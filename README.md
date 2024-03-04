@@ -22,7 +22,7 @@ Notes: Here some notes
 
 Click [here](https://google.com/) to visit the website.
 
---.ENV FILES--(Do be deleted at the end)
+---.ENV FILES---(Do be deleted at the end)
 client env:
 VITE_BASE_URL=http://localhost:3002
 
