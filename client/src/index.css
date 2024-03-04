@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
+  background-color: #525252; /* Can be deleted or changed */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
