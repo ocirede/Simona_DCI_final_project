@@ -28,6 +28,10 @@ const profileImageStorage = new CloudinaryStorage({
         console.error("Error uploading the image", error);
       }
     },
+    public_id: (req, file) => {
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+      return uniqueSuffix;
+    },
   },
 });
 
