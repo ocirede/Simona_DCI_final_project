@@ -10,6 +10,7 @@ cloudinaryV2.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
+//Profile image upload
 /* An updated function for the profile image with same functionality 
 but slightly better error handling */
 const profileImageStorage = new CloudinaryStorage({
@@ -22,7 +23,9 @@ const profileImageStorage = new CloudinaryStorage({
           const extension = file.mimetype.split("/")[1];
           return extension;
         } else {
-          throw new Error("The file is not an image format");
+          throw new Error(
+            "The file has to be one of the following formats: .jpg, .jpeg, .png, .gif, .bmp, .webp, .svg, .svgz"
+          );
         }
       } catch (error) {
         console.error("Error uploading the image", error);
