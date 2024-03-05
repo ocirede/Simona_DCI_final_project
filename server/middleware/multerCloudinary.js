@@ -11,7 +11,8 @@ cloudinaryV2.config({
 });
 
 //Profile image upload
-/* An updated function for the profile image with same functionality 
+/* An updated version of the function for the 
+profile image upload with same functionality 
 but slightly better error handling */
 const profileImageStorage = new CloudinaryStorage({
   cloudinary: cloudinaryV2,
