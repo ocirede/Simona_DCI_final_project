@@ -31,3 +31,6 @@ DB_URI="mongodb+srv://kostasbouzianis:F3tXlolveM28z99G@simonacluster.dav6kj6.mon
 PORT=3002
 DB_NAME=simona-final-project-db
 JWT_SECTER_KEY=4LsklhpRotNkwCC1wWNXYf4ivnguyWQS
+CLOUD_NAME=dfnq8t1dm
+CLOUD_API_KEY=214436759469768
+CLOUD_API_SECRET=h0WrCvWtCqCf5iBSaZxV9Tu1z-E
