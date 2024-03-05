@@ -1,15 +1,6 @@
-import cloudinary from "cloudinary";
+import cloudinaryV2 from "../config/cloudinary.js";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import multer from "multer";
-
-const cloudinaryV2 = cloudinary.v2;
-
-cloudinaryV2.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-  secure: true,
-});
 
 //Profile image upload
 /* An updated version of the function for the 
