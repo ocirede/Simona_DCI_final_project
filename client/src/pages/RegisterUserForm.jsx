@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import RegistrationSubmitButton from "../components/RegistrationSubmitButton";
 import LogoImageRegistration from "../components/LogoImageRegistration";
+import RegistrationSubmitButtonLoading from "../components/RegistrationSubmitButtonLoading";
 
 const RegisterUserForm = () => {
   const [email, setEmail] = useState("");
@@ -108,6 +109,7 @@ const RegisterUserForm = () => {
               to disable the button while waiting for the request, to avoid
               double clicks and multiple requests from the user */}
               <RegistrationSubmitButton name="Register" disabled={false} />
+              <RegistrationSubmitButtonLoading name="Loading" disabled={true} />
             </div>
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
