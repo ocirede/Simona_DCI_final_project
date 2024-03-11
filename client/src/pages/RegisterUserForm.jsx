@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import RegistrationSubmitButton from "../components/RegistrationSubmitButton";
 
 const RegisterUserForm = () => {
   const [email, setEmail] = useState("");
@@ -97,12 +98,7 @@ const RegisterUserForm = () => {
               </div>
             </div>
             <div className="text-center">
-              <button
-                type="submit"
-                className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full"
-              >
-                Register
-              </button>
+              <RegistrationSubmitButton name="Register" />
             </div>
             <p className="text-sm text-gray-600">
               Already have an account?{" "}

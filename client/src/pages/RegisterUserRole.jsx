@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RegistrationSubmitButton from "../components/RegistrationSubmitButton";
 
 const RegisterUserRole = () => {
   const [selectedRole, setSelectedRole] = useState("artist");
@@ -58,12 +59,7 @@ const RegisterUserRole = () => {
               </div>
             </div>
             <div className="text-center">
-              <button
-                type="submit"
-                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full"
-              >
-                Next
-              </button>
+              <RegistrationSubmitButton name="Next" />
             </div>
           </form>
         </div>
