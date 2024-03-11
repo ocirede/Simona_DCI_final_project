@@ -8,11 +8,17 @@ const RegisterUserRole = () => {
   const handleRoleChoice = (e) => {
     e.preventDefault();
     navigate(`/register?userRole=${selectedRole}`);
-    console.log("selected user role==>", selectedRole);
+    //console.log("selected user role==>", selectedRole);
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen relative">
+      {/* Logo image - it is a random image to be replaced with our logo */}
+      <img
+        className="absolute top-0 left-0 mt-4 ml-4 h-16"
+        src="https://images.squarespace-cdn.com/content/v1/5e0849d5b75e913537ba6e4b/1580072657793-FQHY1078YO7V1B6O3A5C/Target%2BLogo%2B_%2BPictorial%2BLogo%2BExample%2B_%2BMill%2BCreek%2BCreative.png?format=300w"
+        alt="logo"
+      />
       {/* Form container */}
       <div className="w-full my-auto max-w-screen-sm mx-auto md:w-1/2 md:max-w-480px">
         <div className="px-8 pt-6 pb-8">
@@ -54,7 +60,7 @@ const RegisterUserRole = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full "
+                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full"
               >
                 Next
               </button>
@@ -62,7 +68,8 @@ const RegisterUserRole = () => {
           </form>
         </div>
       </div>
-      {/* Background image to the right */}
+
+      {/* Background image container to the right side*/}
       <div
         className="hidden sm:block sm:w-1/2 bg-cover bg-center"
         style={{
