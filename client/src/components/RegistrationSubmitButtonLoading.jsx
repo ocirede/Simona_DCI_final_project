@@ -1,12 +1,9 @@
-const RegistrationSubmitButtonLoading = ({ name, onClick, disabled }) => {
+const RegistrationSubmitButtonLoading = ({ name }) => {
   return (
     <button
       type="submit"
-      onClick={onClick}
-      disabled={disabled}
-      className={`mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full transition-transform duration-100 ${
-        disabled ? "transform-none" : "transform-gpu active:scale-95"
-      }`}
+      disabled
+      className="mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full transition-transform duration-100 "
     >
       <svg
         aria-hidden="true"
