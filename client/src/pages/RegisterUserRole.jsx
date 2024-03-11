@@ -62,11 +62,14 @@ const RegisterUserRole = () => {
           </form>
         </div>
       </div>
-      {/* Background image */}
+      {/* Background image to the right */}
       <div
         className="hidden sm:block sm:w-1/2 bg-cover bg-center"
         style={{
-          backgroundImage: `url(https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-106321.jpg?w=826&t=st=1710163982~exp=1710164582~hmac=7ca60786b1f393a30f31512d2b809f19afa1b6f304093897799e923e83ebd665)`,
+          backgroundImage:
+            selectedRole === "artist"
+              ? `url(https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-106321.jpg?w=826&t=st=1710163982~exp=1710164582~hmac=7ca60786b1f393a30f31512d2b809f19afa1b6f304093897799e923e83ebd665)`
+              : `url(https://img.freepik.com/free-photo/orange-bright-powder-table_23-2147964258.jpg?w=996&t=st=1710165712~exp=1710166312~hmac=19e86e143c95fd08de46d5244a57decdeaa8a0583161ba8f3918bbc466e76198)`,
         }}
       ></div>
     </div>
