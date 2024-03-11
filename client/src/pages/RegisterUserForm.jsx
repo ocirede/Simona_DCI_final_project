@@ -49,15 +49,15 @@ const RegisterUserForm = () => {
             </div>
             <div className="relative">
               <label
-                htmlFor="current-password"
+                htmlFor="password"
                 className="block mb-2 text-sm font-medium"
               >
                 Password
               </label>
               <input
                 type={showPassword ? "text" : "password"}
-                name="current-password"
-                id="current-password"
+                name="password"
+                id="password"
                 placeholder="********"
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3"
                 onChange={(e) => {
