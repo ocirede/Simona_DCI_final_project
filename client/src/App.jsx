@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
+import RegisterUserForm from "./pages/RegisterUserForm";
+import RegisterUserRole from "./pages/RegisterUserRole";
 
 function App() {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">
-        Here will be the routes, this message can be deleted
-      </h1>
       <Routes>
-        <Route path="/examplepath" element={"<ExamplePage/>"} />
+        <Route path="/register-role" element={<RegisterUserRole />} />
+        <Route path="/register" element={<RegisterUserForm />} />
       </Routes>
     </>
   );
