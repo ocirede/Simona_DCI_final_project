@@ -104,7 +104,10 @@ const RegisterUserForm = () => {
               </div>
             </div>
             <div className="text-center">
-              <RegistrationSubmitButton name="Register" />
+              {/* The button accepts the prop true or falls to use it
+              to disable the button while waiting for the request, to avoid
+              double clicks and multiple requests from the user */}
+              <RegistrationSubmitButton name="Register" disabled={false} />
             </div>
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
