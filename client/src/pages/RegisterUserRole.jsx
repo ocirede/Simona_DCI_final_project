@@ -7,7 +7,7 @@ const RegisterUserRole = () => {
 
   const handleRoleChoice = (e) => {
     e.preventDefault();
-    //navigate(`/register?userRole=${selectedRole}`);
+    navigate(`/register?userRole=${selectedRole}`);
     console.log("selected user role==>", selectedRole);
   };
 
