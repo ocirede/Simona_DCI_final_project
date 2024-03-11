@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RegistrationSubmitButton from "../components/RegistrationSubmitButton";
+import LogoImageRegistration from "../components/LogoImageRegistration";
 
 const RegisterUserRole = () => {
   const [selectedRole, setSelectedRole] = useState("artist");
@@ -15,11 +16,8 @@ const RegisterUserRole = () => {
   return (
     <div className="flex h-screen relative">
       {/* Logo image - it is a random image to be replaced with our logo */}
-      <img
-        className="absolute top-0 left-0 mt-4 ml-4 h-16"
-        src="https://images.squarespace-cdn.com/content/v1/5e0849d5b75e913537ba6e4b/1580072657793-FQHY1078YO7V1B6O3A5C/Target%2BLogo%2B_%2BPictorial%2BLogo%2BExample%2B_%2BMill%2BCreek%2BCreative.png?format=300w"
-        alt="logo"
-      />
+      <LogoImageRegistration imageUrl="https://images.squarespace-cdn.com/content/v1/5e0849d5b75e913537ba6e4b/1580072657793-FQHY1078YO7V1B6O3A5C/Target%2BLogo%2B_%2BPictorial%2BLogo%2BExample%2B_%2BMill%2BCreek%2BCreative.png?format=300w" />
+
       {/* Form container */}
       <div className="w-full my-auto max-w-screen-sm mx-auto md:w-1/2 md:max-w-480px">
         <div className="px-8 pt-6 pb-8">

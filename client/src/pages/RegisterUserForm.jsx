@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import RegistrationSubmitButton from "../components/RegistrationSubmitButton";
+import LogoImageRegistration from "../components/LogoImageRegistration";
 
 const RegisterUserForm = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +21,9 @@ const RegisterUserForm = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
+      <LogoImageRegistration imageUrl="https://images.squarespace-cdn.com/content/v1/5e0849d5b75e913537ba6e4b/1580072657793-FQHY1078YO7V1B6O3A5C/Target%2BLogo%2B_%2BPictorial%2BLogo%2BExample%2B_%2BMill%2BCreek%2BCreative.png?format=300w" />
+
+      {/* form container */}
       <div className="w-full max-w-md mx-auto px-4">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <h1 className="text-2xl font-bold mb-6 text-center">
@@ -43,18 +47,16 @@ const RegisterUserForm = () => {
               />
             </div>
             <div className="relative">
-              {" "}
-              {/* Set the parent div to have position: relative */}
               <label
-                htmlFor="password"
+                htmlFor="current-password"
                 className="block mb-2 text-sm font-medium"
               >
                 Password
               </label>
               <input
                 type={showPassword ? "text" : "password"}
-                name="password"
-                id="password"
+                name="current-password"
+                id="current-password"
                 placeholder="********"
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3"
                 onChange={(e) => {
@@ -63,6 +65,7 @@ const RegisterUserForm = () => {
                 required
               />
               <button
+                type="button"
                 className="absolute top-1/2 transform -translate-y-0.5 right-0 flex items-center px-3 pt-2 text-gray-500 focus:outline-none"
                 onClick={() => {
                   setShowPassword(!showPassword);
