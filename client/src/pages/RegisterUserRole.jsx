@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RegistrationSubmitButton from "../components/RegistrationSubmitButton";
 import LogoImageRegistration from "../components/LogoImageRegistration";
+import FormSubmitButton from "../components/FormSubmitButton";
 
 const RegisterUserRole = () => {
   const [selectedRole, setSelectedRole] = useState("artist");
@@ -57,7 +57,7 @@ const RegisterUserRole = () => {
               </div>
             </div>
             <div className="text-center">
-              <RegistrationSubmitButton name="Next" />
+              <FormSubmitButton name="Next" />
             </div>
           </form>
         </div>

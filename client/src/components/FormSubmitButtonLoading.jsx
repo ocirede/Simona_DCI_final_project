@@ -1,4 +1,4 @@
-const RegistrationSubmitButtonLoading = ({ name }) => {
+const FormSubmitButtonLoading = ({ name }) => {
   return (
     <button
       type="submit"
@@ -27,4 +27,4 @@ const RegistrationSubmitButtonLoading = ({ name }) => {
   );
 };
 
-export default RegistrationSubmitButtonLoading;
+export default FormSubmitButtonLoading;

@@ -1,4 +1,4 @@
-const RegistrationSubmitButton = ({ name, onClick, disabled }) => {
+const FormSubmitButton = ({ name, onClick, disabled }) => {
   return (
     <button
       type="submit"
@@ -13,4 +13,4 @@ const RegistrationSubmitButton = ({ name, onClick, disabled }) => {
   );
 };
 
-export default RegistrationSubmitButton;
+export default FormSubmitButton;
