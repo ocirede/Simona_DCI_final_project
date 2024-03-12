@@ -40,6 +40,7 @@ const RegisterUserForm = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={email}
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3"
                 placeholder="example@email.com"
                 onChange={(e) => {
@@ -59,6 +60,7 @@ const RegisterUserForm = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
+                value={password}
                 placeholder="********"
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3"
                 onChange={(e) => {
