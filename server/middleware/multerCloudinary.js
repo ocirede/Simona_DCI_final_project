@@ -12,16 +12,14 @@ const profileImageStorage = new CloudinaryStorage({
     folder: "Simona_Final_Project/profile_images",
     format: async (req, file) => {
       try {
-        if (file.mimetype.includes("image")) {
-          const extension = file.mimetype.split("/")[1];
-          return extension;
-        } else {
-          throw new Error(
-            "The file has to be one of the following formats: .jpg, .jpeg, .png, .gif, .bmp, .webp, .svg, .svgz"
-          );
+        if (!file.mimetype.startsWith("image")) {
+          throw new Error("Only image files are allowed");
         }
+        const extension = file.mimetype.split("/")[1];
+        return extension;
       } catch (error) {
         console.error("Error uploading the image", error);
+        throw error;
       }
     },
     public_id: (req, file) => {
@@ -40,16 +38,14 @@ const profileBackgroundStorage = new CloudinaryStorage({
     folder: "Simona_Final_Project/background_images",
     format: async (req, file) => {
       try {
-        if (file.mimetype.includes("image")) {
-          const extension = file.mimetype.split("/")[1];
-          return extension;
-        } else {
-          throw new Error(
-            "The file has to be one of the following formats: .jpg, .jpeg, .png, .gif, .bmp, .webp, .svg, .svgz"
-          );
+        if (!file.mimetype.startsWith("image")) {
+          throw new Error("Only image files are allowed");
         }
+        const extension = file.mimetype.split("/")[1];
+        return extension;
       } catch (error) {
         console.error("Error uploading the image", error);
+        throw error;
       }
     },
     public_id: (req, file) => {
@@ -68,16 +64,14 @@ const postImageStorage = new CloudinaryStorage({
     folder: "Simona_Final_Project/post_images",
     format: async (req, file) => {
       try {
-        if (file.mimetype.includes("image")) {
-          const extension = file.mimetype.split("/")[1];
-          return extension;
-        } else {
-          throw new Error(
-            "The file has to be one of the following formats: .jpg, .jpeg, .png, .gif, .bmp, .webp, .svg, .svgz"
-          );
+        if (!file.mimetype.startsWith("image")) {
+          throw new Error("Only image files are allowed");
         }
+        const extension = file.mimetype.split("/")[1];
+        return extension;
       } catch (error) {
         console.error("Error uploading the image", error);
+        throw error;
       }
     },
     public_id: (req, file) => {
