@@ -7,7 +7,7 @@ body {
   width: 100%;
   min-height: 100vh;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
-  background-color: #525252; /* Can be deleted or changed */
+
 }
 
 @tailwind base;

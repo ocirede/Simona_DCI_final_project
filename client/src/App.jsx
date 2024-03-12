@@ -1,14 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
+import NavBarHomepage from "./components/navBarHomepage";
+import ChatBox from "./components/chatBox/chatBox.jsx";
+import HomePageArtist from "./pages/homePageArtist/homePageArtist.jsx";
 
 function App() {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">
-        Here will be the routes, this message can be deleted
-      </h1>
+      <NavBarHomepage />
       <Routes>
-        <Route path="/examplepath" element={"<ExamplePage/>"} />
+        <Route path="/" element={<HomePageArtist />} />
+        <Route path="/chatbox" element={<ChatBox />} />
       </Routes>
     </>
   );
