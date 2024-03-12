@@ -26,7 +26,6 @@ function ProfileArtist() {
         {/*langauges  section*/}
         <Language />
         {/*review  section*/}
-
         <Review/>
       </main>
     </>
