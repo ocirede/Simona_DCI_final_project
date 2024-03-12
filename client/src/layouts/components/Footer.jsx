@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import BackToTop from "../../components/BackToTopButton";
-import FooterContactForm from "../../components/FooterContactForm";
+import BackToTop from "../../components/footer/BackToTopButton";
+import FooterContactForm from "../../components/footer/FooterContactForm";
 
 export function Footer() {
     return (

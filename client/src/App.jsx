@@ -5,16 +5,15 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 import QA from "./pages/Q&A";
 import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur";
-import ProfilePageLayout from "./layouts/ProfilePageLayout";
-
+import IntroPage from "./pages/IntroPage";
 
 function App() {
   return (
     <>
-      <ProfilePageLayout />
       <Routes>
         <Route path="/QA" element={<QA />} />
         <Route path="/ProfilePageEntrepreneur" element={<ProfilePageEntrepreneur />} />
+        <Route path="/IntroPage" element={<IntroPage />} />
       </Routes>
     </>
   );

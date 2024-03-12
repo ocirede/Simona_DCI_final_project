@@ -22,15 +22,15 @@ export default function ProfilePageEntrepreneur() {
             <input type="file" id="backgroundImageInput" className="hidden" accept="image/*" />
             <label htmlFor="backgroundImageInput" className="py-2 px-4 cursor-pointer absolute right-0 text-[22px]"><i className="fa-solid fa-pen-to-square"></i></label>
         </div>
-        <div className="mx-auto p-8 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]"> 
+        <div className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]"> 
             <div className="flex items-center absolute top-[-7%] lg:top-[-8.4%] lg:ml-10">
-                <div className="bg-gray-200 w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden mr-20">
+                <div className="bg-gray-200 w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden">
                 <input type="file" id="profilePictureInput" className="hidden absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" />
                 <label htmlFor="profilePictureInput" className="absolute inset-0 flex items-center justify-center text-gray-600 cursor-pointer">
                     <span className="text-center text-[22px]"><i className="fa-solid fa-pen-to-square"></i></span>
                 </label>
                 </div>
-                <div className="flex gap-6 ml-8">
+                <div className="flex gap-6 ml-4">
                     <button className="bg-gray-500 text-white rounded-md py-2 px-4 mb-4 block mx-auto uppercase">Contact</button>
                     <button className="bg-gray-500 text-white rounded-md py-2 px-4 mb-4 block mx-auto uppercase">Share Link</button>
                 </div>
@@ -159,7 +159,7 @@ export default function ProfilePageEntrepreneur() {
                         <div>
                             <div
                                 contentEditable="true"
-                                className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-[250px]"
+                                className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-[150px] mr-2"
                                 placeholder="Write your comment here..."
                             ></div>
                             <div className="flex mt-2 justify-end">
