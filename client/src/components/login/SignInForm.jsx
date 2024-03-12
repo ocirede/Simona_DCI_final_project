@@ -5,6 +5,9 @@ import LoadingButton from "./LoadingButton";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
+  
+  
+  {/* form container */}
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
       <div className=" w-2/4  p-1 flex flex-col  items-center ">
@@ -37,7 +40,7 @@ function SignInForm() {
           {/* Show hide password button */}
           <button
             type="button"
-            className="absolute right-24 px-3 pt-2 text-gray-500 focus:outline-none xs:right-28 sm:right-32 md:right-64 lg:right-1/3"
+            className="absolute right-24 px-3 pt-2 text-gray-500 focus:outline-none xs:right-[100px] sm:right-[125px] md:right-[260px] lg:right-[320px]"
             onClick={() => {
               setShowPassword(!showPassword);
             }}
@@ -48,10 +51,12 @@ function SignInForm() {
               <i className="fa-solid fa-eye-slash"></i>
             )}
           </button>
+          
+          {/* submit section + loading */}
 
           <div className="flex flex-col items-center justify-center p-4">
-            <Button name="Sign-in" />
-            <LoadingButton name="loading"/>
+            <Button name="Sign-in" disabled={false} />
+            {/* <LoadingButton name="loading" /> */}
           </div>
           <div className="flex justify-center sm:justify-between">
             <label className="hidden sm:flex items-center gap-2">
