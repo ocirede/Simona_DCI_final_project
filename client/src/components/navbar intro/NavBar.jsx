@@ -7,7 +7,6 @@ import DropMenu from "./DropMenu";
 
 function NavBar() {
   const [display, setDisplay] = useState(false);
-  console.log(display);
   return (
     <nav className=" w-full h-20 flex  items-center rounded-lg shadow-lg border border-gray ">
       <ul className=" p-3 w-full flex items-center justify-between  ">

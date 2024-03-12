@@ -1,5 +1,5 @@
 import React from "react";
-import FakeLogo from "../components/navbar intro-page/FakeLogo";
+import FakeLogo from "../components/navbar intro/FakeLogo";
 import SignInForm from "../components/login/SignInForm";
 
 function SignIn() {
