@@ -21,7 +21,7 @@ cloudinaryV2.uploader.upload(
 
 //Instructions:
 
-//1. Paste the exact path of the image on your computer
+//1. Paste the exact path of the image located in your computer
 //2. Including the extension(.jpg, .png ect)
 //3. give a name for the image in the public_id string
 //4. run the file in the terminal. type: node uploadManually.js
