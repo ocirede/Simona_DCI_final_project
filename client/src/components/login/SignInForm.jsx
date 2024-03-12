@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../navbar intro-page/Button";
+import Button from "../navbar intro/Button";
 import { Link } from "react-router-dom";
 import LoadingButton from "./LoadingButton";
 
@@ -13,7 +13,7 @@ function SignInForm() {
       <br />
       <div className="  w-2/3  h-88 p-3 rounded-lg shadow-lg border border-gray md:w-2/4 lg:w-2/5">
         <form className=" flex flex-col justify-center  gap-2  ">
-          <lalbel>Email</lalbel>
+          <label>Email</label>
           <input
             className="p-2 border"
             type="email"
