@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema(
     role: { type: String, required: true },
     profileImage: { type: String },
     profileBackground: { type: String },
+    verified: {
+      type: Boolean,
+      default: false,
+    }, //this is going to be used for the email verification
     address: {
       firstname: String,
       lastname: String,
