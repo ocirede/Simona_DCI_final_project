@@ -1,9 +1,9 @@
-import MotionSlider from "./MotionSlider";
+import MotionSlider from "./motionSlider";
 import styled from "styled-components";
 import CardElement from "./cards/CardElement";
 
 const Container = styled.div`
-  max-width: 900px; 
+  max-width: 700px; 
   margin: 0 auto; 
   @media (max-width: 640px) {
     max-width: 90%; 
