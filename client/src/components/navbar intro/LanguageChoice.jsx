@@ -3,7 +3,7 @@ import React from 'react'
 function LanguageChoice() {
   return (
     <div className=" flex items-center">
-    <span>EN</span>-<span>DE</span>
+    <span className=' underline cursor-pointer'>EN</span>-<span className=' underline cursor-pointer'>DE</span>
   </div>  )
 }
 

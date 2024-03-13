@@ -3,11 +3,8 @@ import React from "react";
 import NavBar from "../components/profile artist/ArtistNavBar";
 import PersonalInfo from "../components/profile artist/PersonalInfo";
 import NameTitle from "../components/profile artist/NameTitle";
-import AboutMeEducation from "../components/profile artist/AboutMeEducation";
-import Portfolio from "../components/profile artist/Portfolio";
-import SkillsIntrestPersonality from "../components/profile artist/SkillsInterestPersonality";
-import Language from "../components/profile artist/Language";
-import Review from "../components/profile artist/Review";
+
+import CardSection from "../components/profile artist/CardSection";
 
 function ProfileArtist() {
   return (
@@ -18,15 +15,15 @@ function ProfileArtist() {
         <PersonalInfo />
         <NameTitle />
         {/* About-me/ education  section*/}
-        <AboutMeEducation />
+        <CardSection section=" About me" />
         {/* Portfolio  section*/}
-        <Portfolio />
+        <CardSection section="Portfolio" />
         {/* Skills intrest personality  section*/}
-        <SkillsIntrestPersonality />
+        <CardSection section="Skill interest" />
         {/*langauges  section*/}
-        <Language />
+        <CardSection section="Language" />
         {/*review  section*/}
-        <Review/>
+        <CardSection section="Review"/>
       </main>
     </>
   );

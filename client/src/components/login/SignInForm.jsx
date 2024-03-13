@@ -40,7 +40,7 @@ function SignInForm() {
           {/* Show hide password button */}
           <button
             type="button"
-            className="absolute right-24 px-3 pt-2 text-gray-500 focus:outline-none xs:right-[100px] sm:right-[125px] md:right-[260px] lg:right-[320px]"
+            className="absolute right-24 px-3 pt-2 text-gray-500 focus:outline-none xs:right-[110px] sm:right-[125px] md:right-[260px] lg:right-[320px]"
             onClick={() => {
               setShowPassword(!showPassword);
             }}
