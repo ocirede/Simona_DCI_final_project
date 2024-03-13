@@ -5,62 +5,68 @@ import LoadingButton from "./LoadingButton";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
-  
-  
-  {/* form container */}
+
+  {
+    /* form container */
+  }
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center h-screen">
       <div className="w-2/4 p-1 flex flex-col items-center">
         <h1 className="text-5xl">Login</h1>
       </div>
       <br />
-      <div className="w-2/3 max-w-[400px] h-auto p-3 rounded-lg shadow-lg border border-gray">
+      <div className="w-2/3 max-w-[400px] h-[325px] p-3 rounded-lg shadow-lg border border-gray">
         <form className="flex flex-col justify-center gap-2">
           <label>Email</label>
-          <input
-            className="p-2 border"
-            type="email"
-            name="email"
-            placeholder="Type your email"
-            required
-          />
+          <div className=" relative">
+            <input
+              className="p-2  border relative w-full "
+              type="email"
+              name="email"
+              placeholder="Type your email"
+              required
+            />
+          </div>
+
           <label className="flex justify-between">
             Password
             <Link to="">
               <span className="underline text-blue-500">Forgot password</span>
             </Link>
           </label>
-          <input
-            className="p-2 border"
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Type your password"
-            required
-          />
-          {/* Show hide password button */}
-          <button
-            type="button"
-            className="absolute right-24  px-3 pt-2 text-gray-500 focus:outline-none"
-            onClick={() => {
-              setShowPassword(!showPassword);
-            }}
-          >
-            {showPassword ? (
-              <i className="fa-solid fa-eye"></i>
-            ) : (
-              <i className="fa-solid fa-eye-slash"></i>
-            )}
-          </button>
+          <div className="relative">
+            <input
+              className="p-2  border relative w-full "
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Type your password"
+              required
+            />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 flex items-center px-3 pt-2 text-gray-500 focus:outline-none"
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            >
+              {showPassword ? (
+                <i className="fa-solid fa-eye"></i>
+              ) : (
+                <i className="fa-solid fa-eye-slash"></i>
+              )}
+            </button>
+          </div>
 
           {/* submit section + loading */}
 
           <div className="flex flex-col items-center justify-center p-4">
             <Button name="Sign-in" disabled={false} />
+            {/* <LoadingButton name="loading"/> */}
           </div>
-          <div className="flex justify-center sm:justify-between">
-            <label className="hidden sm:flex items-center gap-2">
+          <div className=" flex flex-col  items-center gap-2 justify-between ">
+            <label className=" flex items-center gap-2">
               <input type="checkbox" />
-              remember me
+              <span>Remember me</span>
             </label>
             <span>
               Not a member ?&nbsp;
