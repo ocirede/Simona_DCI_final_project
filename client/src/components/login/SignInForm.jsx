@@ -9,13 +9,13 @@ function SignInForm() {
   
   {/* form container */}
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
-      <div className=" w-2/4  p-1 flex flex-col  items-center ">
-        <h1 className=" text-5xl">Login</h1>
+    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center">
+      <div className="w-2/4 p-1 flex flex-col items-center">
+        <h1 className="text-5xl">Login</h1>
       </div>
       <br />
-      <div className="  w-2/3  h-88 p-3 rounded-lg shadow-lg border border-gray md:w-2/4 lg:w-2/5">
-        <form className=" flex flex-col justify-center  gap-2  ">
+      <div className="w-2/3 max-w-[400px] h-auto p-3 rounded-lg shadow-lg border border-gray">
+        <form className="flex flex-col justify-center gap-2">
           <label>Email</label>
           <input
             className="p-2 border"
@@ -24,10 +24,10 @@ function SignInForm() {
             placeholder="Type your email"
             required
           />
-          <label className="flex justify-between ">
+          <label className="flex justify-between">
             Password
             <Link to="">
-              <span className=" underline text-blue-500">Forgot password</span>
+              <span className="underline text-blue-500">Forgot password</span>
             </Link>
           </label>
           <input
@@ -40,7 +40,7 @@ function SignInForm() {
           {/* Show hide password button */}
           <button
             type="button"
-            className="absolute right-24 px-3 pt-2 text-gray-500 focus:outline-none xs:right-[110px] sm:right-[125px] md:right-[260px] lg:right-[320px]"
+            className="absolute right-24  px-3 pt-2 text-gray-500 focus:outline-none"
             onClick={() => {
               setShowPassword(!showPassword);
             }}
@@ -51,12 +51,11 @@ function SignInForm() {
               <i className="fa-solid fa-eye-slash"></i>
             )}
           </button>
-          
+
           {/* submit section + loading */}
 
           <div className="flex flex-col items-center justify-center p-4">
             <Button name="Sign-in" disabled={false} />
-            {/* <LoadingButton name="loading" /> */}
           </div>
           <div className="flex justify-center sm:justify-between">
             <label className="hidden sm:flex items-center gap-2">
