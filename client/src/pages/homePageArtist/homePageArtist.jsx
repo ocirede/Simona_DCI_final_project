@@ -2,7 +2,7 @@ import { CategoriesSearch } from "./categoriesSearch";
 import ConnectNetwork from "./connectNetwork";
 import NavigationTips from "./navigationTips";
 import OffersSection from "./offersSection";
-import RecommendedArtists from "./recommendedArtists";
+import RecommendedEntrepreneurs from "./recommendedArtists";
 
 
 export default function HomePageArtist() {
@@ -11,9 +11,8 @@ export default function HomePageArtist() {
        <h1 className="text-xl font-bold text-center p-4">Artist Homepage</h1>
       <CategoriesSearch/>
       <NavigationTips/>
-      <RecommendedArtists/>
+      <RecommendedEntrepreneurs/>
       <ConnectNetwork />
       <OffersSection />
-    </div>
-  )
+    </div>);
 }

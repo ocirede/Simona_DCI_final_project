@@ -19,6 +19,7 @@ export default function NavBarHomepage() {
         <Link to="/artists" className="mt-4 md:mt-0 md:ml-4">Artists</Link>
         <Link to="/Network" className="mt-4 md:mt-0 md:ml-4">Network</Link>
         <Link to="/chatbox" className="mt-4 md:mt-0 md:ml-4">Chatbox</Link>
+        <Link to="/E" className="mt-4 md:mt-0 md:ml-4">E</Link>
         <Link to="/logout" className="mt-4 md:mt-0 md:ml-4">Logout</Link>
       </div>
     </nav>
