@@ -5,6 +5,11 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
+    categories: [
+      {
+        skill: { type: String },
+      },
+    ],
     profileImage: { type: String },
     profileBackground: { type: String },
     verified: {
@@ -20,6 +25,24 @@ const userSchema = new mongoose.Schema(
       country: String,
       phone: String,
     },
+    pendingRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    sentRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    connections: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     skills: [
       {
         skill: { type: String },
