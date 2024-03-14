@@ -23,6 +23,7 @@ const RegisterUserForm = () => {
     console.log("userRole==>", userRegisterData.role);
     console.log("email==>", email);
     console.log("password==>", password);
+    //localStorage.removeItem("userRegisterData");
   };
 
   return (
