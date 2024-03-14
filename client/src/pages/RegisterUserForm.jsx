@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import LogoImageRegistration from "../components/LogoImageRegistration";
 import FormSubmitButton from "../components/FormSubmitButton";
 import FormSubmitButtonLoading from "../components/FormSubmitButtonLoading";
@@ -8,14 +8,19 @@ const RegisterUserForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [userRegisterData, setUserRegisterData] = useState();
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const userRole = queryParams.get("userRole");
+  useEffect(() => {
+    let userRegisterStoredData = JSON.parse(
+      localStorage.getItem("userRegisterData")
+    );
+    setUserRegisterData(userRegisterStoredData);
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log("userRole==>", userRole);
+    console.log("categories=>", userRegisterData.categories);
+    console.log("userRole==>", userRegisterData.role);
     console.log("email==>", email);
     console.log("password==>", password);
   };
