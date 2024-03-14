@@ -8,6 +8,9 @@ const RegisterUserRoleForm = () => {
   const [selectedRole, setSelectedRole] = useState("artist");
   const navigate = useNavigate();
 
+  //we fetch the user role that was selected from local storage
+  //and we store it again to the selectedRole to keep the background
+  //and the choice when we refresh the page if there is already a role stored
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem("userRegisterData"));
     if (storedUserData && storedUserData.role) {
@@ -15,10 +18,14 @@ const RegisterUserRoleForm = () => {
     }
   }, []);
 
+  //function that is used to bring the role from the Outlet form and
+  //use it for the dynamic background change
   useEffect(() => {
     userRoleChoice(selectedRole);
   }, [selectedRole]);
 
+  //it stores the choosen role in local storage and navigates
+  //to the next page to choose categories, by clicking the Button
   const handleRoleChoice = (e) => {
     e.preventDefault();
     const userRegisterData = { role: selectedRole };

@@ -6,6 +6,7 @@ const RegisterUserCategoryForm = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const navigate = useNavigate();
 
+  //Add or delete the selected categories by clicking them
   const handleSelection = (e) => {
     const selectedCategory = e.target.value;
 
@@ -19,6 +20,7 @@ const RegisterUserCategoryForm = () => {
   };
   //console.log("selected categories==>", selectedCategories);
 
+  //Stores the choices in local storage and navigates to the next page
   const handleSubmit = (e) => {
     e.preventDefault();
     let userRegisterData = JSON.parse(localStorage.getItem("userRegisterData"));

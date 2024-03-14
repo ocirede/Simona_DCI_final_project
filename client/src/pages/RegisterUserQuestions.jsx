@@ -6,6 +6,9 @@ import { UserContext } from "../context/userContext";
 const RegisterUserQuestions = () => {
   const { userRole, setUserRole } = useContext(UserContext);
 
+  //we fetch the user role that was previously selected from local storage
+  //and we store it again to the userRole to use it in order
+  //to keep the same background related to the role when refreshing the page
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem("userRegisterData"));
     if (storedUserData && storedUserData.role) {
