@@ -17,7 +17,7 @@ const AlertMessageSuccess = ({ text }) => {
       </div>
       <div className="w-full">
         <p>
-          <span className="font-bold">Error: </span>
+          <span className="font-bold">Success: </span>
           {text}
         </p>
       </div>
