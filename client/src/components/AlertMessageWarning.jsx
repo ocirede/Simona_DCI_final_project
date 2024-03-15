@@ -17,7 +17,7 @@ const AlertMessageWarning = ({ text }) => {
       </div>
       <div className="w-full">
         <p>
-          <span className="font-bold">Info: </span>
+          <span className="font-bold">Warning: </span>
           {text}
         </p>
       </div>
