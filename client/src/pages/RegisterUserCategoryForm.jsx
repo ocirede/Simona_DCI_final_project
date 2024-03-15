@@ -15,9 +15,15 @@ const RegisterUserCategoryForm = () => {
         selectedCategories.filter((category) => category !== selectedCategory)
       );
     } else {
-      setSelectedCategories([...selectedCategories, selectedCategory]);
+      //we can here modify the maximum number of choices
+      if (selectedCategories.length < 3) {
+        setSelectedCategories([...selectedCategories, selectedCategory]);
+      } else {
+        console.log("You reached your choice limit!");
+      }
     }
   };
+
   //console.log("selected categories==>", selectedCategories);
 
   //Stores the choices in local storage and navigates to the next page
@@ -52,9 +58,13 @@ const RegisterUserCategoryForm = () => {
   return (
     <>
       <div>
-        <h2 className="text-2xl text-center mb-6">
+        <h2 className="text-2xl text-center mb-3">
           What are you interested in?
         </h2>
+        <h3 className="text-xl text-center mb-6">
+          Choose your three favourite categories!
+        </h3>
+
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-4 gap-2 justify-center items-center mb-5">
             {categories.map((category, index) => (
