@@ -10,7 +10,7 @@ function App() {
     <>
       <Routes>
         <Route path="/register-questions" element={<RegisterUserQuestions />}>
-          <Route path="role" element={<RegisterUserRoleForm />} />
+          <Route index element={<RegisterUserRoleForm />} />
           <Route path="category" element={<RegisterUserCategoryForm />} />
         </Route>
         <Route path="/register" element={<RegisterUserForm />} />
