@@ -97,7 +97,7 @@ const RegisterUserCategoryForm = () => {
           <FormSubmitButton name="Next" />
         </form>
         {showLimitChoiseMessage && (
-          <AlertMessageWarning text="You've reached the chice limit!" />
+          <AlertMessageWarning text="You've reached the choice limit!" />
         )}
       </div>
     </>
