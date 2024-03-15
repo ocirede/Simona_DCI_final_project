@@ -4,9 +4,12 @@ import FormSubmitButton from "../components/FormSubmitButton";
 
 const RegisterUserCategoryForm = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [showLimitChoiseMessage, setShowLimitChpoiseMessage] = useState(false);
   const navigate = useNavigate();
 
   //Add or delete the selected categories by clicking them
+  //Sets the choice limit to 3
+  //Limit message popup
   const handleSelection = (e) => {
     const selectedCategory = e.target.value;
 
@@ -19,7 +22,11 @@ const RegisterUserCategoryForm = () => {
       if (selectedCategories.length < 3) {
         setSelectedCategories([...selectedCategories, selectedCategory]);
       } else {
-        console.log("You reached your choice limit!");
+        setShowLimitChpoiseMessage(true);
+
+        setTimeout(() => {
+          setShowLimitChpoiseMessage(false);
+        }, 2000);
       }
     }
   };
@@ -88,6 +95,11 @@ const RegisterUserCategoryForm = () => {
           </div>
           <FormSubmitButton name="Next" />
         </form>
+        {showLimitChoiseMessage && (
+          <div className="bg-red-500 text-white py-2 px-4 fixed top-0 left-0 w-full text-center">
+            You've reached the category selection limit.
+          </div>
+        )}
       </div>
     </>
   );
