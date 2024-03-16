@@ -5,7 +5,7 @@ export default function ChatBoxMain() {
           <h2>Messages box</h2>
           <div className=" ">
                <form >
-                 <label for="msg"> </label>
+                 <label htmlFor="msg"> </label>
                  <textarea name="" id="msg" placeholder="Your message" cols="20" rows="3" className="border border-black"/>
                </form>
                <button className="w-auto bg-blue-400 pl-2 pr-2">sent</button>

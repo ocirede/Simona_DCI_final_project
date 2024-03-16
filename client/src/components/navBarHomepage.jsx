@@ -7,7 +7,7 @@ export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="bg-blue-500 text-white p-3 flex flex-wrap items-center justify-between md:flex-row">
-      <FakeLogo className=""/>
+       <Link to="/"><FakeLogo className=""/></Link>
 
       <div className="md:hidden">
         <button onClick={() => setIsOpen(!isOpen)}>
