@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Contact } from "lucide-react";
 import { Share } from "lucide-react";
 import { Camera } from "lucide-react";
 
-function PersonalInfo() {
+function PersonalInfo({onClick}) {
+ 
   return (
     <section className="flex justify-center items-center  h-[130px] mt-2  ">
       {/* import { Contact } from 'lucide-react' ???*/}
@@ -20,7 +21,7 @@ function PersonalInfo() {
       </label>
       {/* import { Share } from 'lucide-react'???*/}
       <div className="absolute top-0 -right-8  sm:right-12 md:right-28  lg:right-56">
-        <button className=" flex items-center justify-center w-[100px] h-[40px] absolute right-12 top-[210px] rounded-xl bg-slate-500">
+        <button onClick={onClick} className=" flex items-center justify-center w-[100px] h-[40px] absolute right-12 top-[210px] rounded-xl bg-slate-500">
           <span className="text-white">Share Link</span>
         </button>
       </div>

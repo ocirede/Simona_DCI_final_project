@@ -25,7 +25,6 @@ export const Editor = () => {
       />
       <div className=" flex justify-center items-center mt-3">
         <Button name="Post" onClick={handlePost}></Button>
-        
       </div>
     </div>
   );
