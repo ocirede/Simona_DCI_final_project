@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 import useDimensions from "react-use-dimensions";
@@ -11,69 +11,47 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
+  overflow: hidden;
 `;
 
 const StyledTrack = styled(motion.div)`
   display: flex;
   flex-wrap: nowrap;
   min-width: min-content;
-  cursor: grab;
-  &:active {
-    cursor: grabbing;
-  }
 `;
 
-const Track = ({ children, padding, transition }) => {
+const Track = ({ children }) => {
   const [trackRef, trackDimensions] = useDimensions();
+  const [containerRef, containerDimensions] = useDimensions();
   const controls = useAnimation();
+  const { state } = useContext(Context);
 
-  const { state, dispatch } = useContext(Context);
-  const negativeItems = state.items.map(
-    item => item * -1 + trackDimensions.x || 0
-  );
+  const [activeSlide] = useState(0);
 
-  function onDragEnd(event, info) {
-    const offset = info.offset.x;
+  const isBeginning = activeSlide === 0;
+  const isEnd = activeSlide === state.items.length - 1;
 
-    // Adjust the drag constraints based on the track's dimensions
-    const dragConstraints = {
-      left: -trackDimensions.width + trackDimensions.x, // Leftmost position
-      right: trackDimensions.x // Rightmost position
-    };
+  const maxRightDrag = 0;
 
-    // Calculate the x position based on the drag constraints
-    const xPosition = Math.min(
-      Math.max(info.point.x - offset, dragConstraints.left),
-      dragConstraints.right
-    );
-
-    // Find the closest card position
-    const closestPosition = negativeItems.reduce((prev, curr) =>
-      Math.abs(curr - xPosition) < Math.abs(prev - xPosition) ? curr : prev
-    );
-
-    const activeSlide = negativeItems.indexOf(closestPosition);
-    dispatch({ type: "SET_ACTIVE_ITEM", activeItem: activeSlide });
-
-    controls.start({
-      x: Math.max(
-        closestPosition,
-        -trackDimensions.width + trackDimensions.x || 0
-      ),
-      transition
-    });
-  }
+  const dragConstraints = {
+    left: isEnd ? 0 : -(trackDimensions.width - containerDimensions.width),
+    right: isBeginning ? maxRightDrag : (containerDimensions.width - trackDimensions.width)
+  };
 
   return (
-    <Container>
+    <Container ref={containerRef}>
       <Wrapper>
         <StyledTrack
           ref={trackRef}
-          padding={padding}
           animate={controls}
           drag="x"
-          dragConstraints="parent"
-          onDragEnd={onDragEnd}
+          dragMomentum={false}
+          dragConstraints={dragConstraints}
+          onDrag={(event, info) => {
+            if ((info.point.x < 0 && isEnd) || (info.point.x > 0 && isBeginning)) {
+              controls.stop();
+            }
+          }}
         >
           {children}
         </StyledTrack>
@@ -83,5 +61,11 @@ const Track = ({ children, padding, transition }) => {
 };
 
 export default Track;
+
+
+
+
+
+
 
 

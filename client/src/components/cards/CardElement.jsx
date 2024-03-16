@@ -1,3 +1,5 @@
+import PlayfulTag from "./PlayfulTag";
+
 export default function CardElement() {
     return (
         <div className="w-[220px] rounded-lg overflow-hidden shadow-lg bg-white">
@@ -15,16 +17,10 @@ export default function CardElement() {
           {/* Part to be changed */}
             
         </div>
-        <div className="pl-6 pr-6 pb-4 flex flex-col gap-2 text-center">
-            <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-                #Category 1
-            </span>
-            <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-                #Category 2
-            </span>
-            <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-                #Category 3
-            </span>
+        <div className="flex flex-wrap justify-center gap-2 pb-8">
+            <PlayfulTag text="Music" />
+            <PlayfulTag text="Entwicklung" />
+            <PlayfulTag text="Python" />
         </div>
       </div>
     );
