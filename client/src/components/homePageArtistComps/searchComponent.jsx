@@ -10,6 +10,7 @@ export function SearchComponent({ onSearch }){
     }
     const handleSearchSubmit = () => {
         onSearch(searchInput)
+        setSearchInput("")
     }
     return(
         <div className="flex items-center border-b-2 border-gray-200 py-2">
@@ -18,6 +19,7 @@ export function SearchComponent({ onSearch }){
                  placeholder="Search by name or title..."
                  value={searchInput}
                  onChange={handleInputChange}
+                 onKeyDown={(e) => e.key === 'Enter' && handleSearchSubmit()}
                  className="  border w-full text-gray-700 m-3 py-1 px-2 "/>
                 
               <button

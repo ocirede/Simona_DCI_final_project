@@ -1,6 +1,8 @@
 export default function CardElement({ name, role, categories, imageUrl }) {
+
+
     return (
-        <div className="w-[220px] rounded-lg overflow-hidden shadow-lg bg-white">
+        <div className="w-[220px] rounded-lg overflow-hidden shadow-lg bg-white " style={{ minWidth: "250px" }}>
         <div className="bg-gray-300 h-[100px] flex items-center justify-center relative">
         <div className="w-[120px] h-[120px] relative">
             <img

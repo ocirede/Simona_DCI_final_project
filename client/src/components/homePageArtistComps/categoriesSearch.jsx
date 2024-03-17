@@ -8,14 +8,14 @@ export function CategoriesSearch() {
   const [searchQuery, setSearchQuery] = useState("")
 
   const userData = [
-    { id: 1, name: 'tyhe', role: 'Singer', categories: ['music',"contemporary arts"], imageUrl: 'profile-pic.jpg' },
-    { id: 2, name: 'fede', role: 'Actor', categories: ['performing arts'],  imageUrl: 'profile-pic.jpg' },
-    { id: 3, name: 'kostas', role: 'Dancer', categories:[ 'dance'], imageUrl: 'profile-pic.jpg' },
-    { id: 4, name: 'Issa', role: 'Painter', categories: ['painting'],  imageUrl: 'profile-pic.jpg' },
-    { id: 5, name: 'Mary', role: 'Photographer', categories: ['performing arts'], imageUrl: 'profile-pic.jpg' },
-    { id: 6, name: 'Jesus', role: 'Dj', categories: ['music'],  imageUrl: 'profile-pic.jpg' },
-    { id: 7, name: 'Mohammad', role: 'Muisc composer', categories: ['music'], imageUrl: 'profile-pic.jpg' },
-    { id: 8, name: 'Adam', role: 'Performer', categories: ['performing arts','contemporary arts'],  imageUrl: 'profile-pic.jpg' },
+    { id: 11, name: 'tyhe', role: 'Singer', categories: ['music',"contemporary arts"], imageUrl: 'profile-pic.jpg' },
+    { id: 22, name: 'fede', role: 'Actor', categories: ['performing arts'],  imageUrl: 'profile-pic.jpg' },
+    { id: 33, name: 'kostas', role: 'Dancer', categories:[ 'dance'], imageUrl: 'profile-pic.jpg' },
+    { id: 44, name: 'Issa', role: 'Painter', categories: ['painting'],  imageUrl: 'profile-pic.jpg' },
+    { id: 55, name: 'Mary', role: 'Photographer', categories: ['performing arts'], imageUrl: 'profile-pic.jpg' },
+    { id: 66, name: 'Jesus', role: 'Dj', categories: ['music'],  imageUrl: 'profile-pic.jpg' },
+    { id: 77, name: 'Mohammad', role: 'Muisc composer', categories: ['music'], imageUrl: 'profile-pic.jpg' },
+    { id: 88, name: 'Adam', role: 'Performer', categories: ['performing arts','contemporary arts'],  imageUrl: 'profile-pic.jpg' },
   
   ];
 
@@ -47,6 +47,13 @@ export function CategoriesSearch() {
       {showCategories && (
         <div className="w-full p-4 bg-gray-100">
            <SearchComponent onSearch={handleSearch} />
+
+           {searchQuery && (
+                   <div className="w-full p-4 mt-5 bg-gray-100">
+                   <h1 className="text-l font-bold text-center p-4">{selectedCategory}</h1>
+                  <FilteredUsersPage userData={userData} searchQuery={searchQuery}  />
+                  </div>
+                )}
            
           <div className="grid grid-cols-2 gap-4">
             {categories.map((category, index) => (
@@ -59,15 +66,13 @@ export function CategoriesSearch() {
                 Clear
               </button>
              
-          
-          <div className="w-full p-4 mt-5 bg-gray-100">
-            <h1 className="text-l font-bold text-center p-4">{selectedCategory}</h1>
-          
-            {(selectedCategory || searchQuery) && (
-                   
-                  <FilteredUsersPage userData={userData} selectedCategory={selectedCategory} searchQuery={searchQuery}  />
+            {selectedCategory  && (
+                   <div className="w-full p-4 mt-5 bg-gray-100">
+                   <h1 className="text-l font-bold text-center p-4">{selectedCategory}</h1>
+                  <FilteredUsersPage userData={userData} selectedCategory={selectedCategory}   />
+                  </div>
                 )}
-          </div>
+          
             
         </div>
       )}
