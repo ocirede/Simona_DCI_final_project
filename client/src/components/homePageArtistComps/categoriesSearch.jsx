@@ -26,17 +26,15 @@ export function CategoriesSearch() {
 
       const handleCategoryClick = (category)=>{
         setSelectedCategory(category)
-        // setSearchQuery("")
+       
       }
       const clearFilter = () => {
         setSelectedCategory(null)
         setSearchQuery("")
       }
       const handleSearch = (query) => {
-            console.log("Searching for:", query); // Debugging line
+        setSearchQuery(query);
 
-        setSearchQuery(query.toLowerCase());
-        setSelectedCategory(null)
     }
   
        return(
@@ -48,7 +46,7 @@ export function CategoriesSearch() {
       </div>
       {showCategories && (
         <div className="w-full p-4 bg-gray-100">
-           <SearchComponent onSearch={handleSearch}/>
+           <SearchComponent onSearch={handleSearch} />
            
           <div className="grid grid-cols-2 gap-4">
             {categories.map((category, index) => (
@@ -65,9 +63,9 @@ export function CategoriesSearch() {
           <div className="w-full p-4 mt-5 bg-gray-100">
             <h1 className="text-l font-bold text-center p-4">{selectedCategory}</h1>
           
-            {selectedCategory && (
+            {(selectedCategory || searchQuery) && (
                    
-                  <FilteredUsersPage userData={userData} selectedCategory={selectedCategory} searchQuery={searchQuery}/>
+                  <FilteredUsersPage userData={userData} selectedCategory={selectedCategory} searchQuery={searchQuery}  />
                 )}
           </div>
             

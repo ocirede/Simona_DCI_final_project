@@ -1,5 +1,4 @@
 import CardElement from "./CardElement";
-import { useParams } from 'react-router-dom'
 
 
 const categories =["painting" , "drawing", "digital art", "sculpture", "performing arts",
@@ -7,21 +6,24 @@ const categories =["painting" , "drawing", "digital art", "sculpture", "performi
 "traditional arts", "crafts", "design", "other"]
 
 const userData = [
-    { id: 1, name: 'tyhe', role: 'Singer', categories: ['music',"contemporary arts"], imageUrl: 'profile-pic.jpg' },
-    { id: 2, name: 'fede', role: 'Actor', categories: ['performing arts'],  imageUrl: 'profile-pic.jpg' },
-    { id: 3, name: 'kostas', role: 'Dancer', categories:[ 'dance'], imageUrl: 'profile-pic.jpg' },
-    { id: 4, name: 'Issa', role: 'Painter', categories: ['painting'],  imageUrl: 'profile-pic.jpg' },
-    { id: 5, name: 'Mary', role: 'Photographer', categories: ['performing arts'], imageUrl: 'profile-pic.jpg' },
-    { id: 6, name: 'Jesus', role: 'Dj', categories: ['music'],  imageUrl: 'profile-pic.jpg' },
-    { id: 7, name: 'Mohammad', role: 'Muisc composer', categories: ['music'], imageUrl: 'profile-pic.jpg' },
-    { id: 8, name: 'Adam', role: 'Performer', categories: ['performing arts','contemporary arts'],  imageUrl: 'profile-pic.jpg' },
+    { id: 1, name: "tyhe", role: "Singer", categories: ["music","contemporary arts"], imageUrl: "profile-pic.jpg" },
+    { id: 2, name: "fede", role: "Actor", categories: ["performing arts"],  imageUrl: "profile-pic.jpg" },
+    { id: 3, name: "kostas", role: "Dancer", categories:[ "dance"], imageUrl: "profile-pic.jpg" },
+    { id: 4, name: "Issa", role: "Painter", categories: ["painting"],  imageUrl: "profile-pic.jpg" },
+    { id: 5, name: "Mary", role: "Photographer", categories: ["performing arts"], imageUrl: "profile-pic.jpg" },
+    { id: 6, name: "Jesus", role: "Dj", categories: ["music"],  imageUrl: "profile-pic.jpg" },
+    { id: 7, name: "Mohammad", role: "Muisc composer", categories: ["music"], imageUrl: "profile-pic.jpg" },
+    { id: 8, name: "Adam", role: "Performer", categories: ["performing arts","contemporary arts"],  imageUrl: "profile-pic.jpg" },
   
   ];
 
-export default function FilteredUsersPage({ userData, selectedCategory }) {
-    const { categoryName } = useParams()
-    const filteredUsers = userData.filter(user=>user.categories.includes(selectedCategory))
-   
+export default function FilteredUsersPage({  selectedCategory, searchQuery  }) {
+    const filteredUsers = userData.filter(user => {
+        const matchesCategory = selectedCategory ? user.categories.includes(selectedCategory) : true;
+        const matchesSearch = !searchQuery || user.name.toLowerCase().includes(searchQuery.toLowerCase()) || user.role.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
   return (
   <>
          
