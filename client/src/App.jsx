@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        {/* :userId to be added*/}
         <Route path="/profile-artist" element={<ProfileArtistPage />} />
 
       </Routes>

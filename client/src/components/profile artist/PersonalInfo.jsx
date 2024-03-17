@@ -4,14 +4,16 @@ import { Share } from "lucide-react";
 import { Camera } from "lucide-react";
 
 function PersonalInfo({onClick}) {
- 
+ const contactMail =` mailto:federico.diaferia@gmail.com`
   return (
     <section className="flex justify-center items-center  h-[130px] mt-2  ">
       {/* import { Contact } from 'lucide-react' ???*/}
       <div className="absolute top-0 -left-8  sm:left-12 md:left-28 lg:left-56 ">
+        <a href={contactMail}>
         <button className=" flex items-center justify-center w-[100px] h-[40px] absolute left-12 top-[210px] rounded-xl bg-slate-500">
           <span className="text-white">Contact me</span>
         </button>
+        </a>
       </div>
       <label>
         <div className="bg-slate-500 w-28 h-28 rounded-full cursor-pointer absolute top-[160px] transform -translate-x-1/2 z-20">
