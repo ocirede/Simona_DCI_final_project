@@ -11,7 +11,7 @@ const registerSchema = Joi.object({
   password: Joi.string().min(3).required(),
   role: Joi.string().valid("artist", "entrepreneur").required(),
   categories: Joi.object({
-    skills: Joi.array().items(Joi.string()).required(),
+    skills: Joi.array().items(Joi.string()),
   }),
 });
 
