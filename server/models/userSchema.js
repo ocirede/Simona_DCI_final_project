@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
       country: String,
       phone: String,
     },
+    averageRating: { type: Number },
     pendingRequests: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -42,28 +43,15 @@ const userSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    skills: [
-      {
-        skill: { type: String },
-        level: { type: String },
-      },
-    ],
+
     languages: [
       {
         language: { type: String },
         level: { type: String },
       },
     ],
-    interests: [
-      {
-        interest: { type: String },
-      },
-    ],
-    personality: [
-      {
-        traits: { type: String },
-      },
-    ],
+    interests: [{ type: String }],
+    personality: [{ type: String }],
 
     education: [
       {
