@@ -1,10 +1,14 @@
 import express from "express";
 import { profileImageUpload } from "../middleware/multerCloudinary.js";
-import { handleRegister } from "../controllers/userController.js";
+import {
+  emailConfirmation,
+  handleRegister,
+} from "../controllers/userController.js";
 
 const userRoutes = express.Router();
 
 userRoutes.post("/register", handleRegister);
+userRoutes.post("/emailconfirm/:token", emailConfirmation);
 
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(

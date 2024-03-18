@@ -43,3 +43,24 @@ export const handleRegister = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+//email confirmation
+export const emailConfirmation = async (req, res) => {
+  try {
+    const token = jwt.verify(req.params.token, process.env.JWT_SECTER_KEY);
+
+    if (token) {
+      await User.findByIdAndUpdate(
+        token.userId,
+        { verified: true },
+        { new: true }
+      );
+    }
+
+    res.send({ success: true });
+  } catch (error) {
+    console.log("Error in email confirmation:", error.message);
+
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
