@@ -8,6 +8,7 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
+  const [responseSuccsess, setResponseSuccsess] = useState();
 
   const navigate = useNavigate();
 
@@ -33,6 +34,7 @@ const UserProvider = ({ children }) => {
 
       if (response.data.success) {
         setResponse(true);
+        setResponseSuccsess(response.data.success);
         navigate("/sign-in");
         console.log("New User==>>", response.data.newUser);
       }
@@ -59,6 +61,7 @@ const UserProvider = ({ children }) => {
         userRole,
         validationErrors,
         response,
+        responseSuccsess,
         setUserRole,
         userRoleChoice,
         registerUser,
