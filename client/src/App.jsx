@@ -1,4 +1,10 @@
+
 import "./index.css";
+import '@fortawesome/fontawesome-free/css/all.css';
+
+import QA from "./pages/Q&A";
+import IntroPage from "./pages/IntroPage";
+import ProfilePageLayout from "./layouts/ProfilePageLayout"
 
 import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
@@ -15,6 +21,7 @@ import HomePageArtist from "./pages/homePageArtist.jsx";
 function App() {
   return (
     <>
+
  <NavBarHomepage />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -23,12 +30,15 @@ function App() {
         <Route path="/profile-artist" element={<ProfileArtistPage />} />
 
 
-     
+      <Route path="/QA" element={<QA />} />
+        <Route path="/ProfilePageEntrepreneur" element={<ProfilePageLayout />} />
+        <Route path="/IntroPage" element={<IntroPage />} />
       
         <Route path="/" element={<HomePageArtist />} />
         <Route path="/E" element={<HomePageEntrepreneur />} />
         <Route path="/chatbox" element={<ChatBox />} />
         //<Route path="/category/:categoryName" element={<FilteredUsersPage />} />
+
 
       </Routes>
     </>
