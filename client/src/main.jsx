@@ -4,10 +4,19 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 
+import UserProvider from "./context/userContext.jsx";
+
+import { FormVisibilityProvider } from "./context/formVisibility.jsx";
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+  <UserProvider>
+      <FormVisibilityProvider>
+        <App />
+      </FormVisibilityProvider>
+ </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
