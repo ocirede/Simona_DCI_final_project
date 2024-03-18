@@ -5,11 +5,10 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
-    categories: [
-      {
-        skill: { type: String },
-      },
-    ],
+    categories: {
+      skills: [{ type: String }],
+    },
+
     profileImage: { type: String },
     profileBackground: { type: String },
     verified: {
