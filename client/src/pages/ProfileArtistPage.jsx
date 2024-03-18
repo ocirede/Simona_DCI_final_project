@@ -10,7 +10,7 @@ function ProfileArtist() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(!isModalOpen);
   const [shareLnk, setShareLink] = useState(false);
-  const openShareCard = () => setShareLink (!shareLnk);
+  const openShareCard = () => setShareLink(!shareLnk);
   return (
     <>
       <NavBar />
@@ -38,12 +38,9 @@ function ProfileArtist() {
         </section>
         {/* Render the modal if isModalOpen is true */}
         {isModalOpen && <EditorModal onClose={openModal} />}
-        {shareLnk && <ShareLinkCard onClose={openShareCard}/>}
+        {shareLnk && <ShareLinkCard onClose={openShareCard} />}
 
         {/* footer to be replaced with the footer from Tyhe */}
-        <footer className="bg-gray-400 shadow-xl h-[200px] mt-10 rounded-t-[30px] relative flex justify-center items-center">
-          Footer
-        </footer>
       </main>
     </>
   );
