@@ -16,7 +16,6 @@ export function CategoriesSearch() {
     { id: 66, name: 'Jesus', role: 'Dj', categories: ['music'],  imageUrl: 'profile-pic.jpg' },
     { id: 77, name: 'Mohammad', role: 'Muisc composer', categories: ['music'], imageUrl: 'profile-pic.jpg' },
     { id: 88, name: 'Adam', role: 'Performer', categories: ['performing arts','contemporary arts'],  imageUrl: 'profile-pic.jpg' },
-  
   ];
 
   const categories =["painting" , "drawing", "digital art", "sculpture", "performing arts",

@@ -1,21 +1,33 @@
+import { useState } from "react";
+import QASection from "../components/q&aPage/Q&ASection";
+import PrivacyPolicy from "../components/q&aPage/PrivacyPolicy";
+import TermsAndConditions from "../components/q&aPage/TermsAndConditions";
+
 export default function QA() {
+    const [currentSection, setCurrentSection] = useState(1);
+
+    const renderSection = () => {
+        switch (currentSection) {
+        case 1:
+            return <QASection />;
+        case 2:
+            return <PrivacyPolicy />;
+        case 3:
+            return <TermsAndConditions />;
+        default:
+            return null;
+        }
+    };
+
     return (
-        <div className="py-8 px-4 m-10">
-            {/* Needs to be modified, questions made and answers according to our app needs */}
-            <h1 className="text-3xl font-semibold mb-4 text-center uppercase">Frequently Asked Questions</h1>
-            <div className="space-y-4">
-                <div className="border-gray-300 py-4">
-                    <h2 className="text-lg font-semibold uppercase">Question 1?</h2>
-                    <p className="">Answer to question 1.</p>
-                </div>
-                <div className="border-gray-300 py-4">
-                    <h2 className="text-lg font-semibold uppercase">Question 2?</h2>
-                    <p className="">Answer to question 2.</p>
-                </div>
-                <div className="border-gray-300 py-4">
-                    <h2 className="text-lg font-semibold uppercase">Question 3?</h2>
-                    <p className="">Answer to question 3.</p>
-                </div>
+        <div className="min-h-screen bg-gray-100 flex flex-col sm:flex-row">
+            <div className="bg-gray-800 text-gray-100 w-full sm:w-1/4 p-4">
+                <button onClick={() => setCurrentSection(1)} className="block py-2 px-4 my-2 rounded-md bg-gray-700 hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full text-left">Q&A</button>
+                <button onClick={() => setCurrentSection(2)} className="block py-2 px-4 my-2 rounded-md bg-gray-700 hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full text-left">Privacy Policy</button>
+                <button onClick={() => setCurrentSection(3)} className="block py-2 px-4 my-2 rounded-md bg-gray-700 hover:bg-gray-900 focus:outline-none focus:bg-gray-900 w-full text-left">Terms and Conditions</button>
+            </div>
+            <div className="bg-white p-4 flex-grow">
+                {renderSection()}
             </div>
         </div>
     );
