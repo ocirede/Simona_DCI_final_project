@@ -154,6 +154,7 @@ const RegisterUserForm = () => {
           </div>
         </div>
       </div>
+      {/* Error hadling/mapping */}
       <div className="fixed top-0 left-1/2 transform -translate-x-1/2">
         {showErrorMessage && validationErrors ? (
           <ul className="text-red-500 list-none list-inside text-left">
