@@ -1,5 +1,11 @@
 
-import "./index.css";
+
+
+import RegisterUserForm from "./pages/RegisterUserForm";
+import RegisterUserQuestions from "./pages/RegisterUserQuestions";
+import RegisterUserRoleForm from "./pages/RegisterUserRoleForm";
+import RegisterUserCategoryForm from "./pages/RegisterUserCategoryForm";
+
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import QA from "./pages/Q&A";
@@ -18,9 +24,11 @@ import HomePageArtist from "./pages/homePageArtist.jsx";
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 
+
 function App() {
   return (
     <>
+
 
  <NavBarHomepage />
       <Routes>
@@ -28,7 +36,12 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         {/* :userId to be added*/}
         <Route path="/profile-artist" element={<ProfileArtistPage />} />
-
+          
+  <Route path="/register-questions" element={<RegisterUserQuestions />}>
+          <Route index element={<RegisterUserRoleForm />} />
+          <Route path="category" element={<RegisterUserCategoryForm />} />
+        </Route>
+        <Route path="/register" element={<RegisterUserForm />} />
 
       <Route path="/QA" element={<QA />} />
         <Route path="/ProfilePageEntrepreneur" element={<ProfilePageLayout />} />
@@ -38,6 +51,7 @@ function App() {
         <Route path="/E" element={<HomePageEntrepreneur />} />
         <Route path="/chatbox" element={<ChatBox />} />
         //<Route path="/category/:categoryName" element={<FilteredUsersPage />} />
+
 
 
       </Routes>
