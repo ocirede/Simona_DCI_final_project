@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<HomePageArtist />} />
         <Route path="/E" element={<HomePageEntrepreneur />} />
         <Route path="/chatbox" element={<ChatBox />} />
-        {/* <Route path="/category/:categoryName" element={<FilteredUsersPage />} /> */}
+        <Route path="/category/:categoryName" element={<FilteredUsersPage />} />
       </Routes>
     </>
   );
