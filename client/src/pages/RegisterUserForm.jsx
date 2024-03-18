@@ -4,7 +4,7 @@ import LogoImageRegistration from "../components/LogoImageRegistration";
 import FormSubmitButton from "../components/FormSubmitButton";
 import FormSubmitButtonLoading from "../components/FormSubmitButtonLoading";
 import { UserContext } from "../context/userContext";
-import AlertArrayOfErrors from "../components/AlertArrayOfErrors";
+import AlertArrayOfErrors from "../components/alerts/AlertArrayOfErrors";
 
 const RegisterUserForm = () => {
   const { registerUser, response, validationErrors, responseSuccsess } =

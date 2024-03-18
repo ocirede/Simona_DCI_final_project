@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormSubmitButton from "../components/FormSubmitButton";
-import AlertMessageWarning from "../components/AlertMessageWarning";
+import AlertMessageWarning from "../components/alerts/AlertMessageWarning";
 
 const RegisterUserCategoryForm = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
