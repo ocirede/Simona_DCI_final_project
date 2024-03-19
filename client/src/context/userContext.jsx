@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
-  const [responseSuccsess, setResponseSuccsess] = useState();
+  const [responseSuccsess, setResponseSuccsess] = useState(null);
 
   const navigate = useNavigate();
 
@@ -33,9 +33,10 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        setResponse(true);
-        setResponseSuccsess(response.data.success);
         navigate("/sign-in");
+        setResponse(true);
+        localStorage.removeItem("userRegisterData");
+
         console.log("New User==>>", response.data.newUser);
       }
       setValidationErrors(null);

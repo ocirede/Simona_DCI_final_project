@@ -34,7 +34,7 @@ export const handleRegister = async (req, res) => {
       }
     );
 
-    emailVerification(token, newUser.email);
+    //emailVerification(token, newUser.email);
 
     res.send({ success: true, newUser });
     console.log("New user created successfully:", newUser);
