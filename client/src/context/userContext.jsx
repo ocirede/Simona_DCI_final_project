@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberme, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const UserProvider = ({ children }) => {
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
-      if (rememberme) {
+      if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       }
 
@@ -107,13 +107,13 @@ const UserProvider = ({ children }) => {
         validationErrors,
         response,
         responseSuccsess,
-        setUserRole,
-        userRoleChoice,
-        registerUser,
-        rememberme,
+        rememberMe,
         errors,
         email,
         password,
+        setUserRole,
+        userRoleChoice,
+        registerUser,
         setUserRole,
         userRoleChoice,
         authenticationHandler,

@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "../config/axios.js" 
 
 const baseURL = import.meta.env.VITE_BASE_URL
 
 export  const EntrepreneurContext = createContext()
 
-export default  EntrepreneurProvider =  ({ children }) => {
+const EntrepreneurProvider =  ({ children }) => {
     const [entrepreneurs, setEntrepreneurs] = useState([])
 
 
@@ -34,3 +34,5 @@ export default  EntrepreneurProvider =  ({ children }) => {
     ) 
     
 }
+
+export default EntrepreneurProvider

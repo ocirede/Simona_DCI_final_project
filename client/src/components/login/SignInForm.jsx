@@ -9,7 +9,7 @@ function SignInForm() {
   const {
     authenticationHandler,
     errors,
-    rememberme,
+    rememberMe,
     handleRememberMeChange,
     setEmail,
     email,
@@ -95,7 +95,7 @@ function SignInForm() {
           <div className=" flex gap-2 h-12 items-end justify-between ">
             <label className=" flex items-center gap-2">
               <input
-                checked={rememberme}
+                checked={rememberMe}
                 onChange={handleRememberMeChange}
                 type="checkbox"
               />
