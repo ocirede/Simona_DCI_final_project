@@ -18,6 +18,7 @@ function ShareLinkCard({ onClose }) {
     "https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:5173" +
     pathname;
   const twitterLink = ` https://twitter.com/intent/tweet?url=http://localhost:5173${pathname}&text=Check%20out%20my%20profile`;
+  
   const handleCopy = () => {
     inputRef.current.select();
     document.execCommand("copy");

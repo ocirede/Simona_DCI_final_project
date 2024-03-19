@@ -1,28 +1,44 @@
-import { useState } from "react";
-import Button from "../navbar intro/Button";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingButton from "./LoadingButton";
+import { UserContext } from "../../context/userContext";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const {
+    authenticationHandler,
+    errors,
+    rememberme,
+    handleRememberMeChange,
+    setEmail,
+    email,
+    setPassword,
+    password,
+  } = useContext(UserContext);
 
   {
     /* form container */
   }
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div className="w-2/4 p-1 flex flex-col items-center">
-        <h1 className="text-5xl">Login</h1>
-      </div>
       <br />
-      <div className="w-2/3 max-w-[400px] h-[325px] p-3 rounded-lg shadow-lg border border-gray">
-        <form className="flex flex-col justify-center gap-2">
+      <div className="w-2/3 max-w-[440px] h-[390px]  p-3 rounded-lg shadow-lg border border-gray">
+        <form
+          onSubmit={authenticationHandler}
+          className="flex flex-col justify-center gap-2 mt-4"
+        >
+          <div className=" flex justify-center">
+            <h1 className="text-5xl">Login</h1>
+          </div>
           <label>Email</label>
           <div className=" relative">
             <input
               className="p-2  border relative w-full "
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Type your email"
               required
             />
@@ -39,6 +55,8 @@ function SignInForm() {
               className="p-2  border relative w-full "
               type={showPassword ? "text" : "password"}
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Type your password"
               required
             />
@@ -60,17 +78,32 @@ function SignInForm() {
           {/* submit section + loading */}
 
           <div className="flex flex-col items-center justify-center p-4">
-            <Button name="Sign-in" disabled={false} />
-            {/* <LoadingButton name="loading"/> */}
+            {loading ? (
+              <LoadingButton name="Signing in..." />
+            ) : (
+              <button
+                type="submit"
+                className="w-32 h-8 rounded-xl bg-blue-500 text-white font-bold"
+                onClick={() => {
+                  setLoading(!loading);
+                }}
+              >
+                Sign In
+              </button>
+            )}
           </div>
-          <div className=" flex flex-col  items-center gap-2 justify-between ">
+          <div className=" flex gap-2 h-12 items-end justify-between ">
             <label className=" flex items-center gap-2">
-              <input type="checkbox" />
+              <input
+                checked={rememberme}
+                onChange={handleRememberMeChange}
+                type="checkbox"
+              />
               <span>Remember me</span>
             </label>
             <span>
               Not a member ?&nbsp;
-              <Link to="" className="underline text-blue-500">
+              <Link to="/register" className="underline text-blue-500">
                 <span>Sign-up</span>
               </Link>
             </span>

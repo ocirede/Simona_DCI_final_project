@@ -30,13 +30,13 @@ function App() {
 
         <Route element={<ProfilePageLayout />}>
           <Route path="/profile-artist" element={<ProfileArtistPage />} />
-          <Route path="/homeArtist" element={<HomePageArtist />} />
-          <Route path="/E" element={<HomePageEntrepreneur />} />
-          <Route path="/chatbox" element={<ChatBox />} />
           <Route
             path="/ProfilePageEntrepreneur"
             element={<ProfilePageEntrepreneur />}
           />
+          <Route path="/homeArtist" element={<HomePageArtist />} />
+          <Route path="/E" element={<HomePageEntrepreneur />} />
+          <Route path="/chatbox" element={<ChatBox />} />
           <Route path="/QA" element={<QA />} />
         </Route>
 
