@@ -4,6 +4,7 @@ import axios from "../config/axios.js"
 export  const ArtistsContext = createContext()
 
 const baseURL = import.meta.env.VITE_BASE_URL
+console.log(baseURL)
 
 const   ArtistsProvider =  ({ children }) => {
     const [artists, setArtists] = useState([])
@@ -11,7 +12,7 @@ const   ArtistsProvider =  ({ children }) => {
 
     const fetchArtists = async (role="artist") => {
         try {
-            const response = await axios.get(baseURL + `users/get-artists/?role=${role}`)
+            const response = await axios.get(baseURL + `/users/get-artists/?role=${role}`)
 
             if(response.data.success) {
            setArtists(response.data.artists)

@@ -11,10 +11,10 @@ const EntrepreneurProvider =  ({ children }) => {
 
     const fetchEntrepreneurs = async (role="entrepreneur") => {
         try {
-            const response = await axios.get(baseURL + `users/get-entrepreneurs/?role=${role}`)
+            const response = await axios.get(baseURL + `/users/get-entrepreneurs/?role=${role}`)
 
             if(response.data.success) {
-                setEntrepreneurs(response.data.entrepreneur)
+                setEntrepreneurs(response.data.entrepreneurs)
             }
         } catch (error) {
             console.error(error);
