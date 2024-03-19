@@ -33,8 +33,8 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        navigate("/sign-in");
         setResponse(true);
+        navigate("/sign-in");
         localStorage.removeItem("userRegisterData");
 
         console.log("New User==>>", response.data.newUser);
