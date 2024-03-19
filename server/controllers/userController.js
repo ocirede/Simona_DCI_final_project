@@ -299,3 +299,38 @@ export const deleteConnection = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
+
+export const signInHandling = async (req, res) =>{
+  try {
+      const{error, value} = loginValidator(req.body);
+      if(error){
+          return res.status(400).json({message: error.details});
+      }
+      const {password, email} = value;
+      const user = await User.findOne({email});
+      if(!user){
+          return res.status(404).send("User not found");
+      }
+      const isMatched = await bcrypt.compare(password, user.password);
+      if(!isMatched || !user){
+          return res.status(400).send("Wrong email or password")
+      }
+
+      if(!user.verified){
+          return res.json({
+              success: false,
+              error: "Email not verified"
+          });
+      }
+      const token = jwt.sign({id: user._id }, process.env.JWT_SECTER_KEY, {
+          expiresIn: "1d",
+      });
+      res.json({token, user});
+      console.log(user)
+
+  } catch (error) {
+      res.status(500).json({success: false, error: error.message});
+  }
+
+}
+
