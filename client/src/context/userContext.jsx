@@ -1,4 +1,4 @@
-import { createContext, useState,useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "../config/axios.js";
@@ -15,11 +15,10 @@ const UserProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_BASE_URL;
-console.log(baseURL)
   // fetching email-remember checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -35,7 +34,7 @@ console.log(baseURL)
       email,
       password,
     };
-
+    console.log(body);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -47,8 +46,13 @@ console.log(baseURL)
       e.target.reset();
       setEmail("");
       setPassword("");
+      setLoading(false);
       setUser(response.data.user);
       setErrors(null);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    
     } catch (error) {
       setErrors(error.response.data?.message || "An error occurred");
     }
@@ -111,6 +115,7 @@ console.log(baseURL)
         errors,
         email,
         password,
+        loading,
         setUserRole,
         userRoleChoice,
         registerUser,
@@ -120,6 +125,7 @@ console.log(baseURL)
         handleRememberMeChange,
         setPassword,
         setEmail,
+        setLoading,
       }}
     >
       {children}

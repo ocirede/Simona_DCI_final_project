@@ -303,7 +303,6 @@ export const deleteConnection = async (req, res) => {
 export const signInHandling = async (req, res) =>{
 
   try {
-    console.log(req.body)
       const{error, value} = loginValidator(req.body);
       if(error){
           return res.status(400).json({message: error.details});
@@ -329,7 +328,6 @@ export const signInHandling = async (req, res) =>{
       });
       res.json({token, user});
       console.log(user)
-
   } catch (error) {
       res.status(500).json({success: false, error: error.message});
   }

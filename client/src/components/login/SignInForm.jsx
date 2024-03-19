@@ -5,7 +5,6 @@ import { UserContext } from "../../context/userContext";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const {
     authenticationHandler,
     errors,
@@ -15,6 +14,8 @@ function SignInForm() {
     email,
     setPassword,
     password,
+    loading,
+    setLoading,
   } = useContext(UserContext);
 
   {
@@ -79,19 +80,18 @@ function SignInForm() {
 
           <div className="flex flex-col items-center justify-center p-4">
             {loading ? (
-              <LoadingButton name="Signing in..." />
-            ) : (
               <button
                 type="submit"
                 className="w-32 h-8 rounded-xl bg-blue-500 text-white font-bold"
-                onClick={() => {
-                  setLoading(!loading);
-                }}
+                disabled={false}
               >
                 Sign In
               </button>
+            ) : (
+              <LoadingButton name="Signing in..." />
             )}
           </div>
+
           <div className=" flex gap-2 h-12 items-end justify-between ">
             <label className=" flex items-center gap-2">
               <input

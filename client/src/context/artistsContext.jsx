@@ -4,7 +4,6 @@ import axios from "../config/axios.js"
 export  const ArtistsContext = createContext()
 
 const baseURL = import.meta.env.VITE_BASE_URL
-console.log(baseURL)
 
 const   ArtistsProvider =  ({ children }) => {
     const [artists, setArtists] = useState([])
