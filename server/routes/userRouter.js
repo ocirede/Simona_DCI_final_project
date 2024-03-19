@@ -10,6 +10,7 @@ import {
   deleteConnection,
 getEntrepreneurs,
  getArtists,
+ signInHandling,
 
 } from "../controllers/userController.js";
 
@@ -23,6 +24,7 @@ userRoutes.post("/reject-connection-request", rejectConnectionRequest);
 userRoutes.post("/delete-connection", deleteConnection);
 userRoutes.get("/get-artists", getArtists)
 userRoutes.get("/get-entrepreneurs", getEntrepreneurs)
+userRoutes.post("/signin", signInHandling)
 
 
 //The following route is an example to test the image upload, it can be deleted
