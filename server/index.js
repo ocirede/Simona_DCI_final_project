@@ -9,11 +9,12 @@ import postRoutes from "./routes/postRoutes.js";
 const app = express();
 
 const port = process.env.PORT;
+const clientURL = process.env.CLIENT_URL;
 
 app.use(express.json());
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: clientURL,
   credentials: true,
 };
 
