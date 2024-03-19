@@ -64,3 +64,197 @@ export const emailConfirmation = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
+
+//Send connect request
+export const sendConnectionRequest = async (req, res) => {
+  const { senderId, receiverId } = req.body;
+
+  try {
+    const sender = await User.findById(senderId);
+    if (!sender) {
+      return res.status(404).send({
+        success: false,
+        error: "Sender not found",
+      });
+    }
+
+    const receiver = await User.findById(receiverId);
+    if (!receiver) {
+      return res.status(404).send({
+        success: false,
+        error: "Receiver not found",
+      });
+    }
+
+    const isInSendersRequests = sender.sentRequests.includes(receiverId);
+    const isInReceiversPendingRequests =
+      receiver.pendingRequests.includes(senderId);
+
+    if (isInSendersRequests && isInReceiversPendingRequests) {
+      sender.sentRequests = sender.sentRequests.filter(
+        (id) => id.toString() !== receiverId
+      );
+      receiver.pendingRequests = receiver.pendingRequests.filter(
+        (id) => id.toString() !== senderId
+      );
+    } else {
+      sender.sentRequests.push(receiverId);
+      receiver.pendingRequests.push(senderId);
+    }
+    await sender.save();
+    await receiver.save();
+
+    await sender.populate("sentRequests");
+    await sender.populate("connections");
+    await sender.populate("pendingRequests");
+
+    res.send({
+      success: true,
+      sender,
+    });
+  } catch (error) {
+    console.error("Error sending connection request", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//Accept connection request
+export const acceptConnectionRequest = async (req, res) => {
+  const { receiverId, senderId } = req.body;
+
+  try {
+    const receiver = await User.findById(receiverId);
+    if (!receiver) {
+      return res.status(404).send({
+        success: false,
+        error: "Receiver not found",
+      });
+    }
+
+    const sender = await User.findById(senderId);
+    if (!sender) {
+      return res.status(404).send({
+        success: false,
+        error: "Sender not found",
+      });
+    }
+
+    receiver.pendingRequests = receiver.pendingRequests.filter(
+      (id) => id.toString() !== senderId
+    );
+
+    sender.sentRequests = sender.sentRequests.filter(
+      (id) => id.toString() !== receiverId
+    );
+
+    receiver.connections.push(senderId);
+    sender.connections.push(receiverId);
+
+    await receiver.save();
+    await sender.save();
+
+    await receiver.populate("sentRequests");
+    await receiver.populate("pendingRequests");
+    await receiver.populate("connections");
+
+    res.send({
+      success: true,
+      receiver,
+    });
+  } catch (error) {
+    console.error("Error accepting connection request", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//Reject connection request
+export const rejectConnectionRequest = async (req, res) => {
+  const { receiverId, senderId } = req.body;
+
+  try {
+    const receiver = await User.findById(receiverId);
+    if (!receiver) {
+      return res.status(404).send({
+        success: false,
+        error: "Receiver not found",
+      });
+    }
+
+    const sender = await User.findById(senderId);
+    if (!sender) {
+      return res.status(404).send({
+        success: false,
+        error: "Sender not found",
+      });
+    }
+
+    receiver.pendingRequests = receiver.pendingRequests.filter(
+      (id) => id.toString() !== senderId
+    );
+
+    sender.sentRequests = sender.sentRequests.filter(
+      (id) => id.toString() !== receiverId
+    );
+
+    await receiver.save();
+    await sender.save();
+
+    await receiver.populate("sentRequests");
+    await receiver.populate("pendingRequests");
+    await receiver.populate("connections");
+
+    res.send({
+      success: true,
+      receiver,
+    });
+  } catch (error) {
+    console.error("Error rejecting connection request", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//Delete connection
+export const deleteConnection = async (req, res) => {
+  const { userId, connectionId } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        error: "User not found",
+      });
+    }
+
+    const connection = await User.findById(connectionId);
+    if (!connection) {
+      return res.status(404).send({
+        success: false,
+        error: "Sender not found",
+      });
+    }
+
+    user.connections = user.connections.filter(
+      (id) => id.toString() !== connectionId
+    );
+
+    connection.connections = connection.connections.filter(
+      (id) => id.toString() !== userId
+    );
+
+    await user.save();
+    await connection.save();
+
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+
+    res.send({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error("Error deleting the connection", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};

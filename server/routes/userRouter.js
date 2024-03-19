@@ -3,12 +3,20 @@ import { profileImageUpload } from "../middleware/multerCloudinary.js";
 import {
   emailConfirmation,
   handleRegister,
+  sendConnectionRequest,
+  acceptConnectionRequest,
+  rejectConnectionRequest,
+  deleteConnection,
 } from "../controllers/userController.js";
 
 const userRoutes = express.Router();
 
 userRoutes.post("/register", handleRegister);
 userRoutes.post("/emailconfirm/:token", emailConfirmation);
+userRoutes.post("/send-connection-request", sendConnectionRequest);
+userRoutes.post("/accept-connection-request", acceptConnectionRequest);
+userRoutes.post("/reject-connection-request", rejectConnectionRequest);
+userRoutes.post("/delete-connection", deleteConnection);
 
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(
