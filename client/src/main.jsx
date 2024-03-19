@@ -14,15 +14,15 @@ import { FormVisibilityProvider } from "./context/formVisibility.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-  <UserProvider>
-    <ArtistsProvider>
-      <EntrepreneurProvider>
-        <FormVisibilityProvider>
-          <App />
-        </FormVisibilityProvider>
-      </EntrepreneurProvider>
-    </ArtistsProvider>
- </UserProvider>
+      <UserProvider>
+        <ArtistsProvider>
+          <EntrepreneurProvider>
+            <FormVisibilityProvider>
+              <App />
+            </FormVisibilityProvider>
+          </EntrepreneurProvider>
+        </ArtistsProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

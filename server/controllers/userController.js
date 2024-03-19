@@ -39,3 +39,14 @@ export const getEntrepreneurs= async (req, res) => {
         res.send({succsess:false, error:error.message})
     }
 }
+
+// if it will be needed 
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.send({ success: true, users });
+    } catch (error) {
+        console.error("Error fetching all users:", error.message);
+        res.send({ success: false, error: error.message });
+    }
+};

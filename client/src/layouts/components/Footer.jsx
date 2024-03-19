@@ -32,10 +32,18 @@ export default function Footer() {
           </div>
           <div className="md:mr-8 mb-4 md:mb-0 lg:flex items-center gap-2 text-[20px] mt-[20px] md:mt-[210px] lg:mt-[210px]">
             <div className="flex gap-2 mb-4 lg:mb-0">
-              <i className="fa-brands fa-github-alt hover:text-gray-700 transition-colors cursor-pointer"></i>
-              <i className="fa-brands fa-instagram hover:text-gray-700 transition-colors cursor-pointer"></i>
-              <i className="fa-brands fa-facebook hover:text-gray-700 transition-colors cursor-pointer"></i>
-              <i className="fa-brands fa-twitter hover:text-gray-700 transition-colors cursor-pointer"></i>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <i className="fa-brands fa-github-alt hover:text-gray-700 transition-colors cursor-pointer"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                    <i className="fa-brands fa-instagram hover:text-gray-700 transition-colors cursor-pointer"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                    <i className="fa-brands fa-facebook hover:text-gray-700 transition-colors cursor-pointer"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                    <i className="fa-brands fa-twitter hover:text-gray-700 transition-colors cursor-pointer"></i>
+                </a>
             </div>
             <div>
               <h3 className="text-[18px] uppercase">

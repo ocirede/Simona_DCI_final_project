@@ -9,11 +9,13 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
 
   /* background-color: #525252;  */
-
-
-
 }
 
+.header-bg {
+  background-image: url("/qqquad.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 @tailwind base;
 @tailwind components;

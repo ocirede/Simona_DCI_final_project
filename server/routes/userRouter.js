@@ -1,9 +1,10 @@
 import express from "express";
 import { profileImageUpload } from "../middleware/multerCloudinary.js";
-import { getArtists, getEntrepreneurs } from "../controllers/userController.js";
+import { getAllUsers, getArtists, getEntrepreneurs } from "../controllers/userController.js";
 
 const userRoutes = express.Router();
 
+userRoutes.get("/get-users", getAllUsers); 
 userRoutes.get("/get-artists", getArtists)
 userRoutes.get("/get-entrepreneurs", getEntrepreneurs)
 

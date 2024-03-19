@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import CardCarousel from "../components/CardCarousel";
 import MeetOurTeam from "../components/introPage/MeetOurTeam";
 import TopReviews from "../components/introPage/TopReviews";
+import { ArtistsContext } from "../context/artistsContext";
+import { EntrepreneurContext } from "../context/entrepreneurContext";
+import SlideFromLeft from "../components/framerMotionAnimations/SlideFromLeft";
 
 export default function IntroPage() {
     // only to simulate the rating, change later
@@ -10,21 +14,26 @@ export default function IntroPage() {
         { rating: 5, comment: "When my friends told me this place would accommodate to all my needs, I didn't want to believe, but my gig went so well I will for sure book them again." },
     ];
 
+    const { artists } = useContext(ArtistsContext);
+    const { entrepreneurs } = useContext(EntrepreneurContext);
+
     return (
-        <div>
-            <div className="lg:ml-40 lg:mt-40 lg:flex">
+        <div className="">
+            <div className="lg:pl-40 lg:pt-40 lg:flex">
                 <div className="m-10">
+                    <SlideFromLeft>
                     <h1 className="uppercase text-[90px]">Simona</h1>
+                    </SlideFromLeft>
                     <h3 className="text-[48px]">Your next fateful connection</h3>
                     <div className="mt-8">
-                        <p className="mb-4">Do you remember the last time you had to search through dozen of websites just to find that one <span className="uppercase text-[25px]">right</span> person?</p>
+                        <p className="pb-4">Do you remember the last time you had to search through dozen of websites just to find that one <span className="uppercase text-[25px]">right</span> person?</p>
                         <p>With Simona you don't have to feel lost anymore, start searching for your next gig, exhibition or a business partner <span className="uppercase text-[25px]">now</span> within our cool scene and connect with various funky folks out there!</p>
                         <button className="bg-gray-300 rounded-lg p-2 mt-4">Join us</button>
                     </div>
                 </div>
                 <div className="lg:m-10 lg:mr-40">
-                    <h2 className="uppercase text-[38px] mb-5 text-center">Our groovy Artists</h2>
-                    <CardCarousel />
+                    <h2 className="uppercase text-[38px] pb-5 text-center">Our groovy Artists</h2>
+                    <CardCarousel data={artists} />
                 </div>
             </div>
             
@@ -35,7 +44,7 @@ export default function IntroPage() {
                 </div>
                 <div className="lg:order-1">
                     <h2 className="uppercase text-[38px] mb-5 text-center">Our radical Entrepreneurs</h2>
-                    <CardCarousel />
+                    <CardCarousel data={entrepreneurs} />
                 </div>
             </div>
             <div>
