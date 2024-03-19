@@ -17,7 +17,6 @@ const UserProvider = ({ children }) => {
   //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
-    //console.log("User role from context=>>", userRole);
   };
 
   //Register user
@@ -33,11 +32,11 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        setResponse(true);
         navigate("/sign-in");
+        setResponse(true);
         localStorage.removeItem("userRegisterData");
 
-        console.log("New User==>>", response.data.newUser);
+        //console.log("New User==>>", response.data.newUser);
       }
       setValidationErrors(null);
     } catch (error) {
