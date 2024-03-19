@@ -8,12 +8,9 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import QA from "./pages/Q&A";
 import IntroPage from "./pages/IntroPage";
 import ProfilePageLayout from "./layouts/ProfilePageLayout";
-
 import { Route, Routes } from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
 import ProfileArtistPage from "./pages/ProfileArtistPage";
-
-import NavBarHomepage from "./components/navBarHomepage";
 import ChatBox from "./components/chatBox/chatBox.jsx";
 import HomePageEntrepreneur from "./pages/homePageEntrepreneur.jsx";
 import HomePageArtist from "./pages/homePageArtist.jsx";
@@ -33,13 +30,13 @@ function App() {
 
         <Route element={<ProfilePageLayout />}>
           <Route path="/profile-artist" element={<ProfileArtistPage />} />
-          <Route path="/homeArtist" element={<HomePageArtist />} />
-          <Route path="/E" element={<HomePageEntrepreneur />} />
-          <Route path="/chatbox" element={<ChatBox />} />
           <Route
             path="/ProfilePageEntrepreneur"
             element={<ProfilePageEntrepreneur />}
           />
+          <Route path="/homeArtist" element={<HomePageArtist />} />
+          <Route path="/E" element={<HomePageEntrepreneur />} />
+          <Route path="/chatbox" element={<ChatBox />} />
           <Route path="/QA" element={<QA />} />
         </Route>
 
