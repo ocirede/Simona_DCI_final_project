@@ -15,7 +15,6 @@ function SignInForm() {
     setPassword,
     password,
     loading,
-    setLoading,
   } = useContext(UserContext);
 
   {
@@ -35,7 +34,7 @@ function SignInForm() {
           <label>Email</label>
           <div className=" relative">
             <input
-              className="p-2  border relative w-full "
+              className="p-2  border relative w-full h-9 "
               type="email"
               name="email"
               value={email}
@@ -53,7 +52,7 @@ function SignInForm() {
           </label>
           <div className="relative">
             <input
-              className="p-2  border relative w-full "
+              className="p-2  border relative w-full h-9 "
               type={showPassword ? "text" : "password"}
               name="password"
               value={password}

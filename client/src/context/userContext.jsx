@@ -19,7 +19,8 @@ const UserProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_BASE_URL;
-  // fetching email-remember checkbox
+
+  // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
     if (storedEmail) {
@@ -34,7 +35,6 @@ const UserProvider = ({ children }) => {
       email,
       password,
     };
-    console.log(body);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -49,10 +49,18 @@ const UserProvider = ({ children }) => {
       setLoading(false);
       setUser(response.data.user);
       setErrors(null);
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    
+
+      const userRole = response.data.user.role;
+
+      if (userRole === "artist") {
+        setTimeout(() => {
+          navigate("/homeArtist");
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          navigate("/E");
+        }, 1500);
+      }
     } catch (error) {
       setErrors(error.response.data?.message || "An error occurred");
     }
