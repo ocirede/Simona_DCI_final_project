@@ -2,7 +2,7 @@
 import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { registerValidator } from "../validator/user-validator.js";
+import { loginValidator, registerValidator } from "../validator/user-validator.js";
 import { emailVerification } from "../verification/emailVerification.js";
 
 //Register user
