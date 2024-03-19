@@ -11,7 +11,6 @@ const UserProvider = ({ children }) => {
   const [response, setResponse] = useState(true);
   const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
-  const [errors, setErrors] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -30,6 +29,7 @@ const UserProvider = ({ children }) => {
 
   //Sign-in function
   const authenticationHandler = async (e) => {
+    setValidationErrors(null);
     e.preventDefault();
     const body = {
       email,
@@ -48,10 +48,8 @@ const UserProvider = ({ children }) => {
       setPassword("");
       setLoading(false);
       setUser(response.data.user);
-      setErrors(null);
-
+      setValidationErrors(null)
       const userRole = response.data.user.role;
-
       if (userRole === "artist") {
         setTimeout(() => {
           navigate("/homeArtist");
@@ -61,9 +59,19 @@ const UserProvider = ({ children }) => {
           navigate("/E");
         }, 1500);
       }
-    } catch (error) {
-      setErrors(error.response.data?.message || "An error occurred");
+    }  catch (error) {
+      if (Array.isArray(error.response.data.message)) {
+        setValidationErrors(error.response.data.message);
+      } else {
+        const error = [
+          {
+            message: error.response.data.message,
+          },
+        ];
+        setValidationErrors(error);
+      }
     }
+       
   };
 
   // set true or false the checkbox
@@ -120,7 +128,6 @@ const UserProvider = ({ children }) => {
         response,
         responseSuccsess,
         rememberMe,
-        errors,
         email,
         password,
         loading,

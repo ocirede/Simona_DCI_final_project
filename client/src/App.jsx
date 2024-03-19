@@ -17,6 +17,7 @@ import IntroPageLayout from "./layouts/IntroPageLayout.jsx";
 import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur.jsx";
 import EmailConfirmation from "./pages/EmailConfirmation.jsx";
 import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
           <Route
             path="/email-confirmation/:token"
             element={<EmailConfirmation />}
+          />
+          <Route
+          path="/changepassword/:token"
+          element={<ChangePassword/>}
           />
           <Route path="/confirmed-user" element={<ConfirmedUserPage />} />
           <Route path="/register-questions" element={<RegisterUserQuestions />}>

@@ -2,12 +2,13 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingButton from "./LoadingButton";
 import { UserContext } from "../../context/userContext";
+import AlertArrayOfErrors from "../alerts/AlertArrayOfErrors";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const {
     authenticationHandler,
-    errors,
+    setValidationErrors,
     rememberMe,
     handleRememberMeChange,
     setEmail,
@@ -15,6 +16,7 @@ function SignInForm() {
     setPassword,
     password,
     loading,
+    validationErrors,
   } = useContext(UserContext);
 
   {
@@ -108,6 +110,18 @@ function SignInForm() {
             </span>
           </div>
         </form>
+      </div>
+      {/* Error hadling/mapping */}
+      <div className="fixed top-0 left-1/2 transform -translate-x-1/2">
+        {validationErrors ? (
+          <ul className="text-red-500 list-none list-inside text-left">
+            {validationErrors.map((err, i) => (
+              <li className="py-1 text-sm" key={i}>
+                <AlertArrayOfErrors text={err?.message} />
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
     </div>
   );

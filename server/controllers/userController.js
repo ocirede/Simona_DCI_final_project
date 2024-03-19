@@ -3,7 +3,7 @@ import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { loginValidator, registerValidator } from "../validator/user-validator.js";
-import { emailVerification } from "../verification/emailVerification.js";
+import { emailVerification, changePassVerification } from "../verification/emailVerification.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -326,11 +326,14 @@ export const signInHandling = async (req, res) =>{
       const token = jwt.sign({id: user._id }, process.env.JWT_SECTER_KEY, {
           expiresIn: "1d",
       });
+      changePassVerification(token, user.email);
       res.json({token, user});
       console.log(user)
   } catch (error) {
       res.status(500).json({success: false, error: error.message});
   }
 
-}
+};
+
+
 
