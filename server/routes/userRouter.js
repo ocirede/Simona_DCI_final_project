@@ -1,7 +1,12 @@
 import express from "express";
 import { profileImageUpload } from "../middleware/multerCloudinary.js";
+import { getArtists, getEntrepreneurs } from "../controllers/userController.js";
 
 const userRoutes = express.Router();
+
+userRoutes.get("/get-artists", getArtists)
+userRoutes.get("/get-entrepreneurs", getEntrepreneurs)
+
 
 //Here will be the usersRoutes
 //As we have one userSchema i believe it is better to have one userRoutes and one userController
