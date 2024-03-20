@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
+
   const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -16,6 +17,7 @@ const UserProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [rememberme, setRememberMe] = useState(false);
   
+
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_BASE_URL;
@@ -62,7 +64,6 @@ const UserProvider = ({ children }) => {
   //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
-    //console.log("User role from context=>>", userRole);
   };
 
   //Register user
@@ -78,10 +79,11 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        setResponse(true);
-        setResponseSuccsess(response.data.success);
         navigate("/sign-in");
-        console.log("New User==>>", response.data.newUser);
+        setResponse(true);
+        localStorage.removeItem("userRegisterData");
+
+        //console.log("New User==>>", response.data.newUser);
       }
       setValidationErrors(null);
     } catch (error) {
