@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
-    categories: [{ type: String },],
+    categories: [{ type: String }],
     profileImage: { type: String },
     profileBackground: { type: String },
     verified: {
@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema(
       country: String,
       phone: String,
     },
+    averageRating: { type: Number },
     pendingRequests: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -51,10 +52,8 @@ const userSchema = new mongoose.Schema(
         level: { type: String },
       },
     ],
-    interests: [{ type: String },],
-
-    personality: [{ type: String },],
-    
+    interests: [{ type: String }],
+    personality: [{ type: String }],
     education: [
       {
         title: { type: String },

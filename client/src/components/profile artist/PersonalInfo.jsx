@@ -6,7 +6,7 @@ import { Camera } from "lucide-react";
 function PersonalInfo({onClick}) {
  const contactMail =` mailto:federico.diaferia@gmail.com`
   return (
-    <section className="flex justify-center items-center  h-[130px] mt-2  ">
+    <section className="flex justify-center items-center  h-[130px] mt-2">
       {/* import { Contact } from 'lucide-react' ???*/}
       <div className="absolute top-0 -left-8  sm:left-12 md:left-28 lg:left-56 ">
         <a href={contactMail}>
