@@ -6,7 +6,7 @@ import { Menu, X } from 'lucide-react';
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-blue-500 text-white p-3 flex flex-wrap items-center justify-between md:flex-row">
+    <nav className="bg-blue-500 text-white z-50 p-3 flex flex-wrap items-center justify-between md:flex-row ">
        <Link to="/"><FakeLogo className=""/></Link>
 
       <div className="md:hidden">
@@ -14,7 +14,7 @@ export default function NavBarHomepage() {
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
-      <div className={`${isOpen ? "flex" : "hidden"} flex-col w-full md:flex md:flex-row md:items-center md:justify-end md:w-auto`}>
+      <div className={`${isOpen ? "flex" : "hidden"} flex-col w-full md:flex md:flex-row md:items-center md:justify-end md:w-auto `}>
         <Link to="/offers" className="mt-4 md:mt-0 md:ml-4">Offers</Link>
         <Link to="/artists" className="mt-4 md:mt-0 md:ml-4">Artists</Link>
         <Link to="/Network" className="mt-4 md:mt-0 md:ml-4">Network</Link>
