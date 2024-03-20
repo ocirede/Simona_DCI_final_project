@@ -354,7 +354,6 @@ export const signInHandling = async (req, res) => {
 
     res.json({ token, user });
   } catch (error) {
-
     res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -382,3 +381,5 @@ export const updateUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating the user", error.message);
+  }
+};
