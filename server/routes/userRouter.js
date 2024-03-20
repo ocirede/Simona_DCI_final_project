@@ -11,7 +11,9 @@ import {
 getEntrepreneurs,
  getArtists,
  signInHandling,
- changePasswordEmail
+ changePasswordEmail,
+    updateUser
+
 
 } from "../controllers/userController.js";
 
@@ -27,6 +29,9 @@ userRoutes.get("/get-artists", getArtists)
 userRoutes.get("/get-entrepreneurs", getEntrepreneurs)
 userRoutes.post("/signin", signInHandling)
 userRoutes.post("/changepassword", changePasswordEmail)
+userRoutes.put("/update/:userId", updateUser);
+
+
 
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(

@@ -5,9 +5,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
-    categories: {
-      skills: [{ type: String }],
-    },
+    categories: [{ type: String }],
 
     profileImage: { type: String },
     profileBackground: { type: String },
@@ -43,7 +41,12 @@ const userSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-
+    skills: [
+      {
+        skill: { type: String },
+        level: { type: String },
+      },
+    ],
     languages: [
       {
         language: { type: String },

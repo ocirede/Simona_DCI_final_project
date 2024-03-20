@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
+
   const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -123,7 +125,6 @@ const UserProvider = ({ children }) => {
   //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
-    //console.log("User role from context=>>", userRole);
   };
 
   //Register user
@@ -139,10 +140,11 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        setResponse(true);
-        setResponseSuccsess(response.data.success);
         navigate("/sign-in");
-        console.log("New User==>>", response.data.newUser);
+        setResponse(true);
+        localStorage.removeItem("userRegisterData");
+
+        //console.log("New User==>>", response.data.newUser);
       }
       setValidationErrors(null);
     } catch (error) {
