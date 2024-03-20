@@ -41,7 +41,7 @@ export default function ConnectNetwork() {
   return  (
     
     <div>
-      <div className="flex items-center justify-center p-4 border-b-2 bg-blue-100 cursor-pointer" onClick={() => setShowConnectNetwork(!showConnectNetwork)}>
+      <div className="flex items-center justify-center p-4 border-b-2 bg-blue-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowConnectNetwork(!showConnectNetwork)}>
         connections Network
       </div>
       {showConnectNetwork && (

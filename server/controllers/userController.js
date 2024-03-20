@@ -1,8 +1,14 @@
 import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { registerValidator } from "../validator/user-validator.js";
-import { emailVerification } from "../verification/emailVerification.js";
+import {
+  loginValidator,
+  registerValidator,
+} from "../validator/user-validator.js";
+import {
+  emailVerification,
+  changePassVerification,
+} from "../verification/emailVerification.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -65,6 +71,28 @@ export const emailConfirmation = async (req, res) => {
   }
 };
 
+//password email reset
+export const changePasswordEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("Email not found");
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+
+    changePassVerification(token, email);
+    res.json({ success: true });
+  } catch (error) {
+    console.log("Error in email confirmation:", error.message);
+
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+// fetching artists
 //get Artists
 export const getArtists = async (req, res) => {
   const { role } = req.query;
@@ -84,7 +112,8 @@ export const getArtists = async (req, res) => {
   }
 };
 
-//get Enterpreneurs
+// fetching entrepeneurs
+
 export const getEntrepreneurs = async (req, res) => {
   const { role } = req.query;
 
@@ -297,6 +326,39 @@ export const deleteConnection = async (req, res) => {
   }
 };
 
+export const signInHandling = async (req, res) => {
+  try {
+    const { error, value } = loginValidator(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details });
+    }
+    const { password, email } = value;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched || !user) {
+      return res.status(400).send("Wrong email or password");
+    }
+
+    if (!user.verified) {
+      return res.json({
+        success: false,
+        error: "Email not verified",
+      });
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+
+    res.json({ token, user });
+  } catch (error) {
+
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 //Update user
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
@@ -320,6 +382,3 @@ export const updateUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating the user", error.message);
-    res.status(500).json({ success: false, error: error.message });
-  }
-};

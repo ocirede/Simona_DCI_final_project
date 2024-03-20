@@ -82,7 +82,7 @@ export default function OffersSection() {
 
   return (
     <>
-    <div className="flex items-center justify-center p-4 border-b-2 bg-red-100" onClick={() => setShowOffersSection(!showOffersSection)}>offersSection</div>
+    <div className="flex items-center justify-center p-4 border-b-2 bg-red-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowOffersSection(!showOffersSection)}>offersSection</div>
     {showOffersSection && (<div className="flex">
       <div className="w-1/3 h-screen overflow-auto bg-gray-100 p-4">
         <h2 className="font-bold text-lg mb-4">My Offers</h2>

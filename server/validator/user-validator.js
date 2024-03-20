@@ -14,3 +14,13 @@ const registerSchema = Joi.object({
 });
 
 export const registerValidator = validator(registerSchema);
+
+
+const loginSchema = Joi.object({
+    email: Joi.string().email().lowercase().trim().required(),
+    password: Joi.string().min(3).max(30).required(),
+});
+
+const loginValidator = validator(loginSchema);
+
+export { loginValidator };
