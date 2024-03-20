@@ -92,6 +92,28 @@ export const changePasswordEmail = async (req, res) => {
   }
 };
 
+// update password
+export const updatePassword = async (req, res) => {
+  const saltRounds = 10;
+  const { password } = req.body;
+  try {
+    const token = jwt.verify(req.params.token, process.env.JWT_SECTER_KEY);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(req.params.token);
+    if (token) {
+      await User.findByIdAndUpdate(
+        token.id,
+        { password: hashedPassword },
+        { new: true }
+      );
+    }
+    res.json({ success: true });
+  } catch (error) {
+    console.log("Error in update password:", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
 // fetching artists
 export const getArtists = async (req, res) => {
   const { role } = req.query;
@@ -332,6 +354,7 @@ export const signInHandling = async (req, res) => {
     }
     const { password, email } = value;
     const user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       return res.status(404).send("User not found");
     }

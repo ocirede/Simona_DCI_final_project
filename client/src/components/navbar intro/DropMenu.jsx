@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+import { NavLink } from "react-router-dom";
 
 function DropMenu() {
   return (
@@ -10,8 +11,12 @@ function DropMenu() {
         aria-orientation="vertical"
         aria-labelledby="options-menu"
       >
-        <Button name="Register" />
-        <Button name="Sign-in" />
+        <NavLink to="/register">
+          <Button name="Register" />
+        </NavLink>
+        <NavLink to="/sign-in">
+          <Button name="Sign-in" />
+        </NavLink>
       </div>
     </div>
   );
