@@ -45,7 +45,6 @@ const RegisterUserCategoryForm = () => {
     };
     localStorage.setItem("userRegisterData", JSON.stringify(userRegisterData));
     navigate("/register");
-    //console.log("Categories stored:", selectedCategories);
   };
 
   //The categories if necessary can be stored in another file
