@@ -1,9 +1,14 @@
-
 import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { loginValidator, registerValidator } from "../validator/user-validator.js";
-import { emailVerification, changePassVerification } from "../verification/emailVerification.js";
+import {
+  loginValidator,
+  registerValidator,
+} from "../validator/user-validator.js";
+import {
+  emailVerification,
+  changePassVerification,
+} from "../verification/emailVerification.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -66,45 +71,64 @@ export const emailConfirmation = async (req, res) => {
   }
 };
 
+//password email reset
+export const changePasswordEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("Email not found");
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+
+    changePassVerification(token, email);
+    res.json({ success: true });
+  } catch (error) {
+    console.log("Error in email confirmation:", error.message);
+
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+// fetching artists
 export const getArtists = async (req, res) => {
+  const { role } = req.query;
 
-    const {role} = req.query
-
-    try {
-        let filter = {}
-        if (role) {
-            filter.role = {$regex: role, $options: "i"};
-
-        }
-
-        const artists = await User.find(filter);
-
-        res.send({success:true, artists})
-    } catch (error) {
-        console.error("Error fetching the artists", error.message)
-        res.send({succsess:false, error:error.message})
+  try {
+    let filter = {};
+    if (role) {
+      filter.role = { $regex: role, $options: "i" };
     }
-}
 
-export const getEntrepreneurs= async (req, res) => {
+    const artists = await User.find(filter);
 
-    const {role} = req.query
+    res.send({ success: true, artists });
+  } catch (error) {
+    console.error("Error fetching the artists", error.message);
+    res.send({ succsess: false, error: error.message });
+  }
+};
 
-    try {
-        let filter = {}
-        if (role) {
-            filter.role = {$regex: role, $options: "i"};
+// fetching entrepeneurs
+export const getEntrepreneurs = async (req, res) => {
+  const { role } = req.query;
 
-        }
-
-        const entrepreneurs = await User.find(filter);
-
-        res.send({success:true, entrepreneurs})
-    } catch (error) {
-        console.error("Error fetching the Entrepreneurs", error.message)
-        res.send({succsess:false, error:error.message})
+  try {
+    let filter = {};
+    if (role) {
+      filter.role = { $regex: role, $options: "i" };
     }
-}
+
+    const entrepreneurs = await User.find(filter);
+
+    res.send({ success: true, entrepreneurs });
+  } catch (error) {
+    console.error("Error fetching the Entrepreneurs", error.message);
+    res.send({ succsess: false, error: error.message });
+  }
+};
 
 //Send connect request
 export const sendConnectionRequest = async (req, res) => {
@@ -300,40 +324,34 @@ export const deleteConnection = async (req, res) => {
   }
 };
 
-export const signInHandling = async (req, res) =>{
-
+export const signInHandling = async (req, res) => {
   try {
-      const{error, value} = loginValidator(req.body);
-      if(error){
-          return res.status(400).json({message: error.details});
-      }
-      const {password, email} = value;
-      const user = await User.findOne({email});
-      if(!user){
-          return res.status(404).send("User not found");
-      }
-      const isMatched = await bcrypt.compare(password, user.password);
-      if(!isMatched || !user){
-          return res.status(400).send("Wrong email or password")
-      }
+    const { error, value } = loginValidator(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details });
+    }
+    const { password, email } = value;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched || !user) {
+      return res.status(400).send("Wrong email or password");
+    }
 
-      if(!user.verified){
-          return res.json({
-              success: false,
-              error: "Email not verified"
-          });
-      }
-      const token = jwt.sign({id: user._id }, process.env.JWT_SECTER_KEY, {
-          expiresIn: "1d",
+    if (!user.verified) {
+      return res.json({
+        success: false,
+        error: "Email not verified",
       });
-      changePassVerification(token, user.email);
-      res.json({token, user});
-      console.log(user)
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+
+    res.json({ token, user });
   } catch (error) {
-      res.status(500).json({success: false, error: error.message});
+    res.status(500).json({ success: false, error: error.message });
   }
-
 };
-
-
-

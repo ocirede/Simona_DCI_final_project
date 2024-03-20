@@ -49,7 +49,7 @@ function App() {
             element={<EmailConfirmation />}
           />
           <Route
-          path="/changepassword/:token"
+          path="/resetpassword/:token"
           element={<ChangePassword/>}
           />
           <Route path="/confirmed-user" element={<ConfirmedUserPage />} />

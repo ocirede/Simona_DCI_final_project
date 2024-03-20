@@ -15,6 +15,9 @@ const UserProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [forgotPassword, setForgotPasswsord] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_BASE_URL;
@@ -43,12 +46,6 @@ const UserProvider = ({ children }) => {
       }
 
       localStorage.setItem("token", response.data.token);
-      e.target.reset();
-      setEmail("");
-      setPassword("");
-      setLoading(false);
-      setUser(response.data.user);
-      setValidationErrors(null)
       const userRole = response.data.user.role;
       if (userRole === "artist") {
         setTimeout(() => {
@@ -59,7 +56,13 @@ const UserProvider = ({ children }) => {
           navigate("/E");
         }, 1500);
       }
-    }  catch (error) {
+      e.target.reset();
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+      setUser(response.data.user);
+      setValidationErrors(null);
+    } catch (error) {
       if (Array.isArray(error.response.data.message)) {
         setValidationErrors(error.response.data.message);
       } else {
@@ -71,13 +74,51 @@ const UserProvider = ({ children }) => {
         setValidationErrors(error);
       }
     }
-       
   };
 
   // set true or false the checkbox
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
   };
+
+  //send a request to reset the password
+
+  const requestForgotPasswordEmail = async (e) => {
+    e.preventDefault();
+    const body = {
+      email: e.target.email.defaultValue,
+    };
+    try {
+      const response = await axios.post(
+        baseURL + "/users/changepassword",
+        body
+      );
+      if (response.data.success) {
+        console.log("we have sent you an email to reset you password");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  // reset-update password
+
+  const resetPassword = (e) => {
+    e.preventDefault();
+    const password = e.target.password.value;
+    const reType = e.target.retype.value;
+
+    if(reType !== password){
+      alert("password are not matching")
+      return
+    }
+
+    const body = {
+      password: e.target.password.value
+    }
+
+    console.log(body)
+  }
 
   //Register backround handling
   const userRoleChoice = (role) => {
@@ -131,6 +172,8 @@ const UserProvider = ({ children }) => {
         email,
         password,
         loading,
+        showPassword,
+        forgotPassword,
         setUserRole,
         userRoleChoice,
         registerUser,
@@ -141,6 +184,10 @@ const UserProvider = ({ children }) => {
         setPassword,
         setEmail,
         setLoading,
+        setShowPassword,
+        setForgotPasswsord,
+        requestForgotPasswordEmail,
+        resetPassword
       }}
     >
       {children}
