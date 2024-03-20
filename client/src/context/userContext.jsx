@@ -9,8 +9,6 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
-
-  const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +16,7 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [newUser, setNewUser] = useState();
 
   const navigate = useNavigate();
 
@@ -99,7 +97,7 @@ const UserProvider = ({ children }) => {
         console.log("we have sent you an email to reset you password");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -110,17 +108,17 @@ const UserProvider = ({ children }) => {
     const password = e.target.password.value;
     const reType = e.target.retype.value;
 
-    if(reType !== password){
-      alert("password are not matching")
-      return
+    if (reType !== password) {
+      alert("password are not matching");
+      return;
     }
 
     const body = {
-      password: e.target.password.value
-    }
+      password: e.target.password.value,
+    };
 
-    console.log(body)
-  }
+    console.log(body);
+  };
 
   //Register backround handling
   const userRoleChoice = (role) => {
@@ -140,9 +138,9 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        navigate("/sign-in");
         setResponse(true);
         localStorage.removeItem("userRegisterData");
+        setNewUser(response.data.newUser);
 
         //console.log("New User==>>", response.data.newUser);
       }
@@ -163,7 +161,46 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  
+  //logged user
+  const loggedUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const response = await axios.get(baseURL + `/users/loggeduser`);
+        setUser(response.data.user);
+        console.log("Logged user:", response.data.user);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    }
+  };
+  useEffect(() => {
+    loggedUser();
+  }, []);
+
+
+  //logged user
+  const loggedUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const response = await axios.get(baseURL + `/users/loggeduser`);
+        setUser(response.data.user);
+        console.log("Logged user:", response.data.user);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    }
+  };
+  useEffect(() => {
+    loggedUser();
+  }, []);
 
   return (
     <UserContext.Provider
@@ -171,13 +208,14 @@ const UserProvider = ({ children }) => {
         userRole,
         validationErrors,
         response,
-        responseSuccsess,
         rememberMe,
         email,
         password,
         loading,
         showPassword,
         forgotPassword,
+        newUser,
+        user,
         setUserRole,
         userRoleChoice,
         registerUser,
@@ -191,7 +229,7 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-        resetPassword
+        resetPassword,
       }}
     >
       {children}
