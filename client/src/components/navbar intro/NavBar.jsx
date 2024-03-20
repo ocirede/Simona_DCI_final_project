@@ -4,6 +4,7 @@ import Button from "./Button";
 import LanguageChoice from "./LanguageChoice";
 import { Menu } from "lucide-react";
 import DropMenu from "./DropMenu";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   const [display, setDisplay] = useState(false);
@@ -12,8 +13,12 @@ function NavBar() {
       <ul className=" p-3 w-full flex items-center justify-between  ">
         <FakeLogo />
         <div className="hidden xs:flex justify-end items-center flex-grow p-3 gap-5">
-          <Button name="Register" />
-          <Button name="Sign-in" />
+          <NavLink to="/register">
+            <Button name="Register" />
+          </NavLink>
+          <NavLink to="/sign-in">
+            <Button name="Sign-in" />
+          </NavLink>
           <LanguageChoice />
         </div>
         <div className=" flex gap-6 xs:hidden">
