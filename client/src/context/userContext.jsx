@@ -163,6 +163,26 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  //logged user
+  const loggedUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const response = await axios.get(baseURL + `/users/loggeduser`);
+        setUser(response.data.user);
+        console.log("Logged user:", response.data.user);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    }
+  };
+  useEffect(() => {
+    loggedUser();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
