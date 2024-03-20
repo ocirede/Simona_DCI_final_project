@@ -27,8 +27,8 @@ const RegisterUserForm = () => {
     registerUser(
       email,
       password,
-      userRegisterData.role,
-      userRegisterData.categories
+      userRegisterData?.role,
+      userRegisterData?.categories
     );
   };
 

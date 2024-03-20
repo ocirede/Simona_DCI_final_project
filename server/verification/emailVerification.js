@@ -62,7 +62,7 @@ export const changePassVerification = async (token, email) => {
             <p style="font-size: 16px;">Dear user,</p>
             <p style="font-size: 16px;">You've requested to change your password. To proceed, please click the button below:</p>
             <div style="text-align: center; margin-top: 20px;">
-              <a href="${clientURL}/changepass/${token}" style="background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">Change Password</a>
+              <a href="${clientURL}/resetpassword/${token}" style="background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">Change Password</a>
             </div>
             <p style="font-size: 16px;">If you didn't request this change, please ignore this email.</p>
             <p style="font-size: 16px;">Thank you!</p>
