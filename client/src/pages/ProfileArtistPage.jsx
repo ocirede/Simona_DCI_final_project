@@ -9,12 +9,12 @@ import ShareLinkCard from "../components/profile artist/ShareLinkCard";
 function ProfileArtist() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(!isModalOpen);
-  const [shareLnk, setShareLink] = useState(false);
-  const openShareCard = () => setShareLink(!shareLnk);
+  const [shareLink, setShareLink] = useState(false);
+  const openShareCard = () => setShareLink(!shareLink);
   return (
     <>
       <NavBar />
-      <main>
+      <main className=" mb-10">
         {/* personal info section*/}
         <section>
           <PersonalInfo onClick={openShareCard} />
@@ -38,9 +38,11 @@ function ProfileArtist() {
         </section>
         {/* Render the modal if isModalOpen is true */}
         {isModalOpen && <EditorModal onClose={openModal} />}
-        {shareLnk && <ShareLinkCard onClose={openShareCard} />}
+
 
         {/* footer to be replaced with the footer from Tyhe */}
+        {shareLink && <ShareLinkCard onClose={openShareCard} />}
+
       </main>
     </>
   );
