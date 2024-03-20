@@ -7,8 +7,7 @@ import { UserContext } from "../context/userContext";
 import AlertArrayOfErrors from "../components/alerts/AlertArrayOfErrors";
 
 const RegisterUserForm = () => {
-  const { registerUser, response, validationErrors, responseSuccsess } =
-    useContext(UserContext);
+  const { registerUser, response, validationErrors } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,9 +30,6 @@ const RegisterUserForm = () => {
       userRegisterData.role,
       userRegisterData.categories
     );
-    if (responseSuccsess) {
-      localStorage.removeItem("userRegisterData");
-    }
   };
 
   useEffect(() => {

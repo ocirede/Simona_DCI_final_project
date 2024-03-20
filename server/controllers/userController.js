@@ -115,6 +115,7 @@ export const updatePassword = async (req, res) => {
 };
 
 // fetching artists
+//get Artists
 export const getArtists = async (req, res) => {
   const { role } = req.query;
 
@@ -134,6 +135,7 @@ export const getArtists = async (req, res) => {
 };
 
 // fetching entrepeneurs
+
 export const getEntrepreneurs = async (req, res) => {
   const { role } = req.query;
 
@@ -375,6 +377,33 @@ export const signInHandling = async (req, res) => {
 
     res.json({ token, user });
   } catch (error) {
+
     res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+//Update user
+export const updateUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("User updated successfully:", updatedUser);
+    res.send({
+      success: true,
+      user: updatedUser,
+      message: "Updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating the user", error.message);
   }
 };
