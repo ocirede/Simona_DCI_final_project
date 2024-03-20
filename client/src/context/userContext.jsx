@@ -18,7 +18,7 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [newUser, setNewUser] = useState();
 
   const navigate = useNavigate();
 
@@ -99,7 +99,7 @@ const UserProvider = ({ children }) => {
         console.log("we have sent you an email to reset you password");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -110,17 +110,17 @@ const UserProvider = ({ children }) => {
     const password = e.target.password.value;
     const reType = e.target.retype.value;
 
-    if(reType !== password){
-      alert("password are not matching")
-      return
+    if (reType !== password) {
+      alert("password are not matching");
+      return;
     }
 
     const body = {
-      password: e.target.password.value
-    }
+      password: e.target.password.value,
+    };
 
-    console.log(body)
-  }
+    console.log(body);
+  };
 
   //Register backround handling
   const userRoleChoice = (role) => {
@@ -140,9 +140,9 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        navigate("/sign-in");
         setResponse(true);
         localStorage.removeItem("userRegisterData");
+        setNewUser(response.data.newUser);
 
         //console.log("New User==>>", response.data.newUser);
       }
@@ -176,6 +176,7 @@ const UserProvider = ({ children }) => {
         loading,
         showPassword,
         forgotPassword,
+        newUser,
         setUserRole,
         userRoleChoice,
         registerUser,
@@ -189,7 +190,7 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-        resetPassword
+        resetPassword,
       }}
     >
       {children}
