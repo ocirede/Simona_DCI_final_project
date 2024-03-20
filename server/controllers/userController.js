@@ -113,7 +113,6 @@ export const getArtists = async (req, res) => {
 };
 
 // fetching entrepeneurs
-
 export const getEntrepreneurs = async (req, res) => {
   const { role } = req.query;
 
@@ -354,7 +353,6 @@ export const signInHandling = async (req, res) => {
 
     res.json({ token, user });
   } catch (error) {
-
     res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -382,3 +380,18 @@ export const updateUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating the user", error.message);
+  }
+};
+
+//logged user
+export const loggedUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    // const userId = req.params.id;
+    const user = await User.findOne({ _id: userId });
+    res.send({ success: true, user });
+  } catch (error) {
+    console.log("Error logged user:", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
