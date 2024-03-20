@@ -197,6 +197,7 @@ const UserProvider = ({ children }) => {
         showPassword,
         forgotPassword,
         newUser,
+        user,
         setUserRole,
         userRoleChoice,
         registerUser,
