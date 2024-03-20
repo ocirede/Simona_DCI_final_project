@@ -9,8 +9,6 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
-
-  const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -189,7 +187,6 @@ const UserProvider = ({ children }) => {
         userRole,
         validationErrors,
         response,
-        responseSuccsess,
         rememberMe,
         email,
         password,
