@@ -41,9 +41,7 @@ const RegisterUserCategoryForm = () => {
 
     userRegisterData = {
       ...userRegisterData,
-      categories: {
-        skills: selectedCategories,
-      },
+      categories: selectedCategories,
     };
     localStorage.setItem("userRegisterData", JSON.stringify(userRegisterData));
     navigate("/register");

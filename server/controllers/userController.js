@@ -34,7 +34,7 @@ export const handleRegister = async (req, res) => {
       }
     );
 
-    emailVerification(token, newUser.email);
+    //emailVerification(token, newUser.email);
 
     res.send({ success: true, newUser });
     console.log("New user created successfully:", newUser);
@@ -294,5 +294,32 @@ export const deleteConnection = async (req, res) => {
   } catch (error) {
     console.error("Error deleting the connection", error.message);
     res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//Update user
+export const updateUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("User updated successfully:", updatedUser);
+    res.send({
+      success: true,
+      user: updatedUser,
+      message: "Updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating the user", error.message);
+    res.status(500).json({ success: false, error: error.message });
   }
 };
