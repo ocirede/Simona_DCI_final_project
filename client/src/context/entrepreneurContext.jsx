@@ -1,12 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "../config/axios.js" 
 
-const baseURL = import.meta.env.VITE_BASE_URL
+import axios from "../config/axios.js";
 
-export  const EntrepreneurContext = createContext()
 
-const EntrepreneurProvider =  ({ children }) => {
-    const [entrepreneurs, setEntrepreneurs] = useState([])
+const baseURL = import.meta.env.VITE_BASE_URL;
+
+export const EntrepreneurContext = createContext();
+
+
+const EntrepreneurProvider = ({ children }) => {
+  const [entrepreneurs, setEntrepreneurs] = useState([]);
+
 
 
     const fetchEntrepreneurs = async (role="entrepreneur") => {
@@ -19,12 +23,20 @@ const EntrepreneurProvider =  ({ children }) => {
         } catch (error) {
             console.error(error);
         }
-    }
 
-    useEffect(() => {
-        fetchEntrepreneurs()
-    }, [])
-    
+    }
+  };
+
+  useEffect(() => {
+    fetchEntrepreneurs();
+  }, []);
+
+  return (
+    <EntrepreneurContext.Provider value={{ entrepreneurs }}>
+      {children}
+    </EntrepreneurContext.Provider>
+  );
+};
 
 
     return (
@@ -36,3 +48,4 @@ const EntrepreneurProvider =  ({ children }) => {
 }
 
 export default EntrepreneurProvider
+

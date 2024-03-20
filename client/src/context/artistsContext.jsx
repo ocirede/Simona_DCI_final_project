@@ -1,12 +1,16 @@
 import { createContext, useEffect, useState } from "react";
+
 import axios from "../config/axios.js" 
 
-export  const ArtistsContext = createContext()
+export const ArtistsContext = createContext();
 
-const baseURL = import.meta.env.VITE_BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 
      const  ArtistsProvider =  ({ children }) => {
     const [artists, setArtists] = useState([])
+
+
 
 
     const fetchArtists = async (role="artist") => {
@@ -20,10 +24,13 @@ const baseURL = import.meta.env.VITE_BASE_URL
             console.error(error);
         }
     }
+  };
 
-    useEffect(() => {
-        fetchArtists()
-    }, [])
+
+  useEffect(() => {
+    fetchArtists();
+  }, []);
+
     
 
 
@@ -39,4 +46,11 @@ export default ArtistsProvider
 
 
 
+  return (
+    <ArtistsContext.Provider value={{ artists }}>
+      {children}
+    </ArtistsContext.Provider>
+  );
+};
 
+export default ArtistsProvider;

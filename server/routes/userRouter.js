@@ -8,9 +8,9 @@ import {
   acceptConnectionRequest,
   rejectConnectionRequest,
   deleteConnection,
-getEntrepreneurs,
- getArtists,
-
+  getEntrepreneurs,
+  getArtists,
+  updateUser,
 } from "../controllers/userController.js";
 
 const userRoutes = express.Router();
@@ -21,9 +21,9 @@ userRoutes.post("/send-connection-request", sendConnectionRequest);
 userRoutes.post("/accept-connection-request", acceptConnectionRequest);
 userRoutes.post("/reject-connection-request", rejectConnectionRequest);
 userRoutes.post("/delete-connection", deleteConnection);
-userRoutes.get("/get-artists", getArtists)
-userRoutes.get("/get-entrepreneurs", getEntrepreneurs)
-
+userRoutes.get("/get-artists", getArtists);
+userRoutes.get("/get-entrepreneurs", getEntrepreneurs);
+userRoutes.put("/update/:userId", updateUser);
 
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(
