@@ -7,6 +7,7 @@ export const ArtistsContext = createContext();
 const baseURL = import.meta.env.VITE_BASE_URL;
 
 
+
      const  ArtistsProvider =  ({ children }) => {
     const [artists, setArtists] = useState([])
 
@@ -43,6 +44,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 }
 
 export default ArtistsProvider
+
 
 
 
