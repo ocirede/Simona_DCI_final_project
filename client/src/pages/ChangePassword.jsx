@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
 
 function ChangePassword() {
-  const { resetPassword } = useContext(UserContext); 
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
