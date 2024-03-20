@@ -5,10 +5,12 @@ import RecommendedArtists from "../components/homePageEntrepreneurComps/recommen
 
 export default function HomePageEntrepreneur() {
   return (
-    <div className="max-w-md mx-auto flex flex-col gap-5 bg-gray-50">
+    <div className="max-w-md mx-auto flex flex-col gap-5 bg-gray-50 p-10">
       <h1 className="text-xl font-bold text-center p-4">
         Entrepreneur Homepage
       </h1>
+      <h1 className="uppercase text-center text-[90px]">Simona</h1>
+
       <CategoriesSearch/>
       <NavigateThrough />
       <RecommendedArtists />
