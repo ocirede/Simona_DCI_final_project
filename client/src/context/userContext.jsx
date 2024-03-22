@@ -308,7 +308,12 @@ const UserProvider = ({ children }) => {
     }
   };
 
-
+////log out
+const logout = () => {
+  localStorage.removeItem("token");
+  setUser(null)
+  navigate("/");
+};
   return (
     <UserContext.Provider
       value={{
@@ -346,6 +351,7 @@ const UserProvider = ({ children }) => {
         acceptRequest,
         rejectRequest,
         deleteConnection,
+        logout,
       }}
     >
       {children}
