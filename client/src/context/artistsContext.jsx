@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "../config/axios.js";
+
 export const ArtistsContext = createContext();
 const baseURL = import.meta.env.VITE_BASE_URL;
 const ArtistsProvider = ({ children }) => {
@@ -18,6 +19,7 @@ const ArtistsProvider = ({ children }) => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchArtists();
   }, []);
@@ -27,4 +29,7 @@ const ArtistsProvider = ({ children }) => {
     </ArtistsContext.Provider>
   );
 };
+
 export default ArtistsProvider;
+
+

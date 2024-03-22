@@ -11,13 +11,14 @@ function DropMenu() {
         aria-orientation="vertical"
         aria-labelledby="options-menu"
       >
-         <NavLink to="/register">
-            <Button name="Register" />
-          </NavLink>
-          <NavLink to="/sign-in">
-            <Button name="Sign-in" />
-          </NavLink>
-        
+        <NavLink to="/register">
+          <Button name="Register" />
+        </NavLink>
+        <NavLink to="/sign-in">
+          <Button name="Sign-in" />
+        </NavLink>
+
+
       </div>
     </div>
   );
