@@ -354,7 +354,7 @@ export const signInHandling = async (req, res) => {
     }
     const { password, email } = value;
     const user = await User.findOne({ email });
-    console.log(user);
+
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -375,7 +375,7 @@ export const signInHandling = async (req, res) => {
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
-    res.json({success: true,  token, user });
+    res.json({ success: true, token, user });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -409,7 +409,6 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
-
 };
 
 //logged user
@@ -417,7 +416,7 @@ export const loggedUser = async (req, res) => {
   try {
     const userId = req.user.id;
     // const userId = req.params.id;
-    const user = await User.findOne({ _id: userId })
+    const user = await User.findOne({ _id: userId });
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
@@ -431,10 +430,12 @@ export const loggedUser = async (req, res) => {
 //getting all the users in the base
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find()
-    
-    res.json({ success: true, users })
+    const users = await User.find();
+
+    res.json({ success: true, users });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching users", error: error.message });
   }
-}
+};

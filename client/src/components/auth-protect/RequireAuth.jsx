@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
@@ -6,11 +6,13 @@ const RequireAuth = ({ children }) => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!user) {
-    navigate("/sign-in");
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate("/sign-in");
+    }
+  }, [user, navigate]);
 
-  return children;
+  return user ? children : null;
 };
 
 export default RequireAuth;
