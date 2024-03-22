@@ -38,7 +38,9 @@ const UserProvider = ({ children }) => {
     const body = {
       email,
       password,
+      
     };
+    setResponse(false)
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -48,22 +50,28 @@ const UserProvider = ({ children }) => {
 
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      if (userRole === "artist") {
-        setTimeout(() => {
+      
+      if(response.data.success){
+        setResponse(true);
+        if (userRole === "artist") {
           navigate("/homeArtist");
-        }, 1500);
       } else {
-        setTimeout(() => {
           navigate("/E");
-        }, 1500);
+        
       }
       e.target.reset();
       setEmail("");
       setPassword("");
-      setLoading(false);
       setUser(response.data.user);
       setValidationErrors(null);
+      console.log(response.data.success)
+
+      };
+
+     
+   
     } catch (error) {
+      setResponse(true)
       if (Array.isArray(error.response.data.message)) {
         setValidationErrors(error.response.data.message);
       } else {
@@ -294,6 +302,14 @@ const UserProvider = ({ children }) => {
     }
   };
 
+
+////log out
+const logout = () => {
+  localStorage.removeItem("token");
+  setUser(null)
+  navigate("/");
+};
+
   return (
     <UserContext.Provider
       value={{
@@ -327,6 +343,7 @@ const UserProvider = ({ children }) => {
         acceptRequest,
         rejectRequest,
         deleteConnection,
+        logout,
       }}
     >
       {children}

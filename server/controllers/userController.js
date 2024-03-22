@@ -375,7 +375,7 @@ export const signInHandling = async (req, res) => {
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
-    res.json({ token, user });
+    res.json({success: true,  token, user });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
