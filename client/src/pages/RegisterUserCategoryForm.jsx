@@ -3,6 +3,19 @@ import { useNavigate } from "react-router-dom";
 import FormSubmitButton from "../components/FormSubmitButton";
 import AlertMessageWarning from "../components/alerts/AlertMessageWarning";
 
+export const categories = [
+  "React",
+  "MongoDB",
+  "Docker",
+  "CSS",
+  "HTML",
+  "Express.js",
+  "Node.js",
+  "Tailwind",
+  "Firebase",
+  "Redux",
+];
+
 const RegisterUserCategoryForm = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [showLimitChoiseMessage, setShowLimitChpoiseMessage] = useState(false);
@@ -49,18 +62,7 @@ const RegisterUserCategoryForm = () => {
 
   //The categories if necessary can be stored in another file
   //and imported here
-  const categories = [
-    "React",
-    "MongoDB",
-    "Docker",
-    "CSS",
-    "HTML",
-    "Express.js",
-    "Node.js",
-    "Tailwind",
-    "Firebase",
-    "Redux",
-  ];
+ 
 
   return (
     <>

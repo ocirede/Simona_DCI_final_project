@@ -395,3 +395,13 @@ export const loggedUser = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
+
+//getting all the users in the base
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json({ success: true, users })
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching users", error: error.message });
+  }
+}
