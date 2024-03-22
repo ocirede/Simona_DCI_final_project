@@ -7,7 +7,7 @@ const RequireAuth = ({ children }) => {
   const navigate = useNavigate();
 
   if (!user) {
-    navigate("sign-in");
+    navigate("/sign-in");
   }
 
   return children;
