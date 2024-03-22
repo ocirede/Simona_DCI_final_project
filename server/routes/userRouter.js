@@ -14,6 +14,7 @@ import {
   changePasswordEmail,
   updateUser,
   loggedUser,
+  getAllUsers
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -31,6 +32,7 @@ userRoutes.post("/signin", signInHandling);
 userRoutes.post("/changepassword", changePasswordEmail);
 userRoutes.put("/update/:userId", updateUser);
 userRoutes.get("/loggeduser", auth, loggedUser);
+userRoutes.get("/all-the-users", getAllUsers)
 
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(

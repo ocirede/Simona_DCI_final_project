@@ -32,3 +32,10 @@ const EntrepreneurProvider = ({ children }) => {
   );
 };
 export default EntrepreneurProvider;
+
+
+
+
+
+
+

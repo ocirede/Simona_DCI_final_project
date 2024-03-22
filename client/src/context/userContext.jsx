@@ -17,6 +17,8 @@ const UserProvider = ({ children }) => {
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
+  const [users, setUsers] = useState([]);
+
 
   const navigate = useNavigate();
 
@@ -169,7 +171,6 @@ const UserProvider = ({ children }) => {
       try {
         const response = await axios.get(baseURL + `/users/loggeduser`);
         setUser(response.data.user);
-        console.log("Logged user:", response.data.user);
       } catch (error) {
         console.error(error);
         localStorage.removeItem("token");
@@ -180,6 +181,22 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     loggedUser();
   }, []);
+
+  //fetching all userszzzz
+  
+    const fetchUsers = async () => {
+      
+      try {
+        const response = await axios.get(baseURL + "/users/all-the-users");
+        setUsers(response.data.users);
+ 
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
+    };
+    useEffect(() => {
+    fetchUsers();
+   }, []);
 
   //Send-cancel connection request
   const sendOrCancelRequest = async (senderId, receiverId) => {
@@ -280,9 +297,11 @@ const UserProvider = ({ children }) => {
     }
   };
 
+
   return (
     <UserContext.Provider
       value={{
+        users,
         userRole,
         validationErrors,
         response,
