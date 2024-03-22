@@ -1,6 +1,8 @@
-import { useState } from "react"
-
-
+import { useContext, useState } from "react"
+import { UserContext } from "../../context/userContext";
+import AcceptRequest from "../network-comps/AcceptRequest";
+import RejectRquest from "../network-comps/RejectRequest";
+import DeleteConnection from "../network-comps/DeleteConnection";
 const userData = [
   { id: 11, name: "tyhe", role: "Singer", categories: ["music","contemporary arts"], imageUrl: "profile-pic.jpg" },
   { id: 22, name: "fede", role: "Actor", categories: ["performing arts"],  imageUrl: "profile-pic.jpg" },
@@ -25,7 +27,8 @@ const entrepreneursData = [
 export default function ConnectNetwork() {
       const [showConnectNetwork, setShowConnectNetwork] = useState(false);
       const [currentView, setCurrentView] = useState("");
-
+      const { user} = useContext(UserContext)
+    if(user)console.log(user)
 
       const allUsers = [...userData, ...entrepreneursData]
       const [friendsList, setFriendsList] = useState([])
@@ -61,13 +64,11 @@ export default function ConnectNetwork() {
               <div className="w-full h-auto overflow-auto bg-gray-200 slide-in-left">
               <h2 className="text-xl font-semibold p-4">connections</h2>
 
-              {friends.map(friend => (
-                <div key={friend.id} className="flex  gap-2 items-center  ">
-                     <img src={friend.imageUrl} className="w-10 h-10 rounded-full  bg-green-400" />
-                      <div>{friend.name} </div>
-
-
-                  <button className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">-</button>
+              {user?.connections?.map(friend => (
+                <div key={friend._id} className="flex  gap-2 items-center  ">
+                     <img src={friend.profileImage} className="w-10 h-10 rounded-full  bg-green-400" />
+                      <div>{friend.address?.firstname} {friend.address?.lastname} </div>
+                      <DeleteConnection connectionId={friend._id}/>
                 </div>
               ))}
                </div>
@@ -79,12 +80,13 @@ export default function ConnectNetwork() {
               <div className="w-full h-auto overflow-auto  bg-gray-200 slide-in-right">
               <h2 className="text-xl font-semibold p-4">Pending Requests</h2>
               <div className="grid grid-cols-1  gap-5 p-4">
-                  {others.map(user => (
-                    <div key={user.id} className="flex  gap-2 items-center">
-                      <img src={user.imageUrl} className="w-10 h-10 rounded-full  bg-green-400"/>
-                      <div  className="text-center">{user.name}</div>
-                      <button className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2 ml-2 rounded "> + </button>
-                    </div>
+                  {user?.pendingRequests?.map(user => (
+                    <div key={user._id} className="flex  gap-2 items-center">
+                      <img src={user.profileImage} className="w-10 h-10 rounded-full  bg-green-400"/>
+                      <div  className="text-center">{user.address?.firstname} {user.address?.lastname}</div>
+                       <AcceptRequest senderId ={user._id}/>
+                     <RejectRquest senderId={user._id}/>
+                   </div>
                   ))}
               </div>
               

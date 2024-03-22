@@ -7,7 +7,7 @@ import { UserContext } from "../context/userContext.jsx";
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
-  const {  user } = useContext(UserContext)
+  const {  user,logout } = useContext(UserContext)
 
   const handleLogoClick = () => {
     if (user.role === "artist") {
@@ -32,7 +32,7 @@ export default function NavBarHomepage() {
         <Link to="/artists" className="mt-4 md:mt-0 md:ml-4">Artists</Link>
         <Link to="/Network" className="mt-4 md:mt-0 md:ml-4">Network</Link>
         <Link to="/chatbox" className="mt-4 md:mt-0 md:ml-4">Chatbox</Link>
-        <Link to="/logout" className="mt-4 md:mt-0 md:ml-4">Logout</Link>
+        <a  className="mt-4 md:mt-0 md:ml-4"  onClick={logout}>Logout</a>
       </div>
     </nav>
   );

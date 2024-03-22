@@ -8,7 +8,7 @@ const SendCancelRequest = ({ receiverId }) => {
 
   useEffect(() => {
     setIsRequested(
-      user?.sentRequests.filter((item) => item._id === receiverId)
+      user?.sentRequests.map((item) => item._id).includes(receiverId)  
     );
   }, [user, receiverId]);
 
