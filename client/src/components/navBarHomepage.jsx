@@ -7,11 +7,10 @@ import { UserContext } from "../context/userContext.jsx";
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
-  const {  userRole } = useContext(UserContext)
-  console.log("role", userRole)
+  const {  user } = useContext(UserContext)
 
   const handleLogoClick = () => {
-    if (userRole === "artist") {
+    if (user.role === "artist") {
       navigate("/homeArtist"); 
     } else {
       navigate("/E"); 

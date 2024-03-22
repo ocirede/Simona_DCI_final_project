@@ -4,7 +4,9 @@ export const ArtistsContext = createContext();
 const baseURL = import.meta.env.VITE_BASE_URL;
 const ArtistsProvider = ({ children }) => {
   const [artists, setArtists] = useState([]);
-  const fetchArtists = async (role = "artist") => {
+
+
+   const fetchArtists = async (role = "artist") => {
     try {
       const response = await axios.get(
         baseURL + `/users/get-artists/?role=${role}`
@@ -25,32 +27,4 @@ const ArtistsProvider = ({ children }) => {
     </ArtistsContext.Provider>
   );
 };
-
-    useEffect(() => {
-      fetchArtists();
-    }, []);
-  
-      
-  
-  
-      return (
-              <ArtistsContext.Provider value={{artists}}>
-              { children }
-              </ArtistsContext.Provider>
-      ) 
-  };
-
-
-
-    
-
-
-
 export default ArtistsProvider;
-
-
-
-
-
-
-

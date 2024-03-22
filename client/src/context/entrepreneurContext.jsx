@@ -14,24 +14,6 @@ const EntrepreneurProvider = ({ children }) => {
       }
     } catch (error) {
       console.error(error);
-
-const EntrepreneurContext = createContext();
-
-
-
-
-
-    const fetchEntrepreneurs = async (role="entrepreneur") => {
-        try {
-            const response = await axios.get(baseURL + `/users/get-entrepreneurs/?role=${role}`)
-
-            if(response.data.success) {
-                setEntrepreneurs(response.data.entrepreneurs)
-            }
-        } catch (error) {
-            console.error(error);
-        }
-
     }
   };
   useEffect(() => {
@@ -44,3 +26,10 @@ const EntrepreneurContext = createContext();
   );
 };
 export default EntrepreneurProvider;
+
+
+
+
+
+
+
