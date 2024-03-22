@@ -181,6 +181,105 @@ const UserProvider = ({ children }) => {
     loggedUser();
   }, []);
 
+  //Send-cancel connection request
+  const sendOrCancelRequest = async (senderId, receiverId) => {
+    const body = {
+      senderId,
+      receiverId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/send-connection-request`,
+        body
+      );
+
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.sender);
+      }
+
+      console.log("===> add connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+  //Accept connection request
+  const acceptRequest = async (receiverId, senderId) => {
+    const body = {
+      receiverId,
+      senderId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/accept-connection-request`,
+        body
+      );
+
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.receiver);
+      }
+
+      console.log("===> accept connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+
+      console.log(error);
+    }
+  };
+
+  //Reject connection request
+  const rejectRequest = async (receiverId, senderId) => {
+    const body = {
+      receiverId,
+      senderId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/reject-connection-request`,
+        body
+      );
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.receiver);
+      }
+
+      console.log("===> reject connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+  //Delete connection
+  const deleteConnection = async (userId, connectionId) => {
+    const body = {
+      userId,
+      connectionId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/delete-connection`,
+        body
+      );
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.user);
+      }
+
+      console.log("===> delete connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -209,6 +308,10 @@ const UserProvider = ({ children }) => {
         setForgotPasswsord,
         requestForgotPasswordEmail,
         resetPassword,
+        sendOrCancelRequest,
+        acceptRequest,
+        rejectRequest,
+        deleteConnection,
       }}
     >
       {children}
