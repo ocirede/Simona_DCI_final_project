@@ -10,7 +10,6 @@ export default function RecommendedEntrepreneurs() {
   const sortedEntrepreneurUsers = users.filter(user => user.role === "entrepreneur").sort((a, b) => b.averageRating - a.averageRating).slice(0,5)
   
 
-  console.log(sortedEntrepreneurUsers)
  
 const Container = styled.div`
         max-width: 700px; 
