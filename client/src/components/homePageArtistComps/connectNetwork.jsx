@@ -1,24 +1,26 @@
 import { useState } from "react"
+
+
 const userData = [
   { id: 11, name: "tyhe", role: "Singer", categories: ["music","contemporary arts"], imageUrl: "profile-pic.jpg" },
   { id: 22, name: "fede", role: "Actor", categories: ["performing arts"],  imageUrl: "profile-pic.jpg" },
-  // { id: 33, name: "kostas", role: "Dancer", categories:[ "dance"], imageUrl: "profile-pic.jpg" },
-  // { id: 44, name: "Issa", role: "Painter", categories: ["painting"],  imageUrl: "profile-pic.jpg" },
-  // { id: 55, name: "Mary", role: "Photographer", categories: ["performing arts"], imageUrl: "profile-pic.jpg" },
-  // { id: 66, name: "Jesus", role: "Dj", categories: ["music"],  imageUrl: "profile-pic.jpg" },
-  // { id: 77, name: "Mohammad", role: "Muisc composer", categories: ["music"], imageUrl: "profile-pic.jpg" },
-  // { id: 88, name: "Adam", role: "Performer", categories: ["performing arts","contemporary arts"],  imageUrl: "profile-pic.jpg" },
+  { id: 33, name: "kostas", role: "Dancer", categories:[ "dance"], imageUrl: "profile-pic.jpg" },
+  { id: 44, name: "Issa", role: "Painter", categories: ["painting"],  imageUrl: "profile-pic.jpg" },
+  { id: 55, name: "Mary", role: "Photographer", categories: ["performing arts"], imageUrl: "profile-pic.jpg" },
+  { id: 66, name: "Jesus", role: "Dj", categories: ["music"],  imageUrl: "profile-pic.jpg" },
+  { id: 77, name: "Mohammad", role: "Muisc composer", categories: ["music"], imageUrl: "profile-pic.jpg" },
+  { id: 88, name: "Adam", role: "Performer", categories: ["performing arts","contemporary arts"],  imageUrl: "profile-pic.jpg" },
 
 ];
 const entrepreneursData = [
   { id: 1, name: "Elena", role: "Wedding Planner", categories: ["tech", "startup"], imageUrl: "image-url-1.jpg" },
   { id: 2, name: "Marcus", role: "Investor", categories: ["finance", "investor"], imageUrl: "image-url-2.jpg" },
   { id: 3, name: "Jessica", role: "E-commerce Expert", categories: ["retail", "e-commerce"], imageUrl: "image-url-3.jpg" },
-//   { id: 4, name: "Liam", role: "Marketing Guru", categories: ["marketing", "advertising"], imageUrl: "image-url-4.jpg" },
-//   { id: 5, name: "Sophia", role: "Fashion Designer", categories: ["fashion", "design"], imageUrl: "image-url-5.jpg" },
-//   { id: 6, name: "Ethan", role: "Real Estate Mogul", categories: ["real estate", "investment"], imageUrl: "image-url-6.jpg" },
-//   { id: 7, name: "Mia", role: "Restaurant Owner", categories: ["food", "hospitality"], imageUrl: "image-url-7.jpg" },
-//   { id: 8, name: "Noah", role: "Software Developer", categories: ["tech", "software"], imageUrl: "image-url-8.jpg" },
+  { id: 4, name: "Liam", role: "Marketing Guru", categories: ["marketing", "advertising"], imageUrl: "image-url-4.jpg" },
+  { id: 5, name: "Sophia", role: "Fashion Designer", categories: ["fashion", "design"], imageUrl: "image-url-5.jpg" },
+  { id: 6, name: "Ethan", role: "Real Estate Mogul", categories: ["real estate", "investment"], imageUrl: "image-url-6.jpg" },
+  { id: 7, name: "Mia", role: "Restaurant Owner", categories: ["food", "hospitality"], imageUrl: "image-url-7.jpg" },
+  { id: 8, name: "Noah", role: "Software Developer", categories: ["tech", "software"], imageUrl: "image-url-8.jpg" },
    ];
 export default function ConnectNetwork() {
       const [showConnectNetwork, setShowConnectNetwork] = useState(false);

@@ -1,4 +1,12 @@
-export default function CardElement({ address, role, categories, profileImage }) {
+import SendCancelRequest from "../network-comps/SendCancelRequest";
+
+export default function CardElement({ address, role, categories, profileImage ,_id}) {
+
+  if (!address || !categories) {
+    return null; 
+}
+
+const { firstname, lastname } = address;
 
   return (
       <div className="w-[220px] rounded-lg overflow-hidden shadow-lg bg-white " style={{ minWidth: "250px" }}>
@@ -11,9 +19,9 @@ export default function CardElement({ address, role, categories, profileImage })
     </div>
       </div>
       <div className="px-6 py-4 text-center">
-        <div className="font-bold text-xl uppercase mb-2 mt-16">{address.firstname} {address.lastname}</div>
+        <div className="font-bold text-xl uppercase mb-2 mt-16">{address?.firstname} {address?.lastname}</div>
         <p className="text-gray-700 text-base mb-2">{role}</p>
-       
+       <SendCancelRequest receiverId ={_id}/>
           
       </div>
       <div className="pl-6 pr-6 pb-4 flex flex-col gap-2 text-center">
