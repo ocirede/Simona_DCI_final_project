@@ -22,7 +22,7 @@ function SignInForm() {
     forgotPassword,
     setForgotPasswsord,
     requestForgotPasswordEmail,
-    setSuccess,
+    response,
     success
   } = useContext(UserContext);
   
@@ -92,7 +92,7 @@ function SignInForm() {
           {/* submit section + loading */}
 
           <div className="flex flex-col items-center justify-center p-4">
-            {loading ? (
+            {response ? (
               <button
                 type="submit"
                 className="w-32 h-8 rounded-xl bg-blue-500 text-white font-bold"
