@@ -7,7 +7,9 @@ const SendCancelRequest = ({ receiverId }) => {
   const [isRequested, setIsRequested] = useState(false);
 
   useEffect(() => {
-    setIsRequested(user?.sentRequests.some((item) => item._id === receiverId));
+    setIsRequested(
+      user?.sentRequests.filter((item) => item._id === receiverId)
+    );
   }, [user, receiverId]);
 
   return (
