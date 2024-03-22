@@ -1,9 +1,14 @@
 import { createContext, useEffect, useState } from "react";
+
 import axios from "../config/axios.js";
+
 const baseURL = import.meta.env.VITE_BASE_URL;
+
 export const EntrepreneurContext = createContext();
+
 const EntrepreneurProvider = ({ children }) => {
   const [entrepreneurs, setEntrepreneurs] = useState([]);
+
   const fetchEntrepreneurs = async (role = "entrepreneur") => {
     try {
       const response = await axios.get(
@@ -19,6 +24,7 @@ const EntrepreneurProvider = ({ children }) => {
   useEffect(() => {
     fetchEntrepreneurs();
   }, []);
+
   return (
     <EntrepreneurContext.Provider value={{ entrepreneurs }}>
       {children}
