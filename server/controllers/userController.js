@@ -134,7 +134,6 @@ export const getArtists = async (req, res) => {
 };
 
 // fetching entrepeneurs
-
 export const getEntrepreneurs = async (req, res) => {
   const { role } = req.query;
 
@@ -373,10 +372,11 @@ export const signInHandling = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
       expiresIn: "1d",
     });
-
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
     res.json({ token, user });
   } catch (error) {
-
     res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -392,6 +392,10 @@ export const updateUser = async (req, res) => {
       { new: true }
     );
 
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
     if (!updatedUser) {
       return res.send({ success: false, message: "User not found" });
     }
@@ -405,4 +409,32 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
+
 };
+
+//logged user
+export const loggedUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    // const userId = req.params.id;
+    const user = await User.findOne({ _id: userId })
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    res.send({ success: true, user });
+  } catch (error) {
+    console.log("Error logged user:", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//getting all the users in the base
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+    
+    res.json({ success: true, users })
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching users", error: error.message });
+  }
+}

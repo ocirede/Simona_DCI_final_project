@@ -1,4 +1,6 @@
 import { useState } from "react"
+
+
 const userData = [
   { id: 11, name: "tyhe", role: "Singer", categories: ["music","contemporary arts"], imageUrl: "profile-pic.jpg" },
   { id: 22, name: "fede", role: "Actor", categories: ["performing arts"],  imageUrl: "profile-pic.jpg" },
@@ -19,9 +21,10 @@ const entrepreneursData = [
   { id: 6, name: "Ethan", role: "Real Estate Mogul", categories: ["real estate", "investment"], imageUrl: "image-url-6.jpg" },
   { id: 7, name: "Mia", role: "Restaurant Owner", categories: ["food", "hospitality"], imageUrl: "image-url-7.jpg" },
   { id: 8, name: "Noah", role: "Software Developer", categories: ["tech", "software"], imageUrl: "image-url-8.jpg" },
-];
+   ];
 export default function ConnectNetwork() {
       const [showConnectNetwork, setShowConnectNetwork] = useState(false);
+      const [currentView, setCurrentView] = useState("");
 
 
       const allUsers = [...userData, ...entrepreneursData]
@@ -39,46 +42,61 @@ export default function ConnectNetwork() {
       const others = allUsers.filter(user => !friendsList.includes(user.id))
  
   return  (
-    
     <div>
-      <div className="flex items-center justify-center p-4 border-b-2 bg-blue-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowConnectNetwork(!showConnectNetwork)}>
+     <div className="flex items-center justify-center p-4 border-b-2 bg-blue-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg   shadow-lg" onClick={() => setShowConnectNetwork(!showConnectNetwork)}>
         connections Network
       </div>
       {showConnectNetwork && (
-        <div className="flex mt-5  ">
-        
-          <div className="w-1/3 h-screen overflow-auto bg-gray-200">
-         <h2 className="text-xl font-semibold p-4">My Network</h2>
-        
-         {friends.map(friend => (
-           <div key={friend.id} className="flex flex-colgap-3 items-center gap-2 p-2">
-                <img src={friend.imageUrl} className="w-8 h-8 rounded-full  bg-green-400" />
-                 <div>{friend.name} </div>
-            
-             
-             <button onClick={() => removeFriend(friend.id) }className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">-</button>
-           </div>
-         ))}
-       </div>
+        <div>
+
+        <div className="w-full mt-5 flex bg-gray-200">
+            <h2  onClick={() => setCurrentView("Connections")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow">Connections</h2>
+            <h2 onClick={() => setCurrentView("Pending")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow">Pending Requests</h2>
+        </div>
+
+
+
+        {currentView === "Connections"  && (
+
+              <div className="w-full h-auto overflow-auto bg-gray-200 slide-in-left">
+              <h2 className="text-xl font-semibold p-4">connections</h2>
+
+              {friends.map(friend => (
+                <div key={friend.id} className="flex  gap-2 items-center  ">
+                     <img src={friend.imageUrl} className="w-10 h-10 rounded-full  bg-green-400" />
+                      <div>{friend.name} </div>
+
+
+                  <button className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">-</button>
+                </div>
+              ))}
+               </div>
+                      )}
+
+
+          
+        {currentView === "Pending"&&(
+              <div className="w-full h-auto overflow-auto  bg-gray-200 slide-in-right">
+              <h2 className="text-xl font-semibold p-4">Pending Requests</h2>
+              <div className="grid grid-cols-1  gap-5 p-4">
+                  {others.map(user => (
+                    <div key={user.id} className="flex  gap-2 items-center">
+                      <img src={user.imageUrl} className="w-10 h-10 rounded-full  bg-green-400"/>
+                      <div  className="text-center">{user.name}</div>
+                      <button className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2 ml-2 rounded "> + </button>
+                    </div>
+                  ))}
+              </div>
+              
+               </div>
+        )}
        
          
-       <div className="w-2/3 h-screen overflow-auto">
-         <h2 className="text-xl font-semibold p-4">Suggestions</h2>
-         <div className="grid grid-cols-2  gap-5 p-4">
-             {others.map(user => (
-               <div key={user.id} className="flex flex-col gap-2 items-center">
-                 <img src={user.imageUrl} className="w-20 h-20 rounded-full  bg-green-400"/>
-                 <div  className="text-center">{user.name}</div>
-                 <button onClick={() => addFriend(user.id)}className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2 ml-2 rounded "> + </button>
-               </div>
-             ))}
-         </div>
-         
-       </div>
-        </div>
+          
         
+        </div>
      
       )}
-     </div>
+  </div>
   );
 }

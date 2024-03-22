@@ -9,7 +9,6 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
-  const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +17,10 @@ const UserProvider = ({ children }) => {
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [newUser, setNewUser] = useState();
+  const [users, setUsers] = useState([]);
+
+
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
   // fetching email-remember-checkbox
@@ -103,6 +106,25 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // reset-update password
+
+  const resetPassword = (e) => {
+    e.preventDefault();
+    const password = e.target.password.value;
+    const reType = e.target.retype.value;
+
+    if (reType !== password) {
+      alert("password are not matching");
+      return;
+    }
+
+    const body = {
+      password: e.target.password.value,
+    };
+
+    console.log(body);
+  };
+
   //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
@@ -121,9 +143,9 @@ const UserProvider = ({ children }) => {
       });
 
       if (response.data.success) {
-        navigate("/sign-in");
         setResponse(true);
         localStorage.removeItem("userRegisterData");
+        setNewUser(response.data.newUser);
 
         //console.log("New User==>>", response.data.newUser);
       }
@@ -144,13 +166,148 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  //logged user
+  const loggedUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const response = await axios.get(baseURL + `/users/loggeduser`);
+        setUser(response.data.user);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    }
+  };
+  useEffect(() => {
+    loggedUser();
+  }, []);
+
+  //fetching all userszzzz
+  
+    const fetchUsers = async () => {
+      
+      try {
+        const response = await axios.get(baseURL + "/users/all-the-users");
+        setUsers(response.data.users);
+ 
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
+    };
+    useEffect(() => {
+    fetchUsers();
+   }, []);
+
+  //Send-cancel connection request
+  const sendOrCancelRequest = async (senderId, receiverId) => {
+    const body = {
+      senderId,
+      receiverId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/send-connection-request`,
+        body
+      );
+
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.sender);
+      }
+
+      console.log("===> add connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+  //Accept connection request
+  const acceptRequest = async (receiverId, senderId) => {
+    const body = {
+      receiverId,
+      senderId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/accept-connection-request`,
+        body
+      );
+
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.receiver);
+      }
+
+      console.log("===> accept connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+
+      console.log(error);
+    }
+  };
+
+  //Reject connection request
+  const rejectRequest = async (receiverId, senderId) => {
+    const body = {
+      receiverId,
+      senderId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/reject-connection-request`,
+        body
+      );
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.receiver);
+      }
+
+      console.log("===> reject connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+  //Delete connection
+  const deleteConnection = async (userId, connectionId) => {
+    const body = {
+      userId,
+      connectionId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/delete-connection`,
+        body
+      );
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.user);
+      }
+
+      console.log("===> delete connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+
   return (
     <UserContext.Provider
       value={{
+        users,
         userRole,
         validationErrors,
         response,
-        responseSuccsess,
         rememberMe,
         email,
         password,
@@ -159,6 +316,9 @@ const UserProvider = ({ children }) => {
         forgotPassword,
         success,
         setSuccess,
+
+        newUser,
+        user,
         setUserRole,
         userRoleChoice,
         registerUser,
@@ -172,6 +332,12 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
+
+        resetPassword,
+        sendOrCancelRequest,
+        acceptRequest,
+        rejectRequest,
+        deleteConnection,
       }}
     >
       {children}
