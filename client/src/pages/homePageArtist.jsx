@@ -9,7 +9,6 @@ import { UserContext } from "../context/userContext";
 
 export default function HomePageArtist() {
   const { user} = useContext(UserContext)
-  if (user) console.log(user)
   const profileImage = user?.profileImage;
   const firstName = user?.address?.firstname
   const lastName = user?.address?.lastname
