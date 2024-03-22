@@ -9,7 +9,6 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
-
   const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
@@ -93,18 +92,17 @@ const UserProvider = ({ children }) => {
         body
       );
       if (response.data.success) {
-        console.log(response.data.success)
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
         }, 2000);
-      }
+      };
+      console.log(response.data)
     } catch (error) {
       console.log(error);
     }
   };
 
-  
   //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
@@ -174,7 +172,6 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-        
       }}
     >
       {children}

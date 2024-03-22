@@ -82,9 +82,8 @@ export const changePasswordEmail = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
       expiresIn: "1d",
     });
-
     changePassVerification(token, email);
-    res.json({ success: true });
+    res.json({ success: true, user });
   } catch (error) {
     console.log("Error in email confirmation:", error.message);
 

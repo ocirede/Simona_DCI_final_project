@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import { NavLink } from "react-router-dom";
-
+import {X} from "lucide-react"
 function DropMenu() {
   return (
     <div className=" z-10 origin-top-right absolute right-0 mt-16 w-full h-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 xs:hidden">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../config/axios.js";
 import { useState } from "react";
 import AlertMessageSuccess from "../components/alerts/AlertMessageSuccess.jsx";
@@ -8,6 +8,7 @@ function ChangePassword() {
   const [success, setSuccess] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const { token } = useParams();
+  const navigate = useNavigate();
 
   // reset-update password
 
@@ -22,6 +23,7 @@ function ChangePassword() {
         setTimeout(() => {
           setPasswordsMatch(true);
         }, 2000);
+        return;
       }
 
       const body = {
@@ -37,12 +39,9 @@ function ChangePassword() {
         setTimeout(() => {
           setSuccess(false);
         }, 2000);
-      } else {
-        console.log("Password update failed:", response.data.message);
-        setSuccess(false);
+        e.target.reset();
+        navigate("/sign-in");
       }
-
-      e.target.reset();
     } catch (error) {
       console.log(error);
     }
@@ -51,16 +50,13 @@ function ChangePassword() {
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-40 z-40"></div>
-      {success && <AlertMessageSuccess text="Password updated" />}
+      {success && <AlertMessageSuccess text="Password updated successfully" />}
 
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
         <div className="flex flex-col items-center justify-center w-[430px] h-[430px] rounded-xl p-6 bg-slate-100 border-black transition-transform duration-800">
           <h2 className="text-2xl font-bold mb-4 text-center">
-            Reset your password{" "}
+            Change your password{" "}
           </h2>
-          <p className="text-sm text-center mb-6">
-            Enter your password address below.
-          </p>
           <form onSubmit={resetPassword} className="w-full">
             <div className="mb-4">
               <label

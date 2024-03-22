@@ -2,7 +2,7 @@ import { useState } from "react";
 import FakeLogo from "./FakeLogo";
 import Button from "./Button";
 import LanguageChoice from "./LanguageChoice";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import DropMenu from "./DropMenu";
 import { NavLink } from "react-router-dom";
 
@@ -23,10 +23,15 @@ function NavBar() {
         </div>
         <div className=" flex gap-6 xs:hidden">
           <LanguageChoice />
-          <Menu
-            onClick={() => setDisplay(!display)}
-            className=" w-10 h-10 xs:hidden"
-          />
+          {display ? (
+            <X className=" w-8 h-8" onClick={() => setDisplay(!display)}/>
+          ) : (
+            <Menu
+              onClick={() => setDisplay(!display)}
+              className=" w-10 h-10 xs:hidden"
+            />
+          )}
+
           {display && <DropMenu />}
         </div>
       </ul>
