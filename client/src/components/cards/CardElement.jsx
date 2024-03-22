@@ -12,7 +12,7 @@ export default function CardElement({
       <div className="bg-gray-300 h-[100px] flex items-center justify-center relative">
         <div className="w-[120px] h-[120px] relative">
           <img
-            className="w-full h-full rounded-full object-contain bg-gray-700 border-4 border border-gray-800 bg-center absolute top-12"
+            className="w-full h-full rounded-full object-contain bg-gray-700 border-4 border-gray-800 bg-center absolute top-12"
             style={{
               backgroundImage: `url('${profileImage}')`,
               backgroundPosition: "center",
