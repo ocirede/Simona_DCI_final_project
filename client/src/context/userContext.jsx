@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import axios from "../config/axios.js";
 
@@ -16,14 +16,13 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
 
 
   const navigate = useNavigate();
-
   const baseURL = import.meta.env.VITE_BASE_URL;
-
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -96,8 +95,12 @@ const UserProvider = ({ children }) => {
         body
       );
       if (response.data.success) {
-        console.log("we have sent you an email to reset you password");
-      }
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 2000);
+      };
+      console.log(response.data)
     } catch (error) {
       console.log(error);
     }
@@ -311,6 +314,9 @@ const UserProvider = ({ children }) => {
         loading,
         showPassword,
         forgotPassword,
+        success,
+        setSuccess,
+
         newUser,
         user,
         setUserRole,
@@ -326,6 +332,7 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
+
         resetPassword,
         sendOrCancelRequest,
         acceptRequest,
