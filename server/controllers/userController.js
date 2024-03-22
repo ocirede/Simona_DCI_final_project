@@ -82,12 +82,33 @@ export const changePasswordEmail = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
       expiresIn: "1d",
     });
-
     changePassVerification(token, email);
-    res.json({ success: true });
+    res.json({ success: true, user });
   } catch (error) {
     console.log("Error in email confirmation:", error.message);
 
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+// update password
+export const updatePassword = async (req, res) => {
+  const saltRounds = 10;
+  const { password } = req.body;
+  try {
+    const token = jwt.verify(req.params.token, process.env.JWT_SECTER_KEY);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(req.params.token);
+    if (token) {
+      await User.findByIdAndUpdate(
+        token.id,
+        { password: hashedPassword },
+        { new: true }
+      );
+    }
+    res.json({ success: true });
+  } catch (error) {
+    console.log("Error in update password:", error.message);
     res.status(500).send({ success: false, error: error.message });
   }
 };
@@ -333,6 +354,7 @@ export const signInHandling = async (req, res) => {
     }
     const { password, email } = value;
     const user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -387,6 +409,7 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
+
 };
 
 //logged user

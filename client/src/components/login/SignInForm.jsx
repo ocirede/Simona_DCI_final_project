@@ -5,6 +5,7 @@ import LoadingButton from "./LoadingButton";
 import { UserContext } from "../../context/userContext";
 import AlertArrayOfErrors from "../alerts/AlertArrayOfErrors";
 import { X } from "lucide-react";
+import AlertMessageSuccess from "../alerts/AlertMessageSuccess";
 function SignInForm() {
   const {
     showPassword,
@@ -20,8 +21,11 @@ function SignInForm() {
     validationErrors,
     forgotPassword,
     setForgotPasswsord,
-    requestForgotPasswordEmail
+    requestForgotPasswordEmail,
+    setSuccess,
+    success
   } = useContext(UserContext);
+  
   {
     /* form container */
   }
@@ -101,7 +105,7 @@ function SignInForm() {
             )}
           </div>
 
-          <div className=" flex gap-2 h-12 items-end justify-between ">
+          <div className="flex flex-col items-center gap-2 xs:flex md:items-center justify-between h-12">
             <label className=" flex items-center gap-2">
               <input
                 checked={rememberMe}
@@ -133,7 +137,10 @@ function SignInForm() {
       </div>
       {forgotPassword ? (
         <div>
-          <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
+          <div className="fixed inset-0 bg-black opacity-50 z-40">
+          {success && <AlertMessageSuccess text="Email sent successfully" />}
+
+          </div>
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
             <X
               onClick={() => setForgotPasswsord(!forgotPassword)}

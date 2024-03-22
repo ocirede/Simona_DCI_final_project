@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-
 import axios from "../config/axios.js";
+
+
+
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -12,6 +14,7 @@ const EntrepreneurProvider = ({ children }) => {
   const fetchEntrepreneurs = async (role = "entrepreneur") => {
     try {
       const response = await axios.get(
+
         baseURL + `/users/get-entrepreneurs/?role=${role}`
       );
       if (response.data.success) {
@@ -23,7 +26,7 @@ const EntrepreneurProvider = ({ children }) => {
   };
   useEffect(() => {
     fetchEntrepreneurs();
-  }, []);
+  }, [baseURL]); // Added baseURL as a dependency for useEffect
 
   return (
     <EntrepreneurContext.Provider value={{ entrepreneurs }}>
@@ -32,7 +35,6 @@ const EntrepreneurProvider = ({ children }) => {
   );
 };
 export default EntrepreneurProvider;
-
 
 
 
