@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import axios from "../config/axios.js";
 
@@ -16,13 +16,13 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
 
-
   const navigate = useNavigate();
+
   const baseURL = import.meta.env.VITE_BASE_URL;
+
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -95,12 +95,8 @@ const UserProvider = ({ children }) => {
         body
       );
       if (response.data.success) {
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 2000);
-      };
-      console.log(response.data)
+        console.log("we have sent you an email to reset you password");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -186,20 +182,18 @@ const UserProvider = ({ children }) => {
   }, []);
 
   //fetching all userszzzz
-  
-    const fetchUsers = async () => {
-      
-      try {
-        const response = await axios.get(baseURL + "/users/all-the-users");
-        setUsers(response.data.users);
- 
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-      }
-    };
-    useEffect(() => {
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(baseURL + "/users/all-the-users");
+      setUsers(response.data.users);
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+    }
+  };
+  useEffect(() => {
     fetchUsers();
-   }, []);
+  }, []);
 
   //Send-cancel connection request
   const sendOrCancelRequest = async (senderId, receiverId) => {
@@ -300,7 +294,6 @@ const UserProvider = ({ children }) => {
     }
   };
 
-
   return (
     <UserContext.Provider
       value={{
@@ -314,9 +307,6 @@ const UserProvider = ({ children }) => {
         loading,
         showPassword,
         forgotPassword,
-        success,
-        setSuccess,
-
         newUser,
         user,
         setUserRole,
@@ -332,7 +322,6 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-
         resetPassword,
         sendOrCancelRequest,
         acceptRequest,
