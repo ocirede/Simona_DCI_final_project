@@ -466,7 +466,10 @@ export const updateProfileBackground = async (req, res) => {
       return res.send({ success: false, message: "User not found" });
     }
 
-    console.log("Profile back updated successfully:", updatedUser.profileImage);
+    console.log(
+      "Profile back updated successfully:",
+      updatedUser.profileBackground
+    );
     res.send({
       success: true,
       user: updatedUser,
