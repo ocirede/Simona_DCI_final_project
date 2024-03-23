@@ -18,12 +18,10 @@ const RequireAuth = ({ children }) => {
 export default RequireAuth;
 
 /* 
-Dear friend,
- 
 When you are reading this comment you are trying to fix this piece of shit
 and you will realized what a terrible mistake that was,
 please increment the following counter
 to the next friend that will try to fix it:
 
-total_hours_wasted_ = 3
+hours wasted = 3
 */
