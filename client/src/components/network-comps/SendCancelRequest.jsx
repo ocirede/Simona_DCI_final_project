@@ -7,7 +7,7 @@ const SendCancelRequest = ({ receiverId }) => {
   const [isRequested, setIsRequested] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [logged, setLogged] = useState(false); // Initialize logged state
+  const [logged, setLogged] = useState(false);
 
   useEffect(() => {
     setIsRequested(
