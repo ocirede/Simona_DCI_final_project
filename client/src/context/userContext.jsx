@@ -214,7 +214,7 @@ const UserProvider = ({ children }) => {
         setUser(response.data.sender);
       }
 
-      console.log("===> add connetion", response.data);
+      //console.log("===> add connetion", response.data);
     } catch (error) {
       console.log(error);
     }
