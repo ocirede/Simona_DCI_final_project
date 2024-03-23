@@ -14,12 +14,13 @@ const clientURL = process.env.CLIENT_URL;
 
 app.use(express.json());
 
+// to be fixed 
 const corsOptions = {
   origin: clientURL,
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 connectDB();
 

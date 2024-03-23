@@ -8,8 +8,9 @@ import {
   acceptConnectionRequest,
   rejectConnectionRequest,
   deleteConnection,
-getEntrepreneurs,
- getArtists,
+  getEntrepreneurs,
+  getArtists,
+  getAllUsers,
 
 } from "../controllers/userController.js";
 
