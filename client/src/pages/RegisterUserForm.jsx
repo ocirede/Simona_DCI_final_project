@@ -5,9 +5,10 @@ import FormSubmitButton from "../components/FormSubmitButton";
 import FormSubmitButtonLoading from "../components/FormSubmitButtonLoading";
 import { UserContext } from "../context/userContext";
 import AlertArrayOfErrors from "../components/alerts/AlertArrayOfErrors";
+import AlertEmailVerification from "../components/alerts/AlertEmailVerification";
 
 const RegisterUserForm = () => {
-  const { registerUser, response, validationErrors, responseSuccsess } =
+  const { registerUser, response, validationErrors, newUser } =
     useContext(UserContext);
 
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const RegisterUserForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [userRegisterData, setUserRegisterData] = useState();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [emailVerifyNotification, setEmailVerifyNotification] = useState(false);
 
   useEffect(() => {
     let userRegisterStoredData = JSON.parse(
@@ -28,21 +30,29 @@ const RegisterUserForm = () => {
     registerUser(
       email,
       password,
-      userRegisterData.role,
-      userRegisterData.categories
+      userRegisterData?.role,
+      userRegisterData?.categories
     );
-    if (responseSuccsess) {
-      localStorage.removeItem("userRegisterData");
-    }
   };
 
   useEffect(() => {
     setShowErrorMessage(true);
-
     setTimeout(() => {
       setShowErrorMessage(false);
     }, 3000);
   }, [validationErrors]);
+
+  useEffect(() => {
+    if (newUser) {
+      setEmail("");
+      setPassword("");
+      setUserRegisterData("");
+      setEmailVerifyNotification(true);
+      setTimeout(() => {
+        setEmailVerifyNotification(false);
+      }, 10000);
+    }
+  }, [newUser]);
 
   return (
     <>
@@ -169,6 +179,12 @@ const RegisterUserForm = () => {
           </ul>
         ) : null}
       </div>
+
+      {newUser && emailVerifyNotification && (
+        <div className="fixed top-0 left-1/2 transform -translate-x-1/2">
+          <AlertEmailVerification text="We've sent a verification code to verify your email Address" />
+        </div>
+      )}
     </>
   );
 };

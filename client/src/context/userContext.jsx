@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../config/axios.js";
 
@@ -17,8 +18,10 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
+
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -33,22 +36,25 @@ const UserProvider = ({ children }) => {
     const body = {
       email,
       password,
+      
     };
+    setResponse(false)
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
+
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       }
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      if (userRole === "artist") {
-        setTimeout(() => {
+      
+      if(response.data.success){
+        setResponse(true);
+        if (userRole === "artist") {
           navigate("/homeArtist");
-        }, 1500);
       } else {
-        setTimeout(() => {
           navigate("/E");
-        }, 1500);
+        
       }
       e.target.reset();
       setEmail("");
@@ -56,7 +62,14 @@ const UserProvider = ({ children }) => {
       setLoading(false);
       setUser(response.data.user);
       setValidationErrors(null);
+      console.log(response.data.success)
+
+      };
+
+     
+   
     } catch (error) {
+      setResponse(true)
       if (Array.isArray(error.response.data.message)) {
         setValidationErrors(error.response.data.message);
       } else {
@@ -73,7 +86,9 @@ const UserProvider = ({ children }) => {
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
   };
+
   //send a request to reset the password
+
   const requestForgotPasswordEmail = async (e) => {
     e.preventDefault();
     const body = {
@@ -91,20 +106,26 @@ const UserProvider = ({ children }) => {
       console.log(error);
     }
   };
+
   // reset-update password
+
   const resetPassword = (e) => {
     e.preventDefault();
     const password = e.target.password.value;
     const reType = e.target.retype.value;
+
     if (reType !== password) {
       alert("password are not matching");
       return;
     }
+
     const body = {
       password: e.target.password.value,
     };
+
     console.log(body);
   };
+
   //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
@@ -124,6 +145,7 @@ const UserProvider = ({ children }) => {
         setResponse(true);
         localStorage.removeItem("userRegisterData");
         setNewUser(response.data.newUser);
+
         //console.log("New User==>>", response.data.newUser);
       }
       setValidationErrors(null);
@@ -142,9 +164,11 @@ const UserProvider = ({ children }) => {
       }
     }
   };
+
   //logged user
   const loggedUser = async () => {
     const token = localStorage.getItem("token");
+
     if (token) {
       try {
         const response = await axios.get(baseURL + `/users/loggeduser`);
@@ -159,18 +183,128 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     loggedUser();
   }, []);
+
   //fetching all userszzzz
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(baseURL + "/users/get-users");
-        setUsers(response.data.users);
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-      }
-    };
-    useEffect(() => {
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(baseURL + "/users/all-the-users");
+      setUsers(response.data.users);
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+    }
+  };
+  useEffect(() => {
     fetchUsers();
-   }, []);
+  }, []);
+
+  //Send-cancel connection request
+  const sendOrCancelRequest = async (senderId, receiverId) => {
+    const body = {
+      senderId,
+      receiverId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/send-connection-request`,
+        body
+      );
+
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.sender);
+      }
+
+      console.log("===> add connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+  //Accept connection request
+  const acceptRequest = async (receiverId, senderId) => {
+    const body = {
+      receiverId,
+      senderId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/accept-connection-request`,
+        body
+      );
+
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.receiver);
+      }
+
+      console.log("===> accept connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+
+      console.log(error);
+    }
+  };
+
+  //Reject connection request
+  const rejectRequest = async (receiverId, senderId) => {
+    const body = {
+      receiverId,
+      senderId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/reject-connection-request`,
+        body
+      );
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.receiver);
+      }
+
+      console.log("===> reject connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+  //Delete connection
+  const deleteConnection = async (userId, connectionId) => {
+    const body = {
+      userId,
+      connectionId,
+    };
+    setResponse(false);
+    try {
+      const response = await axios.post(
+        baseURL + `/users/delete-connection`,
+        body
+      );
+      if (response.data.success) {
+        setResponse(true);
+        setUser(response.data.user);
+      }
+
+      console.log("===> delete connetion", response.data);
+    } catch (error) {
+      setResponse(true);
+      console.log(error);
+    }
+  };
+
+
+////log out
+const logout = () => {
+  localStorage.removeItem("token");
+  setUser(null)
+  navigate("/");
+};
+
   return (
     <UserContext.Provider
       value={{
@@ -200,6 +334,11 @@ const UserProvider = ({ children }) => {
         setForgotPasswsord,
         requestForgotPasswordEmail,
         resetPassword,
+        sendOrCancelRequest,
+        acceptRequest,
+        rejectRequest,
+        deleteConnection,
+        logout,
       }}
     >
       {children}

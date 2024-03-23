@@ -64,6 +64,7 @@ const offers = [
 export default function OffersSection() {
   const [showOffersSection, setShowOffersSection] = useState(false);
       const [myOffers, setMyOffers] = useState([])
+      const [currentView, setCurrentView] = useState("");
 
       const addOfferToMyOffers = (offer) => {
         setMyOffers(currentOffers => {
@@ -82,24 +83,31 @@ export default function OffersSection() {
 
   return (
     <>
-    <div className="flex items-center justify-center p-4 border-b-2 bg-red-100" onClick={() => setShowOffersSection(!showOffersSection)}>offersSection</div>
-    {showOffersSection && (<div className="flex">
-      <div className="w-1/3 h-screen overflow-auto bg-gray-100 p-4">
-        <h2 className="font-bold text-lg mb-4">My Offers</h2>
-        {myOffers.map((offer) => (
-          <div key={offer.id} className="mb-4 p-2 bg-white shadow-md rounded-lg">
-            <h3 className="text-md font-semibold">{offer.entrepreneurName}</h3>
-            <p>{offer.role}</p>
-            <p>{offer.offerDate}</p>
-            <p>read more</p>
-            {/* <p>{offer.offerDescription}</p> */}
-            <button onClick={() => removeOfferFromMyOffers(offer.id) }className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">-</button>
-          </div>
-        ))}
-      </div>
+    <div className="flex items-center justify-center p-4 border-b-2 bg-red-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowOffersSection(!showOffersSection)}>offers Section</div>
+    {showOffersSection && (
+    <div>
+      <div className="w-full mt-5 flex bg-gray-200">
+            <h2  onClick={() => setCurrentView("MyOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow">My Offers</h2>
+            <h2 onClick={() => setCurrentView("AvailableOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow">Available Offers</h2>
+        </div>
+        {currentView === "MyOffers"  && (
+           <div className="w-full h-auto overflow-auto bg-gray-100 p-4 slide-in-left">
+           <h2 className="font-bold text-lg mb-4">My Offers</h2>
+           {myOffers.map((offer) => (
+             <div key={offer.id} className="mb-4 p-2 bg-white shadow-md rounded-lg">
+               <h3 className="text-md font-semibold">{offer.entrepreneurName}</h3>
+               <p>{offer.role}</p>
+               <p>{offer.offerDate}</p>
+               <p>read more</p>
+               {/* <p>{offer.offerDescription}</p> */}
+               <button onClick={() => removeOfferFromMyOffers(offer.id) }className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">-</button>
+             </div>
+           ))}
+         </div>
+        )}
 
-    
-      <div className="w-2/3 h-screen overflow-auto p-4">
+       {currentView === "AvailableOffers"  && (
+        <div className="w-full h-auto overflow-auto p-4 slide-in-right ">
         <h2 className="font-bold text-lg mb-4">Available Offers</h2>
         <div className="grid grid-cols-1 gap-4">
           {availableOffers.map((offer) => (
@@ -113,6 +121,10 @@ export default function OffersSection() {
           ))}
         </div>
       </div>
+       )}
+
+    
+      
     </div>)}
      
     </>

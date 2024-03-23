@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
       country: String,
       phone: String,
     },
-    averageRating: { type: Number },
+    averageRating: { type: Number ,default: 0,},
     pendingRequests: [
       {
         type: mongoose.Schema.Types.ObjectId,

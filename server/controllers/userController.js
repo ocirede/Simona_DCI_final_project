@@ -1,9 +1,14 @@
-
 import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { registerValidator } from "../validator/user-validator.js";
-import { emailVerification } from "../verification/emailVerification.js";
+import {
+  loginValidator,
+  registerValidator,
+} from "../validator/user-validator.js";
+import {
+  emailVerification,
+  changePassVerification,
+} from "../verification/emailVerification.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -66,45 +71,86 @@ export const emailConfirmation = async (req, res) => {
   }
 };
 
+//password email reset
+export const changePasswordEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("Email not found");
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+    changePassVerification(token, email);
+    res.json({ success: true, user });
+  } catch (error) {
+    console.log("Error in email confirmation:", error.message);
+
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+// update password
+export const updatePassword = async (req, res) => {
+  const saltRounds = 10;
+  const { password } = req.body;
+  try {
+    const token = jwt.verify(req.params.token, process.env.JWT_SECTER_KEY);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(req.params.token);
+    if (token) {
+      await User.findByIdAndUpdate(
+        token.id,
+        { password: hashedPassword },
+        { new: true }
+      );
+    }
+    res.json({ success: true });
+  } catch (error) {
+    console.log("Error in update password:", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+// fetching artists
+//get Artists
 export const getArtists = async (req, res) => {
+  const { role } = req.query;
 
-    const {role} = req.query
-
-    try {
-        let filter = {}
-        if (role) {
-            filter.role = {$regex: role, $options: "i"};
-
-        }
-
-        const artists = await User.find(filter);
-
-        res.send({success:true, artists})
-    } catch (error) {
-        console.error("Error fetching the artists", error.message)
-        res.send({succsess:false, error:error.message})
+  try {
+    let filter = {};
+    if (role) {
+      filter.role = { $regex: role, $options: "i" };
     }
-}
 
-export const getEntrepreneurs= async (req, res) => {
+    const artists = await User.find(filter);
 
-    const {role} = req.query
+    res.send({ success: true, artists });
+  } catch (error) {
+    console.error("Error fetching the artists", error.message);
+    res.send({ succsess: false, error: error.message });
+  }
+};
 
-    try {
-        let filter = {}
-        if (role) {
-            filter.role = {$regex: role, $options: "i"};
+// fetching entrepeneurs
+export const getEntrepreneurs = async (req, res) => {
+  const { role } = req.query;
 
-        }
-
-        const entrepreneurs = await User.find(filter);
-
-        res.send({success:true, entrepreneurs})
-    } catch (error) {
-        console.error("Error fetching the Entrepreneurs", error.message)
-        res.send({succsess:false, error:error.message})
+  try {
+    let filter = {};
+    if (role) {
+      filter.role = { $regex: role, $options: "i" };
     }
-}
+
+    const entrepreneurs = await User.find(filter);
+
+    res.send({ success: true, entrepreneurs });
+  } catch (error) {
+    console.error("Error fetching the Entrepreneurs", error.message);
+    res.send({ succsess: false, error: error.message });
+  }
+};
 
 //Send connect request
 export const sendConnectionRequest = async (req, res) => {
@@ -299,6 +345,192 @@ export const deleteConnection = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
+
+export const signInHandling = async (req, res) => {
+  try {
+    const { error, value } = loginValidator(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details });
+    }
+    const { password, email } = value;
+    const user = await User.findOne({ email });
+    console.log(user);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched || !user) {
+      return res.status(400).send("Wrong email or password");
+    }
+
+    if (!user.verified) {
+      return res.json({
+        success: false,
+        error: "Email not verified",
+      });
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    res.json({success: true,  token, user });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+//Update user
+export const updateUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("User updated successfully:", updatedUser);
+    res.send({
+      success: true,
+      user: updatedUser,
+      message: "Updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating the user", error.message);
+  }
+
+};
+
+//logged user
+export const loggedUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    // const userId = req.params.id;
+    const user = await User.findOne({ _id: userId })
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    res.send({ success: true, user });
+  } catch (error) {
+    console.log("Error logged user:", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//getting all the users in the base
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+    
+    res.json({ success: true, users })
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching users", error: error.message });
+  }
+}
+
+export const signInHandling = async (req, res) => {
+  try {
+    const { error, value } = loginValidator(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details });
+    }
+    const { password, email } = value;
+    const user = await User.findOne({ email });
+    console.log(user);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched || !user) {
+      return res.status(400).send("Wrong email or password");
+    }
+
+    if (!user.verified) {
+      return res.json({
+        success: false,
+        error: "Email not verified",
+      });
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
+      expiresIn: "1d",
+    });
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    res.json({success: true,  token, user });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+//Update user
+export const updateUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("User updated successfully:", updatedUser);
+    res.send({
+      success: true,
+      user: updatedUser,
+      message: "Updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating the user", error.message);
+  }
+
+};
+
+//logged user
+export const loggedUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    // const userId = req.params.id;
+    const user = await User.findOne({ _id: userId })
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    res.send({ success: true, user });
+  } catch (error) {
+    console.log("Error logged user:", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+//getting all the users in the base
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+    
+    res.json({ success: true, users })
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching users", error: error.message });
+  }
+}
 
 
 // if it will be needed 
