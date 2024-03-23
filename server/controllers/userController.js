@@ -9,6 +9,7 @@ import {
   emailVerification,
   changePassVerification,
 } from "../verification/emailVerification.js";
+import cloudinaryV2 from "../config/cloudinary.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -378,6 +379,96 @@ export const signInHandling = async (req, res) => {
     res.json({ success: true, token, user });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+//Update profile image
+export const updateProfileImage = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    // Delete old profile image if exist
+    if (user.profileImage) {
+      const filename = user.profileImage.split("/").pop();
+      const publicId = filename.split(".")[0];
+      if (publicId) {
+        cloudinaryV2.uploader
+          .destroy(`Simona_Final_Project/profile_images/${publicId}`)
+          .then((result) =>
+            console.log("Old profile image deleted result:", result)
+          );
+      }
+    }
+    req.body.profileImage = req.file.path;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("Profile pic updated successfully:", updatedUser.profileImage);
+    res.send({
+      success: true,
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating the profile pic", error.message);
+  }
+};
+
+//Update profile background image
+export const updateProfileBackground = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    // Delete old profile background if exist
+    if (user.profileBackground) {
+      const filename = user.profileBackground.split("/").pop();
+      const publicId = filename.split(".")[0];
+      if (publicId) {
+        cloudinaryV2.uploader
+          .destroy(`Simona_Final_Project/background_images/${publicId}`)
+          .then((result) =>
+            console.log("Old background image deleted result:", result)
+          );
+      }
+    }
+    req.body.profileBackground = req.file.path;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("Profile back updated successfully:", updatedUser.profileImage);
+    res.send({
+      success: true,
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating the profile back", error.message);
   }
 };
 

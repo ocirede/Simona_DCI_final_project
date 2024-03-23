@@ -294,6 +294,77 @@ const UserProvider = ({ children }) => {
     navigate("/");
   };
 
+  //Update user(everything except profile image and background)
+  const updateUser = async (userId, updatedData) => {
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update/${userId}`,
+        updatedData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error("Error updating the user", error);
+    }
+  };
+
+  //Update profile pic
+  const updateProfileImage = async (userId, formData) => {
+    /* Note ==> The formData should have this structure:
+    const formData = new FormData();
+    formData.append("profileImage", profileImageFile);
+    
+    and the input:
+     <input
+          type="file"
+          onChange={(e) => {
+            setProfileImageFile(e.target.files[0]);
+          }}
+        />
+    
+    */
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update-profile-pic/${userId}`,
+        formData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error("Error updating the profile pic", error);
+    }
+  };
+
+  //Update profile background
+  const updateProfileBackground = async (userId, formData) => {
+    /* Note ==> The formData should have this structure:
+    const formData = new FormData();
+    formData.append("profileBackground", backgroundImageFile);;
+    
+    and the input:
+     <input
+          type="file"
+          onChange={(e) => {
+            setBackgroundImageFile(e.target.files[0]);
+          }}
+        />
+    
+    */
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update-profile-back/${userId}`,
+        formData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error("Error updating the profile back", error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -328,6 +399,9 @@ const UserProvider = ({ children }) => {
         rejectRequest,
         deleteConnection,
         logout,
+        updateUser,
+        updateProfileImage,
+        updateProfileBackground,
       }}
     >
       {children}
