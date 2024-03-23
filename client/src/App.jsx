@@ -18,7 +18,6 @@ import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur.jsx";
 import EmailConfirmation from "./pages/EmailConfirmation.jsx";
 import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
-import TestingPage from "./pages/TestingPage.jsx";
 
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
@@ -57,8 +56,6 @@ function App() {
             <Route path="category" element={<RegisterUserCategoryForm />} />
           </Route>
         </Route>
-
-        <Route path="/test" element={<TestingPage />} />
 
         {/* <Route path="/category/:categoryName" element={<FilteredUsersPage />} /> */}
       </Routes>

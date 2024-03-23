@@ -303,6 +303,7 @@ const UserProvider = ({ children }) => {
       );
       if (response.data.success) {
         setUser(response.data.user);
+        console.log("User updated!");
       }
     } catch (error) {
       console.error("Error updating the user", error);
@@ -331,6 +332,7 @@ const UserProvider = ({ children }) => {
       );
       if (response.data.success) {
         setUser(response.data.user);
+        console.log("Profile image updated!");
       }
     } catch (error) {
       console.error("Error updating the profile pic", error);
@@ -359,6 +361,7 @@ const UserProvider = ({ children }) => {
       );
       if (response.data.success) {
         setUser(response.data.user);
+        console.log("Profile background updated!");
       }
     } catch (error) {
       console.error("Error updating the profile back", error);
