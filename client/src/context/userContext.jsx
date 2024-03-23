@@ -368,6 +368,15 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  /**
+   * For the brave souls who get this far: You are the chosen ones,
+   * the valiant knights of programming, without rest,
+   * writing our most amazing code. To you, true saviors, kings and heroes,
+   * I say this: never gonna give you up, never gonna let you down,
+   * Never gonna make you cry, never gonna say goodbye.
+   * Never gonna hurt you.
+   */
+
   return (
     <UserContext.Provider
       value={{

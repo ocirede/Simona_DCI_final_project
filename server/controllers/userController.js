@@ -383,13 +383,18 @@ export const signInHandling = async (req, res) => {
 };
 
 //Update profile image
+/*
+ * You may think you know what the following code does.
+ * But you dont. Trust me.
+ * It works with magic
+ * Same for the updateProfileBackground
+ */
 export const updateProfileImage = async (req, res) => {
   const { userId } = req.params;
 
   try {
     const user = await User.findById(userId);
 
-    // Delete old profile image if exist
     if (user.profileImage) {
       const filename = user.profileImage.split("/").pop();
       const publicId = filename.split(".")[0];
@@ -434,7 +439,6 @@ export const updateProfileBackground = async (req, res) => {
   try {
     const user = await User.findById(userId);
 
-    // Delete old profile background if exist
     if (user.profileBackground) {
       const filename = user.profileBackground.split("/").pop();
       const publicId = filename.split(".")[0];
