@@ -1,10 +1,9 @@
-// import PlayfulTag from './PlayfulTag'; 
+import PlayfulTag from './PlayfulTag'; 
 
 export default function CardElement({ user }) {
-    const { address, profileImage } = user;
+    const { address, profileImage, categories } = user;
 
-    if (!address) {
-        console.log("Address or interests not available");
+    if (!address || !categories) {
         return null; 
     }
 
@@ -21,18 +20,18 @@ export default function CardElement({ user }) {
                     />
                 </div>
             </div>
-            <div className="px-6 py-4 text-center">
-                <h4 className="font-bold text-xl uppercase mb-2 mt-16">
+            <div className="px-4 py-4 text-center">
+                <h4 className="font-bold text-[18px] uppercase mb-2 mt-14">
                     {firstname} {lastname} 
                 </h4>
                 <p>{user.role}</p>
             </div>
             <div className="px-6 py-2">
-                {/* <div className="flex flex-wrap justify-center gap-2">
-                    {interests.map((interest, index) => (
-                        <PlayfulTag key={index} text={interest} />
+                <div className="flex flex-wrap justify-center gap-2">
+                    {categories.map((category, index) => (
+                        <PlayfulTag key={index} text={category} />
                     ))}
-                </div> */}
+                </div>
             </div>
         </div>
     );

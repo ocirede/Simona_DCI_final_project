@@ -1,6 +1,5 @@
-import { createContext, useState,useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import axios from "../config/axios.js";
 
 export const UserContext = createContext();
@@ -9,62 +8,107 @@ const UserProvider = ({ children }) => {
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
-  const [responseSuccsess, setResponseSuccsess] = useState();
   const [user, setUser] = useState(null);
-  const [errors, setErrors] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberme, setRememberMe] = useState(false);
-  
+  const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [forgotPassword, setForgotPasswsord] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [newUser, setNewUser] = useState();
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-
   const baseURL = import.meta.env.VITE_BASE_URL;
-
-  // fetching email-remember checkbox
+  // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
     if (storedEmail) {
       setEmail(storedEmail);
     }
   }, []);
-
   //Sign-in function
   const authenticationHandler = async (e) => {
+    setValidationErrors(null);
     e.preventDefault();
     const body = {
       email,
       password,
     };
-
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
-
-      if (rememberme) {
+      if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       }
-
       localStorage.setItem("token", response.data.token);
+      const userRole = response.data.user.role;
+      if (userRole === "artist") {
+        setTimeout(() => {
+          navigate("/homeArtist");
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          navigate("/E");
+        }, 1500);
+      }
       e.target.reset();
       setEmail("");
       setPassword("");
+      setLoading(false);
       setUser(response.data.user);
-      setErrors(null);
+      setValidationErrors(null);
     } catch (error) {
-      setErrors(error.response.data?.message || "An error occurred");
+      if (Array.isArray(error.response.data.message)) {
+        setValidationErrors(error.response.data.message);
+      } else {
+        const error = [
+          {
+            message: error.response.data.message,
+          },
+        ];
+        setValidationErrors(error);
+      }
     }
   };
-
   // set true or false the checkbox
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
   };
-
-  //Register background handling
+  //send a request to reset the password
+  const requestForgotPasswordEmail = async (e) => {
+    e.preventDefault();
+    const body = {
+      email: e.target.email.defaultValue,
+    };
+    try {
+      const response = await axios.post(
+        baseURL + "/users/changepassword",
+        body
+      );
+      if (response.data.success) {
+        console.log("we have sent you an email to reset you password");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // reset-update password
+  const resetPassword = (e) => {
+    e.preventDefault();
+    const password = e.target.password.value;
+    const reType = e.target.retype.value;
+    if (reType !== password) {
+      alert("password are not matching");
+      return;
+    }
+    const body = {
+      password: e.target.password.value,
+    };
+    console.log(body);
+  };
+  //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
-    //console.log("User role from context=>>", userRole);
   };
-
   //Register user
   const registerUser = async (email, password, role, categories) => {
     setValidationErrors(null);
@@ -76,12 +120,11 @@ const UserProvider = ({ children }) => {
         role,
         categories,
       });
-
       if (response.data.success) {
         setResponse(true);
-        setResponseSuccsess(response.data.success);
-        navigate("/sign-in");
-        console.log("New User==>>", response.data.newUser);
+        localStorage.removeItem("userRegisterData");
+        setNewUser(response.data.newUser);
+        //console.log("New User==>>", response.data.newUser);
       }
       setValidationErrors(null);
     } catch (error) {
@@ -99,32 +142,68 @@ const UserProvider = ({ children }) => {
       }
     }
   };
-
+  //logged user
+  const loggedUser = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const response = await axios.get(baseURL + `/users/loggeduser`);
+        setUser(response.data.user);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    }
+  };
+  useEffect(() => {
+    loggedUser();
+  }, []);
+  //fetching all userszzzz
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(baseURL + "/users/get-users");
+        setUsers(response.data.users);
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
+    };
+    useEffect(() => {
+    fetchUsers();
+   }, []);
   return (
     <UserContext.Provider
       value={{
+        users,
         userRole,
         validationErrors,
         response,
-        responseSuccsess,
+        rememberMe,
+        email,
+        password,
+        loading,
+        showPassword,
+        forgotPassword,
+        newUser,
+        user,
         setUserRole,
         userRoleChoice,
         registerUser,
-        rememberme,
-        errors,
-        email,
-        password,
         setUserRole,
         userRoleChoice,
         authenticationHandler,
         handleRememberMeChange,
         setPassword,
         setEmail,
+        setLoading,
+        setShowPassword,
+        setForgotPasswsord,
+        requestForgotPasswordEmail,
+        resetPassword,
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
-
 export default UserProvider;

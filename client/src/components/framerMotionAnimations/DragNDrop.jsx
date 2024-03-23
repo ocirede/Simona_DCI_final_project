@@ -1,33 +1,33 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const DragComponent = () => {
+const DragComponent = ({ children, constraints }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragStart = () => {
     setIsDragging(true);
-    console.log('Drag started');
   };
 
   const handleDragEnd = () => {
     setIsDragging(false);
-    console.log('Drag ended');
   };
 
   return (
     <motion.div
       drag
+      dragConstraints={constraints}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       style={{
-        width: 100,
-        height: 100,
-        background: isDragging ? 'red' : 'blue',
-        borderRadius: 10,
         cursor: 'grab',
+        width: 'fit-content', 
+        height: 'fit-content'
       }}
-    />
+    >
+      {children}
+    </motion.div>
   );
 };
 
 export default DragComponent;
+
