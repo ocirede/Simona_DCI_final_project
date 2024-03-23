@@ -38,9 +38,8 @@ const UserProvider = ({ children }) => {
     const body = {
       email,
       password,
-      
     };
-    setResponse(false)
+    setResponse(false);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -50,28 +49,23 @@ const UserProvider = ({ children }) => {
 
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      
-      if(response.data.success){
+
+      if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
           navigate("/homeArtist");
-      } else {
+        } else {
           navigate("/E");
-        
+        }
+        e.target.reset();
+        setEmail("");
+        setPassword("");
+        setUser(response.data.user);
+        setValidationErrors(null);
+        console.log(response.data.success);
       }
-      e.target.reset();
-      setEmail("");
-      setPassword("");
-      setUser(response.data.user);
-      setValidationErrors(null);
-      console.log(response.data.success)
-
-      };
-
-     
-   
     } catch (error) {
-      setResponse(true)
+      setResponse(true);
       if (Array.isArray(error.response.data.message)) {
         setValidationErrors(error.response.data.message);
       } else {
@@ -209,7 +203,7 @@ const UserProvider = ({ children }) => {
       senderId,
       receiverId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/send-connection-request`,
@@ -217,13 +211,11 @@ const UserProvider = ({ children }) => {
       );
 
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.sender);
       }
 
       console.log("===> add connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
@@ -234,7 +226,7 @@ const UserProvider = ({ children }) => {
       receiverId,
       senderId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/accept-connection-request`,
@@ -242,14 +234,11 @@ const UserProvider = ({ children }) => {
       );
 
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.receiver);
       }
 
       console.log("===> accept connetion", response.data);
     } catch (error) {
-      setResponse(true);
-
       console.log(error);
     }
   };
@@ -260,20 +249,18 @@ const UserProvider = ({ children }) => {
       receiverId,
       senderId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/reject-connection-request`,
         body
       );
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.receiver);
       }
 
       console.log("===> reject connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
@@ -284,31 +271,28 @@ const UserProvider = ({ children }) => {
       userId,
       connectionId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/delete-connection`,
         body
       );
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.user);
       }
 
       console.log("===> delete connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
 
-
-////log out
-const logout = () => {
-  localStorage.removeItem("token");
-  setUser(null)
-  navigate("/");
-};
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <UserContext.Provider
