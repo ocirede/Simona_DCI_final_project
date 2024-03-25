@@ -9,6 +9,7 @@ import {
   emailVerification,
   changePassVerification,
 } from "../verification/emailVerification.js";
+import cloudinaryV2 from "../config/cloudinary.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -40,7 +41,7 @@ export const handleRegister = async (req, res) => {
       }
     );
 
-    emailVerification(token, newUser.email);
+    await emailVerification(token, newUser.email);
 
     res.send({ success: true, newUser });
     console.log("New user created successfully:", newUser);
@@ -354,7 +355,7 @@ export const signInHandling = async (req, res) => {
     }
     const { password, email } = value;
     const user = await User.findOne({ email });
-    console.log(user);
+
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -375,9 +376,106 @@ export const signInHandling = async (req, res) => {
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
-    res.json({success: true,  token, user });
+    res.json({ success: true, token, user });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+//Update profile image
+/*
+ * You may think you know what the following code does.
+ * But you dont. Trust me.
+ * It works with magic
+ * Same for the updateProfileBackground
+ */
+export const updateProfileImage = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (user.profileImage) {
+      const filename = user.profileImage.split("/").pop();
+      const publicId = filename.split(".")[0];
+      if (publicId) {
+        cloudinaryV2.uploader
+          .destroy(`Simona_Final_Project/profile_images/${publicId}`)
+          .then((result) =>
+            console.log("Old profile image deleted result:", result)
+          );
+      }
+    }
+    req.body.profileImage = req.file.path;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log("Profile pic updated successfully:", updatedUser.profileImage);
+    res.send({
+      success: true,
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating the profile pic", error.message);
+  }
+};
+
+//Update profile background image
+export const updateProfileBackground = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (user.profileBackground) {
+      const filename = user.profileBackground.split("/").pop();
+      const publicId = filename.split(".")[0];
+      if (publicId) {
+        cloudinaryV2.uploader
+          .destroy(`Simona_Final_Project/background_images/${publicId}`)
+          .then((result) =>
+            console.log("Old background image deleted result:", result)
+          );
+      }
+    }
+    req.body.profileBackground = req.file.path;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+
+    await updatedUser.populate("sentRequests");
+    await updatedUser.populate("pendingRequests");
+    await updatedUser.populate("connections");
+
+    if (!updatedUser) {
+      return res.send({ success: false, message: "User not found" });
+    }
+
+    console.log(
+      "Profile back updated successfully:",
+      updatedUser.profileBackground
+    );
+    res.send({
+      success: true,
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating the profile back", error.message);
   }
 };
 
@@ -409,7 +507,6 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
-
 };
 
 //logged user
@@ -417,7 +514,7 @@ export const loggedUser = async (req, res) => {
   try {
     const userId = req.user.id;
     // const userId = req.params.id;
-    const user = await User.findOne({ _id: userId })
+    const user = await User.findOne({ _id: userId });
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
@@ -431,10 +528,14 @@ export const loggedUser = async (req, res) => {
 //getting all the users in the base
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find()
-    
-    res.json({ success: true, users })
+    const users = await User.find();
+
+    res.json({ success: true, users });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching users", error: error.message });
   }
-}
+
+};
+

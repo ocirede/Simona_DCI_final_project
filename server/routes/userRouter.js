@@ -1,5 +1,8 @@
 import express from "express";
-import { profileImageUpload } from "../middleware/multerCloudinary.js";
+import {
+  profileBackroundUpload,
+  profileImageUpload,
+} from "../middleware/multerCloudinary.js";
 
 import {
   emailConfirmation,
@@ -14,9 +17,10 @@ import {
   changePasswordEmail,
   updateUser,
   updatePassword,
-
   loggedUser,
-  getAllUsers
+  getAllUsers,
+  updateProfileImage,
+  updateProfileBackground,
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -38,19 +42,16 @@ userRoutes.get("/get-artists", getArtists);
 userRoutes.post("/changepassword", changePasswordEmail);
 userRoutes.put("/update/:userId", updateUser);
 userRoutes.get("/loggeduser", auth, loggedUser);
-userRoutes.get("/all-the-users", getAllUsers)
-
-
-//The following route is an example to test the image upload, it can be deleted
-userRoutes.post(
-  "/image",
+userRoutes.get("/all-the-users", getAllUsers);
+userRoutes.put(
+  "/update-profile-pic/:userId",
   profileImageUpload.single("profileImage"),
-
-  (req, res) => {
-    res
-      .status(200)
-      .json({ message: "Image uploaded successfully", file: req.file });
-  }
+  updateProfileImage
+);
+userRoutes.put(
+  "/update-profile-back/:userId",
+  profileBackroundUpload.single("profileBackground"),
+  updateProfileBackground
 );
 
 export default userRoutes;
