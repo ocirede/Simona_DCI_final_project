@@ -6,9 +6,7 @@
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
-
-  /* background-color: #525252;  */
+  font-family: "DM Sans", sans-serif;
 }
 
 .header-bg {
@@ -52,4 +50,9 @@ body {
 
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
+}
+
+@font-face {
+  font-family: 'Magic Retro';
+  src: url('/fonts/MagicRetro.ttf') format('truetype');
 }

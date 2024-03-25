@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import axios from "../config/axios.js";
 
 export const UserContext = createContext();
@@ -20,6 +20,7 @@ const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
+
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // fetching email-remember-checkbox
@@ -29,6 +30,7 @@ const UserProvider = ({ children }) => {
       setEmail(storedEmail);
     }
   }, []);
+
   //Sign-in function
   const authenticationHandler = async (e) => {
     setValidationErrors(null);
@@ -45,6 +47,7 @@ const UserProvider = ({ children }) => {
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       }
+
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
       
@@ -59,7 +62,6 @@ const UserProvider = ({ children }) => {
       e.target.reset();
       setEmail("");
       setPassword("");
-      setLoading(false);
       setUser(response.data.user);
       setValidationErrors(null);
       console.log(response.data.success)
@@ -82,6 +84,7 @@ const UserProvider = ({ children }) => {
       }
     }
   };
+
   // set true or false the checkbox
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
@@ -130,6 +133,7 @@ const UserProvider = ({ children }) => {
   const userRoleChoice = (role) => {
     setUserRole(role);
   };
+
   //Register user
   const registerUser = async (email, password, role, categories) => {
     setValidationErrors(null);
@@ -141,6 +145,7 @@ const UserProvider = ({ children }) => {
         role,
         categories,
       });
+
       if (response.data.success) {
         setResponse(true);
         localStorage.removeItem("userRegisterData");
@@ -323,8 +328,6 @@ const logout = () => {
         setUserRole,
         userRoleChoice,
         registerUser,
-        setUserRole,
-        userRoleChoice,
         authenticationHandler,
         handleRememberMeChange,
         setPassword,
@@ -345,4 +348,5 @@ const logout = () => {
     </UserContext.Provider>
   );
 };
+
 export default UserProvider;
