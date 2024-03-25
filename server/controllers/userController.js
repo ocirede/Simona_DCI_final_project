@@ -536,4 +536,6 @@ export const getAllUsers = async (req, res) => {
       .status(500)
       .json({ message: "Error fetching users", error: error.message });
   }
+
 };
+
