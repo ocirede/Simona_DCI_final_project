@@ -1,12 +1,11 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "../config/axios.js";
 
 export const RatingContext = createContext();
 
 const RatingContextProvider = ({ children }) => {
   const [ratings, setRatings] = useState([]);
-  const navigate = useNavigate();
+  const [bestRatedComments, setBestRatedComments] = useState([]);
 
   const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -54,8 +53,29 @@ const RatingContextProvider = ({ children }) => {
     }
   };
 
+  //get best rated comments
+  const getBestRatedComments = async (role = "") => {
+    try {
+      const response = await axios.get(
+        baseURL + `/ratings/get-best-ratings/?role=${role}`
+      );
+      if (response.data.success) {
+        setBestRatedComments(response.data.bestComments);
+      }
+    } catch (error) {
+      console.log("Error getting the best rated comments", error);
+    }
+  };
+
   return (
-    <RatingContext.Provider value={{ addNewRating, getRatingsForUer }}>
+    <RatingContext.Provider
+      value={{
+        bestRatedComments,
+        addNewRating,
+        getRatingsForUer,
+        getBestRatedComments,
+      }}
+    >
       {children}
     </RatingContext.Provider>
   );
