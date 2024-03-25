@@ -9,6 +9,7 @@ import ProfilePageLayout from "./layouts/ProfilePageLayout";
 import { Route, Routes } from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
 import ProfileArtistPage from "./pages/ProfileArtistPage";
+
 import ChatBox from "./components/chatBox/chatBox.jsx";
 import HomePageEntrepreneur from "./pages/homePageEntrepreneur.jsx";
 import HomePageArtist from "./pages/homePageArtist.jsx";

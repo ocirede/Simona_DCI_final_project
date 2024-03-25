@@ -10,15 +10,16 @@ const Container = styled.div`
   }
 `;
 
-export default function CardCarousel() {
+export default function CardCarousel({ data }) {
+
   return (
     <Container>
       <div className="relative overflow-hidden">
         <MotionSlider>
-          {[...Array(10)].map((item, i) => (
+          {data.map((user, i) => (
             <CardElement
               key={i}
-              style={{ opacity: Math.random() }}
+              user={user}
             />
           ))}
         </MotionSlider>
