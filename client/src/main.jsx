@@ -9,6 +9,7 @@ import ArtistsProvider from "./context/artistsContext.jsx";
 import EntrepreneurProvider from "./context/entrepreneurContext.jsx";
 
 import { FormVisibilityProvider } from "./context/formVisibility.jsx";
+import RatingContextProvider from "./context/ratingContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ArtistsProvider>
           <EntrepreneurProvider>
             <FormVisibilityProvider>
-              <App />
+              <RatingContextProvider>
+                <App />
+              </RatingContextProvider>
             </FormVisibilityProvider>
           </EntrepreneurProvider>
         </ArtistsProvider>
