@@ -19,9 +19,9 @@ export default RequireAuth;
 
 /* 
 When you are reading this comment you are trying to fix this piece of shit
-and you will realized what a terrible mistake that was,
+and you will realized soon what a terrible mistake you did,
 please increment the following counter
-to the next friend that will try to fix it:
+to the next one that will try to fix it:
 
 hours wasted = 3
 */

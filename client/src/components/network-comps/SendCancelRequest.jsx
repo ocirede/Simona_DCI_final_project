@@ -9,14 +9,9 @@ const SendCancelRequest = ({ receiverId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [logged, setLogged] = useState(false);
 
-  // Magic. Do not touch.
   useEffect(() => {
-    setIsRequested(
-      user?.sentRequests?.map((item) => item._id).includes(receiverId)
-    );
-    setIsConnected(
-      user?.connections?.map((item) => item._id).includes(receiverId)
-    );
+    setIsRequested(user?.sentRequests?.some((item) => item._id === receiverId));
+    setIsConnected(user?.connections?.some((item) => item._id === receiverId));
     setLogged(user?._id === receiverId);
   }, [user, receiverId]);
 
