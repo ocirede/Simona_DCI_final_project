@@ -38,9 +38,8 @@ const UserProvider = ({ children }) => {
     const body = {
       email,
       password,
-      
     };
-    setResponse(false)
+    setResponse(false);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -50,28 +49,24 @@ const UserProvider = ({ children }) => {
 
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      
-      if(response.data.success){
+
+      if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
           navigate("/homeArtist");
-      } else {
+        } else {
           navigate("/E");
-        
+        }
+        e.target.reset();
+        setEmail("");
+        setPassword("");
+        setUser(response.data.user);
+        setValidationErrors(null);
+        console.log(response.data.success);
       }
-      e.target.reset();
-      setEmail("");
-      setPassword("");
-      setUser(response.data.user);
-      setValidationErrors(null);
-      console.log(response.data.success)
 
-      };
-
-     
-   
     } catch (error) {
-      setResponse(true)
+      setResponse(true);
       if (Array.isArray(error.response.data.message)) {
         setValidationErrors(error.response.data.message);
       } else {
@@ -209,7 +204,7 @@ const UserProvider = ({ children }) => {
       senderId,
       receiverId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/send-connection-request`,
@@ -217,13 +212,11 @@ const UserProvider = ({ children }) => {
       );
 
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.sender);
       }
 
-      console.log("===> add connetion", response.data);
+      //console.log("===> add connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
@@ -234,7 +227,7 @@ const UserProvider = ({ children }) => {
       receiverId,
       senderId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/accept-connection-request`,
@@ -242,14 +235,11 @@ const UserProvider = ({ children }) => {
       );
 
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.receiver);
       }
 
       console.log("===> accept connetion", response.data);
     } catch (error) {
-      setResponse(true);
-
       console.log(error);
     }
   };
@@ -260,20 +250,18 @@ const UserProvider = ({ children }) => {
       receiverId,
       senderId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/reject-connection-request`,
         body
       );
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.receiver);
       }
 
       console.log("===> reject connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
@@ -284,31 +272,111 @@ const UserProvider = ({ children }) => {
       userId,
       connectionId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/delete-connection`,
         body
       );
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.user);
       }
 
       console.log("===> delete connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
 
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  };
 
-////log out
-const logout = () => {
-  localStorage.removeItem("token");
-  setUser(null)
-  navigate("/");
-};
+  //Update user(everything except profile image and background)
+  const updateUser = async (userId, updatedData) => {
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update/${userId}`,
+        updatedData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        console.log("User updated!");
+      }
+    } catch (error) {
+      console.error("Error updating the user", error);
+    }
+  };
+
+  //Update profile pic
+  const updateProfileImage = async (userId, formData) => {
+    /* Note ==> The formData should have this structure:
+    const formData = new FormData();
+    formData.append("profileImage", profileImageFile);
+    
+    and the input:
+     <input
+          type="file"
+          onChange={(e) => {
+            setProfileImageFile(e.target.files[0]);
+          }}
+        />
+    
+    */
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update-profile-pic/${userId}`,
+        formData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        console.log("Profile image updated!");
+      }
+    } catch (error) {
+      console.error("Error updating the profile pic", error);
+    }
+  };
+
+  //Update profile background
+  const updateProfileBackground = async (userId, formData) => {
+    /* Note ==> The formData should have this structure:
+    const formData = new FormData();
+    formData.append("profileBackground", backgroundImageFile);;
+    
+    and the input:
+     <input
+          type="file"
+          onChange={(e) => {
+            setBackgroundImageFile(e.target.files[0]);
+          }}
+        />
+    
+    */
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update-profile-back/${userId}`,
+        formData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        console.log("Profile background updated!");
+      }
+    } catch (error) {
+      console.error("Error updating the profile back", error);
+    }
+  };
+
+  /**
+   * For the brave souls who get this far: You are the chosen ones,
+   * the valiant knights of programming, without rest,
+   * writing our most amazing code. To you, true saviors, kings and heroes,
+   * I say this: never gonna give you up, never gonna let you down,
+   * Never gonna make you cry, never gonna say goodbye.
+   * Never gonna hurt you.
+   */
 
   return (
     <UserContext.Provider
@@ -342,6 +410,9 @@ const logout = () => {
         rejectRequest,
         deleteConnection,
         logout,
+        updateUser,
+        updateProfileImage,
+        updateProfileBackground,
       }}
     >
       {children}

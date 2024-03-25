@@ -1,14 +1,10 @@
 const ButtonLoading = () => {
   return (
-    <button
-      type="submit"
-      disabled
-      className="mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full transition-transform duration-100 "
-    >
+    <button type="submit" disabled className="bg-transparent">
       <svg
         aria-hidden="true"
         role="status"
-        className="inline mr-3 w-4 h-4 text-white animate-spin"
+        className="inline mr-3 w-4 h-4 text-gray-800 animate-spin"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
