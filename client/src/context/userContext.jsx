@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
+import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../config/axios.js";
 
 export const UserContext = createContext();
@@ -16,13 +16,12 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
 
-
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
+
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -30,7 +29,6 @@ const UserProvider = ({ children }) => {
       setEmail(storedEmail);
     }
   }, []);
-
   //Sign-in function
   const authenticationHandler = async (e) => {
     setValidationErrors(null);
@@ -39,31 +37,33 @@ const UserProvider = ({ children }) => {
       email,
       password,
     };
+    setResponse(false);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       }
-
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      if (userRole === "artist") {
-        setTimeout(() => {
+
+      if (response.data.success) {
+        setResponse(true);
+        if (userRole === "artist") {
           navigate("/homeArtist");
-        }, 1500);
-      } else {
-        setTimeout(() => {
+        } else {
           navigate("/E");
-        }, 1500);
+        }
+        e.target.reset();
+        setEmail("");
+        setPassword("");
+        setUser(response.data.user);
+        setValidationErrors(null);
+        console.log(response.data.success);
       }
-      e.target.reset();
-      setEmail("");
-      setPassword("");
-      setLoading(false);
-      setUser(response.data.user);
-      setValidationErrors(null);
+
     } catch (error) {
+      setResponse(true);
       if (Array.isArray(error.response.data.message)) {
         setValidationErrors(error.response.data.message);
       } else {
@@ -76,7 +76,6 @@ const UserProvider = ({ children }) => {
       }
     }
   };
-
   // set true or false the checkbox
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
@@ -95,12 +94,8 @@ const UserProvider = ({ children }) => {
         body
       );
       if (response.data.success) {
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 2000);
-      };
-      console.log(response.data)
+        console.log("we have sent you an email to reset you password");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -129,7 +124,6 @@ const UserProvider = ({ children }) => {
   const userRoleChoice = (role) => {
     setUserRole(role);
   };
-
   //Register user
   const registerUser = async (email, password, role, categories) => {
     setValidationErrors(null);
@@ -141,7 +135,6 @@ const UserProvider = ({ children }) => {
         role,
         categories,
       });
-
       if (response.data.success) {
         setResponse(true);
         localStorage.removeItem("userRegisterData");
@@ -186,20 +179,18 @@ const UserProvider = ({ children }) => {
   }, []);
 
   //fetching all userszzzz
-  
-    const fetchUsers = async () => {
-      
-      try {
-        const response = await axios.get(baseURL + "/users/all-the-users");
-        setUsers(response.data.users);
- 
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-      }
-    };
-    useEffect(() => {
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(baseURL + "/users/all-the-users");
+      setUsers(response.data.users);
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+    }
+  };
+  useEffect(() => {
     fetchUsers();
-   }, []);
+  }, []);
 
   //Send-cancel connection request
   const sendOrCancelRequest = async (senderId, receiverId) => {
@@ -207,7 +198,7 @@ const UserProvider = ({ children }) => {
       senderId,
       receiverId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/send-connection-request`,
@@ -215,13 +206,11 @@ const UserProvider = ({ children }) => {
       );
 
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.sender);
       }
 
-      console.log("===> add connetion", response.data);
+      //console.log("===> add connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
@@ -232,7 +221,7 @@ const UserProvider = ({ children }) => {
       receiverId,
       senderId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/accept-connection-request`,
@@ -240,14 +229,11 @@ const UserProvider = ({ children }) => {
       );
 
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.receiver);
       }
 
       console.log("===> accept connetion", response.data);
     } catch (error) {
-      setResponse(true);
-
       console.log(error);
     }
   };
@@ -258,20 +244,18 @@ const UserProvider = ({ children }) => {
       receiverId,
       senderId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/reject-connection-request`,
         body
       );
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.receiver);
       }
 
       console.log("===> reject connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
@@ -282,30 +266,112 @@ const UserProvider = ({ children }) => {
       userId,
       connectionId,
     };
-    setResponse(false);
+
     try {
       const response = await axios.post(
         baseURL + `/users/delete-connection`,
         body
       );
       if (response.data.success) {
-        setResponse(true);
         setUser(response.data.user);
       }
 
       console.log("===> delete connetion", response.data);
     } catch (error) {
-      setResponse(true);
       console.log(error);
     }
   };
 
-////log out
-const logout = () => {
-  localStorage.removeItem("token");
-  setUser(null)
-  navigate("/");
-};
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  };
+
+  //Update user(everything except profile image and background)
+  const updateUser = async (userId, updatedData) => {
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update/${userId}`,
+        updatedData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        console.log("User updated!");
+      }
+    } catch (error) {
+      console.error("Error updating the user", error);
+    }
+  };
+
+  //Update profile pic
+  const updateProfileImage = async (userId, formData) => {
+    /* Note ==> The formData should have this structure:
+    const formData = new FormData();
+    formData.append("profileImage", profileImageFile);
+    
+    and the input:
+     <input
+          type="file"
+          onChange={(e) => {
+            setProfileImageFile(e.target.files[0]);
+          }}
+        />
+    
+    */
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update-profile-pic/${userId}`,
+        formData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        console.log("Profile image updated!");
+      }
+    } catch (error) {
+      console.error("Error updating the profile pic", error);
+    }
+  };
+
+  //Update profile background
+  const updateProfileBackground = async (userId, formData) => {
+    /* Note ==> The formData should have this structure:
+    const formData = new FormData();
+    formData.append("profileBackground", backgroundImageFile);;
+    
+    and the input:
+     <input
+          type="file"
+          onChange={(e) => {
+            setBackgroundImageFile(e.target.files[0]);
+          }}
+        />
+    
+    */
+    try {
+      const response = await axios.put(
+        baseURL + `/users/update-profile-back/${userId}`,
+        formData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        console.log("Profile background updated!");
+      }
+    } catch (error) {
+      console.error("Error updating the profile back", error);
+    }
+  };
+
+  /**
+   * For the brave souls who get this far: You are the chosen ones,
+   * the valiant knights of programming, without rest,
+   * writing our most amazing code. To you, true saviors, kings and heroes,
+   * I say this: never gonna give you up, never gonna let you down,
+   * Never gonna make you cry, never gonna say goodbye.
+   * Never gonna hurt you.
+   */
+
   return (
     <UserContext.Provider
       value={{
@@ -319,9 +385,6 @@ const logout = () => {
         loading,
         showPassword,
         forgotPassword,
-        success,
-        setSuccess,
-
         newUser,
         user,
         setUserRole,
@@ -337,18 +400,19 @@ const logout = () => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-
         resetPassword,
         sendOrCancelRequest,
         acceptRequest,
         rejectRequest,
         deleteConnection,
         logout,
+        updateUser,
+        updateProfileImage,
+        updateProfileBackground,
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
-
 export default UserProvider;

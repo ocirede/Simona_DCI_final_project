@@ -13,7 +13,7 @@ function NavBar() {
       <ul className=" p-3 w-full flex items-center justify-between  ">
         <FakeLogo />
         <div className="hidden xs:flex justify-end items-center flex-grow p-3 gap-5">
-          <NavLink to="/register">
+          <NavLink to="/register-questions">
             <Button name="Register" />
           </NavLink>
           <NavLink to="/sign-in">
@@ -24,7 +24,7 @@ function NavBar() {
         <div className=" flex gap-6 xs:hidden">
           <LanguageChoice />
           {display ? (
-            <X className=" w-8 h-8" onClick={() => setDisplay(!display)}/>
+            <X className=" w-8 h-8" onClick={() => setDisplay(!display)} />
           ) : (
             <Menu
               onClick={() => setDisplay(!display)}

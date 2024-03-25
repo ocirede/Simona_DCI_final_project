@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: { type: String, required: true },
     categories: [{ type: String }],
-
     profileImage: { type: String },
     profileBackground: { type: String },
     verified: {
@@ -55,7 +54,6 @@ const userSchema = new mongoose.Schema(
     ],
     interests: [{ type: String }],
     personality: [{ type: String }],
-
     education: [
       {
         title: { type: String },
