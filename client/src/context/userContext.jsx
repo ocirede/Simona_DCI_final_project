@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../config/axios.js";
 
@@ -61,7 +60,6 @@ const UserProvider = ({ children }) => {
         setValidationErrors(null);
         console.log(response.data.success);
       }
-
     } catch (error) {
       setResponse(true);
       if (Array.isArray(error.response.data.message)) {
