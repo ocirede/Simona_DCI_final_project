@@ -56,6 +56,8 @@ const RatingContextProvider = ({ children }) => {
   //get best rated comments
   //it gets the best rated comments by date
   //it means it will fetch the best newest ratings
+  //it can accept role or being empty will get the best ratings
+  //from all users ignoring the role
   const getBestRatedComments = async (role = "") => {
     try {
       const response = await axios.get(
