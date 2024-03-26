@@ -6,13 +6,31 @@ import TopReviews from "../components/introPage/TopReviews";
 import { useEffect, useRef, useState } from "react";
 import LanguageChoice from "../components/navbar intro/LanguageChoice";
 import DropMenu from "../components/navbar intro/DropMenu";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import MovingText from "../components/framerMotionAnimations/MovingText";
 
 export default function IntroPage() { 
     const divRef = useRef(null);
     const [divWidth, setDivWidth] = useState(0);
     const [divHeight, setDivHeight] = useState(0);
+    const [display, setDisplay] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 400) {
+          setShowMenu(true);
+        } else {
+          setShowMenu(false);
+        }
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
 
     useEffect(() => {
         if (divRef.current) {
@@ -31,12 +49,20 @@ export default function IntroPage() {
                     <h3 className="text-[28px] text-[#1E1E1E] font-bold p-10">Your next fateful connection</h3>
                     <div className="flex gap-3 items-center m-10 mt-11">
                         <LanguageChoice /> 
-                        <Menu />
+                        {display ? (
+                            <X className="w-10 h-10" onClick={() => setDisplay(!display)} />
+                        ) : (
+                            <Menu
+                            onClick={() => setDisplay(!display)}
+                            className="w-10 h-10 xs:hidden"
+                            />
+                        )}
+                        {display && <DropMenu />}
                     </div>
-                    <h1 className="uppercase text-[60px] font-custom text-[#1E1E1E] absolute top-[78%] left-[5%]">Simona</h1>
+                    <h1 className="uppercase text-[80px] text-[#1E1E1E] absolute top-[69%] left-[7%] simona">Simona</h1>
                    
                 </div>
-                <div className="m-2 mt-4 lg:m-10 lg:mr-40 border border-1 border-black rounded-[30px] bg-white h-[622px] shadow-md">
+                <div className="m-2 mt-4 lg:m-10 lg:mr-40 border border-1 border-black rounded-[30px] bg-white h-[650px] shadow-md">
                     <div className="bg-cobaltBlue rounded-tl-[30px] rounded-tr-[30px] flex p-6 justify-between items-center pr-8 pl-8">
                         <img src="/smiley.svg" alt="smiley" className="w-[70px]"></img>
                         <h2 className="text-[26px] text-center text-white">Our groovy Artists</h2>
@@ -51,7 +77,7 @@ export default function IntroPage() {
                     </div>
                 </div>
             </div>
-            <div className="mb-4 pb-14 lg:flex lg:justify-center">
+            <div className="mb-4 lg:flex lg:justify-center">
                 <MovingText text="What do we do What do we do What do we do What do we do What do we do What do we do "/>
                 <div className="m-2 lg:order-2 lg:mr-40 border border-1 border-black rounded-[30px] bg-white p-10 shadow-md">
                     
@@ -64,23 +90,39 @@ export default function IntroPage() {
                         <img src="/circles_two.svg" alt="two_circles" className="w-[80px]"></img>
                     </div>
                     <div className="lg:w-1/1">
-                       <CardCarousel role="entrepreneur" /> 
+                       <CardCarousel role="entrepreneur"/> 
                     </div>
-                    <div className="lg:w-1/3 flex items-center justify-center pt-8 bg-cover bg-center rounded-bl-[30px] rounded-br-[30px] mt-2">
-                            <img src="/flower_two.svg" alt="lines" className="w-[240px] pb-9"></img>
-                            <img src="/star_one.svg" alt="lines" className="w-[240px] pb-9 absolute rotate-[deg]"></img>
+                    <div className="lg:w-1/3 flex items-center justify-center pt-8 bg-cover bg-center rounded-bl-[30px] rounded-br-[30px] mt-2 border-t border-black">
+                            <img src="/flower_two.svg" alt="lines" className="w-[150px] pb-9"></img>
+                            <img src="/star_one.svg" alt="lines" className="w-[150px] pb-9 absolute rotate-[deg]"></img>
                     </div>
                 </div>
             </div>
-            <div> 
+            <div className="m-2 bg-white border border-1 border-black rounded-[30px] shadow-md p-8"> 
+                <div className="flex gap-2 pb-4">
+                    <img src="/heart_three.svg" alt="heart" className="w-[50px]"></img>
+                    <p>Join a vast pool of talented force that enriches our community and become a valuable member.</p>
+                </div>
+                <div className="flex gap-2 pb-4"> 
+                    <img src="/flower_three.svg" alt="heart" className="w-[50px]"></img>
+                    <p>Connect and share your work with those that might find your potential unequaled.</p>
+                </div>
+                <div className="flex gap-2 pb-4">
+                    <img src="/cyberpunk_eye.svg" alt="heart" className="w-[50px]"></img>
+                    <p>Create your own network circle and enjoy the process of making friendships along the while.</p>
+                </div>
             </div>
             <div>
+                <MovingText text="Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews "/>
                 <TopReviews />
             </div>
-            <div className="w-full">
-                <div className="m-10 lg:ml-40 lg:mt-10">
-                    <h2 className="uppercase text-[50px] ">Our Team</h2>
-                    <h4 className="text-[21px]">Meet the stellar quartet</h4>
+            <div className="m-2 bg-white border border-1 border-black rounded-[30px] shadow-md">
+                <div className="bg-retroRed rounded-tr-[30px] rounded-tl-[30px] p-6 relative border-t-[10px] border-black">
+                    <h2 className="uppercase text-[50px] text-[#1E1E1E] font-bold absolute top-[-11.5%]">Our Team</h2>
+                    <div className="flex gap-6">
+                        <h4 className="text-[21px] text-white pt-8">Meet the stellar quartet of chaotic good</h4>
+                        <img src="/heart_mash.svg" alt="mash_heart" className="w-32"></img>
+                    </div>
                 </div>
                 <MeetOurTeam />
             </div>

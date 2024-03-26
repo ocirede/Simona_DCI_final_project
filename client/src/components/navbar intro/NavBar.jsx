@@ -46,7 +46,7 @@ function NavBar() {
         <div className="flex gap-6 xs:hidden">
           <LanguageChoice />
           {display ? (
-            <X className="w-8 h-8" onClick={() => setDisplay(!display)} />
+            <X className="w-10 h-10" onClick={() => setDisplay(!display)} />
           ) : (
             <Menu
               onClick={() => setDisplay(!display)}

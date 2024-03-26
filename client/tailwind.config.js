@@ -16,9 +16,6 @@ export default {
         xl: "1280px", // Extra large screen size
         xxl: "1563px", // Extra extra large screen size
       },
-      fontFamily: {
-        custom: ['Magic Retro', 'sans-serif'],
-      },
     },
   },
   plugins: [],

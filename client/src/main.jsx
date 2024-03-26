@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 
+import '@fontsource/bungee';
+
 import UserProvider from "./context/userContext.jsx";
 import ArtistsProvider from "./context/artistsContext.jsx";
 import EntrepreneurProvider from "./context/entrepreneurContext.jsx";
