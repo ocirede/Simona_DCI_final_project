@@ -54,13 +54,16 @@ const RatingContextProvider = ({ children }) => {
   };
 
   //get best rated comments
+  //it gets the best rated comments by date
+  //it means it will fetch the best newest ratings
   const getBestRatedComments = async (role = "") => {
     try {
       const response = await axios.get(
         baseURL + `/ratings/get-best-ratings/?role=${role}`
       );
       if (response.data.success) {
-        setBestRatedComments(response.data.bestComments);
+        setBestRatedComments(response.data.ratings);
+        console.log("==>best 4 ratings for role:", response.data.ratings);
       }
     } catch (error) {
       console.log("Error getting the best rated comments", error);

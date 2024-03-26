@@ -79,11 +79,47 @@ export const getBestRatedComments = async (req, res) => {
     if (role) {
       filter.role = { $regex: role, $options: "i" };
     }
-    const users = await Rating.find(filter);
+    const users = await User.find(filter);
 
-    const bestComments = [];
+    if (!users) {
+      return res.status(404).send({
+        success: false,
+        error: "Users not found.",
+      });
+    }
 
-    //not finished yet
+    const findRatingsForRole = [];
+
+    // Iterate over each user for the choosen role
+    for (const user of users) {
+      // Find ratings for the one user
+      const ratings = await Rating.find({ ratedUser: user._id })
+        .populate("rater")
+        .populate("ratedUser");
+
+      // Push the ratings for the current user into the array
+      findRatingsForRole.push(...ratings);
+
+      // Sort the array based on createdAt
+      findRatingsForRole.sort((a, b) => {
+        // Sort if createdAt is not same between 2 ratings(newest first)
+        const createdAtComparison = b.createdAt - a.createdAt;
+        if (createdAtComparison !== 0) {
+          return createdAtComparison;
+        }
+        // If createdAt is the same, sort by ratingNumber
+        return b.ratingNumber - a.ratingNumber;
+      });
+    }
+
+    // Sort the array based on ratingNumber of the ratings
+    findRatingsForRole.sort((a, b) => b.ratingNumber - a.ratingNumber);
+
+    // Store the top 4 ratings in the bestRatingsForRole array
+    //The number can be adjusted
+    const bestRatingsForRole = findRatingsForRole.slice(0, 4);
+
+    res.send({ success: true, ratings: bestRatingsForRole });
   } catch (error) {
     console.error("Error fetching the top comments", error.message);
     res.send({ succsess: false, error: error.message });
