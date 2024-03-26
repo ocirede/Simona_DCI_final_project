@@ -55,7 +55,8 @@ const RatingContextProvider = ({ children }) => {
 
   //get best rated comments
   //it gets the best rated comments by date
-  //it means it will fetch the best newest ratings
+  //it means it will fetch the 4 best newest ratings
+  //the number can be adjusted in backend controller
   //it can accept role or being empty will get the best ratings
   //from all users ignoring the role
   const getBestRatedComments = async (role = "") => {
