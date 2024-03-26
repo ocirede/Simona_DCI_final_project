@@ -3,7 +3,7 @@ import { ArtistsContext } from "../context/artistsContext";
 import { EntrepreneurContext } from "../context/entrepreneurContext";
 import styled from "styled-components";
 import MotionSlider from "./motionSlider";
-import CardElement from "./cards/CardElement";
+import CardElementIntro from "./cards/CardElementIntro";
 
 export default function CardCarousel({ role }) {
   let data = [];
@@ -31,7 +31,7 @@ export default function CardCarousel({ role }) {
         <div className="p-4">
           <MotionSlider>
             {data.map((user, i) => (
-              <CardElement key={i} {...user} />
+              <CardElementIntro key={i} {...user} />
             ))}
           </MotionSlider>
         </div>

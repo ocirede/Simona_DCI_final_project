@@ -9,8 +9,6 @@ export default function RecommendedEntrepreneurs() {
   const { users} = useContext(UserContext)
   const sortedEntrepreneurUsers = users.filter(user => user.role === "entrepreneur").sort((a, b) => b.averageRating - a.averageRating).slice(0,5)
   
-
- 
 const Container = styled.div`
         max-width: 700px; 
         margin: 0 auto; 
