@@ -9,6 +9,11 @@ export default function CommentSection() {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 
+  //The profile id in the strings should be replaced with the
+  //user id that we will get either from params or either from
+  //query when we click on him to open this page
+  //for testing now i importwd it manually
+
   const handleWriteComment = (e) => {
     e.preventDefault();
     addNewRating(user._id, "65f851e75a436b8f1fd61a8f", rating, comment);
