@@ -18,7 +18,7 @@ export default function TopReviews({ reviews }) {
                 <img src="/star.png" alt="star" className="w-[30px]"></img>
                 <img src="/star_empty.png" alt="star" className="w-[30px]"></img>
             </div>
-            <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  commodo consequat.</p>
+            <p className="text-center md:text-[22px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  commodo consequat.</p>
         </div>
     );
 }

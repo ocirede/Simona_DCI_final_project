@@ -1,5 +1,3 @@
-import React from 'react'
-
 function LanguageChoice() {
   return (
     <div className="flex items-center">
