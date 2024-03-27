@@ -5,6 +5,7 @@ import NameTitle from "../components/profile artist/NameTitle";
 import CardSection from "../components/profile artist/CardSection";
 import EditorModal from "../components/profile artist/EditorModal";
 import ShareLinkCard from "../components/profile artist/ShareLinkCard";
+import CommentSection from "../components/profilePageEntrepreneur/CommentSection";
 
 function ProfileArtist() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,15 +35,15 @@ function ProfileArtist() {
           {/* Languages  section*/}
           <CardSection section="Language" />
           {/* Review  section*/}
-          <CardSection section="Review" />
+          <section className="">
+            <CommentSection />
+          </section>
         </section>
         {/* Render the modal if isModalOpen is true */}
         {isModalOpen && <EditorModal onClose={openModal} />}
 
-
         {/* footer to be replaced with the footer from Tyhe */}
         {shareLink && <ShareLinkCard onClose={openShareCard} />}
-
       </main>
     </>
   );
