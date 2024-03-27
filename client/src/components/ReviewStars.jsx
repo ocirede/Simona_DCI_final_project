@@ -1,25 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from "react";
+import starSvg from "../assets/rating_svg/star1.png";
+import fullStarSvg from "../assets/rating_svg/star.png";
+import { RatingContext } from "../context/ratingContext";
 
-export default function StarRating({ onClick }){
-    const [rating, setRating] = useState(0);
+export default function StarRating({ setRating }) {
+  const { ratings } = useContext(RatingContext);
+  const [localRating, setLocalRating] = useState(0);
 
-    const handleStarClick = (index) => {
-        const newRating = index + 1;
-        setRating(newRating === rating ? 0 : newRating);
-        onClick && onClick(newRating);
-    };
+  useEffect(() => {
+    setLocalRating(0);
+  }, [ratings]);
 
-    return (
-        <div className="flex">
-            {[...Array(5)].map((_, index) => (
-                <i
-                    key={index}
-                    className={`fa-solid fa-star cursor-pointer text-[20px] m-1 ${index < rating ? 'text-yellow-500' : 'text-gray-400'}`}
-                    onMouseEnter={() => setRating(index + 1)}
-                    onMouseLeave={() => setRating(0)}
-                    onClick={() => handleStarClick(index)}
-                ></i>
-            ))}
-        </div>
-    );
+  const handleRatingChange = (value) => {
+    setLocalRating(value);
+    setRating(value);
+  };
+
+  return (
+    <div className="flex space-x-2 items-center justify-start">
+      {[1, 2, 3, 4, 5].map((value) => (
+        <img
+          key={value}
+          src={value <= localRating ? fullStarSvg : starSvg}
+          alt={value <= localRating ? "Full Star" : "Empty Star"}
+          className="w-8 h-8 cursor-pointer"
+          onClick={() => handleRatingChange(value)}
+        />
+      ))}
+    </div>
+  );
 }

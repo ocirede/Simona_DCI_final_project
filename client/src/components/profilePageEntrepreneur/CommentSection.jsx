@@ -1,30 +1,93 @@
-import StarRating from "../ReviewStars"
-
+import { useContext, useEffect, useState } from "react";
+import StarRating from "../ReviewStars";
+import { UserContext } from "../../context/userContext";
+import { RatingContext } from "../../context/ratingContext";
+import fullStarSvg from "../../assets/rating_svg/star.png";
 export default function CommentSection() {
-    return (
-        <div className="mb-4">
-            <div className="h-[250px] bg-gray-500 rounded-[20px] pr-4 pl-4 pt-4">
-                <div className="flex justify-between items-center">
-                    <div className="mb-8">
-                    <StarRating />
-                    </div>
-                    <div>
-                        <div
-                            contentEditable="true"
-                            className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-[150px] mr-2"
-                            placeholder="Write your comment here..."
-                        ></div>
-                        <div className="flex mt-2 justify-end">
-                            <button className="mr-2 bg-gray-400 text-white rounded-md py-1 px-4">Post</button>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h3 className="text-[28px] uppercase font-semibold">Comment section</h3>
-                </div>
-            </div>
+  const { user } = useContext(UserContext);
+  const { addNewRating, getRatingsForUer, ratings } = useContext(RatingContext);
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const handleWriteComment = (e) => {
+    e.preventDefault();
+    addNewRating(user._id, "65f851e75a436b8f1fd61a8f", rating, comment);
+    setComment("");
+    setRating(0);
+  };
+
+  useEffect(() => {
+    getRatingsForUer("65f851e75a436b8f1fd61a8f");
+  }, [user]);
+
+  return (
+    <div className="mb-4">
+      <div className=" bg-gray-500 rounded-[20px] pr-4 pl-4 pt-4">
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between align-middle mr-20">
+          <div>
+            <h3 className="text-[28px] uppercase font-semibold">Reviews</h3>
+          </div>
+
+          <StarRating setRating={setRating} />
         </div>
-    );
+
+        <div>
+          <form className="flex" onSubmit={handleWriteComment}>
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className="w-full h-[50px] bg-gray-300 rounded-[50px] p-2 mb-2 align-middle"
+              placeholder="Write your comment..."
+              style={{ resize: "none" }}
+            ></textarea>
+            <button
+              type="submit"
+              className=" text-black py-2 px-4 rounded-[10px]transition duration-300"
+            >
+              WRITE
+            </button>
+          </form>
+        </div>
+        <div style={{ maxHeight: "20rem", overflowY: "auto" }}>
+          {ratings?.map((rating) => (
+            <div key={rating._id} className="items-center mb-4">
+              <div className="border rounded-lg p-4">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    {/* Display rater's photo */}
+                    <img
+                      src={rating.rater.profileImage}
+                      alt="Rater's Photo"
+                      className="w-10 h-10 rounded-full mr-4 object-cover"
+                    />
+                    {/* Display rater's name */}
+                    <p className="font-semibold text-lg">
+                      {rating.rater.address.firstname}
+                    </p>
+                  </div>
+
+                  {/* Display rating with stars */}
+                  <div className="flex items-center">
+                    {[...Array(rating.ratingNumber)].map((_, index) => (
+                      <img
+                        key={index}
+                        src={fullStarSvg}
+                        alt="Full Star"
+                        className="w-4 h-4 mr-1"
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Display comment */}
+                <div className="mt-2">
+                  <p>{rating.comment}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
-
-

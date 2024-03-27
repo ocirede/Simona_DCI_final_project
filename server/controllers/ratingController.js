@@ -63,6 +63,17 @@ export const getRatingsForUser = async (req, res) => {
       .populate("rater")
       .populate("ratedUser");
 
+    // Sort the array based on createdAt
+    ratings.sort((a, b) => {
+      // Sort if createdAt is not same between 2 ratings(newest first)
+      const createdAtComparison = b.createdAt - a.createdAt;
+      if (createdAtComparison !== 0) {
+        return createdAtComparison;
+      }
+      // If createdAt is the same, sort by ratingNumber
+      return b.ratingNumber - a.ratingNumber;
+    });
+
     res.send({ success: true, ratings });
   } catch (error) {
     console.error("Error finding the ratings for this user");

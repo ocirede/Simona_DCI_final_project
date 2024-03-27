@@ -24,14 +24,11 @@ const RatingContextProvider = ({ children }) => {
         body
       );
       if (response.data.success) {
-        setRatings(
-          ratings
-            ? [...ratings, response.data.newRating]
-            : [response.data.newRating]
-        );
+        setRatings((prevRatings) => {
+          const newRating = response.data.newRating;
+          return prevRatings ? [newRating, ...prevRatings] : [newRating];
+        });
       }
-
-      console.log("===>updated ratings for this user", ratings);
     } catch (error) {
       console.log("Error submitting the new comment", error);
     }
@@ -76,6 +73,7 @@ const RatingContextProvider = ({ children }) => {
   return (
     <RatingContext.Provider
       value={{
+        ratings,
         bestRatedComments,
         addNewRating,
         getRatingsForUer,
