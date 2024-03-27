@@ -7,7 +7,6 @@ import "./index.css";
 import UserProvider from "./context/userContext.jsx";
 import ArtistsProvider from "./context/artistsContext.jsx";
 import EntrepreneurProvider from "./context/entrepreneurContext.jsx";
-
 import { FormVisibilityProvider } from "./context/formVisibility.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -16,9 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <UserProvider>
         <ArtistsProvider>
           <EntrepreneurProvider>
-            <FormVisibilityProvider>
-              <App />
-            </FormVisibilityProvider>
+              <FormVisibilityProvider>
+                <App />
+              </FormVisibilityProvider>
           </EntrepreneurProvider>
         </ArtistsProvider>
       </UserProvider>

@@ -18,10 +18,11 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
-
-  const navigate = useNavigate();
+  const [connections, setConnections] = useState([])
+const navigate = useNavigate();
 
   const baseURL = import.meta.env.VITE_BASE_URL;
+
 
   // fetching email-remember-checkbox
   useEffect(() => {
@@ -72,8 +73,8 @@ const UserProvider = ({ children }) => {
    
     } catch (error) {
       setResponse(true)
-      if (Array.isArray(error.response.data.message)) {
-        setValidationErrors(error.response.data.message);
+      if (Array.isArray(error.response?.data?.message)) {
+        setValidationErrors(error.response?.data?.message);
       } else {
         const error = [
           {
@@ -110,24 +111,8 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  // reset-update password
 
-  const resetPassword = (e) => {
-    e.preventDefault();
-    const password = e.target.password.value;
-    const reType = e.target.retype.value;
 
-    if (reType !== password) {
-      alert("password are not matching");
-      return;
-    }
-
-    const body = {
-      password: e.target.password.value,
-    };
-
-    console.log(body);
-  };
 
   //Register backround handling
   const userRoleChoice = (role) => {
@@ -338,7 +323,6 @@ const logout = () => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-        resetPassword,
         sendOrCancelRequest,
         acceptRequest,
         rejectRequest,

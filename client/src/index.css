@@ -9,16 +9,22 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
 
   /* background-color: #525252;  */
-
-
-
 }
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* send messages chat*/
+.sent-message {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.received-message {
+  display: flex;
+  justify-content: flex-start;
+}
 
 /* network animations*/
 

@@ -1,4 +1,5 @@
 import User from "../models/userSchema.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
@@ -98,7 +99,6 @@ export const updatePassword = async (req, res) => {
   try {
     const token = jwt.verify(req.params.token, process.env.JWT_SECTER_KEY);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(req.params.token);
     if (token) {
       await User.findByIdAndUpdate(
         token.id,
@@ -354,7 +354,6 @@ export const signInHandling = async (req, res) => {
     }
     const { password, email } = value;
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -375,7 +374,7 @@ export const signInHandling = async (req, res) => {
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
-    res.json({success: true,  token, user });
+    res.json({ success: true, token, user });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -409,7 +408,24 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
+};
 
+export const findConnectionsForCurrentUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId).populate("connections");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ success: true, connections: user.connections });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching connections", error: error.message });
+  }
 };
 
 //logged user
@@ -417,11 +433,13 @@ export const loggedUser = async (req, res) => {
   try {
     const userId = req.user.id;
     // const userId = req.params.id;
-    const user = await User.findOne({ _id: userId })
-    await user.populate("sentRequests");
-    await user.populate("pendingRequests");
-    await user.populate("connections");
+    const user = await User.findOne({ _id: userId });
+    await user?.populate("sentRequests");
+    await user?.populate("pendingRequests");
+    await user?.populate("connections");
     res.send({ success: true, user });
+    // console.log("logged user", user)
+
   } catch (error) {
     console.log("Error logged user:", error.message);
     res.status(500).send({ success: false, error: error.message });
@@ -431,10 +449,12 @@ export const loggedUser = async (req, res) => {
 //getting all the users in the base
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find()
-    
-    res.json({ success: true, users })
+    const users = await User.find();
+
+    res.json({ success: true, users });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching users", error: error.message });
   }
-}
+};
