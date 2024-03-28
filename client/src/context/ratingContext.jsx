@@ -63,7 +63,7 @@ const RatingContextProvider = ({ children }) => {
       );
       if (response.data.success) {
         setBestRatedComments(response.data.ratings);
-        console.log("==>best 4 ratings for role:", response.data.ratings);
+        console.log("==>best 3 ratings for role:", response.data.ratings);
       }
     } catch (error) {
       console.log("Error getting the best rated comments", error);

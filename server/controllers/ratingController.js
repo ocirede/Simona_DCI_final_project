@@ -128,7 +128,7 @@ export const getBestRatedComments = async (req, res) => {
 
     // Store the top 4 ratings in the bestRatingsForRole array
     //The number can be adjusted
-    const bestRatingsForRole = findRatingsForRole.slice(0, 4);
+    const bestRatingsForRole = findRatingsForRole.slice(0, 3);
 
     res.send({ success: true, ratings: bestRatingsForRole });
   } catch (error) {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import starSvg from "../assets/rating_svg/star1.png";
-import fullStarSvg from "../assets/rating_svg/star.png";
-import { RatingContext } from "../context/ratingContext";
+import starSvg from "../../assets/rating_svg/star1.png";
+import fullStarSvg from "../../assets/rating_svg/star.png";
+import { RatingContext } from "../../context/ratingContext";
 
 export default function StarRating({ setRating }) {
   const { ratings } = useContext(RatingContext);

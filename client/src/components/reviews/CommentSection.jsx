@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import StarRating from "../ReviewStars";
+import StarRating from "./ReviewStars";
 import { UserContext } from "../../context/userContext";
 import { RatingContext } from "../../context/ratingContext";
 import fullStarSvg from "../../assets/rating_svg/star.png";
@@ -27,7 +27,7 @@ export default function CommentSection() {
 
   return (
     <div className="mb-4">
-      <div className=" bg-gray-500 rounded-[20px] pr-4 pl-4 pt-4">
+      <div className=" bg-white-500 rounded-[20px] pr-4 pl-4 pt-4 border border-black">
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between align-middle mr-20">
           <div>
             <h3 className="text-[28px] uppercase font-semibold">Reviews</h3>
@@ -37,11 +37,11 @@ export default function CommentSection() {
         </div>
 
         <div>
-          <form className="flex" onSubmit={handleWriteComment}>
+          <form className="flex mb-2" onSubmit={handleWriteComment}>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="w-full h-[50px] bg-gray-300 rounded-[50px] p-2 mb-2 align-middle"
+              className="w-full h-[50px] bg-white-300 rounded-[50px] p-2  align-middle border border-black"
               placeholder="Write your comment..."
               style={{ resize: "none" }}
             ></textarea>
