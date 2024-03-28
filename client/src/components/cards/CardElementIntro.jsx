@@ -15,7 +15,7 @@ const { firstname, lastname } = address;
       <div className="bg-gray-300 lg:h-[100px] h-[70px] flex items-center justify-center relative bg-retroBlue">
         <div className="w-[120px] h-[120px] relative">
           <img
-            className="lg:w-full lg:h-full w-20 h-20 rounded-full bg-gray-700 border-2 border-gray-800 bg-center absolute top-14 left-5"
+            className="lg:w-full lg:h-full w-20 h-20 rounded-full bg-gray-700 border-2 border-gray-800 bg-center absolute top-14 left-5 lg:left-0"
             style={{
               backgroundImage: `url('${profileImage}')`,
               backgroundPosition: "center",
