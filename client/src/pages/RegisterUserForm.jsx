@@ -154,15 +154,6 @@ const RegisterUserForm = () => {
                   <FormSubmitButtonLoading name="Loading" />
                 )}
               </div>
-              <p className="text-sm text-gray-600">
-                Already have an account?{" "}
-                <NavLink
-                  to="#"
-                  className="font-medium text-primary-600 hover:underline"
-                >
-                  Login here
-                </NavLink>
-              </p>
             </form>
           </div>
         </div>

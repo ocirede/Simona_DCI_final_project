@@ -4,11 +4,11 @@ const FormSubmitButton = ({ name, onClick, disabled }) => {
       type="submit"
       onClick={onClick}
       disabled={disabled}
-      className={`mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full transition-transform duration-100 ${
+      className={`mt-2 x text-black border border-black font-bold py-1 px-4 rounded-full w-full transition-transform duration-100 ${
         disabled ? "transform-none" : "transform-gpu active:scale-95"
       }`}
     >
-      {name}
+      <p className="font-custom text-2xl">{name}</p>
     </button>
   );
 };
