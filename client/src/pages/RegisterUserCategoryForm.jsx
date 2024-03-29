@@ -62,7 +62,6 @@ const RegisterUserCategoryForm = () => {
 
   //The categories if necessary can be stored in another file
   //and imported here
- 
 
   return (
     <>
@@ -95,7 +94,7 @@ const RegisterUserCategoryForm = () => {
               </label>
             ))}
           </div>
-          <FormSubmitButton name="Next" />
+          <FormSubmitButton name="NEXT" />
         </form>
         {showLimitChoiseMessage && (
           <AlertMessageWarning text="You've reached the choice limit!" />

@@ -65,7 +65,6 @@ const UserProvider = ({ children }) => {
         setValidationErrors(null);
         console.log(response.data.success);
       }
-
     } catch (error) {
       setResponse(true);
       if (Array.isArray(error.response.data.message)) {

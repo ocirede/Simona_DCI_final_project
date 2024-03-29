@@ -348,9 +348,7 @@ export const signInHandling = async (req, res) => {
 //Update profile image
 /*
  * You may think you know what the following code does.
- * But you dont. Trust me.
- * It works with magic
- * Same for the updateProfileBackground
+ * But you dont. Trust me
  */
 export const updateProfileImage = async (req, res) => {
   const { userId } = req.params;
@@ -499,6 +497,4 @@ export const getAllUsers = async (req, res) => {
       .status(500)
       .json({ message: "Error fetching users", error: error.message });
   }
-
 };
-

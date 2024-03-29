@@ -4,7 +4,11 @@ import NameTitle from "../components/profile artist/NameTitle";
 import CardSection from "../components/profile artist/CardSection";
 import EditorModal from "../components/profile artist/EditorModal";
 import ShareLinkCard from "../components/profile artist/ShareLinkCard";
+
+import CommentSection from "../components/reviews/CommentSection";
+
 import { useFormVisibility } from "../components/profilePageEntrepreneur/customHook/FormVisibility";
+
 
 
 function ProfileArtist() {
@@ -37,13 +41,17 @@ function ProfileArtist() {
           {/* Languages  section*/}
           <CardSection section="Language" />
           {/* Review  section*/}
-          <CardSection section="Review" />
+          <section className="">
+            <CommentSection />
+          </section>
         </section>
+
         {/* Render the modal if formVisibility.about is true */}
         {formVisibility.about && <EditorModal onClose={() => toggleFormVisibility("about")} />}
         
         {/* Render the shareLink card if formVisibility.shareLink is true */}
         {formVisibility.shareLink && <ShareLinkCard onClose={openShareCard} />}
+
       </main>
     </>
   );

@@ -7,6 +7,7 @@ export default {
         retroRed: "#DF3C5F",
         retroBlue: "#6F9BD1",
         cobaltBlue: "#224193"
+
       },
       screens: {
         xs: "480px", // Custom extra small screen size
@@ -15,6 +16,9 @@ export default {
         lg: "1024px", // Large screen size
         xl: "1280px", // Extra large screen size
         xxl: "1563px", // Extra extra large screen size
+      },
+      fontFamily: {
+        custom: ["Magic Retro", "sans-serif"],
       },
     },
   },
