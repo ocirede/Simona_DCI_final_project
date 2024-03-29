@@ -19,7 +19,7 @@ const DragComponent = ({ children, constraints }) => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       style={{
-        cursor: 'grab',
+        cursor: isDragging ? 'grabbing' : 'grab',
         width: 'fit-content', 
         height: 'fit-content'
       }}

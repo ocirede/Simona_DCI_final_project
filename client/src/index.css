@@ -6,9 +6,8 @@
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
-
-  /* background-color: #525252;  */
+  font-family: "DM Sans", sans-serif;
+  background-image: url("/background_paper.jpg");
 }
 
 .header-bg {
@@ -52,4 +51,34 @@ body {
 
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
+}
+
+@font-face {
+  font-family: 'Magic Retro';
+  src: url('/fonts/MagicRetro.ttf') format('truetype');
+}
+
+
+/* Glowing effect on hover */
+.glow-border {
+  transition: box-shadow 0.5s;
+}
+
+.glow-border:hover {
+  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #DF3C5F, 0 0 10px #DF3C5F, 0 0 20px #DF3C5F;
+}
+
+.text-glow {
+  transition: text-shadow 0.5s; 
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
+}
+
+
+
+/* Special font */
+.simona {
+  font-family: 'Bungee', system-ui;
 }

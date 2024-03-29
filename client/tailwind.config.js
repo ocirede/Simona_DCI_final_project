@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        customColor: "#A0523D", // Here add custom colors
+        retroRed: "#DF3C5F",
+        retroBlue: "#6F9BD1",
+        cobaltBlue: "#224193"
       },
       screens: {
         xs: "480px", // Custom extra small screen size
