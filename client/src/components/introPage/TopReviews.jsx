@@ -1,6 +1,7 @@
 import fullStarSvg from "../../assets/rating_svg/star.png";
 
 export default function TopReviews({ reviews }) {
+
   return (
     <div className="bg-cobaltBlue pb-4 rounded-2xl">
       <h2 className="uppercase text-[40px] mb-5 mt-10 pt-4 text-center">
@@ -19,6 +20,7 @@ export default function TopReviews({ reviews }) {
             ))}
           </div>
           <p className="mt-2 text-white">{review.comment}</p>
+
         </div>
       ))}
     </div>

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import axios from "../config/axios.js";
 
 export const UserContext = createContext();
@@ -17,8 +18,10 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+  const [aboutText, setAboutText] = useState('');
 
   const navigate = useNavigate();
+
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // fetching email-remember-checkbox
@@ -28,6 +31,7 @@ const UserProvider = ({ children }) => {
       setEmail(storedEmail);
     }
   }, []);
+
   //Sign-in function
   const authenticationHandler = async (e) => {
     setValidationErrors(null);
@@ -43,6 +47,7 @@ const UserProvider = ({ children }) => {
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       }
+
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
 
@@ -74,6 +79,7 @@ const UserProvider = ({ children }) => {
       }
     }
   };
+
   // set true or false the checkbox
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
@@ -118,10 +124,11 @@ const UserProvider = ({ children }) => {
     console.log(body);
   };
 
-  //Register backround handling
+  //Register background handling
   const userRoleChoice = (role) => {
     setUserRole(role);
   };
+
   //Register user
   const registerUser = async (email, password, role, categories) => {
     setValidationErrors(null);
@@ -133,6 +140,7 @@ const UserProvider = ({ children }) => {
         role,
         categories,
       });
+
       if (response.data.success) {
         setResponse(true);
         localStorage.removeItem("userRegisterData");
@@ -361,6 +369,16 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // Profile Page functions
+  const saveAboutText = async () => {
+    try {
+        await axios.post(baseURL + `/profile/user/${user.id}/about`, { about: aboutText });
+    } catch (error) {
+        console.error('Error saving about text:', error);
+    }
+  };
+
+
   /**
    * For the brave souls who get this far: You are the chosen ones,
    * the valiant knights of programming, without rest,
@@ -388,8 +406,6 @@ const UserProvider = ({ children }) => {
         setUserRole,
         userRoleChoice,
         registerUser,
-        setUserRole,
-        userRoleChoice,
         authenticationHandler,
         handleRememberMeChange,
         setPassword,
@@ -407,10 +423,12 @@ const UserProvider = ({ children }) => {
         updateUser,
         updateProfileImage,
         updateProfileBackground,
+        saveAboutText,
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
+
 export default UserProvider;

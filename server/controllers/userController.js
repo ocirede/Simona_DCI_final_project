@@ -114,43 +114,6 @@ export const updatePassword = async (req, res) => {
   }
 };
 
-//get Artists
-export const getArtists = async (req, res) => {
-  const { role } = req.query;
-
-  try {
-    let filter = {};
-    if (role) {
-      filter.role = { $regex: role, $options: "i" };
-    }
-
-    const artists = await User.find(filter);
-
-    res.send({ success: true, artists });
-  } catch (error) {
-    console.error("Error fetching the artists", error.message);
-    res.send({ succsess: false, error: error.message });
-  }
-};
-
-// fetching entrepeneurs
-export const getEntrepreneurs = async (req, res) => {
-  const { role } = req.query;
-
-  try {
-    let filter = {};
-    if (role) {
-      filter.role = { $regex: role, $options: "i" };
-    }
-
-    const entrepreneurs = await User.find(filter);
-
-    res.send({ success: true, entrepreneurs });
-  } catch (error) {
-    console.error("Error fetching the Entrepreneurs", error.message);
-    res.send({ succsess: false, error: error.message });
-  }
-};
 
 //Send connect request
 export const sendConnectionRequest = async (req, res) => {
