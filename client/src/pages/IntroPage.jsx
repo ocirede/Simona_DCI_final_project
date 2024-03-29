@@ -1,62 +1,15 @@
 import CardCarousel from "../components/CardCarousel";
 import MeetOurTeam from "../components/introPage/MeetOurTeam";
 import TopReviews from "../components/introPage/TopReviews";
-import { useEffect, useRef, useState } from "react";
-import LanguageChoice from "../components/navbar intro/LanguageChoice";
-import { Menu, X } from "lucide-react";
 import MovingText from "../components/framerMotionAnimations/MovingText";
-import DropMenuIntro from "../components/navbar intro/DropMenuIntro";
-import { NavLink } from "react-router-dom";
-import Button from "../components/navbar intro/Button";
+import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
 
 export default function IntroPage() { 
-    const divRef = useRef(null);
-    const [display, setDisplay] = useState(false);
-    const [showMenu, setShowMenu] = useState(false);
-  
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 400) {
-          setShowMenu(true);
-        } else {
-          setShowMenu(false);
-        }
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-  
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }, []);
-  
+   
       return (
           <div>
               <div className="lg:pl-20 lg:pr-20">
-                  <div className="m-2 mt-4 border-black border border-1 shadow-md rounded-[30px] bg-white border-b-[20px] h-[300px] md:h-[500px] relative flex items-start md:justify-between" ref={divRef}>  
-                      <h3 className="text-[28px] text-[#1E1E1E] font-bold p-10 md:text-[40px] lg:text-[52px] lg:p-[70px]">Your next fateful connection</h3>
-                      <div className="flex gap-3 items-center m-10 mt-11 md:mt-[21px]">
-                          <LanguageChoice /> 
-                          {display ? (
-                              <X className="w-8 h-8 cursor-pointer absolute right-10 top-10 z-10" onClick={() => setDisplay(!display)} />
-                          ) : (
-                              <Menu
-                              onClick={() => setDisplay(!display)}
-                              className="w-8 h-8 xs:hidden cursor-pointer"
-                              />
-                          )}
-                          {display && <DropMenuIntro />}
-                      </div>
-                      <div className="hidden xs:flex justify-end items-center flex-grow p-6 gap-5">
-                        <NavLink to="/register-questions">
-                            <Button name="Register" />
-                        </NavLink>
-                        <NavLink to="/sign-in">
-                            <Button name="Sign-in" />
-                        </NavLink>
-                      </div>
-                      <h1 className="uppercase text-[80px] md:text-[150px] lg:text-[200px] text-[#1E1E1E] absolute top-[69%] md:top-[66%] left-[7%] md:left-[4%] lg:top-[54%] simona">Simona</h1>
-                </div>
+                <SimonaIntroSection />
                 <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[650px] md:h-fit border-b-8">
                     <div className="bg-cobaltBlue rounded-tl-[30px] rounded-tr-[30px] flex p-6 justify-between items-center pr-8 pl-8 md:pr-24 md:pl-24">
                         <img src="/smiley.svg" alt="smiley" className="w-[70px] lg:w-[150px] lg:ml-[120px]"></img>

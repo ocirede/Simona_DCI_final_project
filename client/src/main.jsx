@@ -7,18 +7,12 @@ import "./index.css";
 import '@fontsource/bungee';
 
 import UserProvider from "./context/userContext.jsx";
-import ArtistsProvider from "./context/artistsContext.jsx";
-import EntrepreneurProvider from "./context/entrepreneurContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ArtistsProvider>
-          <EntrepreneurProvider>
-              <App />
-          </EntrepreneurProvider>
-        </ArtistsProvider>
+        <App />  
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

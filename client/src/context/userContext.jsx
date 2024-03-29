@@ -18,6 +18,7 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+  const [aboutText, setAboutText] = useState('');
 
   const navigate = useNavigate();
 
@@ -124,7 +125,7 @@ const UserProvider = ({ children }) => {
     console.log(body);
   };
 
-  //Register backround handling
+  //Register background handling
   const userRoleChoice = (role) => {
     setUserRole(role);
   };
@@ -369,6 +370,16 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // Profile Page functions
+  const saveAboutText = async () => {
+    try {
+        await axios.post(baseURL + `/profile/user/${user.id}/about`, { about: aboutText });
+    } catch (error) {
+        console.error('Error saving about text:', error);
+    }
+  };
+
+
   /**
    * For the brave souls who get this far: You are the chosen ones,
    * the valiant knights of programming, without rest,
@@ -413,6 +424,7 @@ const UserProvider = ({ children }) => {
         updateUser,
         updateProfileImage,
         updateProfileBackground,
+        saveAboutText,
       }}
     >
       {children}
