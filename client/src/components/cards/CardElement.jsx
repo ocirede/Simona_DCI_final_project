@@ -11,10 +11,11 @@ const { firstname, lastname } = address;
 
   return (
     <div
+
       className="w-[220px] h-[390px] rounded-lg overflow-hidden shadow-lg bg-white "
       style={{ minWidth: "240px" }}
     >
-      <div className="bg-gray-300 h-[100px] flex items-center justify-center relative">
+      <div className="bg-retroBlue h-[100px] flex items-center justify-center relative">
         <div className="w-[120px] h-[120px] relative">
           <img
             className="w-full h-full rounded-full bg-gray-700 border-4 border-gray-800 bg-center absolute top-12"
@@ -37,8 +38,10 @@ const { firstname, lastname } = address;
         {categories?.map((category, index) => (
           <PlayfulTag
             key={index}
-            text={category}
-          />
+            className="bg-retroBlue rounded-full px-3 py-1 text-sm  text-white"
+          >
+            {category}
+
         ))}
       </div>
     </div>

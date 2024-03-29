@@ -57,10 +57,10 @@ const SendCancelRequest = ({ receiverId }) => {
                       ) : (
                         <button
                           type="button"
-                          className="text-sm uppercase"
+                          className="text-sm uppercase text-retroRed"
                           onClick={handleSendOrCancelRequest}
                         >
-                          <i className="fa-solid fa-plus"></i> Connect
+                          <i className="fa-solid fa-plus "></i> Connect
                         </button>
                       )}
                     </>

@@ -6,8 +6,9 @@ export default {
       colors: {
         retroRed: "#DF3C5F",
         retroBlue: "#6F9BD1",
-        cobaltBlue: "#224193"
-
+        lightBlue: "#8CAFDA",
+        cobaltBlue: "#224193",
+        borderBlue: "#597CA7"
       },
       screens: {
         xs: "480px", // Custom extra small screen size
@@ -20,6 +21,7 @@ export default {
       fontFamily: {
         custom: ["Magic Retro", "sans-serif"],
       },
+      
     },
   },
   plugins: [],

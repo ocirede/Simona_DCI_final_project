@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="237.59953mm"
+   height="253.12334mm"
+   viewBox="0 0 237.59953 253.12334"
+   version="1.1"
+   id="svg18734"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="crescent_shape.svg">
+  <defs
+     id="defs18728" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="472.83768"
+     inkscape:cy="475.48617"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="1107"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata18731">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(19.271637,-21.515715)">
+    <path
+       id="path16864"
+       d="M -19.271637,21.515715 V 274.63905 c 66.31063,-4.15453 118.79979,-59.21748 118.79979,-126.56167 0,-67.344185 -52.48916,-122.407135 -118.79979,-126.561665"
+       style="clip-rule:evenodd;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.18811703;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path16866"
+       d="M 99.528153,21.515715 V 274.63905 C 165.81848,270.48452 218.32789,215.42157 218.32789,148.07738 218.32789,80.733195 165.81848,25.670245 99.528153,21.515715"
+       style="clip-rule:evenodd;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.18811703;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
