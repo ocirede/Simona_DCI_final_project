@@ -5,7 +5,8 @@ import connectDB from "./config/mongo-db.js";
 import userRoutes from "./routes/userRouter.js";
 import ratingRoutes from "./routes/ratingRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
-import emailRoutes from "./routes/emailRoutes.js"
+import emailRoutes from "./routes/emailRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 const app = express();
 
@@ -27,6 +28,7 @@ connectDB();
 app.use("/users", userRoutes);
 app.use("/ratings", ratingRoutes);
 app.use("/posts", postRoutes);
+app.use("/profile", profileRoutes)
 // To user send email
 app.use('/send-email', emailRoutes);
 

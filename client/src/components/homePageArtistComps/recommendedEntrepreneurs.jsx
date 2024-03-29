@@ -4,13 +4,7 @@ import CardElement from "../cards/CardElement.jsx";
 import styled from "styled-components";
 import MotionSlider from "../../components/motionSlider"
 
-export default function RecommendedEntrepreneurs() {
-  const [showRecommendedEntrepreneurs, setShowRecommendedEntrepreneurs] = useState(false);
-  const { users} = useContext(UserContext)
-  const sortedEntrepreneurUsers = users.filter(user => user.role === "entrepreneur").sort((a, b) => b.averageRating - a.averageRating).slice(0,5)
-  
-
- 
+// Defining the styled component outside for better optimization
 const Container = styled.div`
         max-width: 700px; 
         margin: 0 auto; 
@@ -18,6 +12,12 @@ const Container = styled.div`
             max-width: 90%; 
         }
         `
+
+export default function RecommendedEntrepreneurs() {
+  const [showRecommendedEntrepreneurs, setShowRecommendedEntrepreneurs] = useState(false);
+  const { users} = useContext(UserContext)
+  const sortedEntrepreneurUsers = users.filter(user => user.role === "entrepreneur").sort((a, b) => b.averageRating - a.averageRating).slice(0,5)
+  
   return (
     <>
     

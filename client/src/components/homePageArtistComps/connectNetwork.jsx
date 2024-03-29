@@ -10,6 +10,7 @@ export default function ConnectNetwork() {
       const [currentView, setCurrentView] = useState("");
       const { user} = useContext(UserContext)
 
+
   return  (
     <>
      <div className="ml-3 mr-3 flex items-center justify-center p-4  bg-blue-100 cursor-pointer min-h-[200px] mx-auto rounded-2xl   shadow-lg border border-b-4 border-black md:w-1/4" onClick={() => setShowConnectNetwork(!showConnectNetwork)}>
