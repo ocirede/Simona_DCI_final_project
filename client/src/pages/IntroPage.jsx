@@ -4,6 +4,7 @@ import TopReviews from "../components/introPage/TopReviews";
 import MovingText from "../components/framerMotionAnimations/MovingText";
 import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
 import { RatingContext } from "../context/ratingContext";
+import { useContext, useEffect } from "react";
 
 export default function IntroPage() {
   const { bestRatedComments, getBestRatedComments } = useContext(RatingContext);
