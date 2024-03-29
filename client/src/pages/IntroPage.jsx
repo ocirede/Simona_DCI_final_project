@@ -3,8 +3,15 @@ import MeetOurTeam from "../components/introPage/MeetOurTeam";
 import TopReviews from "../components/introPage/TopReviews";
 import MovingText from "../components/framerMotionAnimations/MovingText";
 import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
+  import { RatingContext } from "../context/ratingContext";
 
 export default function IntroPage() { 
+  const { bestRatedComments, getBestRatedComments } = useContext(RatingContext);
+  
+   useEffect(() => {
+    getBestRatedComments();
+  }, []);
+
    
       return (
           <div>
@@ -63,7 +70,7 @@ export default function IntroPage() {
             </div>
             <div>
                 <MovingText text="Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews "/>
-                <TopReviews />
+                <TopReviews reviews={bestRatedComments} />
             </div>
             <div className="m-2 bg-white border border-1 border-black rounded-[30px] border-b-8 lg:ml-20 lg:mr-20">
                 <div className="bg-retroRed rounded-tr-[30px] rounded-tl-[30px] p-6 relative border-t-[10px] border-black md:pb-10 lg:text-[28px] lg:pl-20">
@@ -75,6 +82,7 @@ export default function IntroPage() {
                 </div>
                 <MeetOurTeam />
             </div>
-        </div>
-    );
+
+       
+  );
 }

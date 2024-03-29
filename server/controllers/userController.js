@@ -114,44 +114,6 @@ export const updatePassword = async (req, res) => {
   }
 };
 
-// fetching artists
-// //get Artists
-// export const getArtists = async (req, res) => {
-//   const { role } = req.query;
-
-//   try {
-//     let filter = {};
-//     if (role) {
-//       filter.role = { $regex: role, $options: "i" };
-//     }
-
-//     const artists = await User.find(filter);
-
-//     res.send({ success: true, artists });
-//   } catch (error) {
-//     console.error("Error fetching the artists", error.message);
-//     res.send({ succsess: false, error: error.message });
-//   }
-// };
-
-// // fetching entrepeneurs
-// export const getEntrepreneurs = async (req, res) => {
-//   const { role } = req.query;
-
-//   try {
-//     let filter = {};
-//     if (role) {
-//       filter.role = { $regex: role, $options: "i" };
-//     }
-
-//     const entrepreneurs = await User.find(filter);
-
-//     res.send({ success: true, entrepreneurs });
-//   } catch (error) {
-//     console.error("Error fetching the Entrepreneurs", error.message);
-//     res.send({ succsess: false, error: error.message });
-//   }
-// };
 
 //Send connect request
 export const sendConnectionRequest = async (req, res) => {
@@ -385,9 +347,7 @@ export const signInHandling = async (req, res) => {
 //Update profile image
 /*
  * You may think you know what the following code does.
- * But you dont. Trust me.
- * It works with magic
- * Same for the updateProfileBackground
+ * But you dont. Trust me
  */
 export const updateProfileImage = async (req, res) => {
   const { userId } = req.params;
@@ -536,6 +496,4 @@ export const getAllUsers = async (req, res) => {
       .status(500)
       .json({ message: "Error fetching users", error: error.message });
   }
-
 };
-
