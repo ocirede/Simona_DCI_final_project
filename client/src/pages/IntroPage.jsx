@@ -1,6 +1,11 @@
 import CardCarousel from "../components/CardCarousel";
 import MeetOurTeam from "../components/introPage/MeetOurTeam";
 import TopReviews from "../components/introPage/TopReviews";
+
+import { useTranslation } from 'react-i18next';
+
+
+  
 import MovingText from "../components/framerMotionAnimations/MovingText";
 import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
   import { RatingContext } from "../context/ratingContext";
@@ -13,6 +18,8 @@ export default function IntroPage() {
   }, []);
 
    
+       const { t } = useTranslation();
+
       return (
           <div>
               <div className="lg:pl-20 lg:pr-20">
