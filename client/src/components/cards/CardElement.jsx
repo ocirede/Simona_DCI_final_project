@@ -12,10 +12,10 @@ const { firstname, lastname } = address;
 
   return (
     <div
-      className="w-[220px] rounded-lg overflow-hidden shadow-lg bg-white "
+      className="w-[220px] rounded-lg overflow-hidden shadow-lg border border-black bg-white "
       style={{ minWidth: "250px" }}
     >
-      <div className="bg-gray-300 h-[100px] flex items-center justify-center relative">
+      <div className="bg-retroBlue h-[100px] flex items-center justify-center relative">
         <div className="w-[120px] h-[120px] relative">
           <img
             className="w-full h-full rounded-full object-contain bg-gray-700 border-4 border-gray-800 bg-center absolute top-12"
@@ -38,7 +38,7 @@ const { firstname, lastname } = address;
         {categories?.map((category, index) => (
           <span
             key={index}
-            className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+            className="bg-retroBlue rounded-full px-3 py-1 text-sm  text-white"
           >
             {category}
           </span>

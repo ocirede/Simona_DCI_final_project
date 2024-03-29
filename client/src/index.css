@@ -17,6 +17,7 @@ body {
   background-size: cover;
 }
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,6 +47,7 @@ body {
   }
 }
 
+/*//////////////////////////////issa*/
 .slide-in-left {
   animation: slideInLeft 1s ease-out forwards;
 }
@@ -53,3 +55,12 @@ body {
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
 }
+.placeholder-xs::placeholder {
+  font-size: 0.75rem;
+ }
+ .vertical-text {
+  transform: rotate(-90deg);
+  transform-origin: left top;
+  white-space: nowrap;
+}
+

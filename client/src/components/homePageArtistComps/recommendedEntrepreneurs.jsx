@@ -20,20 +20,25 @@ const Container = styled.div`
         `
   return (
     <>
-        <div className="flex items-center justify-center p-4 border-b-2 bg-purple-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowRecommendedEntrepreneurs(!showRecommendedEntrepreneurs)}>Recommended Entrepreneurs</div>
+    
+
+  
+        <div className=" relative mr-3 ml-3 flex items-center justify-center p-4  bg-retroRed min-h-[200px] mx-auto rounded-2xl shadow-lg border border-b-4 border-black md:w-1/4  cursor-pointer" onClick={() => setShowRecommendedEntrepreneurs(!showRecommendedEntrepreneurs)}>Recommended Entrepreneurs</div>
+       
             {showRecommendedEntrepreneurs && (
-            <Container>
-            <div className="p-4">
-                <h2 className="text-lg font-bold mt-10 mb-10">Recommended Entrepreneurs</h2>
-                <MotionSlider>
+              <div className=" relative overflow-hidden border border-b-4 border-black rounded-2xl shadow-lg  ">
+                  <h2 className=" text-2xl font-bold h-[100px] rounded-l-2xl rounded-r-2xl uppercase  vertical-text bg-cobaltBlue absolute z-50 text-center w-full bottom-[-110px] left-0 ">Top five</h2>
+            <Container >
+              
+                <MotionSlider >
                 {sortedEntrepreneurUsers?.map((user, i) => (
-                <CardElement key={i} {...user}/>
+                <CardElement  key={i} {...user}/>
                     ))}
                 </MotionSlider>
-            </div>
+            
             </Container>
+            </div>
             )}
-        
     </>
   )
 }

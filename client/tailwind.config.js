@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        customColor: "#A0523D", // Here add custom colors
+        retroRed: "#DF3C5F",
+        retroBlue: "#6F9BD1",
+        lightBlue: "#8CAFDA",
+        cobaltBlue: "#224193",
+        borderBlue: "#597CA7"
       },
       screens: {
         xs: "480px", // Custom extra small screen size
@@ -14,6 +18,7 @@ export default {
         xl: "1280px", // Extra large screen size
         xxl: "1563px", // Extra extra large screen size
       },
+      
     },
   },
   plugins: [],

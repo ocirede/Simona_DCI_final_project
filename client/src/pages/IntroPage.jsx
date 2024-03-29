@@ -5,8 +5,11 @@ import TopReviews from "../components/introPage/TopReviews";
 import { ArtistsContext } from "../context/artistsContext";
 import { EntrepreneurContext } from "../context/entrepreneurContext";
 import DragComponent from "../components/framerMotionAnimations/DragNDrop";
+import { useTranslation } from 'react-i18next';
 
 export default function IntroPage() {
+    const { t } = useTranslation();
+
     // only to simulate the rating, change later
     const reviews = [
         { rating: 5, comment: "An amazing dude to work with. His professionalism was shown through the smallest of details, delivering the finishing product with ease." },
@@ -27,6 +30,7 @@ export default function IntroPage() {
                  {/* an example for draggable for now  */}
                     <DragComponent constraints={constraints}>
                         <h1 className="uppercase text-[90px]">Simona</h1>
+                        <h1>{t('WelcomeMessage')}</h1>
                     </DragComponent>
                     <h3 className="text-[48px]">Your next fateful connection</h3>
                     <div className="mt-8">

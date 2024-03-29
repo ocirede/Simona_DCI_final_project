@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="134.38902mm"
+   height="167.9863mm"
+   viewBox="0 0 134.38903 167.9863"
+   version="1.1"
+   id="svg12652"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="ghost.svg">
+  <defs
+     id="defs12646" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="453.2902"
+     inkscape:cy="204.82267"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g12897"
+     showgrid="false"
+     inkscape:window-width="1210"
+     inkscape:window-height="1016"
+     inkscape:window-x="710"
+     inkscape:window-y="1107"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata12649">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(14.099703,-35.039722)">
+    <g
+       id="g12677"
+       transform="matrix(7.1422275,0,0,7.1422275,-9.2102081,24.35058)">
+      <g
+         id="g12718"
+         transform="matrix(0.07239319,0,0,0.07239319,-3.0905042,-3.852966)">
+        <g
+           id="g12759"
+           transform="matrix(0.9976262,0,0,0.9976262,7.9696602,-2.3539829)">
+          <g
+             id="g12800"
+             transform="matrix(5.3491048,0,0,5.3491048,40.611695,-289.72993)">
+            <g
+               id="g12782"
+               transform="translate(-20.274298,50.411767)" />
+            <g
+               id="g12840"
+               transform="matrix(0.08340627,0,0,0.08340627,-50.76575,38.206551)">
+              <g
+                 id="g12897"
+                 transform="matrix(48.66352,0,0,48.66352,492.27015,267.37763)">
+                <path
+                   id="path12880"
+                   d="m 7.6875315,1.9575365 c 3.3137095,0 5.9999995,2.6862915 5.9999995,6 v 9.0000005 l -2,-1.5 -1.9999995,1.5 -2,-1.5 -2,1.5 -2,-1.5 -2,1.5 V 7.9575365 c 0,-3.3137085 2.68629,-6 6,-6 z m 2.4999995,4 c -0.8284295,0 -1.4999995,0.6715729 -1.4999995,1.5 v 1 c 0,0.828427 0.67157,1.5 1.4999995,1.5 0.6544,0 1.21092,-0.419049 1.41586,-1.003443 -0.47621,-0.03964 -0.86893,-0.417222 -0.91199,-0.909406 -0.0481,-0.5501505 0.35883,-1.0351538 0.90898,-1.0832857 -0.20183,-0.5847404 -0.7584,-1.0038653 -1.41285,-1.0038653 z m -4.9999995,0 c -0.82843,0 -1.5,0.6715729 -1.5,1.5 v 1 c 0,0.828427 0.67157,1.5 1.5,1.5 0.6544,0 1.21092,-0.419049 1.41586,-1.003443 -0.47621,-0.03964 -0.86893,-0.417222 -0.91199,-0.909406 -0.0481,-0.5501505 0.35883,-1.0351538 0.90898,-1.0832857 -0.20183,-0.5847404 -0.7584,-1.0038653 -1.41285,-1.0038653 z"
+                   inkscape:connector-curvature="0"
+                   style="fill-rule:evenodd" />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
