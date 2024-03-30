@@ -10,8 +10,10 @@ export const findConnectedUsersInfo = async (req, res) => {
 
     const user = await User.findById(userId).populate({
       path: "connections",
-      select: "address"
+      select: "address email"
     });
+    console.log("userId",userId)
+
     const connections = user.connections;
     res.json(connections);
   } catch (error) {
