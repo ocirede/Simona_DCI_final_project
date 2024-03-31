@@ -14,10 +14,8 @@ import {
   changePasswordEmail,
   updateUser,
   updatePassword,
-
   loggedUser,
   getAllUsers,
-  findConnectionsForCurrentUser
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -38,7 +36,7 @@ userRoutes.post("/changepassword", changePasswordEmail);
 userRoutes.put("/update/:userId", updateUser);
 userRoutes.get("/loggeduser", auth, loggedUser);
 userRoutes.get("/all-the-users", getAllUsers);
-userRoutes.get("/findconnections/:userId", findConnectionsForCurrentUser);
+userRoutes.get("/findconnections/:userId");
 
 
 
