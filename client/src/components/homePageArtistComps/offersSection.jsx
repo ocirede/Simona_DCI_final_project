@@ -83,18 +83,19 @@ export default function OffersSection() {
 
   return (
     <>
-    <div className="flex items-center justify-center p-4 border-b-2 bg-red-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowOffersSection(!showOffersSection)}>offers Section</div>
+    <div className="mr-3 ml-3 flex items-center justify-center p-4  bg-red-100 min-h-[200px] mx-auto rounded-2xl shadow-lg border border-b-4 border-black md:w-1/4 cursor-pointer" onClick={() => setShowOffersSection(!showOffersSection)}>offers Section</div>
+
     {showOffersSection && (
-    <div>
-      <div className="w-full mt-5 flex bg-gray-200">
-            <h2  onClick={() => setCurrentView("MyOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow">My Offers</h2>
-            <h2 onClick={() => setCurrentView("AvailableOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow">Available Offers</h2>
+    <div className="rounded-lg border border-b-4 border-black">
+      <div className="w-full text-white flex bg-black ">
+            <h2  onClick={() => setCurrentView("MyOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-lg ">My Offers</h2>
+            <h2 onClick={() => setCurrentView("AvailableOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tr-lg ">Available Offers</h2>
         </div>
         {currentView === "MyOffers"  && (
-           <div className="w-full h-auto overflow-auto bg-gray-100 p-4 slide-in-left">
+           <div className="w-full h-auto overflow-auto  p-4 slide-in-left">
            <h2 className="font-bold text-lg mb-4">My Offers</h2>
            {myOffers.map((offer) => (
-             <div key={offer.id} className="mb-4 p-2 bg-white shadow-md rounded-lg">
+             <div key={offer.id} className="mb-4 p-2  shadow-md rounded-lg">
                <h3 className="text-md font-semibold">{offer.entrepreneurName}</h3>
                <p>{offer.role}</p>
                <p>{offer.offerDate}</p>

@@ -1,7 +1,16 @@
 import express from "express";
+import {
+  addNewRating,
+  getBestRatedComments,
+  getRatingsForUser,
+} from "../controllers/ratingController.js";
 
 const ratingRoutes = express.Router();
 
-//Here will be the ratingRoutes for the rating system of the users (even if is artist or enterprenour)
+ratingRoutes.post("/add-new-rating", addNewRating);
+
+ratingRoutes.get("/get-for-user/:userId", getRatingsForUser);
+
+ratingRoutes.get("/get-best-ratings", getBestRatedComments);
 
 export default ratingRoutes;

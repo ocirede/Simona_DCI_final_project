@@ -27,7 +27,9 @@ export default function BackToTop() {
     return (
         <>
             {isVisible && (
-               <i className="fa-solid fa-arrow-up fixed bottom-4 right-4 bg-gray-300 p-2 pr-3 pl-3 rounded-full" onClick={scrollToTop}></i>
+              
+               <i className="fa-solid fa-arrow-up fixed bottom-4 right-4 p-2 pr-3 pl-3 rounded-full bg-retroRed text-white transition duration-300 cursor-pointer glow-border" onClick={scrollToTop}></i>
+              
             )}
         </>
     );

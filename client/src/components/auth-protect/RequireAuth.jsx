@@ -1,16 +1,18 @@
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 const RequireAuth = ({ children }) => {
   const { user } = useContext(UserContext);
-  const navigate = useNavigate();
+  const location = useLocation();
 
-  if (!user) {
-    navigate("sign-in");
-  }
+  console.log("protected", user);
 
-  return children;
+  return user ? (
+    children
+  ) : (
+    <Navigate to="/sign-in" state={{ from: location }} replace />
+  );
 };
 
 export default RequireAuth;
