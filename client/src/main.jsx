@@ -13,18 +13,18 @@ import RatingContextProvider from "./context/ratingContext.jsx";
 import UserProvider from "./context/userContext.jsx";
 
 
+import SocketProvider from "./context/socketContext.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-
-      
-         
-              <RatingContextProvider>
+  
+                <RatingContextProvider>
+              <SocketProvider>
                 <App />
-              </RatingContextProvider>
-       
-
+              </SocketProvider>
+                </RatingContextProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
