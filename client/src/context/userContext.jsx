@@ -18,11 +18,8 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
-  const [connections, setConnections] = useState([])
-const navigate = useNavigate();
-
+  const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
-
 
   // fetching email-remember-checkbox
   useEffect(() => {
@@ -39,9 +36,8 @@ const navigate = useNavigate();
     const body = {
       email,
       password,
-      
     };
-    setResponse(false)
+    setResponse(false);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -51,28 +47,22 @@ const navigate = useNavigate();
 
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      
-      if(response.data.success){
+
+      if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
           navigate("/homeArtist");
-      } else {
+        } else {
           navigate("/E");
-        
+        }
+        e.target.reset();
+        setEmail("");
+        setPassword("");
+        setUser(response.data.user);
+        setValidationErrors(null);
       }
-      e.target.reset();
-      setEmail("");
-      setPassword("");
-      setUser(response.data.user);
-      setValidationErrors(null);
-      console.log(response.data.success)
-
-      };
-
-     
-   
     } catch (error) {
-      setResponse(true)
+      setResponse(true);
       if (Array.isArray(error.response?.data?.message)) {
         setValidationErrors(error.response?.data?.message);
       } else {
@@ -110,9 +100,6 @@ const navigate = useNavigate();
       console.log(error);
     }
   };
-
-
-
 
   //Register backround handling
   const userRoleChoice = (role) => {
@@ -287,13 +274,12 @@ const navigate = useNavigate();
     }
   };
 
-
-////log out
-const logout = () => {
-  localStorage.removeItem("token");
-  setUser(null)
-  navigate("/");
-};
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <UserContext.Provider

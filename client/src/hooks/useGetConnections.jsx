@@ -3,11 +3,10 @@ import axios from "../config/axios.js";
 import { UserContext } from "../context/userContext.jsx";
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-export default function UseGetConnections(connection) {
+export default function UseGetConnections() {
 
   const [connections, setConnections] = useState([]);
   const { user } = useContext(UserContext);
-
   // fetching the connections of the specific user
 
   const getConnections = async () => {
@@ -25,5 +24,5 @@ export default function UseGetConnections(connection) {
     }
   }, [user]);
 
-  return { connections };
+  return { connections, getConnections };
 }

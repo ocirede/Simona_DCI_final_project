@@ -26,6 +26,24 @@ body {
   justify-content: flex-start;
 }
 
+/* avatar online */
+
+.avatar {
+  position: relative;
+}
+
+.avatar.online::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+}
+
+
 /* network animations*/
 
 @keyframes slideInLeft {
