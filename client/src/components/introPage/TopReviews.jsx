@@ -1,15 +1,28 @@
-import StarRating from "../ReviewStars";
+import fullStarSvg from "../../assets/rating_svg/star.png";
 
 export default function TopReviews({ reviews }) {
-    return (
-        <div className="bg-gray-500 pb-4">
-            <h2 className="uppercase text-[40px] mb-5 mt-10 pt-4 text-center">Top Reviews</h2>
-            {reviews.map((review, index) => (
-                <div key={index} className="m-5 flex flex-col items-center text-center">
-                    <StarRating rating={review.rating} />
-                    <p className="mt-2">{review.comment}</p>
-                </div>
+
+  return (
+    <div className="bg-cobaltBlue pb-4 rounded-2xl">
+      <h2 className="uppercase text-[40px] mb-5 mt-10 pt-4 text-center">
+        Top Reviews
+      </h2>
+      {reviews?.map((review, index) => (
+        <div key={index} className="m-5 flex flex-col items-center text-center">
+          <div className="flex items-center">
+            {[...Array(review.ratingNumber)].map((_, index) => (
+              <img
+                key={index}
+                src={fullStarSvg}
+                alt="Full Star"
+                className="w-6 h-6 mr-1"
+              />
             ))}
+          </div>
+          <p className="mt-2 text-white">{review.comment}</p>
+
         </div>
-    );
+      ))}
+    </div>
+  );
 }

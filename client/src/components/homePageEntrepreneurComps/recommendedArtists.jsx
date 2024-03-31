@@ -21,18 +21,24 @@ export default function RecommendedArtists() {
 
   return (
     <>
-        <div className="flex items-center justify-center p-4 border-b-2 bg-purple-100 cursor-pointer w-4/5 min-h-[200px] mx-auto rounded-lg shadow-lg" onClick={() => setShowRecommendedArtists(!showRecommendedArtists)}>Recommended Artists</div>
+        <div className="mr-3 ml-3 flex items-center justify-center p-4  bg-purple-100 cursor-pointer  min-h-[200px] mx-auto rounded-2xl shadow-lg border border-b-4 border-black" onClick={() => setShowRecommendedArtists(!showRecommendedArtists)}>Recommended Artists</div>
+
         {showRecommendedArtists && (
-          <Container>
-            <div className="p-4">
-                <h2 className="text-lg font-bold mb-2">Recommended Artists</h2>
+          
+            <div className="relative overflow-hidden border border-b-4 border-black rounded-2xl shadow-lg ">
+
+                <h2 className=" text-2xl  font-bold h-[100px] rounded-l-2xl rounded-r-2xl uppercase  vertical-text bg-cobaltBlue absolute z-50 text-center w-full bottom-[-110px] left-0 ">Top five</h2>
+                <Container >
+                
+
                 <MotionSlider>
                 {sortedArtistsUsers?.map((user, i) => (
-                <CardElement key={i} {...user}/>
+                <CardElement  key={i} {...user}/>
                     ))}
                 </MotionSlider>
-            </div>
+           
             </Container>
+            </div>
         )}
         
     </>

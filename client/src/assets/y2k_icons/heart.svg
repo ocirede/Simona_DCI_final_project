@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="249.61237mm"
+   height="198.79752mm"
+   viewBox="0 0 249.61237 198.79752"
+   version="1.1"
+   id="svg12652"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="heart.svg">
+  <defs
+     id="defs12646" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="475.36791"
+     inkscape:cy="296.4536"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g12759"
+     showgrid="false"
+     inkscape:window-width="1210"
+     inkscape:window-height="1016"
+     inkscape:window-x="710"
+     inkscape:window-y="1107"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata12649">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(19.941093,-28.472511)">
+    <g
+       id="g12677"
+       transform="matrix(7.1422275,0,0,7.1422275,-9.2102081,24.35058)">
+      <g
+         id="g12718"
+         transform="matrix(0.07239319,0,0,0.07239319,-3.0905042,-3.852966)">
+        <g
+           id="g12759"
+           transform="matrix(0.9976262,0,0,0.9976262,7.9696602,-2.3539829)">
+          <g
+             id="g12741">
+            <path
+               id="path12739"
+               d="M 468.3,93.4 C 449.1,74.2 423.7,63.7 396.6,63.7 369.5,63.7 344,74.2 324.8,93.4 L 256,162.2 187.2,93.4 C 147.7,53.9 83.3,53.9 43.8,93.4 24.6,112.5 14,138 14,165.1 c 0,27.1 10.6,52.6 29.7,71.7 L 256,449.1 468.2,236.8 c 39.6,-39.5 39.6,-103.9 0.1,-143.4 z"
+               inkscape:connector-curvature="0" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

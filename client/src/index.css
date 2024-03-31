@@ -6,6 +6,15 @@
 body {
   width: 100%;
   min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  background-image: url("/background_paper.jpg");
+}
+
+.header-bg {
+  background-image: url("/qqquad.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
 
   /* background-color: #525252;  */
@@ -68,10 +77,46 @@ body {
   }
 }
 
+/*//////////////////////////////issa*/
 .slide-in-left {
   animation: slideInLeft 1s ease-out forwards;
 }
 
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
+}
+.placeholder-xs::placeholder {
+  font-size: 0.75rem;
+ }
+ .vertical-text {
+  transform: rotate(-90deg);
+  transform-origin: left top;
+  white-space: nowrap;
+}
+
+
+
+
+/* Glowing effect on hover */
+.glow-border {
+  transition: box-shadow 0.5s;
+}
+
+.glow-border:hover {
+  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #DF3C5F, 0 0 10px #DF3C5F, 0 0 20px #DF3C5F;
+}
+
+.text-glow {
+  transition: text-shadow 0.5s; 
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
+}
+
+
+
+/* Special font */
+.simona {
+  font-family: 'Bungee', system-ui;
 }

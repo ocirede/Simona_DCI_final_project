@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import NavBar from "../components/profile artist/ArtistNavBar";
 import PersonalInfo from "../components/profile artist/PersonalInfo";
 import NameTitle from "../components/profile artist/NameTitle";
@@ -6,15 +5,20 @@ import CardSection from "../components/profile artist/CardSection";
 import EditorModal from "../components/profile artist/EditorModal";
 import ShareLinkCard from "../components/profile artist/ShareLinkCard";
 
+import CommentSection from "../components/reviews/CommentSection";
+
+import { useFormVisibility } from "../components/profilePageEntrepreneur/customHook/FormVisibility";
+
+
+
 function ProfileArtist() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(!isModalOpen);
-  const [shareLink, setShareLink] = useState(false);
-  const openShareCard = () => setShareLink(!shareLink);
+  const { formVisibility, toggleFormVisibility } = useFormVisibility();
+  const openShareCard = () => toggleFormVisibility("shareLink");
+
   return (
     <>
       <NavBar />
-      <main className=" mb-10">
+      <main className="mb-10">
         {/* personal info section*/}
         <section>
           <PersonalInfo onClick={openShareCard} />
@@ -22,7 +26,10 @@ function ProfileArtist() {
         </section>
         <section className="xs:grid grid-rows-1 grid-cols-2">
           {/* About-me/ education  section*/}
-          <CardSection onClick={openModal} section=" About me - education" />
+          <CardSection
+            onClick={() => toggleFormVisibility("about")}
+            section=" About me - education"
+          />
           {/* Skills interest personality  section*/}
           <CardSection section="Skills interests personality" />
         </section>
@@ -34,14 +41,16 @@ function ProfileArtist() {
           {/* Languages  section*/}
           <CardSection section="Language" />
           {/* Review  section*/}
-          <CardSection section="Review" />
+          <section className="">
+            <CommentSection />
+          </section>
         </section>
-        {/* Render the modal if isModalOpen is true */}
-        {isModalOpen && <EditorModal onClose={openModal} />}
 
-
-        {/* footer to be replaced with the footer from Tyhe */}
-        {shareLink && <ShareLinkCard onClose={openShareCard} />}
+        {/* Render the modal if formVisibility.about is true */}
+        {formVisibility.about && <EditorModal onClose={() => toggleFormVisibility("about")} />}
+        
+        {/* Render the shareLink card if formVisibility.shareLink is true */}
+        {formVisibility.shareLink && <ShareLinkCard onClose={openShareCard} />}
 
       </main>
     </>
@@ -49,3 +58,4 @@ function ProfileArtist() {
 }
 
 export default ProfileArtist;
+

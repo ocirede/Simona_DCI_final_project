@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import FormSubmitButton from "../components/FormSubmitButton";
 import { UserContext } from "../context/userContext";
 
@@ -35,47 +35,76 @@ const RegisterUserRoleForm = () => {
   };
   return (
     <>
-      <h2 className="text-2xl text-center mb-6">Tell us who you are!</h2>
-      {/* Role selection form */}
-      <form onSubmit={handleRoleChoice}>
-        <div className="mb-4">
-          <div className="border rounded p-4 bg-gray-500">
-            <input
-              type="radio"
-              name="userRole"
-              value="artist"
-              onChange={(e) => {
-                setSelectedRole(e.target.value);
-              }}
-              checked={selectedRole === "artist"}
-              className="mr-2"
-            />
-            <label htmlFor="artist" className="inline-block">
-              Artist
+      <div className="border border-black rounded-2xl p-7">
+        <h2 className="text-2xl text-center mb-9">Tell us who you are{":)"}</h2>
+        {/* Role selection form */}
+        <form onSubmit={handleRoleChoice}>
+          <div className="mb-8">
+            <label htmlFor="artist" className="cursor-pointer">
+              <div
+                className=" rounded-xl p-2 bg-retroRed text-center"
+                style={{
+                  boxShadow:
+                    selectedRole === "artist" ? "0 0px 15px #DF3C5F" : "none",
+                }}
+              >
+                <input
+                  type="radio"
+                  id="artist"
+                  name="userRole"
+                  value="artist"
+                  onChange={(e) => {
+                    setSelectedRole(e.target.value);
+                  }}
+                  checked={selectedRole === "artist"}
+                  className="appearance-none opacity-0 mr-2"
+                />
+                <span className="inline-block text-white text-2xl">Artist</span>
+              </div>
             </label>
           </div>
-        </div>
-        <div className="mb-4">
-          <div className="border rounded p-4 bg-gray-500">
-            <input
-              type="radio"
-              name="userRole"
-              value="entrepreneur"
-              onChange={(e) => {
-                setSelectedRole(e.target.value);
-              }}
-              checked={selectedRole === "entrepreneur"}
-              className="mr-2"
-            />
-            <label htmlFor="entrepreneur" className="inline-block">
-              Entrepreneur
+          <div className="mb-8">
+            <label htmlFor="entrepreneur" className="cursor-pointer">
+              <div
+                className="rounded-xl p-2 bg-retroBlue text-center"
+                style={{
+                  boxShadow:
+                    selectedRole === "entrepreneur"
+                      ? "0 0px 15px #6F9BD1"
+                      : "none",
+                }}
+              >
+                <input
+                  type="radio"
+                  id="entrepreneur"
+                  name="userRole"
+                  value="entrepreneur"
+                  onChange={(e) => {
+                    setSelectedRole(e.target.value);
+                  }}
+                  checked={selectedRole === "entrepreneur"}
+                  className="appearance-none opacity-0 mr-2 cursor-none"
+                />
+                <span className="inline-block text-white text-2xl">
+                  Entrepreneur
+                </span>
+              </div>
             </label>
           </div>
-        </div>
-        <div className="text-center">
-          <FormSubmitButton name="Next" />
-        </div>
-      </form>
+          <div className="text-center">
+            <FormSubmitButton name="NEXT" />
+          </div>
+          <p className="text-sm text-gray-600 mt-1">
+            Already have an account?{" "}
+            <NavLink
+              to="/sign-in"
+              className="font-medium text-primary-600 hover:underline"
+            >
+              Login here
+            </NavLink>
+          </p>
+        </form>
+      </div>
     </>
   );
 };

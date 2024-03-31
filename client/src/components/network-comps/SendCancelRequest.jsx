@@ -5,37 +5,71 @@ import ButtonLoading from "./ButtonLoading";
 const SendCancelRequest = ({ receiverId }) => {
   const { user, sendOrCancelRequest, response } = useContext(UserContext);
   const [isRequested, setIsRequested] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [logged, setLogged] = useState(false);
 
   useEffect(() => {
-    setIsRequested(
-
-      user?.sentRequests.map((item) => item._id).includes(receiverId)  
-
-    );
+    setIsRequested(user?.sentRequests?.some((item) => item._id === receiverId));
+    setIsConnected(user?.connections?.some((item) => item._id === receiverId));
+    setLogged(user?._id === receiverId);
   }, [user, receiverId]);
+
+  const handleSendOrCancelRequest = async () => {
+    setIsLoading(true);
+    try {
+      await sendOrCancelRequest(user._id, receiverId);
+    } catch (error) {
+      console.error("Error sending/canceling request:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
       {response ? (
-        <div>
-          {isRequested ? (
-            <button
-              type="button"
-              className="inline-block rounded-full bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal shadow-warning-3 transition duration-150 ease-in-out hover:bg-warning-accent-300 hover:shadow-warning-2 focus:bg-warning-accent-300 focus:shadow-warning-2 focus:outline-none focus:ring-0 active:bg-warning-600 active:shadow-warning-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-              onClick={() => sendOrCancelRequest(user._id, receiverId)}
-            >
-              Cancel
-            </button>
+        <>
+          {isConnected ? (
+            <div className="text-green-600">
+              <p>
+                <i className="fa-solid fa-circle-check"></i> Connected
+              </p>
+            </div>
           ) : (
-            <button
-              type="button"
-              className="inline-block rounded-full bg-success px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal  shadow-success-3 transition duration-150 ease-in-out hover:bg-success-accent-300 hover:shadow-success-2 focus:bg-success-accent-300 focus:shadow-success-2 focus:outline-none focus:ring-0 active:bg-success-600 active:shadow-success-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-              onClick={() => sendOrCancelRequest(user._id, receiverId)}
-            >
-              Send Request
-            </button>
+            <div>
+              {logged ? (
+                <button className=" text-sm uppercase bg-transparent"></button>
+              ) : (
+                <>
+                  {isLoading ? (
+                    <ButtonLoading />
+                  ) : (
+                    <>
+                      {isRequested ? (
+                        <button
+                          type="button"
+                          className="text-red-600 text-sm uppercase"
+                          onClick={handleSendOrCancelRequest}
+                        >
+                          Cancel
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="text-sm uppercase text-retroRed"
+                          onClick={handleSendOrCancelRequest}
+                        >
+                          <i className="fa-solid fa-plus "></i> Connect
+                        </button>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           )}
-        </div>
+        </>
       ) : (
         <ButtonLoading />
       )}
