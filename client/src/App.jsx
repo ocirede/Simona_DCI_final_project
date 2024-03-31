@@ -9,7 +9,6 @@ import ProfilePageLayout from "./layouts/ProfilePageLayout";
 import { Route, Routes } from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
 import ProfileArtistPage from "./pages/ProfileArtistPage";
-import ChatBox from "./components/chatBox/chatBox.jsx";
 import HomePageEntrepreneur from "./pages/homePageEntrepreneur.jsx";
 import HomePageArtist from "./pages/homePageArtist.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
@@ -18,6 +17,7 @@ import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur.jsx";
 import EmailConfirmation from "./pages/EmailConfirmation.jsx";
 import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
+import Chat from "./pages/Chat.jsx";
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
           />
           <Route path="/homeArtist" element={<HomePageArtist />} />
           <Route path="/E" element={<HomePageEntrepreneur />} />
-          <Route path="/chatbox" element={<ChatBox />} />
+          <Route path="/chatbox" element={<Chat/>} />
           <Route path="/QA" element={<QA />} />
         </Route>
 
@@ -48,10 +48,7 @@ function App() {
             path="/email-confirmation/:token"
             element={<EmailConfirmation />}
           />
-          <Route
-          path="/resetpassword/:token"
-          element={<ChangePassword/>}
-          />
+          <Route path="/resetpassword/:token" element={<ChangePassword />} />
           <Route path="/confirmed-user" element={<ConfirmedUserPage />} />
           <Route path="/register-questions" element={<RegisterUserQuestions />}>
             <Route index element={<RegisterUserRoleForm />} />

@@ -18,9 +18,7 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
-
   const navigate = useNavigate();
-
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // fetching email-remember-checkbox
@@ -38,9 +36,8 @@ const UserProvider = ({ children }) => {
     const body = {
       email,
       password,
-      
     };
-    setResponse(false)
+    setResponse(false);
     try {
       const response = await axios.post(baseURL + "/users/signin", body);
 
@@ -50,30 +47,24 @@ const UserProvider = ({ children }) => {
 
       localStorage.setItem("token", response.data.token);
       const userRole = response.data.user.role;
-      
-      if(response.data.success){
+
+      if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
           navigate("/homeArtist");
-      } else {
+        } else {
           navigate("/E");
-        
+        }
+        e.target.reset();
+        setEmail("");
+        setPassword("");
+        setUser(response.data.user);
+        setValidationErrors(null);
       }
-      e.target.reset();
-      setEmail("");
-      setPassword("");
-      setUser(response.data.user);
-      setValidationErrors(null);
-      console.log(response.data.success)
-
-      };
-
-     
-   
     } catch (error) {
-      setResponse(true)
-      if (Array.isArray(error.response.data.message)) {
-        setValidationErrors(error.response.data.message);
+      setResponse(true);
+      if (Array.isArray(error.response?.data?.message)) {
+        setValidationErrors(error.response?.data?.message);
       } else {
         const error = [
           {
@@ -108,25 +99,6 @@ const UserProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  // reset-update password
-
-  const resetPassword = (e) => {
-    e.preventDefault();
-    const password = e.target.password.value;
-    const reType = e.target.retype.value;
-
-    if (reType !== password) {
-      alert("password are not matching");
-      return;
-    }
-
-    const body = {
-      password: e.target.password.value,
-    };
-
-    console.log(body);
   };
 
   //Register backround handling
@@ -302,13 +274,12 @@ const UserProvider = ({ children }) => {
     }
   };
 
-
-////log out
-const logout = () => {
-  localStorage.removeItem("token");
-  setUser(null)
-  navigate("/");
-};
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <UserContext.Provider
@@ -338,7 +309,6 @@ const logout = () => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-        resetPassword,
         sendOrCancelRequest,
         acceptRequest,
         rejectRequest,

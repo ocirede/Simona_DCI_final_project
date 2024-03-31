@@ -7,8 +7,8 @@ import "./index.css";
 import UserProvider from "./context/userContext.jsx";
 import ArtistsProvider from "./context/artistsContext.jsx";
 import EntrepreneurProvider from "./context/entrepreneurContext.jsx";
-
 import { FormVisibilityProvider } from "./context/formVisibility.jsx";
+import SocketProvider from "./context/socketContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,7 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ArtistsProvider>
           <EntrepreneurProvider>
             <FormVisibilityProvider>
-              <App />
+              <SocketProvider>
+                <App />
+              </SocketProvider>
             </FormVisibilityProvider>
           </EntrepreneurProvider>
         </ArtistsProvider>

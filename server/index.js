@@ -5,9 +5,10 @@ import connectDB from "./config/mongo-db.js";
 import userRoutes from "./routes/userRouter.js";
 import ratingRoutes from "./routes/ratingRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
+import chatRouter from "./routes/chatRoutes.js";
+import messageRouter from "./routes/messageRoutes.js";
 
-const app = express();
-
+import {app, server} from "./socket/socket.js"
 const port = process.env.PORT;
 const clientURL = process.env.CLIENT_URL;
 
@@ -25,7 +26,11 @@ connectDB();
 app.use("/users", userRoutes);
 app.use("/ratings", ratingRoutes);
 app.use("/posts", postRoutes);
+app.use("/chats", chatRouter);
+app.use("/messages", messageRouter);
 
-app.listen(port, () => {
+
+
+server.listen(port, () => {
   console.log(`The server is running in port ${port}`);
 });
