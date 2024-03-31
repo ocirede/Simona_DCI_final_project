@@ -15,25 +15,20 @@ export const getSocketIds = (senderId, receiverId) => {
   return { senderSocketId, receiverSocketId };
 };
 
-
 const userSocketMap = {}; // {userId: socketId}
 const socketUserMap = {}; // {socketId: userId}
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
-    const userId = socket.handshake.query.userId;
-    console.log("Current rooms:", socket.rooms);
-   
-    
+  const userId = socket.handshake.query.userId;
 
-  if (userId !== "undefined"){
+  if (userId !== "undefined") {
     userSocketMap[userId] = socket.id;
     socketUserMap[socket.id] = userId;
   }
- 
+
   // Emit getOnlineUsers event to all clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
-
 
   // Handle disconnect event
   socket.on("disconnect", () => {
@@ -52,4 +47,3 @@ io.on("connection", (socket) => {
 });
 
 export { app, io, server, userSocketMap, socketUserMap };
-

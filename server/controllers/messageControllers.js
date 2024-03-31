@@ -30,15 +30,15 @@ export const sendMessage = async (req, res) => {
 
     await Promise.all([conversation.save(), newMessage.save()]);
 
-    //SOCKET.IO FUNCTIONALITY WILL GO HERE
+    //SOCKET.IO FUNCTIONALITY
 
     const { senderSocketId, receiverSocketId } = getSocketIds(senderId, receiverId);
+    // Emit message to receiver
+
     io.to(receiverSocketId).emit("newMessage", newMessage);
 
     // Emit message to sender
     io.to(senderSocketId).emit("newMessage", newMessage);
-
-    
 
     res.status(201).json(newMessage);
   } catch (error) {

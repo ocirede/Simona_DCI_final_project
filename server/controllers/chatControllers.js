@@ -12,7 +12,6 @@ export const findConnectedUsersInfo = async (req, res) => {
       path: "connections",
       select: "address email"
     });
-    console.log("userId",userId)
 
     const connections = user.connections;
     res.json(connections);
