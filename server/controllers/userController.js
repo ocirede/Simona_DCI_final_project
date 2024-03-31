@@ -470,23 +470,7 @@ export const updateUser = async (req, res) => {
 
 };
 
-// export const findConnectionsForCurrentUser = async (req, res) => {
-//   const { userId } = req.params;
 
-//   try {
-//     const user = await User.findById(userId).populate("connections");
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     res.json({ success: true, connections: user.connections });
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ message: "Error fetching connections", error: error.message });
-//   }
-// };
 
 //logged user
 export const loggedUser = async (req, res) => {

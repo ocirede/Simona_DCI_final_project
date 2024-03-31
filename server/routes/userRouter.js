@@ -39,7 +39,6 @@ userRoutes.get("/loggeduser", auth, loggedUser);
 userRoutes.get("/all-the-users", getAllUsers);
 userRoutes.put(
   "/update-profile-pic/:userId",)
-userRoutes.get("/findconnections/:userId",);
   
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(
