@@ -35,7 +35,6 @@ export function useFetchMessages(connection) {
       const response = await axios.get(`${baseURL}/messages/get/${contactId}`);
       if (response.data) {
         setMessages(response.data);
-        console.log("sent response", response.data);
       }
     } catch (error) {
       console.log(error);

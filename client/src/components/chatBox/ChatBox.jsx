@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   useFetchMessages,
   useSendMessage,
@@ -12,32 +12,34 @@ export default function ChatBox({ connection }) {
   const { socket } = useSocketContext();
   const { user } = useContext(UserContext);
   const { sendMessage, newMessage, setNewMessage } = useSendMessage(connection);
-  const { messages, setMessages, getMessages } = useFetchMessages(connection);
+  const { messages, setMessages } = useFetchMessages(connection);
+  const messagesEndRef = useRef(null);
 
-  
   useEffect(() => {
     try {
       socket.on("newMessage", (newMessage) => {
-        setMessages(prevMessages => [...prevMessages, newMessage]);
-  
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
       });
-  
-  
+
       return () => socket.off("newMessage");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   }, [socket, newMessage, messages, setMessages, setNewMessage]);
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const allMessages = [...messages].sort((a, b) =>
     moment(a.createdAt).diff(moment(b.createdAt))
   );
 
   return (
-    <div className="chat-box">
-      <div className="messages">
+    <div className="flex flex-col h-full">
+      <div className="overflow-y-auto max-h-[calc(100vh-100px)]">
         {allMessages.map((message, index) => {
           const isSameAsPrev =
             index > 0 &&
@@ -53,9 +55,8 @@ export default function ChatBox({ connection }) {
                   ? `sent-message`
                   : `received-message`
               }
-              
             >
-              <div className="">
+              <div>
                 <p>{message.message} </p>
                 {!isSameAsPrev && (
                   <span>{moment(message.createdAt).calendar()}</span>
@@ -63,22 +64,21 @@ export default function ChatBox({ connection }) {
               </div>
             </div>
           );
-        })}{" "}
+        })}
+        <div ref={messagesEndRef}></div>
       </div>
-      <div
-        className="input-area absolute bottom-0 flex w-2/3"
-      >
+      <div className="flex items-center mt-auto p-4">
         <input
           type="text"
           name="message"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2 mr-2 w-full"
+          className="border border-gray-300 rounded px-4 py-2 mr-2 flex-1"
           placeholder="Type your message..."
         />
         <button
           onClick={() => sendMessage(connection._id)}
-          className="bg-blue-500 text-white px-4 py-2 rounded "
+          className="bg-blue-500 text-white px-4 py-2 rounded"
         >
           <Send />
         </button>

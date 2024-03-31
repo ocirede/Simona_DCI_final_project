@@ -33,8 +33,8 @@ export const sendMessage = async (req, res) => {
     //SOCKET.IO FUNCTIONALITY
 
     const { senderSocketId, receiverSocketId } = getSocketIds(senderId, receiverId);
+    
     // Emit message to receiver
-
     io.to(receiverSocketId).emit("newMessage", newMessage);
 
     // Emit message to sender
