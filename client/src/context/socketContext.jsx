@@ -12,6 +12,7 @@ const SocketProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const[notifications, setNotifications]=useState([]);
   useEffect(() => {
     try {
       if (user) {
@@ -27,6 +28,14 @@ const SocketProvider = ({ children }) => {
           setOnlineUsers(users);
         });
 
+        socket.on("notification", (data)=> {
+          setNotifications((prevNotifications) => {
+            const updatedNotifications = [...prevNotifications, data.message];
+            localStorage.setItem("notifications", JSON.stringify(updatedNotifications));
+            return updatedNotifications;
+          });
+        })
+
         return () => socket.close();
       } else {
         if (socket) {
@@ -39,7 +48,7 @@ const SocketProvider = ({ children }) => {
     }
   }, [user]);
   return (
-    <SocketContext.Provider value={{ socket, onlineUsers }}>
+    <SocketContext.Provider value={{ socket, onlineUsers, notifications, setNotifications }}>
       {children}
     </SocketContext.Provider>
   );

@@ -36,6 +36,9 @@ export const sendMessage = async (req, res) => {
     
     // Emit message to receiver
     io.to(receiverSocketId).emit("newMessage", newMessage);
+    io.to(receiverSocketId).emit("notification", {message:"You have received a new message"})
+    
+    
 
     // Emit message to sender
     io.to(senderSocketId).emit("newMessage", newMessage);

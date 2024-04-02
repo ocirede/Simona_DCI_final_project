@@ -24,5 +24,5 @@ export default function UseGetConnections() {
     }
   }, [user]);
 
-  return { connections, getConnections };
+  return { connections, setConnections, getConnections };
 }
