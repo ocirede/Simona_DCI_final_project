@@ -65,8 +65,8 @@ const RegisterUserCategoryForm = () => {
 
   return (
     <>
-      <div>
-        <h2 className="text-2xl text-center mb-3">
+      <div className="border border-black rounded-2xl p-7 bg-white">
+        <h2 className="text-2xl text-center mb-3 font-semibold">
           What are you interested in?
         </h2>
         <h3 className="text-xl text-center mb-6">
@@ -80,7 +80,7 @@ const RegisterUserCategoryForm = () => {
                 key={index}
                 className={`flex items-center justify-center px-4 py-2 rounded-md cursor-pointer transition-colors duration-300 ${
                   selectedCategories.includes(category)
-                    ? "bg-orange-500"
+                    ? "bg-retroRed"
                     : "bg-gray-200 hover:bg-gray-300"
                 }`}
               >
