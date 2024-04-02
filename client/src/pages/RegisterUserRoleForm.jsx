@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import FormSubmitButton from "../components/FormSubmitButton";
+import FormSubmitButton from "../components/register/FormSubmitButton";
 import { UserContext } from "../context/userContext";
 
 const RegisterUserRoleForm = () => {

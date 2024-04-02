@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormSubmitButton from "../components/FormSubmitButton";
+import FormSubmitButton from "../components/register/FormSubmitButton";
 import AlertMessageWarning from "../components/alerts/AlertMessageWarning";
 
 export const categories = [

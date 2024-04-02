@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import LogoImageRegistration from "../components/LogoImageRegistration";
+import LogoImageRegistration from "../components/register/LogoImageRegistration";
 import { UserContext } from "../context/userContext";
 import starFourSvg from "../assets/y2k_icons/star_four.svg";
 import starTwoSvg from "../assets/y2k_icons/star_two.svg";
