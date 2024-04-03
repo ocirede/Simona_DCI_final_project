@@ -5,7 +5,6 @@ import { UserContext } from "../context/userContext.jsx";
 import CircleIcon from "./iconsComponents/circle.jsx";
 import StarFiveIcon from "./iconsComponents/starFive.jsx";
 import WelcomeUser from "./welcomeUser.jsx";
-import { Bell } from "lucide-react";
 import { useSocketContext } from "../context/socketContext.jsx";
 
 export default function NavBarHomepage() {
@@ -13,7 +12,6 @@ export default function NavBarHomepage() {
   const navigate = useNavigate();
   const { user, logout } = useContext(UserContext);
   const { notifications, setNotifications } = useSocketContext();
-
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");
@@ -27,14 +25,15 @@ export default function NavBarHomepage() {
     } else {
       navigate("/ProfilePageEntrepreneur");
     }
-  }; 
+  };
 
   useEffect(() => {
-    const storedNotifications = JSON.parse(localStorage.getItem("notifications"));
+    const storedNotifications = JSON.parse(
+      localStorage.getItem("notifications")
+    );
     if (storedNotifications) {
       setNotifications(storedNotifications);
-    };
-
+    }
   }, []);
   return (
     <nav className=" m-3 z-50 pt-3 pl-3 pr-3 bg-white-400 relative rounded-lg shadow-lg border border-b-4 border-black">
@@ -72,20 +71,9 @@ export default function NavBarHomepage() {
             <NavLink to="/chatbox" className="mt-4 md:mt-0 md:ml-4">
               Chatbox
             </NavLink>
-            <div className="relative flex">
-              <Bell
-                className={`notification ${
-                  notifications.length > 0 ? "count" : ""
-                }`}
-              />
-              {notifications.length > 0 && (
-                <span className="notification-count">
-                  {notifications.length}
-                </span>
-              )}
-            </div>
+            
           </div>
-
+         
           <a className="mt-4 md:mt-0 md:ml-4" onClick={logout}>
             Logout
           </a>

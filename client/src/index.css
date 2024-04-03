@@ -24,15 +24,42 @@ body {
 @tailwind components;
 @tailwind utilities;
 
-/* send messages chat*/
-.sent-message {
+.chat-bubble {
+  position: relative; /* Add position relative for timestamp alignment */
+
+  padding: 5px 9px;
+  border-radius: 20px;
+  margin-bottom: 8px;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+}
+.sent-message {
+  text-align: left;
 }
 
 .received-message {
-  display: flex;
-  justify-content: flex-start;
+  text-align: left;
+}
+
+/* send messages chat*/
+.sent-message .chat-bubble {
+  align-self: flex-end;
+  background-color: rgb(34, 65, 147);
+  color: #fff;
+  margin-left: auto;
+  max-width: calc(25% - 16px);
+}
+
+.received-message .chat-bubble {
+  align-self: flex-start;
+  background-color: rgb(223, 60, 95);
+  color: #fff;
+  margin-right: auto;
+  max-width: calc(25% - 16px);
+}
+
+.message-timestamp{
+  margin-left: auto;
 }
 
 /* avatar online */
@@ -42,7 +69,7 @@ body {
 }
 
 .avatar.online::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 10px;
   height: 10px;
@@ -53,14 +80,14 @@ body {
 }
 
 /*notification center*/
-.notification{
+.notification {
   position: relative;
 }
 
 .notification-count {
   position: absolute;
-  top: -8px; 
-  right: -8px; 
+  top: -8px;
+  right: -8px;
   background-color: red;
   color: white;
   width: 16px;
@@ -71,6 +98,23 @@ body {
   align-items: center;
   font-size: 10px;
 }
+
+/*notification sidebar*/
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -200px; /* Initially hidden */
+  width: 200px;
+  height: 100vh;
+  background-color: white;
+  transition: right 0.3s ease; /* Smooth transition effect */
+}
+
+.sidebar.open {
+  right: 0; /* Slide in from the right when open */
+}
+
 
 /* network animations*/
 
@@ -106,15 +150,12 @@ body {
 }
 .placeholder-xs::placeholder {
   font-size: 0.75rem;
- }
- .vertical-text {
+}
+.vertical-text {
   transform: rotate(-90deg);
   transform-origin: left top;
   white-space: nowrap;
 }
-
-
-
 
 /* Glowing effect on hover */
 .glow-border {
@@ -122,20 +163,20 @@ body {
 }
 
 .glow-border:hover {
-  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #DF3C5F, 0 0 10px #DF3C5F, 0 0 20px #DF3C5F;
+  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #df3c5f, 0 0 10px #df3c5f,
+    0 0 20px #df3c5f;
 }
 
 .text-glow {
-  transition: text-shadow 0.5s; 
+  transition: text-shadow 0.5s;
 }
 
 .text-glow:hover {
-  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
+  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8),
+    0 0 15px rgba(223, 60, 95, 0.8);
 }
-
-
 
 /* Special font */
 .simona {
-  font-family: 'Bungee', system-ui;
+  font-family: "Bungee", system-ui;
 }

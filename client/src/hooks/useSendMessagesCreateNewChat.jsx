@@ -50,5 +50,5 @@ export function useFetchMessages(connection) {
     }
   }, [connection]);
 
-  return { messages, setMessages };
+  return { messages, setMessages, getMessages };
 }
