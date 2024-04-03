@@ -31,4 +31,7 @@ import RequireAuth from "./components/auth-protect/RequireAuth.jsx";
     element={<RequireAuth><ProfileArtistPage /></RequireAuth>}
   />
 
+This will prevent the user to access this element if he is not logged in, or if he clicks
+any link that directs to that page, he will be redirected to the sign in page.
+
 */
