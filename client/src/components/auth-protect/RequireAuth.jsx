@@ -1,18 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
-import { useLocation, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RequireAuth = ({ children }) => {
   const { user } = useContext(UserContext);
-  const location = useLocation();
+  const navigate = useNavigate();
 
-  console.log("protected", user);
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/sign-in", { replace: true });
+    }
+  }, []);
 
-  return user ? (
-    children
-  ) : (
-    <Navigate to="/sign-in" state={{ from: location }} replace />
-  );
+  return children;
 };
 
 export default RequireAuth;
