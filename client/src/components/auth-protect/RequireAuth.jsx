@@ -16,3 +16,19 @@ const RequireAuth = ({ children }) => {
 };
 
 export default RequireAuth;
+
+/* Example how to protect an element 
+
+if this is the original route:
+<Route path="/profile-artist" element={<ProfileArtistPage />} /> 
+
+you have to import first the component and then wrap yout element:
+
+import RequireAuth from "./components/auth-protect/RequireAuth.jsx";
+
+<Route
+    path="/profile-artist"
+    element={<RequireAuth><ProfileArtistPage /></RequireAuth>}
+  />
+
+*/
