@@ -21,7 +21,6 @@ const UserProvider = ({ children }) => {
   const [aboutText, setAboutText] = useState('');
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
-
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");

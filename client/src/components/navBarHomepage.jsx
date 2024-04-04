@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Clock, Menu, X } from "lucide-react";
 import { UserContext } from "../context/userContext.jsx";
 import CircleIcon from "./iconsComponents/circle.jsx";
 import StarFiveIcon from "./iconsComponents/starFive.jsx";

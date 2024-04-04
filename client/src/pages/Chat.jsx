@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UseGetConnections from "../hooks/useGetConnections.jsx";
 import UserContact from "../components/chatBox/UserContact.jsx";
 import ChatBox from "../components/chatBox/ChatBox.jsx";
@@ -8,13 +8,19 @@ import Sidebar from "../components/chatBox/SideBar.jsx";
 
 export default function Chat() {
   const { user } = useContext(UserContext);
-  const { setNotifications , notifications} = useSocketContext();
-  const { connections } = UseGetConnections();
+  const { setNotifications, notifications } = useSocketContext();
+  const {setConnections, connections } = UseGetConnections();
   const [selectedContact, setSelectedContact] = useState(null);
   const fullName = user?.address?.firstname;
   const welcomeMessage = `Welcome ${fullName}!`;
   const initialMessage = `Select a chat to start messaging!`;
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (user?._id) {
+      setConnections([]); // Clear connections when user changes
+    }
+  }, [user]);
 
   const handleSelectedContact = (connection) => {
     setSelectedContact(connection);
@@ -30,9 +36,9 @@ export default function Chat() {
   return (
     <div className="flex h-screen gap-2">
       {/* Sidebar (Contacts) */}
-      <div className="w-1/4 ml-3 mt-4 h-2/3 rounded-lg overflow-y-auto max-h-[calc(100vh-100px)] border border-b-4 border-r-4 border-black">
+      <div className="w-1/4 ml-3 mt-4 h-2/3 rounded-lg bg-lightBlue overflow-y-auto max-h-[calc(100vh-100px)] border border-b-4 border-r-4 border-black">
         <div className=" flex  text-4xl ml-3 mt-4">
-          <h2 className=" text-left">Chats</h2>
+          <h2 className=" font-custom font-bold text-left">Chats</h2>
         </div>
         <div className=" flex justify-center mt-4 ">
           <input
@@ -65,13 +71,19 @@ export default function Chat() {
       {/* Main Content (Chat Box) */}
       <div className="flex-grow ">
         {selectedContact ? (
-          <ChatBox connection={selectedContact} />
+          <>
+            <ChatBox connection={selectedContact} />
+          </>
         ) : (
           <>
             <div className="bg-retroBlue flex items-center justify-center flex-grow h-2/3 mt-4 mr-3 rounded-lg border border-b-4 border-black  border-l-4">
               <div className=" bg-white flex flex-col justify-center items-center gap-2 w-1/2 h-2/3 border border-black border-b-4 border-r-4">
-                <h2 className=" text-2xl font-bold">{welcomeMessage}</h2>
-                <h2 className=" text-2xl font-bold">{initialMessage}</h2>
+                <h2 className=" text-2xl font-bold font-custom">
+                  {welcomeMessage}
+                </h2>
+                <h2 className=" text-2xl font-bold font-custom">
+                  {initialMessage}
+                </h2>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="100mm"
@@ -104,8 +116,8 @@ export default function Chat() {
                     height: "100px",
                     color: "rgb(223, 60, 95)",
                     position: "absolute",
-                    top: "720px",
-                    right: "380px",
+                    top: "730px",
+                    right: "410px",
                   }}
                 >
                   <g transform="translate(-11.170693,-42.357793)">
@@ -128,7 +140,7 @@ export default function Chat() {
                   width="100mm"
                   height="100mm"
                   viewBox="0 0 281.66079 281.66079"
-                  className="w-[200px] absolute right-[21%] top-[38%] rotate-[25deg] z-50  "
+                  className="w-[200px] absolute right-[24%] top-[38%] rotate-[25deg] z-50  "
                 >
                   <g transform="translate(103.02608,83.209972)">
                     <g transform="matrix(7.1422275,0,0,7.1422275,-9.2102081,24.35058)">
@@ -149,7 +161,7 @@ export default function Chat() {
             </div>
           </>
         )}
-        <Sidebar connection={connections} notification={notifications} />
+        <Sidebar />
       </div>
     </div>
   );

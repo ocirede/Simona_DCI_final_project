@@ -4,10 +4,11 @@ import NameTitle from "../components/profile artist/NameTitle";
 import CardSection from "../components/profile artist/CardSection";
 import EditorModal from "../components/profile artist/EditorModal";
 import ShareLinkCard from "../components/profile artist/ShareLinkCard";
-
+import Sidebar from "../components/chatBox/SideBar";
 import CommentSection from "../components/reviews/CommentSection";
 
 import { useFormVisibility } from "../components/profilePageEntrepreneur/customHook/FormVisibility";
+import { useSocketContext } from "../context/socketContext";
 
 
 
@@ -51,7 +52,7 @@ function ProfileArtist() {
         
         {/* Render the shareLink card if formVisibility.shareLink is true */}
         {formVisibility.shareLink && <ShareLinkCard onClose={openShareCard} />}
-
+        <Sidebar/>
       </main>
     </>
   );

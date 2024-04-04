@@ -1,34 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  useFetchMessages} from "../../hooks/useSendMessagesCreateNewChat";
+import { useFetchMessages } from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
 import UseGetConnections from "../../hooks/useGetConnections";
 import { UserContext } from "../../context/userContext";
 
 export default function UserContact({ connection, onClick }) {
-  const { user } = useContext(UserContext);
-  const { getConnections } = UseGetConnections();
   const { messages, getMessages } = useFetchMessages(connection);
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(connection._id);
   const { address } = connection;
   const fullName = `${address.firstname} ${address.lastname}`;
+ 
+
   useEffect(() => {
-    if (user) {
-      getConnections();
+    if (messages) {
+      getMessages(connection._id);
     }
-  }, [user]);
+  }, []);
+ 
 
-  useEffect(() => {
-    getMessages(connection._id);
-  }, [messages]);
-
-  const lastMessage =
-    messages.length > 0
-      ? messages[messages.length - 1].message
-      : "No messages yet";
-
-  // keep track of the unred messages
+  const lastMessage = messages[messages.length - 1]?.message;
+  const cutLastMessage =
+    lastMessage?.length > 20
+      ? lastMessage?.substring(0, 15) + "..."
+      : lastMessage;
 
   return (
     <div className="user-contact flex items-center gap-1 ml-4 mt-6  ">
@@ -40,11 +35,14 @@ export default function UserContact({ connection, onClick }) {
       <div
         onClick={onClick}
         role="button"
-        className={`flex flex-col border  border-black rounded-[10px] w-3/4 `}
+        className={`flex flex-col bg-white border  border-black rounded-[10px] w-3/4 `}
       >
-        <div className=" ml-2 p-0.5">
-          <h3 className=" text-black">{fullName}</h3>
-          {lastMessage}
+        <div className="  ml-2 ">
+          <h3 className=" text-black font-custom">{fullName}</h3>
+          <div className=" flex gap-1">
+            <p className=" font-custom">last message:</p>
+            <p className=" font-bold font-custom">{cutLastMessage} </p>
+          </div>
         </div>
       </div>
     </div>

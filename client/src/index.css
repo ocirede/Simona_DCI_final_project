@@ -34,11 +34,15 @@ body {
   flex-direction: column;
 }
 .sent-message {
-  text-align: left;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .received-message {
   text-align: left;
+  display: flex;
+  justify-content: flex-start;
 }
 
 /* send messages chat*/
@@ -68,7 +72,7 @@ body {
   position: relative;
 }
 
-.avatar.online::after {
+ /* .avatar.online::after {
   content: "";
   position: absolute;
   width: 10px;
@@ -77,12 +81,10 @@ body {
   border-radius: 50%;
   top: -5px;
   right: -5px;
-}
+}  */
 
-/*notification center*/
-.notification {
-  position: relative;
-}
+
+/*notification sidebar*/
 
 .notification-count {
   position: absolute;
@@ -99,20 +101,18 @@ body {
   font-size: 10px;
 }
 
-/*notification sidebar*/
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: -200px; /* Initially hidden */
-  width: 200px;
-  height: 100vh;
-  background-color: white;
-  transition: right 0.3s ease; /* Smooth transition effect */
+/* Bouncing animation  notification */
+.animated-message {
+  animation: bounce 0.3s ease infinite alternate; 
 }
 
-.sidebar.open {
-  right: 0; /* Slide in from the right when open */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
 }
 
 

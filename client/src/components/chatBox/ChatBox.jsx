@@ -15,6 +15,7 @@ export default function ChatBox({ connection }) {
   const { messages, setMessages } = useFetchMessages(connection);
   const messagesEndRef = useRef(null);
 
+
   useEffect(() => {
     try {
       socket.on("newMessage", (newMessage) => {
@@ -44,7 +45,7 @@ export default function ChatBox({ connection }) {
   return (
     <div className="flex flex-col p-5 mt-4 mr-3  h-2/3 bg-white rounded-lg border border-b-4 border-l-4 border-black">
       <div className="overflow-y-auto max-h-[calc(100vh-100px)] ">
-        {allMessages.map((message, index) => {
+        {allMessages?.map((message, index) => {
           const isSameAsPrev =
             index > 0 &&
             moment(message.createdAt).isSame(
@@ -52,11 +53,12 @@ export default function ChatBox({ connection }) {
               "minute"
             );
           const messageClass =
-            message.senderId === user._id ? `sent-message` : `received-message`;
+            message?.senderId === user?._id ? `sent-message` : `received-message`;
+            
           return (
             <div key={index} className={messageClass}>
               <div className="chat-bubble">
-                <p className="message-text">{message.message}</p>
+                <p className="message-text font-custom">{message?.message}</p>
                 {!isSameAsPrev && (
                   <span className="message-timestamp">
                     {moment(message.createdAt).calendar()}
