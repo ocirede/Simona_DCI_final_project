@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "../config/axios.js";
 
+
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
@@ -51,9 +53,9 @@ const UserProvider = ({ children }) => {
       if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
-          navigate("/homeArtist");
+         navigate("/homeArtist");
         } else {
-          navigate("/E");
+         navigate("/E");
         }
         e.target.reset();
         setEmail("");
@@ -267,12 +269,13 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  ////log out
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    navigate("/");
-  };
+  // ////log out
+  // const logout = () => {
+  //   localStorage.removeItem("token");
+
+  //   setUser(null);
+  //   navigate("/");
+  // };
 
   //Update user(everything except profile image and background)
   const updateUser = async (userId, updatedData) => {
@@ -382,6 +385,7 @@ const UserProvider = ({ children }) => {
         forgotPassword,
         newUser,
         user,
+        setUser,
         setUserRole,
         userRoleChoice,
         registerUser,
@@ -397,7 +401,7 @@ const UserProvider = ({ children }) => {
         acceptRequest,
         rejectRequest,
         deleteConnection,
-        logout,
+        // logout,
         updateUser,
         updateProfileImage,
         updateProfileBackground,

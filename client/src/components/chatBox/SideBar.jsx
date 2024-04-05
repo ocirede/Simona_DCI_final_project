@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { MessageSquareText } from "lucide-react";
 import { useSocketContext } from "../../context/socketContext";
 import { NavLink } from "react-router-dom";
-
+import axios from "../../config/axios.js";
 function Sidebar() {
-  const { setNotifications, notifications}= useSocketContext()
-
+  const { setNotifications, notifications, socket } = useSocketContext();
   const [isOpen, setIsOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
+  const baseURL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     if (notifications && notifications.length > 0) {
@@ -38,6 +38,22 @@ function Sidebar() {
     }
   }, [notifications]);
 
+  const handleUpdateNotificationStatus = async (notificationId) => {
+    try {
+      const response = await axios.put(
+        `${baseURL}/messages/notifications/${notificationId}`
+      );
+
+      setNotifications((prevNotifications) =>
+        prevNotifications.filter(
+          (notification) => notification._id !== notificationId
+        )
+      );
+    } catch (error) {
+      console.error("Error updating notification status:", error);
+    }
+  };
+  console.log(notifications);
   return (
     <>
       {isOpen && (
@@ -46,14 +62,19 @@ function Sidebar() {
             isOpen ? "transform translate-x-0" : "transform translate-x-full"
           }`}
         >
-          <NavLink onClick={()=>setNotifications([])} to="/chatbox">
-          <div className="relative flex items-center justify-center animated-message ">
-            <div className="relative flex gap-1 text-lg font-custom">
-              <p>You have new message(s)</p>
-              <MessageSquareText className="notification-icon" />
-              <span className="notification-count">{notificationCount}</span>
+          <NavLink
+            onClick={() =>
+              handleUpdateNotificationStatus(notifications[0]?._id)
+            }
+            to="/chatbox"
+          >
+            <div className="relative flex items-center justify-center animated-message ">
+              <div className="relative flex gap-1 text-lg font-custom">
+                <p>You have new message(s)</p>
+                <MessageSquareText className="notification-icon" />
+                <span className="notification-count">{notificationCount}</span>
+              </div>
             </div>
-          </div>
           </NavLink>
         </div>
       )}

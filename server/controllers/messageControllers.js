@@ -1,6 +1,7 @@
 import Chat from "../models/chatSchema.js";
 import Message from "../models/messageSchema.js";
 import { getSocketIds, io } from "../socket/socket.js";
+
 // sendMessage
 
 export const sendMessage = async (req, res) => {
@@ -22,6 +23,9 @@ export const sendMessage = async (req, res) => {
       senderId,
       receiverId,
       message,
+      notifications: [
+        { message: "You have received a new message", read: false },
+      ],
     });
 
     if (newMessage) {
@@ -39,10 +43,9 @@ export const sendMessage = async (req, res) => {
 
     // Emit message to receiver
     io.to(receiverSocketId).emit("newMessage", newMessage);
-    io.to(receiverSocketId).emit("notification", {
-      message: "You have received a new message",
-      senderId: senderId,
-      receiverId: receiverId,
+
+    newMessage.notifications.forEach((notification) => {
+      io.to(receiverSocketId).emit("notification", notification);
     });
 
     // Emit message to sender
@@ -74,5 +77,37 @@ export const getMessages = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
+  }
+};
+
+// update notifications
+
+export const markNotificationAsRead = async (req, res) => {
+  try {
+    const { notificationId } = req.params;
+
+    const message = await Message.findOne({
+      "notifications._id": notificationId,
+    });
+
+    if (!message) {
+      return res.status(404).json({ error: "Conversation not found" });
+    }
+
+    const notification = message.notifications.find(
+      (notif) => notif._id.toString() === notificationId
+    );
+
+    if (!notification) {
+      return res.status(404).json({ error: "Notification not found" });
+    }
+
+    notification.read = true;
+    await message.save();
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.log("Error marking notification as read:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

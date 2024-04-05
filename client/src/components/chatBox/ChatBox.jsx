@@ -15,7 +15,6 @@ export default function ChatBox({ connection }) {
   const { messages, setMessages } = useFetchMessages(connection);
   const messagesEndRef = useRef(null);
 
-
   useEffect(() => {
     try {
       socket.on("newMessage", (newMessage) => {
@@ -38,9 +37,9 @@ export default function ChatBox({ connection }) {
     moment(a.createdAt).diff(moment(b.createdAt))
   );
 
-  const handleClearNotifications = () => {
-    setNotifications([]);
-  };
+  // const handleClearNotifications = () => {
+  //   setNotifications([]);
+  // };
 
   return (
     <div className="flex flex-col p-5 mt-4 mr-3  h-2/3 bg-white rounded-lg border border-b-4 border-l-4 border-black">
@@ -57,7 +56,7 @@ export default function ChatBox({ connection }) {
             
           return (
             <div key={index} className={messageClass}>
-              <div className="chat-bubble">
+              <div className="chat-bubble  ">
                 <p className="message-text font-custom">{message?.message}</p>
                 {!isSameAsPrev && (
                   <span className="message-timestamp">
@@ -78,7 +77,7 @@ export default function ChatBox({ connection }) {
             name="message"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            onFocus={handleClearNotifications}
+            // onFocus={handleClearNotifications}
             className="border border-black rounded-[50px] w-full px-4 py-2"
             placeholder="Type your message..."
           />

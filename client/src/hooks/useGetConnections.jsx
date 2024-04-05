@@ -20,7 +20,6 @@ export default function UseGetConnections() {
     getConnections()
   },[user])
   
-  console.log(connections)
 
   useEffect(() => {
     if (user) {

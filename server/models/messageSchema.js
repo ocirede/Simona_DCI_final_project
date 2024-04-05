@@ -15,7 +15,18 @@ const messageSchema = new mongoose.Schema({
     message: {
         type: String,
         required: true
-    }
+    }, 
+    notifications: [
+        {
+          message: String,
+          read: {
+            type: Boolean,
+            default: false
+          }
+        }
+      ]
+
+    
 }, {
     timestamps: true
 });

@@ -31,16 +31,15 @@ const SocketProvider = ({ children }) => {
           setNotifications((prevNotifications) => {
             if (data) {
               const updatedNotifications = [...prevNotifications, data];
-              localStorage.setItem(
+              sessionStorage.setItem(
                 "notifications",
                 JSON.stringify(updatedNotifications)
-              );
+              ); 
               return updatedNotifications;
             }
             return prevNotifications;
           });
         });
-        
 
         return () => socket.close();
       } else {

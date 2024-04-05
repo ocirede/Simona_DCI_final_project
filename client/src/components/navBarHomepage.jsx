@@ -10,8 +10,7 @@ import { useSocketContext } from "../context/socketContext.jsx";
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { user, logout } = useContext(UserContext);
-  const { notifications, setNotifications } = useSocketContext();
+  const { user, setUser } = useContext(UserContext);
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");
@@ -26,15 +25,13 @@ export default function NavBarHomepage() {
       navigate("/ProfilePageEntrepreneur");
     }
   };
-
-  useEffect(() => {
-    const storedNotifications = JSON.parse(
-      localStorage.getItem("notifications")
-    );
-    if (storedNotifications) {
-      setNotifications(storedNotifications);
-    }
-  }, []);
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("notifications");
+    setUser(null);
+    navigate("/");
+  };
   return (
     <nav className=" m-3 z-50 pt-3 pl-3 pr-3 bg-white-400 relative rounded-lg shadow-lg border border-b-4 border-black">
       <div className="flex flex-wrap items-center justify-between md:flex-row">
@@ -74,7 +71,7 @@ export default function NavBarHomepage() {
             
           </div>
          
-          <a className="mt-4 md:mt-0 md:ml-4" onClick={logout}>
+          <a className="mt-4 md:mt-0 md:ml-4 cursor-pointer" onClick={logout}>
             Logout
           </a>
         </div>
