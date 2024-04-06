@@ -21,12 +21,15 @@ export default function UserContact({ connection, onClick }) {
         `${baseURL}/messages/notifications/${notificationId}`
       );
 
-      setNotifications((prevNotifications) =>
-        prevNotifications.filter(
-          (notification) => notification._id !== notificationId
-        )
-      );
-
+      if (response.data) {
+        setNotifications((prevNotifications) =>
+          prevNotifications?.filter(
+            (notification) => notification._id !== notificationId
+          )
+        );
+      } else {
+        console.error("Empty response received from server.");
+      }
     } catch (error) {
       console.error("Error updating notification status:", error);
     }
@@ -72,16 +75,20 @@ export default function UserContact({ connection, onClick }) {
         className={`flex flex-col bg-white border  border-black rounded-[10px] w-3/4 `}
       >
         <div
-          onClick={() => handleUpdateNotificationStatus(notifications[0]._id)}
-          className="  ml-2 "
+          onClick={() => {
+            if (notifications && notifications.length > 0) {
+              handleUpdateNotificationStatus(notifications[0]._id);
+            }
+          }}
+          className="ml-2"
         >
           {notificationCount > 0 ? (
-         <div className="flex justify-between items-center mr-1">
-         <h3 className="text-black font-custom">{fullName}</h3>
-         <span className="bg-retroRed w-5 h-5 flex items-center justify-center rounded-full text-white">
-           {notificationCount}
-         </span>
-       </div>
+            <div className="flex justify-between items-center mr-1">
+              <h3 className="text-black font-custom">{fullName}</h3>
+              <span className="bg-retroRed w-5 h-5 flex items-center justify-center rounded-full text-white">
+                {notificationCount}
+              </span>
+            </div>
           ) : (
             <h3 className=" text-black font-custom">{fullName}</h3>
           )}
