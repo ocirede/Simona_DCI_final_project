@@ -22,6 +22,10 @@ const messageSchema = new mongoose.Schema({
           read: {
             type: Boolean,
             default: false
+          },
+          receiverId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
           }
         }
       ]

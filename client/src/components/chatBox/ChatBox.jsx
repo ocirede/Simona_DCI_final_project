@@ -14,7 +14,6 @@ export default function ChatBox({ connection }) {
   const { sendMessage, newMessage, setNewMessage } = useSendMessage(connection);
   const { messages, setMessages } = useFetchMessages(connection);
   const messagesEndRef = useRef(null);
-
   useEffect(() => {
     try {
       socket.on("newMessage", (newMessage) => {

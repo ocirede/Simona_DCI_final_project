@@ -24,7 +24,7 @@ export const sendMessage = async (req, res) => {
       receiverId,
       message,
       notifications: [
-        { message: "You have received a new message", read: false },
+        { message: "You have received a new message", read: false, receiverId },
       ],
     });
 
@@ -94,15 +94,19 @@ export const markNotificationAsRead = async (req, res) => {
       return res.status(404).json({ error: "Conversation not found" });
     }
 
-    const notification = message.notifications.find(
+    const notificationIndex = message.notifications.findIndex(
       (notif) => notif._id.toString() === notificationId
     );
 
-    if (!notification) {
+    if (notificationIndex === -1) {
       return res.status(404).json({ error: "Notification not found" });
     }
 
-    notification.read = true;
+    message.notifications[notificationIndex].read = true;
+
+    if (message.notifications[notificationIndex].read === true) {
+      message.notifications.splice(notificationIndex, 1);
+    }
     await message.save();
 
     res.status(200).json({ success: true });

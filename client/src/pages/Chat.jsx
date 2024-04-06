@@ -3,12 +3,10 @@ import UseGetConnections from "../hooks/useGetConnections.jsx";
 import UserContact from "../components/chatBox/UserContact.jsx";
 import ChatBox from "../components/chatBox/ChatBox.jsx";
 import { UserContext } from "../context/userContext.jsx";
-import { useSocketContext } from "../context/socketContext.jsx";
-import Sidebar from "../components/chatBox/SideBar.jsx";
+
 
 export default function Chat() {
   const { user } = useContext(UserContext);
-  const { setNotifications, notifications, socket } = useSocketContext();
   const { setConnections, connections } = UseGetConnections();
   const [selectedContact, setSelectedContact] = useState(null);
   const fullName = user?.address?.firstname;
@@ -26,12 +24,6 @@ export default function Chat() {
     setSelectedContact(connection);
   };
 
-  useEffect(() => {
-    const savedNotifications = JSON.parse(sessionStorage.getItem("notifications"));
-    if (savedNotifications) {
-      setNotifications(savedNotifications);
-    }
-  }, [setNotifications]);
 
   const filteredConnections = connections.filter((connection) =>
     connection.address.firstname
@@ -166,7 +158,6 @@ export default function Chat() {
             </div>
           </>
         )}
-        <Sidebar />
       </div>
     </div>
   );
