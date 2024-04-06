@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useFetchMessages } from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
-import UseGetConnections from "../../hooks/useGetConnections";
-import { UserContext } from "../../context/userContext";
 import axios from "../../config/axios.js";
 
 export default function UserContact({ connection, onClick }) {
@@ -14,7 +12,6 @@ export default function UserContact({ connection, onClick }) {
   const { address } = connection;
   const fullName = `${address.firstname} ${address.lastname}`;
   const baseURL = import.meta.env.VITE_BASE_URL;
-
   const handleUpdateNotificationStatus = async (notificationId) => {
     try {
       const response = await axios.put(
@@ -56,6 +53,8 @@ export default function UserContact({ connection, onClick }) {
       setNotificationCount(0);
     }
   }, [notifications]);
+
+
   const lastMessage = messages[messages.length - 1]?.message;
   const cutLastMessage =
     lastMessage?.length > 20

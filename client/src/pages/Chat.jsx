@@ -31,9 +31,9 @@ export default function Chat() {
       .includes(searchQuery.toLowerCase())
   );
   return (
-    <div className="flex h-screen gap-2">
+    <div className="flex h-screen mb-10 gap-2 ">
       {/* Sidebar (Contacts) */}
-      <div className="w-1/4 ml-3 mt-4 h-2/3 rounded-lg bg-lightBlue overflow-y-auto max-h-[calc(100vh-100px)] border border-b-4 border-r-4 border-black">
+      <div className="w-1/4 ml-3 h-2/3 rounded-lg bg-lightBlue overflow-y-auto  border border-b-4 border-r-4 border-black">
         <div className=" flex  text-4xl ml-3 mt-4">
           <h2 className=" font-custom font-bold text-left">Chats</h2>
         </div>
@@ -49,20 +49,29 @@ export default function Chat() {
         </div>
 
         {searchQuery === ""
-          ? connections.map((connection, index) => (
-              <UserContact
-                key={index}
-                connection={connection}
-                onClick={() => handleSelectedContact(connection)}
-              />
-            ))
-          : filteredConnections.map((connection, index) => (
-              <UserContact
-                key={index}
-                connection={connection}
-                onClick={() => handleSelectedContact(connection)}
-              />
-            ))}
+  ? connections.length === 0 ? (
+      <div className=" h-1/2 text-lg font-bold font-custom flex justify-center items-center">No connections available.</div>
+    ) : (
+      connections.map((connection, index) => (
+        <UserContact
+          key={index}
+          connection={connection}
+          onClick={() => handleSelectedContact(connection)}
+        />
+      ))
+    )
+  : filteredConnections.length === 0 ? (
+      <div>No matching connections found.</div>
+    ) : (
+      filteredConnections.map((connection, index) => (
+        <UserContact
+          key={index}
+          connection={connection}
+          onClick={() => handleSelectedContact(connection)}
+        />
+      ))
+    )}
+
       </div>
 
       {/* Main Content (Chat Box) */}
@@ -73,8 +82,8 @@ export default function Chat() {
           </>
         ) : (
           <>
-            <div className="bg-retroBlue flex items-center justify-center flex-grow h-2/3 mt-4 mr-3 rounded-lg border border-b-4 border-black  border-l-4">
-              <div className=" bg-white flex flex-col justify-center items-center gap-2 w-1/2 h-2/3 border border-black border-b-4 border-r-4">
+            <div className="bg-retroBlue flex items-center justify-center flex-grow h-2/3 mr-3 rounded-lg border border-b-4 border-black  border-l-4">
+            <div className=" bg-white flex flex-col justify-center items-center gap-2 w-1/2 h-2/3 border border-black border-b-4 border-r-4">
                 <h2 className=" text-2xl font-bold font-custom">
                   {welcomeMessage}
                 </h2>

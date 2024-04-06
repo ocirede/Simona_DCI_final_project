@@ -41,6 +41,9 @@ const SocketProvider = ({ children }) => {
           });
         });
 
+        socket.on("reconnectionFailed");
+
+
         return () => socket.close();
       } else {
         if (socket) {

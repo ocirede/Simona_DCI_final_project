@@ -41,6 +41,14 @@ io.on("connection", (socket) => {
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 
+  // Handle reconnection event
+  socket.on("reconnect", (attemptNumber) => {
+    console.log(`Socket reconnected (attempt ${attemptNumber})`);
+    if (attemptNumber > 3) {
+      // After 3 failed attempts, notify the client or perform custom logic
+      socket.emit("reconnectionFailed");
+    }  });
+
   // Handle error event
   socket.on("error", (error) => {
     console.error("Socket error:", error);
