@@ -39,7 +39,7 @@ export default function ChatBox({ connection }) {
 
   return (
     <div className="flex flex-col  mr-3 h-2/3  bg-white rounded-lg border border-b-4 border-l-4 border-black">
-      <nav className=" w-full h-[50px] p-2 flex items-center z-50 font-custom font-bold shadow-xl">
+      <nav className=" w-full h-[50px]   p-3 flex items-center z-50 font-custom font-bold shadow-xl">
         {fullName}
       </nav>
       <div className="overflow-y-auto p-5 mt-10 ">
@@ -56,10 +56,7 @@ export default function ChatBox({ connection }) {
               : `received-message`;
 
           return (
-            <div
-              key={index}
-              className={`${messageClass}`}
-            >
+            <div key={index} className={`${messageClass}`}>
               <div className="chat-bubble">
                 <p className="message-text font-custom">{message?.message}</p>
                 {!isSameAsPrev && (
@@ -73,8 +70,8 @@ export default function ChatBox({ connection }) {
           );
         })}
       </div>
-      <div className="flex items-center  gap-2 justify-center mt-auto mb-4  w-full">
-        <div className="w-1/2 ">
+      <footer className="flex items-center p-1 gap-2 justify-center mt-auto mb-4  shadow-current h-[50px]  w-full">
+        <div className="w-1/2  flex items-center">
           <input
             type="text"
             name="message"
@@ -91,7 +88,7 @@ export default function ChatBox({ connection }) {
         >
           <Send />
         </button>
-      </div>
+      </footer>
     </div>
   );
 }

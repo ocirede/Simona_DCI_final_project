@@ -4,7 +4,6 @@ import UserContact from "../components/chatBox/UserContact.jsx";
 import ChatBox from "../components/chatBox/ChatBox.jsx";
 import { UserContext } from "../context/userContext.jsx";
 
-
 export default function Chat() {
   const { user } = useContext(UserContext);
   const { setConnections, connections } = UseGetConnections();
@@ -16,7 +15,7 @@ export default function Chat() {
 
   useEffect(() => {
     if (user?._id) {
-      setConnections([]); 
+      setConnections([]);
     }
   }, [user]);
 
@@ -24,54 +23,68 @@ export default function Chat() {
     setSelectedContact(connection);
   };
 
-
   const filteredConnections = connections.filter((connection) =>
     connection.address.firstname
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
   return (
-    <div className="flex h-screen mb-10 gap-2 ">
+    <div className="flex h-screen mb-10  relative">
       {/* Sidebar (Contacts) */}
-      <div className="w-1/4 ml-3 h-2/3 rounded-lg bg-lightBlue overflow-y-auto  border border-b-4 border-r-4 border-black">
-        <div className=" flex  text-4xl ml-3 mt-4">
-          <h2 className=" font-custom font-bold text-left">Chats</h2>
+      <div className="w-1/4 ml-3 h-2/3  z-50 rounded-lg bg-lightBlue overflow-y-auto  border border-b-4 border-r-4 border-black">
+        <div className=" shadow-xl flex  text-4xl  mt-4">
+          <h2 className=" font-custom font-bold text-left p-1">Chats</h2>
         </div>
         <div className=" flex justify-center mt-4 ">
           <input
-            className=" w-2/3 border border-black rounded-[50px] p-1 pl-2"
+            className=" w-2/3 border border-black rounded-[10px] p-1 pl-2"
             type="text"
             name="chat"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search chat..."
           />
+          <svg
+            width="251"
+            height="251"
+            viewBox="40 130 251 241"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="z-0 absolute bottom-[87px] left-[395px]"
+          >
+            <path
+              d="M125.499 0L130.214 95.7401L164.282 6.14257L139.18 98.6521L199.266 23.9676L146.806 104.194L227.031 51.7322L152.346 111.82L244.857 86.718L155.26 120.786L251 125.499L155.26 130.214L244.857 164.282L152.346 139.18L227.031 199.266L146.806 146.806L199.266 227.031L139.18 152.346L164.282 244.857L130.214 155.26L125.499 251L120.786 155.26L86.718 244.857L111.82 152.346L51.7322 227.031L104.194 146.806L23.9676 199.266L98.6521 139.18L6.14257 164.282L95.74 130.214L0 125.499L95.74 120.786L6.14257 86.718L98.6521 111.82L23.9676 51.7322L104.194 104.194L51.7322 23.9676L111.82 98.6521L86.718 6.14257L120.786 95.7401L125.499 0Z"
+              fill="black"
+            />
+          
+          </svg>
         </div>
 
-        {searchQuery === ""
-  ? connections.length === 0 ? (
-      <div className=" h-1/2 text-lg font-bold font-custom flex justify-center items-center">No connections available.</div>
-    ) : (
-      connections.map((connection, index) => (
-        <UserContact
-          key={index}
-          connection={connection}
-          onClick={() => handleSelectedContact(connection)}
-        />
-      ))
-    )
-  : filteredConnections.length === 0 ? (
-      <div>No matching connections found.</div>
-    ) : (
-      filteredConnections.map((connection, index) => (
-        <UserContact
-          key={index}
-          connection={connection}
-          onClick={() => handleSelectedContact(connection)}
-        />
-      ))
-    )}
-
+        {searchQuery === "" ? (
+          connections.length === 0 ? (
+            <div className=" h-1/2 text-lg font-bold font-custom flex justify-center items-center">
+              No connections available.
+            </div>
+          ) : (
+            connections.map((connection, index) => (
+              <UserContact
+                key={index}
+                connection={connection}
+                onClick={() => handleSelectedContact(connection)}
+              />
+            ))
+          )
+        ) : filteredConnections.length === 0 ? (
+          <div>No matching connections found.</div>
+        ) : (
+          filteredConnections.map((connection, index) => (
+            <UserContact
+              key={index}
+              connection={connection}
+              onClick={() => handleSelectedContact(connection)}
+            />
+          ))
+        )}
       </div>
 
       {/* Main Content (Chat Box) */}
@@ -82,8 +95,8 @@ export default function Chat() {
           </>
         ) : (
           <>
-            <div className="bg-retroBlue flex items-center justify-center flex-grow h-2/3 mr-3 rounded-lg border border-b-4 border-black  border-l-4">
-            <div className=" bg-white flex flex-col justify-center items-center gap-2 w-1/2 h-2/3 border border-black border-b-4 border-r-4">
+            <div className=" relative bg-retroBlue flex items-center justify-center flex-grow h-2/3 mr-3 rounded-lg border border-b-4 border-black  border-l-4">
+              <div className=" bg-white flex flex-col justify-center items-center gap-2 w-1/2 h-2/3 border border-black border-b-4 border-r-4">
                 <h2 className=" text-2xl font-bold font-custom">
                   {welcomeMessage}
                 </h2>
@@ -95,7 +108,7 @@ export default function Chat() {
                   width="100mm"
                   height="100mm"
                   viewBox="0 0 281.66079 281.66079"
-                  className="w-[200px] absolute right-[45%] top-[45%] rotate-[25deg] z-50  "
+                  className="w-[200px] absolute right-[58%] top-[20%] rotate-[25deg]"
                 >
                   <g transform="translate(103.02608,83.209972)">
                     <g transform="matrix(7.1422275,0,0,7.1422275,-9.2102081,24.35058)">
@@ -122,8 +135,8 @@ export default function Chat() {
                     height: "100px",
                     color: "rgb(223, 60, 95)",
                     position: "absolute",
-                    top: "730px",
-                    right: "410px",
+                    top: "410px",
+                    right: "810px",
                   }}
                 >
                   <g transform="translate(-11.170693,-42.357793)">
@@ -146,7 +159,7 @@ export default function Chat() {
                   width="100mm"
                   height="100mm"
                   viewBox="0 0 281.66079 281.66079"
-                  className="w-[200px] absolute right-[24%] top-[38%] rotate-[25deg] z-50  "
+                  className="w-[200px] absolute right-[30%] top-[53%] rotate-[25deg]"
                 >
                   <g transform="translate(103.02608,83.209972)">
                     <g transform="matrix(7.1422275,0,0,7.1422275,-9.2102081,24.35058)">
