@@ -4,7 +4,7 @@
 
 - **Tyhe**
 
-- Tyhe's our alien coming out of this world, constantly surprising us with his alien-like creativity, whether its her coding solutions, her writing skills or even her poems.
+- Tyhe's our alien coming out of this world, constantly surprising us with her alien-like creativity, whether its her coding solutions, her writing skills or even her poems.
 
 - **Fede**
 
