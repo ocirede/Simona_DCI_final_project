@@ -25,8 +25,7 @@ body {
 @tailwind utilities;
 
 .chat-bubble {
-  position: relative; /* Add position relative for timestamp alignment */
-
+  position: relative;
   padding: 5px 9px;
   border-radius: 20px;
   margin-bottom: 8px;
@@ -47,23 +46,34 @@ body {
 
 /* send messages chat*/
 .sent-message .chat-bubble {
-  align-self: flex-end;
-  background-color: rgb(34, 65, 147);
+  background-color: #224193;
   color: #fff;
   margin-left: auto;
   max-width: calc(25% - 16px);
 }
 
 .received-message .chat-bubble {
-  align-self: flex-start;
-  background-color: rgb(223, 60, 95);
+  background-color: #df3c5f;
   color: #fff;
   margin-right: auto;
   max-width: calc(25% - 16px);
 }
 
-.message-timestamp{
+.message-timestamp {
   margin-left: auto;
+}
+
+/*download image*/
+
+#download-link:hover::after {
+  content: "Download";
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #df3c5f;
+  color: white;
+  padding: 2px;
+  border-radius: 3px;
 }
 
 /* avatar online */
@@ -71,18 +81,6 @@ body {
 .avatar {
   position: relative;
 }
-
- /* .avatar.online::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: green;
-  border-radius: 50%;
-  top: -5px;
-  right: -5px;
-}  */
-
 
 /*notification sidebar*/
 
@@ -103,7 +101,13 @@ body {
 
 /* Bouncing animation  notification */
 .animated-message {
-  animation: bounce 0.3s ease infinite alternate; 
+  animation: bounce 0.3s ease infinite alternate;
+}
+
+/* hide ChevronDown Icon */
+
+.hidden{
+  display: none;
 }
 
 @keyframes bounce {
@@ -114,7 +118,6 @@ body {
     transform: translateY(-10px);
   }
 }
-
 
 /* network animations*/
 

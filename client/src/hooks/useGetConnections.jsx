@@ -6,6 +6,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 export default function UseGetConnections() {
   const [connections, setConnections] = useState([]);
   const { user } = useContext(UserContext);
+
   // fetching the connections of the specific user
   useEffect(()=>{
     const getConnections = async () => {
@@ -16,15 +17,11 @@ export default function UseGetConnections() {
         console.log(error);
       }
     };
-
+ 
     getConnections()
   },[user])
   
 
-  useEffect(() => {
-    if (user) {
-      setConnections([]);
-    }
-  }, [user]);
+  
   return { connections, setConnections };
 }

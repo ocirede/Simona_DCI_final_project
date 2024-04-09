@@ -7,6 +7,7 @@ function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
 
+  // opening notification message
   useEffect(() => {
     if (notifications && notifications.length > 0) {
       if (!isOpen) {
@@ -18,6 +19,9 @@ function Sidebar() {
       }
     }
   }, [notifications, isOpen]);
+
+    // counting notifications 
+
 
   useEffect(() => {
     if (notifications && notifications.length > 0) {
@@ -36,10 +40,11 @@ function Sidebar() {
     }
   }, [notifications]);
 
-  const handleDeleteNotification = ()=>{
-    setNotifications([])
-  sessionStorage.removeItem("notifications")
-  }
+  // empting notification array and sessionStorage
+  const handleDeleteNotification = () => {
+    setNotifications([]);
+    sessionStorage.removeItem("notifications");
+  };
 
   return (
     <>
@@ -49,7 +54,7 @@ function Sidebar() {
             isOpen ? "transform translate-x-0" : "transform translate-x-full"
           }`}
         >
-          <NavLink onClick={()=> handleDeleteNotification()} to="/chatbox">
+          <NavLink onClick={() => handleDeleteNotification()} to="/chatbox">
             <div className="relative flex items-center justify-center animated-message ">
               <div className="relative flex gap-1 text-lg font-custom">
                 <p>You have new message(s)</p>

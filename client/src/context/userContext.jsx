@@ -54,7 +54,7 @@ const UserProvider = ({ children }) => {
         setResponse(true);
         if (userRole === "artist") {
           setTimeout(() => {
-            window.location.replace("/homeArtist");
+           window.location.replace("/homeArtist");
           }, 1000)
         } else {
           setTimeout(() => {

@@ -1,10 +1,26 @@
 import express from "express";
-import { sendMessage, getMessages, markNotificationAsRead } from "../controllers/messageControllers.js";
-import auth from "../middleware/user-auth.js"
+import {
+  sendMessage,
+  getMessages,
+  markNotificationAsRead,
+  deleteMessage,
+} from "../controllers/messageControllers.js";
+import auth from "../middleware/user-auth.js";
+import { chatImageUpload } from "../middleware/multerCloudinary.js";
 const messageRouter = express.Router();
 
-messageRouter.post("/send/:id", auth, sendMessage);
+messageRouter.post(
+  "/send/:id",
+  chatImageUpload.single("chatimage"),
+  auth,
+  sendMessage
+);
 messageRouter.get("/get/:id", auth, getMessages);
-messageRouter.put("/notifications/:notificationId", auth, markNotificationAsRead);
+messageRouter.put(
+  "/notifications/:notificationId",
+  auth,
+  markNotificationAsRead
+);
+messageRouter.delete("/delete/:messageId", auth, deleteMessage)
 
 export default messageRouter;

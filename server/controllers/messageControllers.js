@@ -8,6 +8,7 @@ export const sendMessage = async (req, res) => {
   const { message } = req.body;
   const { id: receiverId } = req.params;
   const senderId = req.user.id;
+  const file = req.file;
   try {
     let conversation = await Chat.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -23,6 +24,7 @@ export const sendMessage = async (req, res) => {
       senderId,
       receiverId,
       message,
+      file: file ? file.path : null,
       notifications: [
         { message: "You have received a new message", read: false, receiverId },
       ],
@@ -115,3 +117,29 @@ export const markNotificationAsRead = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+//delete message
+
+export const deleteMessage = async (req, res) => {
+  const { messageId } = req.params;
+  try {
+    const message = await Message.findOneAndDelete({ _id: messageId });
+    if (!message) {
+      return res.status(404).json({ error: "Message not found" });
+    }
+
+    const updateChat = await Chat.updateOne(
+      { messages: { $in: [messageId] } },
+      { $pull: { messages: messageId } }
+    );
+
+    res.status(200).json({ success: true, message });
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// update message
+
+const updateMessage = () => {};

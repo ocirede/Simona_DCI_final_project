@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFetchMessages } from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
 import axios from "../../config/axios.js";
@@ -12,6 +12,8 @@ export default function UserContact({ connection, onClick }) {
   const { address } = connection;
   const fullName = `${address.firstname} ${address.lastname}`;
   const baseURL = import.meta.env.VITE_BASE_URL;
+
+  // updating notification status
   const handleUpdateNotificationStatus = async (notificationId) => {
     try {
       const response = await axios.put(
@@ -31,11 +33,15 @@ export default function UserContact({ connection, onClick }) {
       console.error("Error updating notification status:", error);
     }
   };
+
+  // fetching messages
   useEffect(() => {
     if (messages) {
       getMessages(connection._id);
     }
   }, []);
+
+  // counting notifications
 
   useEffect(() => {
     if (notifications && notifications.length > 0) {
@@ -54,7 +60,7 @@ export default function UserContact({ connection, onClick }) {
     }
   }, [notifications]);
 
-
+  // grabbing the last message
   const lastMessage = messages[messages.length - 1]?.message;
   const cutLastMessage =
     lastMessage?.length > 20
@@ -62,7 +68,7 @@ export default function UserContact({ connection, onClick }) {
       : lastMessage;
 
   return (
-    <div className="user-contact flex items-center gap-1 ml-4 mt-6  ">
+    <div className="user-contact flex items-center gap-1 ml-4 mt-7  ">
       <div className={`avatar ${isOnline ? "online" : ""}`}>
         <div className=" w-12 h-12 rounded-full">
           <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />

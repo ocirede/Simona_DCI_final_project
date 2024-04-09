@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
+import { writeFile } from "fs";
 
 const app = express();
 const server = http.createServer(app);
@@ -29,7 +30,9 @@ io.on("connection", (socket) => {
     userSocketMap[userId] = socket.id;
     socketUserMap[socket.id] = userId;
   }
-
+socket.on("file-upload", (file)=> {
+  console.log(file)
+})
   // Emit getOnlineUsers event to all clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
   // Handle disconnect event

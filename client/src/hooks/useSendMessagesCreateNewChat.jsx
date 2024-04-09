@@ -7,16 +7,18 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 export function useSendMessage(connection) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [uploadImage, setUploadImage] = useState();
+
   // Function to send a message
   const sendMessage = async (connectionId) => {
-    const body = {
-      message: newMessage,
-    };
+    const formData = new FormData();
+    formData.append("message", newMessage);
+    formData.append("chatimage", uploadImage);
 
     try {
       const response = await axios.post(
         `${baseURL}/messages/send/${connectionId}`,
-        body
+        formData
       );
       setMessages((prev) => [...prev, response.data]);
       setNewMessage("");
@@ -25,7 +27,14 @@ export function useSendMessage(connection) {
     }
   };
 
-  return { messages, sendMessage, newMessage, setNewMessage };
+  return {
+    messages,
+    sendMessage,
+    newMessage,
+    setNewMessage,
+    uploadImage,
+    setUploadImage,
+  };
 }
 
 export function useFetchMessages(connection) {
@@ -41,7 +50,9 @@ export function useFetchMessages(connection) {
         setMessages(response.data);
         const allNotifications = [];
         response.data.forEach((message) => {
-          const userNotifications = message.notifications.filter((notif) => notif.receiverId === user?._id);
+          const userNotifications = message.notifications.filter(
+            (notif) => notif.receiverId === user?._id
+          );
           allNotifications.push(...userNotifications);
         });
         setNotifications(allNotifications);
@@ -51,6 +62,7 @@ export function useFetchMessages(connection) {
     }
   };
 
+  
 
   useEffect(() => {
     if (connection) {
@@ -59,7 +71,13 @@ export function useFetchMessages(connection) {
     }
   }, [connection]);
 
-
-
-  return { messages, setMessages, getMessages, notifications, setNotifications };
+  return {
+    messages,
+    setMessages,
+    getMessages,
+    notifications,
+    setNotifications,
 }
+};
+
+
