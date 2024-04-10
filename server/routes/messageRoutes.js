@@ -4,6 +4,7 @@ import {
   getMessages,
   markNotificationAsRead,
   deleteMessage,
+  updateMessage,
 } from "../controllers/messageControllers.js";
 import auth from "../middleware/user-auth.js";
 import { chatImageUpload } from "../middleware/multerCloudinary.js";
@@ -21,6 +22,6 @@ messageRouter.put(
   auth,
   markNotificationAsRead
 );
-messageRouter.delete("/delete/:messageId", auth, deleteMessage)
-
+messageRouter.delete("/delete/:messageId", auth, deleteMessage);
+messageRouter.put("/update/:messageId", auth, updateMessage);
 export default messageRouter;

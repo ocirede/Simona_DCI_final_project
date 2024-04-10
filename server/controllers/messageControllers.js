@@ -133,7 +133,7 @@ export const deleteMessage = async (req, res) => {
       { $pull: { messages: messageId } }
     );
 
-    res.status(200).json({ success: true, message });
+    res.status(200).json({ message });
   } catch (error) {
     console.error("Error deleting message:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -142,4 +142,23 @@ export const deleteMessage = async (req, res) => {
 
 // update message
 
-const updateMessage = () => {};
+export const updateMessage = async (req, res) => {
+  const { messageId } = req.params;
+  const { message: updatedMessage } = req.body;
+
+  try {
+    const newMessage = await Message.findByIdAndUpdate(
+      messageId,
+      { message: updatedMessage },
+      { new: true }
+    );
+    if (!newMessage) {
+      return res.status(404).json({ error: "Message not found" });
+    }
+
+    res.status(200).json(newMessage);
+  } catch (error) {
+    console.error("Error updating message:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
