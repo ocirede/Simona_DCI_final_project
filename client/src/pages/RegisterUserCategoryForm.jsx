@@ -4,16 +4,20 @@ import FormSubmitButton from "../components/register/FormSubmitButton";
 import AlertMessageWarning from "../components/alerts/AlertMessageWarning";
 
 export const categories = [
-  "React",
-  "MongoDB",
-  "Docker",
-  "CSS",
-  "HTML",
-  "Express.js",
-  "Node.js",
-  "Tailwind",
-  "Firebase",
-  "Redux",
+  "Painting",
+  "Drawing",
+  "Digital art",
+  "Sculpture",
+  "Performing arts",
+  "Music",
+  "Dance",
+  "Photography",
+  "Literaly arts",
+  "Conterporary arts",
+  "Tradinional arts",
+  "Crafts",
+  "Design",
+  "Other",
 ];
 
 const RegisterUserCategoryForm = () => {
@@ -74,15 +78,19 @@ const RegisterUserCategoryForm = () => {
         </h3>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-4 gap-2 justify-center items-center mb-5">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-2 justify-center items-center mb-5">
             {categories.map((category, index) => (
               <label
                 key={index}
-                className={`flex items-center justify-center px-4 py-2 rounded-md cursor-pointer transition-colors duration-300 ${
+                className={`flex items-center justify-center px-4 py-2 rounded-md cursor-pointer transition-colors duration-300 overflow-hidden ${
                   selectedCategories.includes(category)
                     ? "bg-retroRed"
                     : "bg-gray-200 hover:bg-gray-300"
                 }`}
+                style={{
+                  whiteSpace: "nowrap",
+                  minWidth: "0",
+                }}
               >
                 <input
                   className="sr-only"
@@ -94,6 +102,7 @@ const RegisterUserCategoryForm = () => {
               </label>
             ))}
           </div>
+
           <FormSubmitButton name="NEXT" />
         </form>
         {showLimitChoiseMessage && (
