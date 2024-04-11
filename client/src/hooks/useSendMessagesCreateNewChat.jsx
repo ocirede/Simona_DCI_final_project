@@ -59,7 +59,7 @@ export function useFetchMessages(connection) {
       const response = await axios.get(`${baseURL}/messages/get/${contactId}`);
       if (response.data) {
         setMessages(response.data);
-        const lastMessage = response.data[response.data.length - 1].message;
+        const lastMessage = response.data[response.data.length - 1];
         setLastMessage(lastMessage)
         const allNotifications = [];
         response.data.forEach((message) => {

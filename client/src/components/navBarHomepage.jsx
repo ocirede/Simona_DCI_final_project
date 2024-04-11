@@ -10,7 +10,7 @@ import { useSocketContext } from "../context/socketContext.jsx";
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, logout } = useContext(UserContext);
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");

@@ -103,7 +103,7 @@ export default function UserContact({ connection, onClick }) {
 
           <div className=" flex gap-1">
             <p className=" font-custom">last message:</p>
-            <p className="  font-bold font-custom">{lastMessage} </p>
+            <p className="  font-bold font-custom">{lastMessage?.message} </p>
           </div>
         </div>
       </div>
