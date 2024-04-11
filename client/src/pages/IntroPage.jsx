@@ -4,7 +4,6 @@ import TopReviews from "../components/introPage/TopReviews";
 import { useTranslation } from "react-i18next";
 import MovingText from "../components/framerMotionAnimations/MovingText";
 import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
-
 import { RatingContext } from "../context/ratingContext";
 import { useContext, useEffect } from "react";
 
@@ -17,6 +16,7 @@ export default function IntroPage() {
 
   return (
    <div>
+
       <div className="lg:pl-20 lg:pr-20">
         <SimonaIntroSection />
         <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[670px] md:h-fit border-b-8">

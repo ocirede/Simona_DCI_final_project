@@ -7,8 +7,10 @@ import DeleteConnection from "../network-comps/DeleteConnection";
 export default function ConnectNetwork() {
       const { user} = useContext(UserContext)
       // if(user)console.log(user)
+
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
+
       return (
         <>
           <div className="rounded-2xl  shadow-lg border border-b-4 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto ">
