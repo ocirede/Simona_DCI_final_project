@@ -13,7 +13,6 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const [lastMessage, setLastMessage] = useState("")
   useEffect(() => {
     try {
       if (user) {
@@ -58,25 +57,10 @@ const SocketProvider = ({ children }) => {
   }, [user]);
 
 
-  // useEffect(()=> {
-  //   const getMessages = async (contactId) => {
-  //     try {
-  //       const response = await axios.get(`${baseURL}/messages/get/${contactId}`);
-  //       if (response.data) {
-  //         setLastMessage(response.data[response.data.length - 1]);
-          
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   getMessages()
-  // },[])
 
   return (
     <SocketContext.Provider
-      value={{ socket, onlineUsers, notifications, setNotifications, lastMessage}}
+      value={{ socket, onlineUsers, notifications, setNotifications}}
     >
       {children}
     </SocketContext.Provider>

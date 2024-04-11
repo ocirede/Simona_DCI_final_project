@@ -82,6 +82,15 @@ export const getMessages = async (req, res) => {
   }
 };
 
+// get the last message
+export const getLastMessage = async (req, res)=>{
+try {
+  
+} catch (error) {
+  
+}
+}
+
 // update notifications
 
 export const markNotificationAsRead = async (req, res) => {

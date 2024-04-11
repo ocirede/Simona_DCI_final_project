@@ -50,12 +50,17 @@ export function useFetchMessages(connection) {
   const { user } = useContext(UserContext);
   const [messages, setMessages] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [lastMessage, setLastMessage] = useState("")
+  console.log(lastMessage)
+
   // Function to get messages of a specific chat
   const getMessages = async (contactId) => {
     try {
       const response = await axios.get(`${baseURL}/messages/get/${contactId}`);
       if (response.data) {
         setMessages(response.data);
+        const lastMessage = response.data[response.data.length - 1].message;
+        setLastMessage(lastMessage)
         const allNotifications = [];
         response.data.forEach((message) => {
           const userNotifications = message.notifications.filter(
@@ -85,5 +90,6 @@ export function useFetchMessages(connection) {
     getMessages,
     notifications,
     setNotifications,
+    lastMessage
   };
 }

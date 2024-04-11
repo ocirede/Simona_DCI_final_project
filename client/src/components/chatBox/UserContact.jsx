@@ -7,7 +7,7 @@ import { UserContext } from "../../context/userContext.jsx";
 export default function UserContact({ connection, onClick }) {
   const { user } = useContext(UserContext);
   const [notificationCount, setNotificationCount] = useState(0);
-  const { messages, getMessages, notifications, setNotifications } =
+  const { messages, getMessages, notifications, setNotifications, lastMessage } =
     useFetchMessages(connection);
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(connection._id);
@@ -63,11 +63,11 @@ export default function UserContact({ connection, onClick }) {
   }, [notifications]);
 
   // grabbing the last message
-  const lastMessage = messages[messages.length - 1]?.message;
-  const cutLastMessage =
-    lastMessage?.length > 20
-      ? lastMessage?.substring(0, 15) + "..."
-      : lastMessage;
+  // const lastMessage = messages[messages.length - 1]?.message;
+  // const cutLastMessage =
+  //   lastMessage?.length > 20
+  //     ? lastMessage?.substring(0, 15) + "..."
+  //     : lastMessage;
 
 
   return (
@@ -103,7 +103,7 @@ export default function UserContact({ connection, onClick }) {
 
           <div className=" flex gap-1">
             <p className=" font-custom">last message:</p>
-            <p className="  font-bold font-custom">{cutLastMessage} </p>
+            <p className="  font-bold font-custom">{lastMessage} </p>
           </div>
         </div>
       </div>

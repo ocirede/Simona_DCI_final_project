@@ -273,13 +273,13 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  // ////log out
-  // const logout = () => {
-  //   localStorage.removeItem("token");
+  ////log out
+  const logout = () => {
+    localStorage.removeItem("token");
 
-  //   setUser(null);
-  //   navigate("/");
-  // };
+    setUser(null);
+    navigate("/");
+  };
 
   //Update user(everything except profile image and background)
   const updateUser = async (userId, updatedData) => {
@@ -405,7 +405,7 @@ const UserProvider = ({ children }) => {
         acceptRequest,
         rejectRequest,
         deleteConnection,
-        // logout,
+        logout,
         updateUser,
         updateProfileImage,
         updateProfileBackground,
