@@ -18,7 +18,7 @@ messageRouter.post(
 );
 messageRouter.get("/get/:id", auth, getMessages);
 messageRouter.put(
-  "/notifications/:notificationId",
+  "/notifications/:receiverId",
   auth,
   markNotificationAsRead
 );

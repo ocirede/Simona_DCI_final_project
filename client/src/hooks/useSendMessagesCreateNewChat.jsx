@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "../config/axios.js";
 import { UserContext } from "../context/userContext.jsx";
+import { useSocketContext } from "../context/socketContext.jsx";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -8,7 +9,7 @@ export function useSendMessage(connection) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [uploadImage, setUploadImage] = useState();
-
+  const [showAlert, setShowAlert] = useState(false);
   // Function to send a message
   const sendMessage = async (connectionId) => {
     const formData = new FormData();
@@ -16,6 +17,13 @@ export function useSendMessage(connection) {
     formData.append("chatimage", uploadImage);
 
     try {
+      if (!newMessage.trim()) {
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 2500);
+        return;
+      }
       const response = await axios.post(
         `${baseURL}/messages/send/${connectionId}`,
         formData
@@ -34,6 +42,7 @@ export function useSendMessage(connection) {
     setNewMessage,
     uploadImage,
     setUploadImage,
+    showAlert,
   };
 }
 
@@ -41,7 +50,6 @@ export function useFetchMessages(connection) {
   const { user } = useContext(UserContext);
   const [messages, setMessages] = useState([]);
   const [notifications, setNotifications] = useState([]);
-
   // Function to get messages of a specific chat
   const getMessages = async (contactId) => {
     try {
@@ -62,7 +70,7 @@ export function useFetchMessages(connection) {
     }
   };
 
-  
+
 
   useEffect(() => {
     if (connection) {
@@ -77,7 +85,5 @@ export function useFetchMessages(connection) {
     getMessages,
     notifications,
     setNotifications,
+  };
 }
-};
-
-

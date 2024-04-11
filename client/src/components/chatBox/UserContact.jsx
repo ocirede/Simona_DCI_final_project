@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFetchMessages } from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
 import axios from "../../config/axios.js";
+import { UserContext } from "../../context/userContext.jsx";
 
 export default function UserContact({ connection, onClick }) {
+  const { user } = useContext(UserContext);
   const [notificationCount, setNotificationCount] = useState(0);
   const { messages, getMessages, notifications, setNotifications } =
     useFetchMessages(connection);
@@ -14,16 +16,16 @@ export default function UserContact({ connection, onClick }) {
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // updating notification status
-  const handleUpdateNotificationStatus = async (notificationId) => {
+  const handleUpdateNotificationStatus = async (receiverId) => {
     try {
       const response = await axios.put(
-        `${baseURL}/messages/notifications/${notificationId}`
+        `${baseURL}/messages/notifications/${receiverId}`
       );
 
       if (response.data) {
         setNotifications((prevNotifications) =>
           prevNotifications?.filter(
-            (notification) => notification._id !== notificationId
+            (notification) => notification.receiverId !== receiverId
           )
         );
       } else {
@@ -67,6 +69,7 @@ export default function UserContact({ connection, onClick }) {
       ? lastMessage?.substring(0, 15) + "..."
       : lastMessage;
 
+
   return (
     <div className="user-contact flex items-center gap-1 ml-4 mt-7  ">
       <div className={`avatar ${isOnline ? "online" : ""}`}>
@@ -82,7 +85,7 @@ export default function UserContact({ connection, onClick }) {
         <div
           onClick={() => {
             if (notifications && notifications.length > 0) {
-              handleUpdateNotificationStatus(notifications[0]._id);
+              handleUpdateNotificationStatus(user._id);
             }
           }}
           className="ml-2"

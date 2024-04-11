@@ -50,13 +50,13 @@ function Sidebar() {
     <>
       {isOpen && (
         <div
-          className={`fixed top-1/2 right-0 z-50 w-1/6 bg-retroRed text-white rounded-lg p-4 transition-transform duration-700 ease-in-out  ${
+          className={`fixed top-1/2 right-0 z-50 bg-retroRed text-white rounded-lg p-4 transition-transform duration-700 ease-in-out  ${
             isOpen ? "transform translate-x-0" : "transform translate-x-full"
           }`}
         >
           <NavLink onClick={() => handleDeleteNotification()} to="/chatbox">
             <div className="relative flex items-center justify-center animated-message ">
-              <div className="relative flex gap-1 text-lg font-custom">
+              <div className=" relative flex gap-1 text-lg font-custom">
                 <p>You have new message(s)</p>
                 <MessageSquareText className="notification-icon" />
                 <span className="notification-count">{notificationCount}</span>

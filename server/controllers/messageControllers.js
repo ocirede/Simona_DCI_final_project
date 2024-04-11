@@ -26,7 +26,7 @@ export const sendMessage = async (req, res) => {
       message,
       file: file ? file.path : null,
       notifications: [
-        { message: "You have received a new message", read: false, receiverId },
+        { message: "You have received a new message", receiverId },
       ],
     });
 
@@ -86,34 +86,36 @@ export const getMessages = async (req, res) => {
 
 export const markNotificationAsRead = async (req, res) => {
   try {
-    const { notificationId } = req.params;
-
-    const message = await Message.findOne({
-      "notifications._id": notificationId,
+    const { receiverId } = req.params;
+    const messages = await Message.find({
+      "notifications.receiverId": receiverId,
     });
-
-    if (!message) {
+    if (!messages || messages.length < 1) {
       return res.status(404).json({ error: "Conversation not found" });
     }
+    const notificationIds = [];
+    messages.map((message) => {
+      message.notifications.map((notification) => {
+        notificationIds.push(notification._id);
+      });
+    });
 
-    const notificationIndex = message.notifications.findIndex(
-      (notif) => notif._id.toString() === notificationId
+    await Promise.all(
+      notificationIds.map(async (notificationId) => {
+        const targetMessage = await Message.findOne({
+          "notifications._id": notificationId,
+        });
+
+        targetMessage.notifications = targetMessage.notifications.filter(
+          (notif) => notif._id.toString() != notificationId.toString()
+        );
+
+        await targetMessage.save();
+      })
     );
-
-    if (notificationIndex === -1) {
-      return res.status(404).json({ error: "Notification not found" });
-    }
-
-    message.notifications[notificationIndex].read = true;
-
-    if (message.notifications[notificationIndex].read === true) {
-      message.notifications.splice(notificationIndex, 1);
-    }
-    await message.save();
-
     res.status(200).json({ success: true });
   } catch (error) {
-    console.log("Error marking notification as read:", error);
+    console.log("Error deleting notifications:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

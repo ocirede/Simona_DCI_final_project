@@ -14,6 +14,7 @@ import { Check } from "lucide-react";
 import { X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import axios from "../../config/axios.js";
+import AlertMessageWarning from "../alerts/AlertMessageWarning.jsx";
 
 export default function ChatBox({ connection }) {
   const fullName = `${connection.address.firstname} ${connection.address.lastname}`;
@@ -21,7 +22,7 @@ export default function ChatBox({ connection }) {
   const { user } = useContext(UserContext);
   const [openMessages, setOpenMessages] = useState(false);
   const [openEditText, setOpenEditText] = useState(false);
-  const { sendMessage, newMessage, setNewMessage, setUploadImage } =
+  const { sendMessage, newMessage, setNewMessage, setUploadImage, showAlert } =
     useSendMessage(connection);
   const { messages, setMessages, uploadImage } = useFetchMessages(connection);
   const messagesEndRef = useRef(null);
@@ -137,21 +138,21 @@ export default function ChatBox({ connection }) {
       console.log(error);
     }
   };
+
   // NavLink to find out how to navigate through other profile pages;
   return (
     <div className="flex flex-col mr-3 mt-4 h-2/3 bg-white rounded-lg border border-b-4 border-l-4 border-black">
       <nav className="w-full h-16 p-3 flex items-center z-50 font-custom font-bold shadow-xl">
         <NavLink className="underline">{fullName}</NavLink>
       </nav>
+      {showAlert && (
+        <AlertMessageWarning text="Please type a message" />
+      )}
       {messages && messages.length > 0 ? (
+        
         <div className="overflow-y-auto p-5">
           {messages.map((message, index) => {
-            const isSameAsPrev =
-              index > 0 &&
-              moment(message.createdAt).isSame(
-                messages[index - 1].createdAt,
-                "minute"
-              );
+        
             const messageClass =
               message.senderId === user?._id
                 ? "sent-message"
@@ -196,11 +197,9 @@ export default function ChatBox({ connection }) {
                       </div>
                     )}
                   </div>
-                  {!isSameAsPrev && (
-                    <span className="message-timestamp">
-                      {moment(message.createdAt).calendar()}
-                    </span>
-                  )}
+                  <span className="message-timestamp">
+                    {moment(message.createdAt).calendar()}
+                  </span>
                   {message.file && (
                     <div className="chat-file relative">
                       <img src={message.file} alt="File" />
@@ -221,24 +220,24 @@ export default function ChatBox({ connection }) {
                 {openEditText[message._id] && (
                   <form
                     onSubmit={(e) => handleUpdateMessage(e, message._id)}
-                    className=" absolute top-1/3 right-1/3 p-2 bg-slate-200  h-28"
+                    className=" w-1/5 absolute top-1/4 right-1/3 bg-white border border-black border-b-4 border-r-4 h-48"
                   >
-                    <div className=" flex flex-col justify-between gap-10 ">
-                      <div className=" flex justify-between">
+                    <div className=" flex flex-col justify-between gap-28 ">
+                      <div className=" flex justify-between bg-retroRed p-1 font-custom text-white">
                         <nav> Edit message</nav>
                         <X
                           className=" cursor-pointer"
                           onClick={() => handleEditText(message._id)}
                         />
                       </div>
-                      <div className=" flex justify-between gap-3">
+                      <div className="p-1 flex  gap-1 ">
                         <input
                           type="text"
                           name="updatedmessage"
                           defaultValue={message.message}
-                          className=" border text-black"
+                          className=" p-1 w-full  border border-black text-black"
                         />
-                        <button type="submit">
+                        <button className=" bg-retroBlue p-1" type="submit">
                           <Check />
                         </button>
                       </div>
@@ -276,7 +275,7 @@ export default function ChatBox({ connection }) {
         </div>
         <button
           onClick={() => sendMessage(connection._id)}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-lightBlue  text-white px-4 py-2 rounded"
         >
           <Send />
         </button>

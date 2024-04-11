@@ -4,17 +4,14 @@ import UserContact from "../components/chatBox/UserContact.jsx";
 import ChatBox from "../components/chatBox/ChatBox.jsx";
 import { UserContext } from "../context/userContext.jsx";
 
-
 export default function Chat() {
   const { user } = useContext(UserContext);
-  const { setConnections, connections } = UseGetConnections();
+  const { connections } = UseGetConnections();
   const [selectedContact, setSelectedContact] = useState(null);
   const fullName = user?.address?.firstname;
   const welcomeMessage = `Welcome ${fullName}!`;
   const initialMessage = `Select a chat to start messaging!`;
   const [searchQuery, setSearchQuery] = useState("");
-
-
 
   const handleSelectedContact = (connection) => {
     setSelectedContact(connection);
@@ -25,7 +22,6 @@ export default function Chat() {
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
-
 
   return (
     <div className="flex h-screen mb-10  relative">
@@ -44,19 +40,6 @@ export default function Chat() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search chat..."
           />
-          <svg
-            width="251"
-            height="251"
-            viewBox="40 130 251 241"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="z-0 absolute bottom-[70px] left-[395px]"
-          >
-            <path
-              d="M125.499 0L130.214 95.7401L164.282 6.14257L139.18 98.6521L199.266 23.9676L146.806 104.194L227.031 51.7322L152.346 111.82L244.857 86.718L155.26 120.786L251 125.499L155.26 130.214L244.857 164.282L152.346 139.18L227.031 199.266L146.806 146.806L199.266 227.031L139.18 152.346L164.282 244.857L130.214 155.26L125.499 251L120.786 155.26L86.718 244.857L111.82 152.346L51.7322 227.031L104.194 146.806L23.9676 199.266L98.6521 139.18L6.14257 164.282L95.74 130.214L0 125.499L95.74 120.786L6.14257 86.718L98.6521 111.82L23.9676 51.7322L104.194 104.194L51.7322 23.9676L111.82 98.6521L86.718 6.14257L120.786 95.7401L125.499 0Z"
-              fill="black"
-            />
-          </svg>
         </div>
 
         {searchQuery === "" ? (
@@ -134,7 +117,7 @@ export default function Chat() {
                     height: "100px",
                     color: "rgb(223, 60, 95)",
                     position: "absolute",
-                    top: "410px",
+                    top: "385px",
                     right: "810px",
                   }}
                 >

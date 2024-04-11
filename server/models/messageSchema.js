@@ -24,10 +24,7 @@ const messageSchema = new mongoose.Schema({
     notifications: [
         {
           message: String,
-          read: {
-            type: Boolean,
-            default: false
-          },
+        
           receiverId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
