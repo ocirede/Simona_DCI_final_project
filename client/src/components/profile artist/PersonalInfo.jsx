@@ -1,34 +1,52 @@
-import React, { useState } from "react";
-import { Contact } from "lucide-react";
-import { Share } from "lucide-react";
-import { Camera } from "lucide-react";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
 
-function PersonalInfo({onClick}) {
- const contactMail =` mailto:federico.diaferia@gmail.com`
+import ShareLinkCard from "./ShareLinkCard";
+import { useFormVisibility } from "../profilePageEntrepreneur/customHook/FormVisibility";
+
+function PersonalInfo({ onClick }) {
+  const { user } = useContext(UserContext);
+  const { formVisibility, toggleFormVisibility } = useFormVisibility(); 
+
+  const generateMailToLink = () => {
+    const email = user?.email;
+    return email ? `mailto:${email}` : null;
+  };
+
+  const handleContactMeClick = () => {
+    const mailtoLink = generateMailToLink();
+    if (mailtoLink) {
+      window.location.href = mailtoLink;
+    } else {
+      console.error("User email not found");
+    }
+  };
+
   return (
-    <section className="flex justify-center items-center  h-[130px] mt-2">
-      {/* import { Contact } from 'lucide-react' ???*/}
-      <div className="absolute top-0 -left-8  sm:left-12 md:left-28 lg:left-56 ">
-        <a href={contactMail}>
-        <button className=" flex items-center justify-center w-[100px] h-[40px] absolute left-12 top-[210px] rounded-xl bg-slate-500">
-          <span className="text-white">Contact me</span>
-        </button>
-        </a>
-      </div>
-      <label>
-        <div className="bg-slate-500 w-28 h-28 rounded-full cursor-pointer absolute top-[160px] transform -translate-x-1/2 z-20">
-          <input type="file" className="hidden" />
-          <Camera className=" absolute inset-y-10 right-10 w-8 h-8 " />
-        </div>
-      </label>
-      {/* import { Share } from 'lucide-react'???*/}
-      <div className="absolute top-0 -right-8  sm:right-12 md:right-28  lg:right-56">
-        <button onClick={onClick} className=" flex items-center justify-center w-[100px] h-[40px] absolute right-12 top-[210px] rounded-xl bg-slate-500">
-          <span className="text-white">Share Link</span>
+    <section className="flex gap-8 ml-16 items-center">
+      <div className="">
+        <button
+          onClick={handleContactMeClick}
+          className="bg-gray-200 rounded-full p-2"
+        >
+          <span className="text-black">Contact me</span>
         </button>
       </div>
+      <div className="bg-gray-200 rounded-full p-2">
+        <button
+          onClick={() => toggleFormVisibility("shareLink")} 
+          className=""
+        >
+          <span className="text-black">Share Link</span>
+        </button>
+      </div>
+
+   
+      {formVisibility.shareLink && <ShareLinkCard onClose={() => toggleFormVisibility("shareLink")} />}
     </section>
   );
 }
 
 export default PersonalInfo;
+
+

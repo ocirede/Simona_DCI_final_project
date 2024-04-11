@@ -30,9 +30,9 @@ function App() {
         </Route>
 
         <Route element={<ProfilePageLayout />}>
-          <Route path="/profile-artist" element={<ProfileArtistPage />} />
+          <Route path="/profile-artist/:userId" element={<ProfileArtistPage />} />
           <Route
-            path="/ProfilePageEntrepreneur"
+            path="/ProfilePageEntrepreneur/:userId"
             element={<ProfilePageEntrepreneur />}
           />
           <Route path="/homeArtist" element={<HomePageArtist />} />

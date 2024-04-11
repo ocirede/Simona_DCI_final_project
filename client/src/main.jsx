@@ -7,9 +7,7 @@ import './i18n'
 
 import '@fontsource/bungee';
 
-
 import RatingContextProvider from "./context/ratingContext.jsx";
-
 import UserProvider from "./context/userContext.jsx";
 
 
@@ -18,13 +16,17 @@ import SocketProvider from "./context/socketContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
+
+      <UserProvider>   
+     
+
   
                 <RatingContextProvider>
               <SocketProvider>
                 <App />
               </SocketProvider>
                 </RatingContextProvider>
+
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
