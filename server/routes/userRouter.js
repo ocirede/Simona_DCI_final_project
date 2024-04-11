@@ -19,8 +19,8 @@ import {
   getAllUsers,
   updateProfileImage,
   updateProfileBackground,
-  addFavOffer
- getUserById,
+  addFavOffer,
+  getUserById,
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
