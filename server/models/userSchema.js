@@ -54,6 +54,12 @@ const userSchema = new mongoose.Schema(
     ],
     interests: [{ type: String }],
     personality: [{ type: String }],
+    tags: [
+      {
+        trait: { type: String }, 
+        value: { type: Number }, 
+      },
+    ],
     education: [
       {
         title: { type: String },
@@ -62,6 +68,8 @@ const userSchema = new mongoose.Schema(
     ],
 
     about: { type: String },
+
+    portfolioImages: [{ type: String }],
   },
 
   {

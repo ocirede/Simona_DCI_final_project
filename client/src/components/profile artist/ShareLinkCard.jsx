@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import  { useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Copy } from "lucide-react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function ShareLinkCard({ onClose }) {
   const [copySuccess, setCopySuccess] = useState(false);
@@ -103,16 +103,16 @@ function ShareLinkCard({ onClose }) {
               <path
                 d="M20 24C22.2091 24 24 22.2091 24 20C24 17.7909 22.2091 16 20 16C17.7909 16 16 17.7909 16 20C16 22.2091 17.7909 24 20 24Z"
                 stroke="white"
-                stroke-width="2"
-                strokelinecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M24 16V21C24 21.7956 24.3161 22.5587 24.8787 23.1213C25.4413 23.6839 26.2044 24 27 24C27.7956 24 28.5587 23.6839 29.1213 23.1213C29.6839 22.5587 30 21.7956 30 21V20C29.9999 17.743 29.2362 15.5525 27.8333 13.7845C26.4303 12.0165 24.4706 10.7751 22.2726 10.2622C20.0747 9.74925 17.7679 9.99492 15.7274 10.9592C13.6868 11.9236 12.0324 13.5498 11.0333 15.5736C10.0341 17.5973 9.74898 19.8995 10.2242 22.1059C10.6994 24.3123 11.907 26.293 13.6506 27.726C15.3943 29.1591 17.5714 29.9601 19.8281 29.9989C22.0847 30.0377 24.2881 29.312 26.08 27.9398"
                 stroke="white"
-                stroke-width="2"
-                strokelinecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
             </svg>
           </a>
@@ -136,7 +136,7 @@ function ShareLinkCard({ onClose }) {
           <input
             type="text"
             defaultValue={`http://localhost:5173${pathname}`}
-            className="border w-full h-7 pl-2"
+            className="border w-full h-7 pl-2 max-w-[calc(100%-3rem)] h-7 pl-2 overflow-hidden overflow-ellipsis"
             ref={inputRef}
           />
 

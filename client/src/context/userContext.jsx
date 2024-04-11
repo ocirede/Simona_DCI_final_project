@@ -378,6 +378,18 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // Find user by ID
+  const getUserById = async (userId) => {
+    try {
+      const response = await axios.get(baseURL + `/users/single-user/${userId}`);
+      const userFound = response.data.user;
+      return userFound;
+    } catch (error) {
+      console.error('Error fetching user by ID:', error);
+      return null;
+    }
+  };
+  
 
   /**
    * For the brave souls who get this far: You are the chosen ones,
@@ -424,6 +436,8 @@ const UserProvider = ({ children }) => {
         updateProfileImage,
         updateProfileBackground,
         saveAboutText,
+        getUserById,
+        loggedUser
       }}
     >
       {children}

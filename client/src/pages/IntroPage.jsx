@@ -3,7 +3,7 @@ import MeetOurTeam from "../components/introPage/MeetOurTeam";
 import TopReviews from "../components/introPage/TopReviews";
 import MovingText from "../components/framerMotionAnimations/MovingText";
 import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
-  import { RatingContext } from "../context/ratingContext";
+import { RatingContext } from "../context/ratingContext";
 import { useContext, useEffect } from "react";
 
 export default function IntroPage() { 
@@ -18,7 +18,7 @@ export default function IntroPage() {
           <div>
               <div className="lg:pl-20 lg:pr-20">
                 <SimonaIntroSection />
-                <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[650px] md:h-fit border-b-8">
+                <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[670px] md:h-fit border-b-8">
                     <div className="bg-cobaltBlue rounded-tl-[30px] rounded-tr-[30px] flex p-6 justify-between items-center pr-8 pl-8 md:pr-24 md:pl-24">
                         <img src="/smiley.svg" alt="smiley" className="w-[70px] lg:w-[150px] lg:ml-[120px]"></img>
                         <h2 className="text-[26px] md:text-[38px] lg:text-[52px] lg:pr-[70px] text-center text-white">Our groovy Artists</h2>
@@ -35,7 +35,7 @@ export default function IntroPage() {
             </div>
             <div className="mb-4">
                 <MovingText text="What do we do What do we do What do we do What do we do What do we do What do we do "/>
-                <div className="m-2 lg:order-2 lg:mr-40 border border-1 border-black rounded-[30px] bg-white p-10 border-b-8 md:text-[20px] lg:ml-20 lg:mr-20 p-20 lg:text-[28px]">
+                <div className="m-2 lg:order-2 border border-1 border-black rounded-[30px] bg-white p-10 border-b-8 md:text-[20px] lg:ml-20 lg:mr-20 p-20 lg:text-[28px]">
                     <p className="pb-4">Do you remember the last time you had to search through dozen of websites just to find that one <span className="uppercase text-[25px] lg:text-[32px] font-bold">right</span> person?</p>
                     <p>With Simona you don't have to feel lost anymore, start searching for your next gig, exhibition or a business partner <span className="uppercase text-[25px] lg:text-[32px] font-bold">now</span> within our cool scene and connect with various funky folks out there!</p>
                 </div>

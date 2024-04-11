@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import StarRating from "./ReviewStars";
-import { UserContext } from "../../context/userContext";
 import { RatingContext } from "../../context/ratingContext";
 import fullStarSvg from "../../assets/rating_svg/star.png";
-export default function CommentSection() {
-  const { user } = useContext(UserContext);
+export default function CommentSection({user}) {
   const { addNewRating, getRatingsForUer, ratings } = useContext(RatingContext);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -16,13 +14,13 @@ export default function CommentSection() {
 
   const handleWriteComment = (e) => {
     e.preventDefault();
-    addNewRating(user._id, "65f851e75a436b8f1fd61a8f", rating, comment);
+    addNewRating(user._id, rating, comment);
     setComment("");
     setRating(0);
   };
 
   useEffect(() => {
-    getRatingsForUer("65f851e75a436b8f1fd61a8f");
+    getRatingsForUer(user._id);
   }, [user]);
 
   return (

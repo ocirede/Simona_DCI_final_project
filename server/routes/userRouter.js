@@ -19,6 +19,7 @@ import {
   getAllUsers,
   updateProfileImage,
   updateProfileBackground,
+  getUserById,
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -37,7 +38,9 @@ userRoutes.put("/updatepassword/:token", updatePassword);
 userRoutes.post("/changepassword", changePasswordEmail);
 userRoutes.put("/update/:userId", updateUser);
 userRoutes.get("/loggeduser", auth, loggedUser);
+
 userRoutes.get("/all-the-users", getAllUsers);
+userRoutes.get("/single-user/:userId", getUserById)
 userRoutes.put(
   "/update-profile-pic/:userId",
   profileImageUpload.single("profileImage"),

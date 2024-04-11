@@ -28,7 +28,7 @@ export default function ConnectNetwork() {
       const [showConnectNetwork, setShowConnectNetwork] = useState(false);
       const [currentView, setCurrentView] = useState("");
       const { user} = useContext(UserContext)
-      if(user)console.log(user)
+      // if(user)console.log(user)
 
       const allUsers = [...userData, ...entrepreneursData]
       const [friendsList, setFriendsList] = useState([])
