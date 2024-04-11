@@ -1,10 +1,11 @@
 import SendCancelRequest from "../network-comps/SendCancelRequest";
 import PlayfulTag from "../cards/PlayfulTag";
 
+
 import { Link } from 'react-router-dom';
 
-export default function CardElement({ address, role, categories, profileImage, profileBackground, userId, _id }) {
 
+export default function CardElement({ address, role, categories, profileImage,profileBackground, userId, _id }) {
   if (!address || !categories) {
     return null;
   }
@@ -12,6 +13,7 @@ export default function CardElement({ address, role, categories, profileImage, p
   const { firstname, lastname } = address;
 
   const profilePageUrl = role === "artist" ? `/profile-artist/${_id}` : `/ProfilePageEntrepreneur/${_id}`;
+
 
 
   return (
@@ -35,6 +37,7 @@ export default function CardElement({ address, role, categories, profileImage, p
           </div>
 
 
+
         </div>
       </Link>
       <div className="px-4 py-4 text-center">
@@ -44,6 +47,7 @@ export default function CardElement({ address, role, categories, profileImage, p
         <SendCancelRequest receiverId={userId} />
 
  
+
       </div>
       <div className="pl-6 pr-6 pb-4 flex flex-wrap gap-2 justify-center text-center">
         {categories.map((category, index) => (
@@ -58,4 +62,3 @@ export default function CardElement({ address, role, categories, profileImage, p
     </div>
   );
 }
-

@@ -90,15 +90,20 @@ body {
  }
  .vertical-text {
   transform: rotate(-90deg);
-  transform-origin: left top;
+  transform-origin: center;
   white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
 }
 
 
 
 
+ 
 /* Glowing effect on hover */
-.glow-border {
+ .glow-border {
   transition: box-shadow 0.5s;
 }
 
@@ -112,8 +117,7 @@ body {
 
 .text-glow:hover {
   text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
-}
-
+} 
 
 
 /* Special font */

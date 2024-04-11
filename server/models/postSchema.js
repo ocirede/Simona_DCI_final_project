@@ -15,7 +15,7 @@ const postSchema = new mongoose.Schema(
       ref: "User",
     },
     applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    status: { type: String }, //open or closed
+    status: { type: String, default:"open" }, //open or closed
   },
   {
     timestamps: true,

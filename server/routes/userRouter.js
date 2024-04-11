@@ -20,7 +20,11 @@ import {
   updateProfileImage,
   updateProfileBackground,
 
+  addFavOffer
+
+
   getUserById,
+
 
 
 } from "../controllers/userController.js";
@@ -60,5 +64,7 @@ userRoutes.put(
   profileBackroundUpload.single("profileBackground"),
   updateProfileBackground
 );
+
+userRoutes.post("/add-fav-offer/:offerId", addFavOffer)
 
 export default userRoutes;

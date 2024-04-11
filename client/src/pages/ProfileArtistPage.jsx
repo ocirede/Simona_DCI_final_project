@@ -1,3 +1,7 @@
+
+
+
+  import CreateOffer from "../components/profile artist/CreateOfferButton";
 import { useState, useContext, useEffect } from 'react';
 import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
 import CommentSection from "../components/reviews/CommentSection";
@@ -7,6 +11,7 @@ import TagsSection from '../components/profilePageEntrepreneur/TagsSection';
 import AboutSection from '../components/profilePageEntrepreneur/AboutSection';
 import { useParams } from "react-router-dom";
 import TitleNameSection from '../components/profilePageEntrepreneur/TitleNameSection';
+
 
 function ProfileArtist() {
   const { getUserById } = useContext(UserContext);
@@ -29,6 +34,8 @@ function ProfileArtist() {
   if (profileUser) {
   return (
     <>
+
+      <CreateOffer />
       <ProfileImgBgSection user={profileUser}/>
       <main className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
       <div>
@@ -41,6 +48,7 @@ function ProfileArtist() {
             </div>
             <CommentSection user={profileUser} />
           </div>
+
       </main>
     </>
   );

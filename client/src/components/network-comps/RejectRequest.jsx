@@ -26,10 +26,10 @@ const RejectRequest = ({ senderId }) => {
           ) : (
             <button
               type="button"
-              className="text-gray-600 text-xs font-medium uppercase"
+              className=" text-red-500 font-bold text-xl cursor-pointer"
               onClick={handleRejectRequest}
             >
-              Reject
+              -
             </button>
           )}
         </>

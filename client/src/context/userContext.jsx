@@ -358,6 +358,18 @@ const UserProvider = ({ children }) => {
     }
   };
 
+
+  const  addFavOffer = async (offerId,userId) => {
+    try {
+     const response =  await axios.post(baseURL + `/users/add-fav-offer/${offerId}`, { userId });
+      if(response.data.success){
+        setUser(response.data.user)
+      }
+  } catch (error) {
+      console.error('Error adding to fav offers', error);
+  }
+  }
+
   // Find user by ID
   const getUserById = async (userId) => {
     try {
@@ -370,6 +382,7 @@ const UserProvider = ({ children }) => {
     }
   };
   
+
 
   /**
    * For the brave souls who get this far: You are the chosen ones,
@@ -415,8 +428,12 @@ const UserProvider = ({ children }) => {
         updateProfileImage,
         updateProfileBackground,
         saveAboutText,
+
+        addFavOffer,
+
         getUserById,
         loggedUser
+
       }}
     >
       {children}

@@ -6,7 +6,6 @@ import MotionSlider from "../../components/motionSlider"
 
 
 export default function RecommendedArtists() {
-  const [showRecommendedArtists, setShowRecommendedArtists] = useState(false);
   const { users } = useContext(UserContext)
   const sortedArtistsUsers = users.filter(user => user.role === "artist").sort((a, b) => b.averageRating - a.averageRating).slice(0,5)
 
@@ -20,28 +19,25 @@ export default function RecommendedArtists() {
     `
 
   return (
-    <>
-        <div className="mr-3 ml-3 flex items-center justify-center p-4  bg-purple-100 cursor-pointer  min-h-[200px] mx-auto rounded-2xl shadow-lg border border-b-4 border-black" onClick={() => setShowRecommendedArtists(!showRecommendedArtists)}>Recommended Artists</div>
-
-        {showRecommendedArtists && (
-          
-            <div className="relative overflow-hidden border border-b-4 border-black rounded-2xl shadow-lg ">
-
-                <h2 className=" text-2xl  font-bold h-[100px] rounded-l-2xl rounded-r-2xl uppercase  vertical-text bg-cobaltBlue absolute z-50 text-center w-full bottom-[-110px] left-0 ">Top five</h2>
-                <Container >
-                
-
-                <MotionSlider>
-                {sortedArtistsUsers?.map((user, i) => (
-                <CardElement  key={i} {...user}/>
-                    ))}
-                </MotionSlider>
-           
-            </Container>
-            </div>
-        )}
-        
-    </>
+   
+     <>
+     <div className="flex w-full border border-b-4 border-black rounded-2xl shadow-lg overflow-hidden  md:w-1/2 md:max-h-[435px]">
+    <div className="relative flex flex-col justify-center bg-cobaltBlue h-full min-h-[435px] w-20">
+      <h2 className="text-2xl font-bold uppercase text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 vertical-text">
+        Top five artists
+      </h2>
+    </div>
+    <div className="flex-1 overflow-auto">
+      <Container>
+        <MotionSlider>
+          {sortedArtistsUsers.map((user, i) => (
+            <CardElement key={i} {...user} />
+          ))}
+        </MotionSlider>
+      </Container>
+    </div>
+  </div>
+  </>
   
   )
 }

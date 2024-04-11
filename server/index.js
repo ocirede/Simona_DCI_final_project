@@ -28,12 +28,16 @@ connectDB();
 
 app.use("/users", userRoutes);
 app.use("/ratings", ratingRoutes);
-app.use("/posts", postRoutes);
+app.use('/offers', postRoutes);
 app.use("/profile", profileRoutes)
 // To user send email
 app.use('/send-email', emailRoutes);
+
+app.use('/offers', postRoutes);
+
 app.use("/chats", chatRouter);
 app.use("/messages", messageRouter);
+
 
 
 
