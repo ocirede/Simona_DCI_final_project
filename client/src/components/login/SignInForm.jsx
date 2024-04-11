@@ -30,22 +30,22 @@ function SignInForm() {
     /* form container */
   }
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen w-1/2">
       <br />
-      <div className="w-2/3 max-w-[440px] h-[390px]  p-3 rounded-lg shadow-lg border border-gray">
+      <div className="w-2/3 max-w-[440px] h-[390px] bg-white p-3 rounded-lg shadow-lg border border-gray">
         <form
           onSubmit={authenticationHandler}
           className="flex flex-col justify-center gap-2 mt-4"
         >
           <div className=" flex justify-center">
-            <h1 className="text-5xl">Login</h1>
+            <h1 className="text-5xl font-custom">Sign-in</h1>
           </div>
           <label>
-            <span>Email</span>
+            <span className="  font-custom">Email</span>
           </label>
           <div className=" relative">
             <input
-              className="p-2  border relative w-full h-9 "
+              className="p-2  font-custom  border relative w-full h-9 "
               type="email"
               name="email"
               value={email}
@@ -56,10 +56,10 @@ function SignInForm() {
           </div>
 
           <label className="flex justify-between">
-            <span>Password</span>
+            <span className=" font-custom">Password</span>
             <span
               onClick={() => setForgotPasswsord(!forgotPassword)}
-              className="underline text-blue-500 cursor-pointer"
+              className="  font-custom underline text-blue-500 cursor-pointer"
             >
               Forgot password
             </span>
@@ -95,7 +95,7 @@ function SignInForm() {
             {response ? (
               <button
                 type="submit"
-                className="w-32 h-8 rounded-xl bg-blue-500 text-white font-bold"
+                className=" w-2/3 h-8  font-custom rounded-xl bg-retroRed text-white font-bold"
                 disabled={false}
               >
                 Sign In
@@ -112,12 +112,12 @@ function SignInForm() {
                 onChange={handleRememberMeChange}
                 type="checkbox"
               />
-              <span>Remember me</span>
+              <span className="  font-custom">remember me</span>
             </label>
-            <span>
+            <span className="  font-custom">
               Not a member ?&nbsp;
-              <Link to="/register-questions" className="underline text-blue-500">
-                <span>Sign-up</span>
+              <Link to="/register-questions">
+                <span className="  font-custom">Sign-up</span>
               </Link>
             </span>
           </div>
@@ -144,13 +144,13 @@ function SignInForm() {
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
             <X
               onClick={() => setForgotPasswsord(!forgotPassword)}
-              className="absolute top-2 right-1 cursor-pointer"
+              className="absolute top-2 right-2 cursor-pointer"
             />
             <div className="flex flex-col items-center justify-center w-[430px] h-[430px] rounded-xl p-6 bg-slate-100 border-black transition-transform duration-800">
-              <h2 className="text-2xl font-bold mb-4 text-center">
+              <h2 className="text-2xl font-bold mb-4 text-center font-custom">
                 Forgot Your Password?
               </h2>
-              <p className="text-sm text-center mb-6">
+              <p className="text-sm text-center mb-6 font-custom">
                 Enter your email address below, and we'll send you a link to
                 reset your password.
               </p>
@@ -158,7 +158,7 @@ function SignInForm() {
                 <div className="mb-4">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium font-custom text-gray-700 mb-1"
                   >
                     Email Address
                   </label>
@@ -168,14 +168,14 @@ function SignInForm() {
                     name="email"
                     value={email}
                     readOnly
-                    className="p-2 w-full border rounded-md"
+                    className="p-2 w-full border rounded-md font-custom"
                     placeholder="Enter your email address"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md transition duration-300 hover:bg-blue-600"
+                  className="w-full bg-retroRed font-custom text-white font-semibold py-2 rounded-md transition duration-300 hover:bg-blue-600"
                 >
                   Reset Password
                 </button>
