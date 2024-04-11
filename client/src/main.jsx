@@ -7,17 +7,27 @@ import './i18n'
 
 import '@fontsource/bungee';
 
+import RatingContextProvider from "./context/ratingContext.jsx";
 import UserProvider from "./context/userContext.jsx";
 import OfferProvider from "./context/OfferContext.jsx";
+
+
+import SocketProvider from "./context/socketContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <OfferProvider>
-          <App />  
-        </OfferProvider>
-      </UserProvider>
+
+
+  <UserProvider>
+        <RatingContextProvider>
+           <OfferProvider>
+             <SocketProvider>
+                <App />
+              </SocketProvider>
+            </OfferProvider>
+         </RatingContextProvider>
+    </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

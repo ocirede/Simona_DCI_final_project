@@ -9,8 +9,6 @@ import ProfilePageLayout from "./layouts/ProfilePageLayout";
 import { Route, Routes } from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
 import ProfileArtistPage from "./pages/ProfileArtistPage";
-
-import ChatBox from "./components/chatBox/chatBox.jsx";
 import HomePageEntrepreneur from "./pages/homePageEntrepreneur.jsx";
 import HomePageArtist from "./pages/homePageArtist.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
@@ -19,6 +17,9 @@ import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur.jsx";
 import EmailConfirmation from "./pages/EmailConfirmation.jsx";
 import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
+
+import Chat from "./pages/Chat.jsx";
+
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 function App() {
@@ -31,14 +32,14 @@ function App() {
         </Route>
 
         <Route element={<ProfilePageLayout />}>
-          <Route path="/profile-artist" element={<ProfileArtistPage />} />
+          <Route path="/profile-artist/:userId" element={<ProfileArtistPage />} />
           <Route
-            path="/ProfilePageEntrepreneur"
+            path="/ProfilePageEntrepreneur/:userId"
             element={<ProfilePageEntrepreneur />}
           />
           <Route path="/homeArtist" element={<HomePageArtist />} />
           <Route path="/E" element={<HomePageEntrepreneur />} />
-          <Route path="/chatbox" element={<ChatBox />} />
+          <Route path="/chatbox" element={<Chat/>} />
           <Route path="/QA" element={<QA />} />
         </Route>
 

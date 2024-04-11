@@ -19,7 +19,14 @@ import {
   getAllUsers,
   updateProfileImage,
   updateProfileBackground,
+
   addFavOffer
+
+
+  getUserById,
+
+
+
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -32,15 +39,23 @@ userRoutes.post("/accept-connection-request", acceptConnectionRequest);
 userRoutes.post("/reject-connection-request", rejectConnectionRequest);
 userRoutes.post("/delete-connection", deleteConnection);
 
+userRoutes.get("/get-entrepreneurs", getEntrepreneurs);
+userRoutes.get("/get-artists", getArtists);
 userRoutes.post("/signin", signInHandling);
-userRoutes.post("/changepassword", changePasswordEmail);
 userRoutes.put("/updatepassword/:token", updatePassword);
 userRoutes.post("/changepassword", changePasswordEmail);
 userRoutes.put("/update/:userId", updateUser);
 userRoutes.get("/loggeduser", auth, loggedUser);
+
 userRoutes.get("/all-the-users", getAllUsers);
+userRoutes.get("/single-user/:userId", getUserById)
 userRoutes.put(
   "/update-profile-pic/:userId",
+userRoutes.get("/findconnections/:userId");
+  
+//The following route is an example to test the image upload, it can be deleted
+userRoutes.post(
+  "/image",
   profileImageUpload.single("profileImage"),
   updateProfileImage
 );

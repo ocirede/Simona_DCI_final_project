@@ -27,7 +27,7 @@ const SimonaIntroSection = () => {
     }, []);
 
     return (
-        <div className="mb-2 mt-4 border-black border border-1 shadow-md rounded-[30px] bg-white border-b-[20px] h-[300px] md:h-[500px] relative flex items-start md:justify-between" ref={divRef}>  
+        <div className="mb-2 mt-4 border-black border border-1 shadow-md rounded-[30px] bg-white border-b-[20px] h-[300px] md:h-[500px] relative flex items-start md:justify-between mr-[10px] ml-[10px]" ref={divRef}>  
             <h3 className="text-[28px] text-[#1E1E1E] font-bold p-10 md:text-[40px] lg:text-[52px] lg:p-[70px]">Your next fateful connection</h3>
             <div className="flex gap-3 items-center m-10 mt-11 md:mt-[21px]">
                 <LanguageChoice /> 
@@ -36,12 +36,12 @@ const SimonaIntroSection = () => {
                 ) : (
                     <Menu
                     onClick={() => setDisplay(!display)}
-                    className="w-8 h-8 xs:hidden cursor-pointer"
+                    className="w-8 h-8 md:hidden cursor-pointer"
                     />
                 )}
                 {display && <DropMenuIntro />}
             </div>
-            <div className="hidden xs:flex justify-end items-center flex-grow p-6 gap-5">
+            <div className="hidden md:flex justify-end items-center flex-grow p-6 gap-5">
             <NavLink to="/register-questions">
                 <Button name="Register" />
             </NavLink>

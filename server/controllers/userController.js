@@ -1,5 +1,7 @@
 import User from "../models/userSchema.js";
+
 import Post from "../models/postSchema.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
@@ -100,7 +102,6 @@ export const updatePassword = async (req, res) => {
   try {
     const token = jwt.verify(req.params.token, process.env.JWT_SECTER_KEY);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(req.params.token);
     if (token) {
       await User.findByIdAndUpdate(
         token.id,
@@ -114,45 +115,6 @@ export const updatePassword = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
-
-// fetching artists
-// //get Artists
-// export const getArtists = async (req, res) => {
-//   const { role } = req.query;
-
-//   try {
-//     let filter = {};
-//     if (role) {
-//       filter.role = { $regex: role, $options: "i" };
-//     }
-
-//     const artists = await User.find(filter);
-
-//     res.send({ success: true, artists });
-//   } catch (error) {
-//     console.error("Error fetching the artists", error.message);
-//     res.send({ succsess: false, error: error.message });
-//   }
-// };
-
-// // fetching entrepeneurs
-// export const getEntrepreneurs = async (req, res) => {
-//   const { role } = req.query;
-
-//   try {
-//     let filter = {};
-//     if (role) {
-//       filter.role = { $regex: role, $options: "i" };
-//     }
-
-//     const entrepreneurs = await User.find(filter);
-
-//     res.send({ success: true, entrepreneurs });
-//   } catch (error) {
-//     console.error("Error fetching the Entrepreneurs", error.message);
-//     res.send({ succsess: false, error: error.message });
-//   }
-// };
 
 //Send connect request
 export const sendConnectionRequest = async (req, res) => {
@@ -387,9 +349,7 @@ export const signInHandling = async (req, res) => {
 //Update profile image
 /*
  * You may think you know what the following code does.
- * But you dont. Trust me.
- * It works with magic
- * Same for the updateProfileBackground
+ * But you dont. Trust me
  */
 export const updateProfileImage = async (req, res) => {
   const { userId } = req.params;
@@ -509,6 +469,25 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
+
+};
+
+export const findConnectionsForCurrentUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId).populate("connections");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ success: true, connections: user.connections });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching connections", error: error.message });
+  }
 };
 
 //logged user
@@ -521,7 +500,10 @@ export const loggedUser = async (req, res) => {
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
+
     res.send({ success: true, user });
+    // console.log("logged user", user)
+
   } catch (error) {
     console.log("Error logged user:", error.message);
     res.status(500).send({ success: false, error: error.message });
@@ -532,15 +514,14 @@ export const loggedUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-
     res.json({ success: true, users });
   } catch (error) {
     res
       .status(500)
       .json({ message: "Error fetching users", error: error.message });
   }
-
 };
+
 
 // Add fav offer
 
@@ -590,3 +571,23 @@ export const addFavOffer = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
+
+// Get user by ID
+export const getUserById = async (req, res) => {
+  const userId = req.params.userId;
+ 
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    } 
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    console.log("USER TAKEN:", user)
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error fetching user by ID', error: error.message });
+  }
+};
+

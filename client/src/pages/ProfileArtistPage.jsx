@@ -1,54 +1,63 @@
-import NavBar from "../components/profile artist/ArtistNavBar";
-import PersonalInfo from "../components/profile artist/PersonalInfo";
-import NameTitle from "../components/profile artist/NameTitle";
-import CardSection from "../components/profile artist/CardSection";
-import EditorModal from "../components/profile artist/EditorModal";
-import ShareLinkCard from "../components/profile artist/ShareLinkCard";
-import { useFormVisibility } from "../components/profilePageEntrepreneur/customHook/FormVisibility";
-import CreateOffer from "../components/profile artist/CreateOfferButton";
+
+
+
+  import CreateOffer from "../components/profile artist/CreateOfferButton";
+import { useState, useContext, useEffect } from 'react';
+import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
+import CommentSection from "../components/reviews/CommentSection";
+
+import { UserContext } from '../context/userContext';
+import TagsSection from '../components/profilePageEntrepreneur/TagsSection';
+import AboutSection from '../components/profilePageEntrepreneur/AboutSection';
+import { useParams } from "react-router-dom";
+import TitleNameSection from '../components/profilePageEntrepreneur/TitleNameSection';
+
 
 function ProfileArtist() {
-  const { formVisibility, toggleFormVisibility } = useFormVisibility();
-  const openShareCard = () => toggleFormVisibility("shareLink");
+  const { getUserById } = useContext(UserContext);
+  const { userId } = useParams();
+  const [profileUser, setProfileUser] = useState(null);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userFound = await getUserById(userId);
+        setProfileUser(userFound);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, [getUserById, userId]);
+
+  if (profileUser) {
   return (
     <>
-      <NavBar />
+
       <CreateOffer />
-      <main className="mb-10">
-        {/* personal info section*/}
-        <section>
-          <PersonalInfo onClick={openShareCard} />
-          <NameTitle />
-        </section>
-        <section className="xs:grid grid-rows-1 grid-cols-2">
-          {/* About-me/ education  section*/}
-          <CardSection
-            onClick={() => toggleFormVisibility("about")}
-            section=" About me - education"
-          />
-          {/* Skills interest personality  section*/}
-          <CardSection section="Skills interests personality" />
-        </section>
-        <section>
-          {/* Portfolio  section*/}
-          <CardSection section="Portfolio" />
-        </section>
-        <section className="xs:grid grid-rows-1 grid-cols-2">
-          {/* Languages  section*/}
-          <CardSection section="Language" />
-          {/* Review  section*/}
-          <CardSection section="Review" />
-        </section>
-        {/* Render the modal if formVisibility.about is true */}
-        {formVisibility.about && <EditorModal onClose={() => toggleFormVisibility("about")} />}
-        
-        {/* Render the shareLink card if formVisibility.shareLink is true */}
-        {formVisibility.shareLink && <ShareLinkCard onClose={openShareCard} />}
+      <ProfileImgBgSection user={profileUser}/>
+      <main className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
+      <div>
+          <TitleNameSection user={profileUser} />
+          <div className="lg:flex gap-4">
+            <AboutSection user={profileUser} />
+            <div className="lg:w-1/2">
+              <TagsSection user={profileUser} />
+            </div>
+            </div>
+            <CommentSection user={profileUser} />
+          </div>
+
       </main>
     </>
   );
+  } else {
+    return <p>Loading user profile...</p>;
+  }
 }
 
 export default ProfileArtist;
+
+
 
