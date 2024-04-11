@@ -1,7 +1,7 @@
 function FakeLogo() {
   return (
-    <div className=" w-20 h-10 font-bold flex items-center justify-center simona text-[24px] ml-4">
-      Simona
+    <div className=" font-bold font-custom flex items-center  simona text-[32px] ml-4">
+     <span>Simona</span> 
     </div>
   );
 }

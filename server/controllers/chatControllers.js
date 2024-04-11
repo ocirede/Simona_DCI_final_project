@@ -1,8 +1,9 @@
 import User from "../models/userSchema.js";
-
+import Chat from "../models/chatSchema.js";
 // find connections for the current user
 export const findConnectedUsersInfo = async (req, res) => {
   try {
+    // const {userId}= req.params;
     const userId = req.user.id;
     if (!userId) {
       return res.status(400).json({ error: "User ID is missing or invalid" });
@@ -10,7 +11,7 @@ export const findConnectedUsersInfo = async (req, res) => {
 
     const user = await User.findById(userId).populate({
       path: "connections",
-      select: "address email"
+      select: "address email role",
     });
 
     const connections = user.connections;

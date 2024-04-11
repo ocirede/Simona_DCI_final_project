@@ -1,6 +1,5 @@
 
 
-
   import CreateOffer from "../components/profile artist/CreateOfferButton";
 import { useState, useContext, useEffect } from 'react';
 import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
@@ -14,6 +13,7 @@ import TitleNameSection from '../components/profilePageEntrepreneur/TitleNameSec
 
 
 function ProfileArtist() {
+
   const { getUserById } = useContext(UserContext);
   const { userId } = useParams();
   const [profileUser, setProfileUser] = useState(null);
@@ -48,6 +48,7 @@ function ProfileArtist() {
             </div>
             <CommentSection user={profileUser} />
           </div>
+
 
       </main>
     </>

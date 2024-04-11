@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "../config/axios.js";
 
+
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
@@ -18,10 +20,11 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+
   const [aboutText, setAboutText] = useState('');
+
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
-
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -52,9 +55,13 @@ const UserProvider = ({ children }) => {
       if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
-          navigate("/homeArtist");
+          setTimeout(() => {
+           window.location.replace("/homeArtist");
+          }, 1000)
         } else {
-          navigate("/E");
+          setTimeout(() => {
+            window.location.replace("/E");
+          }, 1000)
         }
         e.target.reset();
         setEmail("");
@@ -70,7 +77,7 @@ const UserProvider = ({ children }) => {
       } else {
         const error = [
           {
-            message: error.response.data.message,
+            message: error.response?.data?.message,
           },
         ];
         setValidationErrors(error);
@@ -271,6 +278,7 @@ const UserProvider = ({ children }) => {
   ////log out
   const logout = () => {
     localStorage.removeItem("token");
+
     setUser(null);
     navigate("/");
   };
@@ -352,9 +360,11 @@ const UserProvider = ({ children }) => {
   // Profile Page functions
   const saveAboutText = async () => {
     try {
-        await axios.post(baseURL + `/profile/user/${user.id}/about`, { about: aboutText });
+      await axios.post(baseURL + `/profile/user/${user.id}/about`, {
+        about: aboutText,
+      });
     } catch (error) {
-        console.error('Error saving about text:', error);
+      console.error("Error saving about text:", error);
     }
   };
 
@@ -383,7 +393,6 @@ const UserProvider = ({ children }) => {
   };
   
 
-
   /**
    * For the brave souls who get this far: You are the chosen ones,
    * the valiant knights of programming, without rest,
@@ -408,6 +417,7 @@ const UserProvider = ({ children }) => {
         forgotPassword,
         newUser,
         user,
+        setUser,
         setUserRole,
         userRoleChoice,
         registerUser,
