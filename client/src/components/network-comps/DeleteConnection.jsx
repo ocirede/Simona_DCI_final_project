@@ -24,10 +24,10 @@ const DeleteConnection = ({ connectionId }) => {
       ) : (
         <button
           type="button"
-          className="text-red-600 text-xs font-medium uppercase"
+          className=" text-red-500 font-bold text-xl cursor-pointer"
           onClick={handleDeleteConnection}
         >
-          Remove
+          -
         </button>
       )}
     </>

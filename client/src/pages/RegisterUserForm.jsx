@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import LogoImageRegistration from "../components/LogoImageRegistration";
-import FormSubmitButton from "../components/FormSubmitButton";
-import FormSubmitButtonLoading from "../components/FormSubmitButtonLoading";
+import LogoImageRegistration from "../components/register/LogoImageRegistration";
+import RegisterFormButton from "../components/register/RegisterFormButton";
+import RegisterFormButtonLoading from "../components/register/RegisterFormButtonLoading";
 import { UserContext } from "../context/userContext";
 import AlertArrayOfErrors from "../components/alerts/AlertArrayOfErrors";
 import AlertEmailVerification from "../components/alerts/AlertEmailVerification";
+import starFourSvg from "../assets/y2k_icons/star_four.svg";
+import starTwoSvg from "../assets/y2k_icons/star_two.svg";
 
 const RegisterUserForm = () => {
   const { registerUser, response, validationErrors, newUser } =
@@ -58,11 +60,19 @@ const RegisterUserForm = () => {
     <>
       <div className="flex items-center justify-center h-screen">
         {/* Logo image top left */}
-        <LogoImageRegistration imageUrl="https://images.squarespace-cdn.com/content/v1/5e0849d5b75e913537ba6e4b/1580072657793-FQHY1078YO7V1B6O3A5C/Target%2BLogo%2B_%2BPictorial%2BLogo%2BExample%2B_%2BMill%2BCreek%2BCreative.png?format=300w" />
+        <LogoImageRegistration />
 
         {/* form container */}
-        <div className="w-full max-w-md mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="w-full max-w-md mx-auto px-4 relative">
+          {/* Star with opposite position on small screens */}
+          <div className="absolute sm:top-[-105px] sm:left-[-15px] sm:bottom-auto sm:right-auto sm:h-[180px] sm:w-[180px] top-[-86px] right-2 z-[-1] h-[180px] w-[180px]">
+            <img src={starFourSvg} alt="Star Four" />
+          </div>
+          {/* Star with opposite position on small screens */}
+          <div className="absolute sm:bottom-[-105px] sm:right-[-25px] sm:left-auto sm:top-auto sm:h-[200px] sm:w-[200px] bottom-[-82px] left-2 z-[-1] h-[220px] w-[220px]">
+            <img src={starTwoSvg} alt="Star Two" />
+          </div>
+          <div className="bg-white  shadow-lg p-8 border border-black rounded-2xl  ">
             <h1 className="text-2xl font-bold mb-6 text-center">
               Create your account
             </h1>
@@ -110,7 +120,7 @@ const RegisterUserForm = () => {
                 {/* Show hide password button */}
                 <button
                   type="button"
-                  className="absolute top-1/2 transform -translate-y-0.5 right-0 flex items-center px-3 pt-2 text-gray-500 focus:outline-none"
+                  className="absolute top-1/2 transform -translate-y-0.5 right-0 flex items-center px-3 pt-2 text-black-500 focus:outline-none"
                   onClick={() => {
                     setShowPassword(!showPassword);
                   }}
@@ -149,16 +159,16 @@ const RegisterUserForm = () => {
               to disable the button while waiting for the request, to avoid
               double clicks and multiple requests from the user */}
                 {response ? (
-                  <FormSubmitButton name="Register" disabled={false} />
+                  <RegisterFormButton />
                 ) : (
-                  <FormSubmitButtonLoading name="Loading" />
+                  <RegisterFormButtonLoading name="Loading" />
                 )}
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-500">
                 Already have an account?{" "}
                 <NavLink
                   to="/sign-in"
-                  className="font-medium text-primary-600 hover:underline"
+                  className="font-medium text-gray-900 hover:underline"
                 >
                   Login here
                 </NavLink>

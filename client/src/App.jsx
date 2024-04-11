@@ -17,7 +17,9 @@ import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur.jsx";
 import EmailConfirmation from "./pages/EmailConfirmation.jsx";
 import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
+
 import Chat from "./pages/Chat.jsx";
+
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 function App() {
@@ -30,9 +32,9 @@ function App() {
         </Route>
 
         <Route element={<ProfilePageLayout />}>
-          <Route path="/profile-artist" element={<ProfileArtistPage />} />
+          <Route path="/profile-artist/:userId" element={<ProfileArtistPage />} />
           <Route
-            path="/ProfilePageEntrepreneur"
+            path="/ProfilePageEntrepreneur/:userId"
             element={<ProfilePageEntrepreneur />}
           />
           <Route path="/homeArtist" element={<HomePageArtist />} />

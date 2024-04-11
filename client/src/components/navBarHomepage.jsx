@@ -71,12 +71,9 @@ export default function NavBarHomepage() {
         </div>
       </div>
       <div className="ml-5 mr-5 mt-5 flex items-end   justify-between ">
-        <h1
-          className="uppercase   text-[60px]   md:text-[120px] cursor-pointer"
-          onClick={handleLogoClick}
-        >
-          Simona
-        </h1>
+
+      <h1 className="uppercase simona   text-[60px]   md:text-[120px] cursor-pointer" onClick={handleLogoClick}>Simona</h1>
+
         <CircleIcon />
       </div>
     </nav>

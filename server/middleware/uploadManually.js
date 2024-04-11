@@ -2,11 +2,11 @@ import cloudinaryV2 from "../config/cloudinary.js";
 
 cloudinaryV2.uploader.upload(
   //The exact path in hard drive
-  "C:/Users/Kostas/Desktop/IMG_20240110_112217.jpg",
+  "C:/Users/Kostas/Desktop/profile-background.jpg",
 
   {
-    folder: "Simona_Final_Project/backgrounds",
-    public_id: "Name_of_the_image", //A name for the image
+    folder: "Simona_Final_Project/background_images",
+    public_id: "profile-background", //A name for the image
   },
   function (error, result) {
     if (error) {

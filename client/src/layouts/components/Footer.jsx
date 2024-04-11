@@ -13,8 +13,8 @@ export default function Footer() {
           <FooterContactForm />
         </div> 
         <div className="flex flex-col">
-          <div className="flex items-center justify-center pt-6 bg-[url('/lines_two.svg')] lg:w-[650px] bg-cover bg-center border-t border-black border-b bg-white rounded-tr-[30px]">
-                  <img src="/footer_shape.svg" alt="lines" className="w-[290px] md:w-[310px] lg:w-[400px] pb-6"></img>
+          <div className="flex items-center justify-center pt-6 bg-[url('/lines_two.svg')] md:w-[400px] lg:w-[550px] bg-cover bg-center border-t border-black border-b bg-white md:rounded-tr-[30px]">
+              <img src="/footer_shape.svg" alt="lines" className="w-[290px] md:w-[310px] lg:w-[400px] pb-6"></img>
           </div>
           <div className="flex justify-between items-start md:m-0 bg-white rounded-br-[30px] rounded-bl-[30px] md:rounded-bl-none gap-2 pt-6 pr-6 pl-6 pb-8">
             <div className="md:mr-8 md:mb-0">  

@@ -20,7 +20,9 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+
   const [aboutText, setAboutText] = useState('');
+
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
   // fetching email-remember-checkbox
@@ -358,12 +360,38 @@ const UserProvider = ({ children }) => {
   // Profile Page functions
   const saveAboutText = async () => {
     try {
-        await axios.post(baseURL + `/profile/user/${user.id}/about`, { about: aboutText });
+      await axios.post(baseURL + `/profile/user/${user.id}/about`, {
+        about: aboutText,
+      });
     } catch (error) {
-        console.error('Error saving about text:', error);
+      console.error("Error saving about text:", error);
     }
   };
 
+
+  const  addFavOffer = async (offerId,userId) => {
+    try {
+     const response =  await axios.post(baseURL + `/users/add-fav-offer/${offerId}`, { userId });
+      if(response.data.success){
+        setUser(response.data.user)
+      }
+  } catch (error) {
+      console.error('Error adding to fav offers', error);
+  }
+  }
+
+  // Find user by ID
+  const getUserById = async (userId) => {
+    try {
+      const response = await axios.get(baseURL + `/users/single-user/${userId}`);
+      const userFound = response.data.user;
+      return userFound;
+    } catch (error) {
+      console.error('Error fetching user by ID:', error);
+      return null;
+    }
+  };
+  
 
   /**
    * For the brave souls who get this far: You are the chosen ones,
@@ -410,6 +438,12 @@ const UserProvider = ({ children }) => {
         updateProfileImage,
         updateProfileBackground,
         saveAboutText,
+
+        addFavOffer,
+
+        getUserById,
+        loggedUser
+
       }}
     >
       {children}

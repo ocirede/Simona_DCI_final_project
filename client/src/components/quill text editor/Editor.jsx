@@ -4,28 +4,33 @@ import EditorToolbar, { modules, formats } from "./EditorToolBar";
 import "react-quill/dist/quill.snow.css";
 import Button from "../navbar intro/Button";
 
-export const Editor = () => {
-  const [state, setState] = React.useState({ value: null });
+export const Editor = ({ initialContent, onSave }) => {
+  const [value, setValue] = React.useState(initialContent || "");
+
+  const handleChange = (content) => {
+    setValue(content);
+  };
+
   const handlePost = () => {
-    console.log("Content to be posted:");
+    onSave(value);
+    console.log("Content to be posted:", value);
   };
-  const handleChange = (value) => {
-    setState({ value });
-  };
+
   return (
-    <div className=" text-editor">
+    <div className="text-editor">
       <EditorToolbar />
       <ReactQuill
         theme="snow"
-        value={state.value}
+        value={value}
         onChange={handleChange}
         placeholder={"Write something awesome..."}
         modules={modules}
         formats={formats}
       />
-      <div className=" flex justify-center items-center mt-3">
+      <div className="flex justify-center items-center mt-3">
         <Button name="Post" onClick={handlePost}></Button>
       </div>
     </div>
   );
 };
+

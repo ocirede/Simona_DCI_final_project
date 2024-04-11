@@ -24,10 +24,10 @@ const AcceptRequest = ({ senderId }) => {
       ) : (
         <button
           type="button"
-          className="text-sm uppercase"
+          className=" text-red-500 font-bold text-xl cursor-pointer"
           onClick={handleAcceptRequest}
         >
-          Accept
+          +
         </button>
       )}
     </>

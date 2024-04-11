@@ -1,5 +1,7 @@
 import User from "../models/userSchema.js";
 
+import Post from "../models/postSchema.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
@@ -114,7 +116,6 @@ export const updatePassword = async (req, res) => {
   }
 };
 
-
 //Send connect request
 export const sendConnectionRequest = async (req, res) => {
   const { senderId, receiverId } = req.body;
@@ -153,7 +154,7 @@ export const sendConnectionRequest = async (req, res) => {
     }
     await sender.save();
     await receiver.save();
-
+    await sender.populate("favOffers");
     await sender.populate("sentRequests");
     await sender.populate("connections");
     await sender.populate("pendingRequests");
@@ -202,7 +203,7 @@ export const acceptConnectionRequest = async (req, res) => {
 
     await receiver.save();
     await sender.save();
-
+    await receiver.populate("favOffers");
     await receiver.populate("sentRequests");
     await receiver.populate("pendingRequests");
     await receiver.populate("connections");
@@ -248,7 +249,7 @@ export const rejectConnectionRequest = async (req, res) => {
 
     await receiver.save();
     await sender.save();
-
+    await receiver.populate("favOffers");
     await receiver.populate("sentRequests");
     await receiver.populate("pendingRequests");
     await receiver.populate("connections");
@@ -294,7 +295,7 @@ export const deleteConnection = async (req, res) => {
 
     await user.save();
     await connection.save();
-
+    await user.populate("favOffers");
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
@@ -335,6 +336,7 @@ export const signInHandling = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECTER_KEY, {
       expiresIn: "1d",
     });
+    await user.populate("favOffers");
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
@@ -373,7 +375,7 @@ export const updateProfileImage = async (req, res) => {
       { $set: req.body },
       { new: true }
     );
-
+    await updatedUser.populate("favOffers");
     await updatedUser.populate("sentRequests");
     await updatedUser.populate("pendingRequests");
     await updatedUser.populate("connections");
@@ -417,7 +419,7 @@ export const updateProfileBackground = async (req, res) => {
       { $set: req.body },
       { new: true }
     );
-
+    await updatedUser.populate("favOffers");
     await updatedUser.populate("sentRequests");
     await updatedUser.populate("pendingRequests");
     await updatedUser.populate("connections");
@@ -449,7 +451,7 @@ export const updateUser = async (req, res) => {
       { $set: req.body },
       { new: true }
     );
-
+    await updatedUser.populate("favOffers");
     await updatedUser.populate("sentRequests");
     await updatedUser.populate("pendingRequests");
     await updatedUser.populate("connections");
@@ -478,6 +480,7 @@ export const loggedUser = async (req, res) => {
     const userId = req.user.id;
     // const userId = req.params.id;
     const user = await User.findOne({ _id: userId });
+    await user.populate("favOffers");
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
@@ -495,7 +498,6 @@ export const loggedUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-
     res.json({ success: true, users });
   } catch (error) {
     res
@@ -503,3 +505,73 @@ export const getAllUsers = async (req, res) => {
       .json({ message: "Error fetching users", error: error.message });
   }
 };
+
+
+// Add fav offer
+
+
+export const addFavOffer = async (req, res) => {
+  const { userId } = req.body;
+  const { offerId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        error: "User not found.",
+      });
+    }
+    const offer = await Post.findById(offerId);
+    if (!offer) {
+      return res.status(404).send({
+        success: false,
+        error: "Offer not found.",
+      });
+    }
+    const isFavourite = user.favOffers.includes(offerId);
+    if (isFavourite) {
+      // If the offer is already in favorites, we remove it
+      user.favOffers = user.favOffers.filter(
+        (id) => id.toString() !== offerId
+      );
+    } else {
+      // If the restaurant is not in favorites, we add it
+      user.favOffers.push(offerId);
+    }
+    
+    await user.save();
+    await user.populate("favOffers");
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections")
+    
+    res.send({
+      success: true,
+      user,
+      message: "favourites updated",
+    });
+  } catch (error) {
+    console.error("Error updating favourites", error.message);
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+// Get user by ID
+export const getUserById = async (req, res) => {
+  const userId = req.params.userId;
+ 
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    } 
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+    console.log("USER TAKEN:", user)
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error fetching user by ID', error: error.message });
+  }
+};
+
