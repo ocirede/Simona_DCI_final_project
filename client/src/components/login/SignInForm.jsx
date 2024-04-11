@@ -116,7 +116,7 @@ function SignInForm() {
             </label>
             <span>
               Not a member ?&nbsp;
-              <Link to="/register" className="underline text-blue-500">
+              <Link to="/register-questions" className="underline text-blue-500">
                 <span>Sign-up</span>
               </Link>
             </span>
@@ -166,7 +166,8 @@ function SignInForm() {
                     type="email"
                     id="email"
                     name="email"
-                    defaultValue={email}
+                    value={email}
+                    readOnly
                     className="p-2 w-full border rounded-md"
                     placeholder="Enter your email address"
                     required

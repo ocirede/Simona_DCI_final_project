@@ -18,10 +18,10 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
-  const [aboutText, setAboutText] = useState("");
+
+  const [aboutText, setAboutText] = useState('');
 
   const navigate = useNavigate();
-
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // fetching email-remember-checkbox
@@ -63,12 +63,12 @@ const UserProvider = ({ children }) => {
         setPassword("");
         setUser(response.data.user);
         setValidationErrors(null);
-        console.log(response.data.success);
+
       }
     } catch (error) {
       setResponse(true);
-      if (Array.isArray(error.response.data.message)) {
-        setValidationErrors(error.response.data.message);
+      if (Array.isArray(error.response?.data?.message)) {
+        setValidationErrors(error.response?.data?.message);
       } else {
         const error = [
           {
@@ -105,26 +105,8 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  // reset-update password
 
-  const resetPassword = (e) => {
-    e.preventDefault();
-    const password = e.target.password.value;
-    const reType = e.target.retype.value;
-
-    if (reType !== password) {
-      alert("password are not matching");
-      return;
-    }
-
-    const body = {
-      password: e.target.password.value,
-    };
-
-    console.log(body);
-  };
-
-  //Register background handling
+  //Register backround handling
   const userRoleChoice = (role) => {
     setUserRole(role);
   };
@@ -380,6 +362,31 @@ const UserProvider = ({ children }) => {
     }
   };
 
+
+  const  addFavOffer = async (offerId,userId) => {
+    try {
+     const response =  await axios.post(baseURL + `/users/add-fav-offer/${offerId}`, { userId });
+      if(response.data.success){
+        setUser(response.data.user)
+      }
+  } catch (error) {
+      console.error('Error adding to fav offers', error);
+  }
+  }
+
+  // Find user by ID
+  const getUserById = async (userId) => {
+    try {
+      const response = await axios.get(baseURL + `/users/single-user/${userId}`);
+      const userFound = response.data.user;
+      return userFound;
+    } catch (error) {
+      console.error('Error fetching user by ID:', error);
+      return null;
+    }
+  };
+  
+
   /**
    * For the brave souls who get this far: You are the chosen ones,
    * the valiant knights of programming, without rest,
@@ -415,7 +422,6 @@ const UserProvider = ({ children }) => {
         setShowPassword,
         setForgotPasswsord,
         requestForgotPasswordEmail,
-        resetPassword,
         sendOrCancelRequest,
         acceptRequest,
         rejectRequest,
@@ -425,6 +431,12 @@ const UserProvider = ({ children }) => {
         updateProfileImage,
         updateProfileBackground,
         saveAboutText,
+
+        addFavOffer,
+
+        getUserById,
+        loggedUser
+
       }}
     >
       {children}
