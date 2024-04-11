@@ -1,8 +1,9 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import AcceptRequest from "../network-comps/AcceptRequest";
 import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
+
 export default function ConnectNetwork() {
       const { user} = useContext(UserContext)
       // if(user)console.log(user)
@@ -35,10 +36,13 @@ export default function ConnectNetwork() {
                       <RejectRquest senderId={user._id} />
                     </div>
                   ))}
+
                 </div>
-              </div>
+              ))}
             </div>
           </div>
+
         </>
       );
 }
+

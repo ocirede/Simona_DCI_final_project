@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 export default function HomePageEntrepreneur() {
   const { user } = useContext(UserContext);
   const userId = user?._id;
+
   const profileImage = user?.profileImage;
   const firstName = user?.address?.firstname;
   const lastName = user?.address?.lastname;
 
   return (
+
   <>
   <div className="max-w-md mx-auto flex flex-col gap-5 bg-gray-50 p-10 md:max-w-full">
     <Link to={`/ProfilePageEntrepreneur/${userId}`} className="flex items-center gap-3">
@@ -31,5 +33,6 @@ export default function HomePageEntrepreneur() {
   </>
   );
 }
+
 
 

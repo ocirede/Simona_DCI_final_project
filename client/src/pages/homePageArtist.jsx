@@ -7,16 +7,15 @@ import RecommendedEntrepreneurs from "../components/homePageArtistComps/recommen
 import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
 
-
 export default function HomePageArtist() {
-
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
   const userId = user?._id;
   const profileImage = user?.profileImage;
   const { firstname, lastname } = user?.address || {};
 
   return (
     <>
+
       <div className="max-w-md mx-auto flex flex-col gap-5 bg-gray-50 p-10 md:max-w-full">
         <Link to={`/profile-artist/${userId}`} className="flex items-center gap-3">
           <img src={profileImage} alt="User Profile" className="w-10 h-10 rounded-full object-cover" />
@@ -29,11 +28,11 @@ export default function HomePageArtist() {
           <RecommendedEntrepreneurs />
         </div>
         <div className="w-full p-3 flex flex-col gap-5 pb-10 md:flex-row md:justify-between">
+
           <ConnectNetwork />
           <OffersSection />
         </div>
       </div>
     </>
-    );
+  );
 }
-
