@@ -11,8 +11,8 @@ export default function ConnectNetwork() {
 
       // if(user)console.log(user)
 
-      const allUsers = [...userData, ...entrepreneursData]
-      const [friendsList, setFriendsList] = useState([])
+      // const allUsers = [...userData, ...entrepreneursData]
+      // const [friendsList, setFriendsList] = useState([])
 
 
 
