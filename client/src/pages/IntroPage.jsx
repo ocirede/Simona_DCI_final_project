@@ -16,7 +16,7 @@ export default function IntroPage() {
   }, []);
 
   return (
-    <div>
+   <div>
       <div className="lg:pl-20 lg:pr-20">
         <SimonaIntroSection />
         <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[670px] md:h-fit border-b-8">
@@ -171,7 +171,7 @@ export default function IntroPage() {
       </div>
       <div>
         <MovingText text="Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews Top Reviews " />
-        <TopReviews reviews={bestRatedComments} />
+        <TopReviews />
       </div>
       <div className="m-2 bg-white border border-1 border-black rounded-[30px] border-b-8 lg:ml-20 lg:mr-20">
         <div className="bg-retroRed rounded-tr-[30px] rounded-tl-[30px] p-6 relative border-t-[10px] border-black md:pb-10 lg:text-[28px] lg:pl-20">
