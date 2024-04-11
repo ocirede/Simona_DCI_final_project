@@ -20,7 +20,9 @@ import {
   updateProfileImage,
   updateProfileBackground,
   addFavOffer,
+
   getUserById,
+
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 

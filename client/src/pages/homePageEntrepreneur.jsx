@@ -15,7 +15,9 @@ export default function HomePageEntrepreneur() {
 
   return (
 
+
   <>
+
   <div className="max-w-md mx-auto flex flex-col gap-5 bg-gray-50 p-10 md:max-w-full">
     <Link to={`/ProfilePageEntrepreneur/${userId}`} className="flex items-center gap-3">
       <img src={profileImage} alt="User Profile" className="w-10 h-10 rounded-full object-cover" />
@@ -26,12 +28,15 @@ export default function HomePageEntrepreneur() {
       <CategoriesSearch/>
       <RecommendedArtists />
     </div>
+
     <div className="w-full p-3 flex flex-col gap-5 bg-white pb-10 md:flex-row md:justify-between">
       <ConnectNetwork />
     </div>
   </div>
-  </>
-  );
+
+</>
+ );
+
 }
 
 
