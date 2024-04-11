@@ -4,6 +4,7 @@ import ConnectNetwork from "../components/homePageArtistComps/connectNetwork";
 import NavigationTips from "../components/homePageArtistComps/navigationTips";
 import OffersSection from "../components/homePageArtistComps/offersSection";
 import RecommendedEntrepreneurs from "../components/homePageArtistComps/recommendedEntrepreneurs";
+
 import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
 
@@ -24,8 +25,15 @@ export default function HomePageArtist() {
        <h1 className="uppercase text-center text-[90px]">Simona</h1>
       <CategoriesSearch/>
       <NavigationTips/>
+
       <RecommendedEntrepreneurs/>
+      </div>
+      <div className="w-full flex flex-col gap-5 bg-white pb-10 md:flex md:flex-row md:flex-wrap  md:justify-center">
       <ConnectNetwork />
       <OffersSection />
-    </div>);
+      </div>
+    
+    </>
+    );
 }
+

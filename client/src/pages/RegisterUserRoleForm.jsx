@@ -97,7 +97,7 @@ const RegisterUserRoleForm = () => {
           <p className="text-sm text-gray-600 mt-1">
             Already have an account?{" "}
             <NavLink
-              to="#"
+              to="/sign-in"
               className="font-medium text-primary-600 hover:underline"
             >
               Login here

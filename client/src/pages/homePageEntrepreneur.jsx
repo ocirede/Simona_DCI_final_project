@@ -10,6 +10,7 @@ export default function HomePageEntrepreneur() {
   const { user } = useContext(UserContext);
   const userId = user?._id;
 
+
   const profileImage = user?.profileImage;
   const firstName = user?.address?.firstname;
   const lastName = user?.address?.lastname;
@@ -23,6 +24,9 @@ export default function HomePageEntrepreneur() {
       <h1 className="text-xl font-bold text-center p-4">Entrepreneur Homepage</h1>
       <h1 className="uppercase text-center text-[90px]">Simona</h1>
       <CategoriesSearch />
+
+  
+
       <NavigateThrough />
       <RecommendedArtists />
       <ConnectNetwork />

@@ -14,11 +14,43 @@ body {
   background-image: url("/qqquad.svg");
   background-repeat: no-repeat;
   background-size: cover;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
+
+  /* background-color: #525252;  */
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* send messages chat*/
+.sent-message {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.received-message {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* avatar online */
+
+.avatar {
+  position: relative;
+}
+
+.avatar.online::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+}
 
 
 /* network animations*/
@@ -45,6 +77,7 @@ body {
   }
 }
 
+/*//////////////////////////////issa*/
 .slide-in-left {
   animation: slideInLeft 1s ease-out forwards;
 }
@@ -52,11 +85,16 @@ body {
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
 }
-
-@font-face {
-  font-family: 'Magic Retro';
-  src: url('/fonts/MagicRetro.ttf') format('truetype');
+.placeholder-xs::placeholder {
+  font-size: 0.75rem;
+ }
+ .vertical-text {
+  transform: rotate(-90deg);
+  transform-origin: left top;
+  white-space: nowrap;
 }
+
+
 
 
 /* Glowing effect on hover */
