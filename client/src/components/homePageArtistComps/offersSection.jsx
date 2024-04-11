@@ -1,134 +1,184 @@
-import { useState } from "react";
-
-
-const offers = [
-  {
-    id: 1,
-    entrepreneurName: "Elena",
-    role: "Wedding Planner",
-    offerDate: "2024-03-15",
-    offerDescription: "Looking for a contemporary artist to design unique wedding invitations.",
-  },
-  {
-    id: 2,
-    entrepreneurName: "Marcus",
-    role: "Investor",
-    offerDate: "2024-03-20",
-    offerDescription: "Offering investment for innovative music tech startups.",
-  },
-  {
-    id: 3,
-    entrepreneurName: "Jessica",
-    role: "E-commerce Expert",
-    offerDate: "2024-03-18",
-    offerDescription: "Seeking a photographer for product shoots for a new line of artisanal crafts.",
-  },
-  {
-    id: 4,
-    entrepreneurName: "Liam",
-    role: "Marketing Guru",
-    offerDate: "2024-03-22",
-    offerDescription: "Looking for a graphic designer to collaborate on a branding project for a high-profile client.",
-  },
-  {
-    id: 5,
-    entrepreneurName: "Sophia",
-    role: "Fashion Designer",
-    offerDate: "2024-03-25",
-    offerDescription: "Seeking a visual artist for an avant-garde fashion show installation.",
-  },
-  {
-    id: 6,
-    entrepreneurName: "Ethan",
-    role: "Real Estate Mogul",
-    offerDate: "2024-03-28",
-    offerDescription: "Offering a gallery space for emerging painters to display their work.",
-  },
-  {
-    id: 7,
-    entrepreneurName: "Mia",
-    role: "Restaurant Owner",
-    offerDate: "2024-03-30",
-    offerDescription: "In search of a musician or band to perform live on weekends at a trendy restaurant.",
-  },
-  {
-    id: 8,
-    entrepreneurName: "Noah",
-    role: "Software Developer",
-    offerDate: "2024-04-02",
-    offerDescription: "Developing a new app for artists to sell their work and looking for beta testers.",
-  }
-];
-
+import { useContext, useEffect, useState } from "react";
+import { OfferContext, useOfferContext } from "../../context/OfferContext";
+import { UserContext } from "../../context/userContext";
 
 export default function OffersSection() {
-  const [showOffersSection, setShowOffersSection] = useState(false);
-      const [myOffers, setMyOffers] = useState([])
-      const [currentView, setCurrentView] = useState("");
+  const [currentView, setCurrentView] = useState("AvailableOffers");
+  const { offers } = useOfferContext();
+  const { user, addFavOffer } = useContext(UserContext);
+  const { applyOffer } = useContext(OfferContext);
+  const [appliedOffers,setAppliedOffers]=useState()
+  const [isApplied,setIsApplied]=useState(false)
+  const { deleteOffer, updateOffer } = useContext(OfferContext);
 
-      const addOfferToMyOffers = (offer) => {
-        setMyOffers(currentOffers => {
-          const isOfferInList = currentOffers.some(item => item.id === offer.id);
-          if (!isOfferInList) {
-            return [...currentOffers, offer];
-          }
-          return currentOffers;
-        })
-      }
-      const removeOfferFromMyOffers = (offerId) => {
-        setMyOffers(currentOffers => currentOffers.filter(item => item.id !== offerId));
-      }
+  const userFavOffers = offers?.filter((offer) =>
+    user?.favOffers?.some((favOffer) => favOffer._id === offer?._id)
+  );
+  const handleFavOffers = (offerId) => {
+    addFavOffer(offerId, user._id);
+  };
+
+  const handleApply = (offerId) => {
+    applyOffer(offerId, user._id);
+  };
+  const availableOffersArray = offers?.filter((offer) =>
+    !user?.favOffers?.some((favOffer) => favOffer._id === offer._id) &&
+    !appliedOffers?.some((appliedOffer) => appliedOffer._id === offer._id)
+  );
  
-      const availableOffers = offers.filter(offer => !myOffers.find(item => item.id === offer.id));
+  useEffect(() => {
+    
+    const appliedOffersArray = offers?.filter((offer) =>
+      offer.applicants.some(applicantId => applicantId === user?._id)
+    );
+    setAppliedOffers(appliedOffersArray);
+  
+    // const isAppliedArray = userFavOffers?.map((offer) =>
+    //   offer.applicants.includes(user?._id)
+    // );
+    // setIsApplied(isAppliedArray);
+  
+  }, [user, offers]); 
+  
+  const handleDelete = (offerId) => {
+    deleteOffer(offerId);
+  };
+
+  const handleEdit = (offerId) => {
+    updateOffer(offerId);
+  };
+  console.log("available", availableOffersArray);
+  console.log("Applied Offers:", appliedOffers);
+  console.log("isApplied:", isApplied);
 
   return (
     <>
-    <div className="mr-3 ml-3 flex items-center justify-center p-4  bg-red-100 min-h-[200px] mx-auto rounded-2xl shadow-lg border border-b-4 border-black md:w-1/4 cursor-pointer" onClick={() => setShowOffersSection(!showOffersSection)}>offers Section</div>
-
-    {showOffersSection && (
-    <div className="rounded-lg border border-b-4 border-black">
-      <div className="w-full text-white flex bg-black ">
-            <h2  onClick={() => setCurrentView("MyOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-lg ">My Offers</h2>
-            <h2 onClick={() => setCurrentView("AvailableOffers")}  className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tr-lg ">Available Offers</h2>
+      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto ">
+        <div className="w-full text-white flex bg-black sticky top-0 z-50 ">
+          <h2
+            onClick={() => setCurrentView("MyOffers")}
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-lg "
+          >
+              My Favourits Offers          </h2>
+          <h2
+            onClick={() => setCurrentView("AvailableOffers")}
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tr-lg "
+          >
+            Available Offers
+          </h2>
         </div>
-        {currentView === "MyOffers"  && (
-           <div className="w-full h-auto overflow-auto  p-4 slide-in-left">
-           <h2 className="font-bold text-lg mb-4">My Offers</h2>
-           {myOffers.map((offer) => (
-             <div key={offer.id} className="mb-4 p-2  shadow-md rounded-lg">
-               <h3 className="text-md font-semibold">{offer.entrepreneurName}</h3>
-               <p>{offer.role}</p>
-               <p>{offer.offerDate}</p>
-               <p>read more</p>
-               {/* <p>{offer.offerDescription}</p> */}
-               <button onClick={() => removeOfferFromMyOffers(offer.id) }className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">-</button>
-             </div>
-           ))}
-         </div>
+        {currentView === "MyOffers" && (
+          <div className="w-full h-auto overflow-auto  p-4 slide-in-left">
+            <h2 className="font-bold text-lg mb-4">My Favourits Offers</h2>
+            {userFavOffers?.map((offer) => (
+              <div key={offer._id} className="mb-4 p-2  shadow-md rounded-lg">
+                <h3 className="text-md font-semibold">{offer.title}</h3>
+                <p>
+                  Created by :{" "}
+                  <span className="font-bold">
+                    {offer.createdBy?.address?.firstname}{" "}
+                    {offer.createdBy?.address?.lastname}
+                  </span>
+                </p>
+                <p>Location : {offer.location}</p>
+                <p>{offer.description}</p>
+                <button
+                  onClick={() => handleFavOffers(offer._id)}
+                  className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                >
+                  -
+                </button>
+               <button
+                  onClick={() => handleApply(offer._id)} 
+                  className="bg-green-700 hover:bg-green-800 text-white font-bold  px-2  ml-3 rounded "
+                >
+                  apply
+                </button>
+               
+              </div>
+            ))}
+          </div>
         )}
 
-       {currentView === "AvailableOffers"  && (
-        <div className="w-full h-auto overflow-auto p-4 slide-in-right ">
-        <h2 className="font-bold text-lg mb-4">Available Offers</h2>
-        <div className="grid grid-cols-1 gap-4">
-          {availableOffers.map((offer) => (
-            <div key={offer.id} className="bg-white p-4 shadow-md rounded-lg">
-              <h3 className="text-md font-semibold">{offer.entrepreneurName}</h3>
-              <p>{offer.role}</p>
-              <p>{offer.offerDate}</p>
-              <p>{offer.offerDescription}</p>
-              <button onClick={() => addOfferToMyOffers(offer) }className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded ">+</button>
+        {currentView === "AvailableOffers" && (
+          <div className="w-full h-auto overflow-auto p-4 slide-in-right ">
+            <h2 className="font-bold text-lg mb-4">Available Offers</h2>
+            <div className="grid grid-cols-1 gap-4">
+              {availableOffersArray?.map((offer) => (
+                <div
+                  key={offer._id}
+                  className="bg-white p-4 shadow-md rounded-lg"
+                >
+                  <h3 className="text-md font-semibold">{offer.title}</h3>
+                  <p>
+                    Created by :{" "}
+                    <span className="font-bold">
+                      {offer.createdBy?.address?.firstname}{" "}
+                      {offer.createdBy?.address?.lastname}
+                    </span>
+                  </p>
+                  <p>Location : {offer.location}</p>
+                  <p>{offer.description}</p>
+                  <button
+                    onClick={() => handleFavOffers(offer._id)}
+                    className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                  >
+                    +
+                  </button>
+                  <div className=" flex gap-2 font-bold  p-2  rounded ">
+                      <button 
+                      className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                      onClick={() => handleEdit(offer._id)}>Edit</button>
+                      <button
+                     className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                      onClick={() => handleDelete(offer._id)}>Delete</button>
+                   </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-       )}
-
-    
+          </div>
+        )}
       
-    </div>)}
-     
+
+      
+      </div>
+      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto ">
+      <div className="w-full rounded-2xl text-white flex bg-black sticky top-0 z-50 ">
+          <h2
+            onClick={() => setCurrentView("MyOffers")}
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-2xl "
+          >
+             Applied Offers          </h2>
+          {/* <h2
+            onClick={() => setCurrentView("AvailableOffers")}
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tr-lg "
+          >
+            Available Offers
+          </h2> */}
+        </div>
+        {appliedOffers?.map((offer) => (
+                <div
+                  key={offer._id}
+                  className="bg-white p-4 shadow-md rounded-2xl"
+                >
+                  <h3 className="text-md font-semibold">{offer.title}</h3>
+                  <p>
+                    Created by :{" "}
+                    <span className="font-bold">
+                      {offer.createdBy?.address?.firstname}{" "}
+                      {offer.createdBy?.address?.lastname}
+                    </span>
+                  </p>
+                  <p>Location : {offer.location}</p>
+                  <p>{offer.description}</p>
+                  <button
+                    className="bg-red-700 text-white font-bold  px-2  rounded "
+                  >
+                    applied
+                  </button>
+                </div>
+              ))}
+      </div>
     </>
-    
-)
+  );
 }

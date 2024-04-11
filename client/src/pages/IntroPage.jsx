@@ -19,7 +19,7 @@ export default function IntroPage() {
                 <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[650px] md:h-fit border-b-8">
                     <div className="bg-cobaltBlue rounded-tl-[30px] rounded-tr-[30px] flex p-6 justify-between items-center pr-8 pl-8 md:pr-24 md:pl-24">
                         <img src="/smiley.svg" alt="smiley" className="w-[70px] lg:w-[150px] lg:ml-[120px]"></img>
-                        <h2 className="text-[26px] md:text-[38px] lg:text-[52px] lg:pr-[70px] text-center text-white">Our groovy Artists</h2>
+                        <h2 className="text-[26px] md:text-[38px] lg:text-[52px] lg:pr-[70px] text-center text-white">{t('OurGroovyArtists')}</h2>
                     </div>
                     <div className="md:flex">
                         <div className="md:w-[540px] lg:w-[970px] order-1">

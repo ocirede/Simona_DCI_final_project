@@ -1,17 +1,15 @@
 import SendCancelRequest from "../network-comps/SendCancelRequest";
-import PlayfulTag from "../cards/PlayfulTag"
+import PlayfulTag from "../cards/PlayfulTag";
 
-export default function CardElement({ address, role, categories, profileImage ,_id }) {
-
+export default function CardElement({ address, role, categories, profileImage, _id }) {
   if (!address || !categories) {
-    return null; 
-}
+    return null;
+  }
 
-const { firstname, lastname } = address;
+  const { firstname, lastname } = address;
 
   return (
     <div
-
       className="w-[220px] h-[390px] rounded-lg overflow-hidden shadow-lg bg-white "
       style={{ minWidth: "240px" }}
     >
@@ -23,30 +21,25 @@ const { firstname, lastname } = address;
               backgroundImage: `url('${profileImage}')`,
               backgroundPosition: "center",
             }}
+            alt="Profile"
           />
         </div>
       </div>
       <div className="px-4 py-4 text-center">
-
-        <div className="font-bold text-xl uppercase mb-2 mt-16">{address?.firstname} {address?.lastname}</div>
+        <div className="font-bold text-xl uppercase mb-2 mt-16">{firstname} {lastname}</div>
         <p className="text-gray-700 text-base mb-2">{role}</p>
-       <SendCancelRequest receiverId ={_id}/>
-          
-
+        <SendCancelRequest receiverId={_id} />
       </div>
       <div className="pl-6 pr-6 pb-4 flex flex-wrap gap-2 justify-center text-center">
         {categories?.map((category, index) => (
           <PlayfulTag
             key={index}
-            className="bg-retroBlue rounded-full px-3 py-1 text-sm  text-white"
+            className="bg-retroBlue rounded-full px-3 py-1 text-sm text-white"
           >
             {category}
-
+          </PlayfulTag>
         ))}
       </div>
     </div>
   );
 }
-
-
-

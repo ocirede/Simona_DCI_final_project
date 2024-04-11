@@ -19,6 +19,7 @@ import {
   getAllUsers,
   updateProfileImage,
   updateProfileBackground,
+  addFavOffer
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -48,5 +49,7 @@ userRoutes.put(
   profileBackroundUpload.single("profileBackground"),
   updateProfileBackground
 );
+
+userRoutes.post("/add-fav-offer/:offerId", addFavOffer)
 
 export default userRoutes;

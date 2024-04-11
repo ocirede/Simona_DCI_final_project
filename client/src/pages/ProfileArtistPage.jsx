@@ -5,7 +5,7 @@ import CardSection from "../components/profile artist/CardSection";
 import EditorModal from "../components/profile artist/EditorModal";
 import ShareLinkCard from "../components/profile artist/ShareLinkCard";
 import { useFormVisibility } from "../components/profilePageEntrepreneur/customHook/FormVisibility";
-
+import CreateOffer from "../components/profile artist/CreateOfferButton";
 
 function ProfileArtist() {
   const { formVisibility, toggleFormVisibility } = useFormVisibility();
@@ -14,6 +14,7 @@ function ProfileArtist() {
   return (
     <>
       <NavBar />
+      <CreateOffer />
       <main className="mb-10">
         {/* personal info section*/}
         <section>

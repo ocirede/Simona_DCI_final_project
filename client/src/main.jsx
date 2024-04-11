@@ -8,12 +8,15 @@ import './i18n'
 import '@fontsource/bungee';
 
 import UserProvider from "./context/userContext.jsx";
+import OfferProvider from "./context/OfferContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />  
+        <OfferProvider>
+          <App />  
+        </OfferProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

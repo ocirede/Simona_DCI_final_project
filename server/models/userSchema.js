@@ -62,7 +62,14 @@ const userSchema = new mongoose.Schema(
     ],
 
     about: { type: String },
+    favOffers:[
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
   },
+  
 
   {
     timestamps: true,

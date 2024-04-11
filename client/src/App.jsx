@@ -19,7 +19,6 @@ import ProfilePageEntrepreneur from "./pages/ProfilePageEntrepreneur.jsx";
 import EmailConfirmation from "./pages/EmailConfirmation.jsx";
 import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
-
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 function App() {
