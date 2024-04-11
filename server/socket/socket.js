@@ -1,17 +1,21 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
+import { writeFile } from "fs";
 
 const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
+  connectionStateRecovery: {reconnect: true,},
   cors: true,
 });
 
 export const getSocketIds = (senderId, receiverId) => {
   const senderSocketId = userSocketMap[senderId];
   const receiverSocketId = userSocketMap[receiverId];
+  console.log(receiverSocketId)
+
   return { senderSocketId, receiverSocketId };
 };
 
@@ -26,10 +30,11 @@ io.on("connection", (socket) => {
     userSocketMap[userId] = socket.id;
     socketUserMap[socket.id] = userId;
   }
-
+socket.on("file-upload", (file)=> {
+  console.log(file)
+})
   // Emit getOnlineUsers event to all clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
-
   // Handle disconnect event
   socket.on("disconnect", () => {
     console.log("a user disconnected", socket.id);
@@ -38,6 +43,14 @@ io.on("connection", (socket) => {
     delete socketUserMap[socket.id];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
+
+  // Handle reconnection event
+  socket.on("reconnect", (attemptNumber) => {
+    console.log(`Socket reconnected (attempt ${attemptNumber})`);
+    if (attemptNumber > 3) {
+      // After 3 failed attempts, notify the client or perform custom logic
+      socket.emit("reconnectionFailed");
+    }  });
 
   // Handle error event
   socket.on("error", (error) => {

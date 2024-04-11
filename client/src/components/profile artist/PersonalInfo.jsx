@@ -23,6 +23,7 @@ function PersonalInfo({ onClick }) {
   };
 
   return (
+
     <section className="flex gap-8 ml-16 items-center">
       <div className="">
         <button
@@ -30,14 +31,17 @@ function PersonalInfo({ onClick }) {
           className="bg-gray-200 rounded-full p-2"
         >
           <span className="text-black">Contact me</span>
+
         </button>
       </div>
+
       <div className="bg-gray-200 rounded-full p-2">
         <button
           onClick={() => toggleFormVisibility("shareLink")} 
           className=""
         >
           <span className="text-black">Share Link</span>
+
         </button>
       </div>
 

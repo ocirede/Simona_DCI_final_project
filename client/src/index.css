@@ -27,15 +27,60 @@ body {
 @tailwind utilities;
 
 
+.chat-bubble {
+  position: relative;
+  padding: 5px 9px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* send messages chat*/
+
 .sent-message {
+  text-align: left;
   display: flex;
   justify-content: flex-end;
 }
 
 .received-message {
+  text-align: left;
   display: flex;
   justify-content: flex-start;
+}
+
+/* send messages chat*/
+.sent-message .chat-bubble {
+  background-color: #224193;
+  color: #fff;
+  margin-left: auto;
+  max-width: calc(25% - 16px);
+}
+
+.received-message .chat-bubble {
+  background-color: #df3c5f;
+  color: #fff;
+  margin-right: auto;
+  max-width: calc(25% - 16px);
+}
+
+.message-timestamp {
+  margin-left: auto;
+}
+
+/*download image*/
+
+#download-link:hover::after {
+  content: "Download";
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #df3c5f;
+  color: white;
+  padding: 2px;
+  border-radius: 3px;
 }
 
 /* avatar online */
@@ -44,17 +89,42 @@ body {
   position: relative;
 }
 
-.avatar.online::after {
-  content: '';
+/*notification sidebar*/
+
+.notification-count {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: green;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  top: -5px;
-  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
 }
 
+/* Bouncing animation  notification */
+.animated-message {
+  animation: bounce 0.3s ease infinite alternate;
+}
+
+/* hide ChevronDown Icon */
+
+.hidden{
+  display: none;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
 
 
 /* network animations*/
@@ -121,7 +191,6 @@ body {
 
   text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
 } 
-
 
 
 /* Special font */

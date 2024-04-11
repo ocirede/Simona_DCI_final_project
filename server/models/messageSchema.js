@@ -15,7 +15,24 @@ const messageSchema = new mongoose.Schema({
     message: {
         type: String,
         required: true
-    }
+    }, 
+
+    file: {
+      type: String
+    },
+
+    notifications: [
+        {
+          message: String,
+        
+          receiverId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+          }
+        }
+      ]
+
+    
 }, {
     timestamps: true
 });

@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "../config/axios.js";
 
+
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
@@ -23,7 +25,6 @@ const UserProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
-
   // fetching email-remember-checkbox
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberedEmail");
@@ -54,9 +55,13 @@ const UserProvider = ({ children }) => {
       if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
-          navigate("/homeArtist");
+          setTimeout(() => {
+           window.location.replace("/homeArtist");
+          }, 1000)
         } else {
-          navigate("/E");
+          setTimeout(() => {
+            window.location.replace("/E");
+          }, 1000)
         }
         e.target.reset();
         setEmail("");
@@ -72,7 +77,7 @@ const UserProvider = ({ children }) => {
       } else {
         const error = [
           {
-            message: error.response.data.message,
+            message: error.response?.data?.message,
           },
         ];
         setValidationErrors(error);
@@ -273,6 +278,7 @@ const UserProvider = ({ children }) => {
   ////log out
   const logout = () => {
     localStorage.removeItem("token");
+
     setUser(null);
     navigate("/");
   };
@@ -411,6 +417,7 @@ const UserProvider = ({ children }) => {
         forgotPassword,
         newUser,
         user,
+        setUser,
         setUserRole,
         userRoleChoice,
         registerUser,
