@@ -15,14 +15,17 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
 
   /* background-color: #525252;  */
 }
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* send messages chat*/
 .sent-message {
@@ -51,6 +54,7 @@ body {
   top: -5px;
   right: -5px;
 }
+
 
 
 /* network animations*/
@@ -87,8 +91,8 @@ body {
 }
 .placeholder-xs::placeholder {
   font-size: 0.75rem;
- }
- .vertical-text {
+}
+.vertical-text {
   transform: rotate(-90deg);
   transform-origin: center;
   white-space: nowrap;
@@ -99,28 +103,28 @@ body {
 }
 
 
-
-
- 
 /* Glowing effect on hover */
  .glow-border {
   transition: box-shadow 0.5s;
 }
 
 .glow-border:hover {
-  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #DF3C5F, 0 0 10px #DF3C5F, 0 0 20px #DF3C5F;
+  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #df3c5f, 0 0 10px #df3c5f,
+    0 0 20px #df3c5f;
 }
 
 .text-glow {
-  transition: text-shadow 0.5s; 
+  transition: text-shadow 0.5s;
 }
 
 .text-glow:hover {
+
   text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
 } 
 
 
+
 /* Special font */
 .simona {
-  font-family: 'Bungee', system-ui;
+  font-family: "Bungee", system-ui;
 }

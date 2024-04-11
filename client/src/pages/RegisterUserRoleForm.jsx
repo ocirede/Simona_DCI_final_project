@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import FormSubmitButton from "../components/FormSubmitButton";
+import FormSubmitButton from "../components/register/FormSubmitButton";
 import { UserContext } from "../context/userContext";
 
 const RegisterUserRoleForm = () => {
@@ -35,11 +35,13 @@ const RegisterUserRoleForm = () => {
   };
   return (
     <>
-      <div className="border border-black rounded-2xl p-7">
-        <h2 className="text-2xl text-center mb-9">Tell us who you are{":)"}</h2>
+      <div className="border border-black rounded-2xl p-7 bg-white">
+        <h2 className="text-2xl text-center mb-9 font-semibold">
+          Tell us who you are{":)"}
+        </h2>
         {/* Role selection form */}
         <form onSubmit={handleRoleChoice}>
-          <div className="mb-8">
+          <div className="mb-8 ">
             <label htmlFor="artist" className="cursor-pointer">
               <div
                 className=" rounded-xl p-2 bg-retroRed text-center"

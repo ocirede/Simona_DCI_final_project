@@ -18,7 +18,9 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+
   const [aboutText, setAboutText] = useState('');
+
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -352,9 +354,11 @@ const UserProvider = ({ children }) => {
   // Profile Page functions
   const saveAboutText = async () => {
     try {
-        await axios.post(baseURL + `/profile/user/${user.id}/about`, { about: aboutText });
+      await axios.post(baseURL + `/profile/user/${user.id}/about`, {
+        about: aboutText,
+      });
     } catch (error) {
-        console.error('Error saving about text:', error);
+      console.error("Error saving about text:", error);
     }
   };
 
@@ -382,7 +386,6 @@ const UserProvider = ({ children }) => {
     }
   };
   
-
 
   /**
    * For the brave souls who get this far: You are the chosen ones,
