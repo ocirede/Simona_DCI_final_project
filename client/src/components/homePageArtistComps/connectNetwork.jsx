@@ -5,8 +5,8 @@ import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
 
 export default function ConnectNetwork() {
-      const { user} = useContext(UserContext)
-      // if(user)console.log(user)
+  const { user } = useContext(UserContext);
+
 
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
@@ -27,24 +27,30 @@ export default function ConnectNetwork() {
                     <DeleteConnection connectionId={friend._id}/>
                   </div>
                 ))}
-              </div>
-              <div className="w-full h-auto overflow-auto p-2 border border-black ">
-                <div className="grid grid-cols-1 gap-5 ">
-                  {user?.pendingRequests?.map(user => (
-                    <div key={user._id} className="flex gap-2 items-center">
-                      <img src={user.profileImage} className="w-5 h-5 rounded-full bg-green-400 object-cover" />
-                      <div className="text-start text-xs ">{user.address?.firstname} {user.address?.lastname}</div>
-                      <AcceptRequest senderId={user._id} />
-                      <RejectRquest senderId={user._id} />
-                    </div>
-                  ))}
 
+              </div>
+            ))}
+          </div>
+          <div className="w-full h-auto overflow-auto p-2 border border-black">
+            <div className="grid grid-cols-1 gap-5">
+              {user?.pendingRequests?.map((user) => (
+                <div key={user._id} className="flex gap-2 items-center">
+                  <img
+                    src={user.profileImage}
+                    className="w-5 h-5 rounded-full bg-green-400 object-cover"
+                    alt="user"
+                  />
+                  <div className="text-start text-xs">
+                    {user.address?.firstname} {user.address?.lastname}
+                  </div>
+                  <AcceptRequest senderId={user._id} />
+                  <RejectRquest senderId={user._id} />
                 </div>
               ))}
             </div>
           </div>
-
-        </>
-      );
+        </div>
+      </div>
+    </>
+  );
 }
-
