@@ -5,8 +5,8 @@ import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
 
 export default function ConnectNetwork() {
-      const { user} = useContext(UserContext)
-      // if(user)console.log(user)
+  const { user } = useContext(UserContext);
+
 
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
@@ -27,6 +27,7 @@ export default function ConnectNetwork() {
                     <DeleteConnection connectionId={friend._id}/>
                   </div>
                 ))}
+
               </div>
               <div className="w-full h-auto overflow-auto p-2 border rounded-br-2xl border-black ">
                 <div className="grid grid-cols-1 gap-5 ">
@@ -43,8 +44,7 @@ export default function ConnectNetwork() {
               
             </div>
           </div>
-          </div>
+
         </>
       );
 }
-

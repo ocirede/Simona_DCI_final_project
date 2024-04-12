@@ -10,7 +10,6 @@ export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
-  const userId = user?._id;
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");
@@ -29,7 +28,9 @@ export default function NavBarHomepage() {
   return (
     <nav className=" m-3 z-50 pt-3 pl-3 pr-3 bg-white-400 relative rounded-lg shadow-lg border border-b-4 border-black">
       <div className="flex flex-wrap items-center justify-between md:flex-row">
+
         <div className="cursor-pointer" onClick={()=>handleUserClick(user._id)}>
+
           <WelcomeUser />
         </div>
         <StarFiveIcon className="w-[200px] absolute right-[30%] top-[-25%] rotate-[25deg] z-50  " />
@@ -62,17 +63,20 @@ export default function NavBarHomepage() {
             <NavLink to="/chatbox" className="mt-4 md:mt-0 md:ml-4">
               Chatbox
             </NavLink>
-            
           </div>
-         
+
           <a className="mt-4 md:mt-0 md:ml-4 cursor-pointer" onClick={logout}>
             Logout
           </a>
         </div>
       </div>
       <div className="ml-5 mr-5 mt-5 flex items-end   justify-between ">
-
-      <h1 className="uppercase simona   text-[60px]   md:text-[120px] cursor-pointer" onClick={handleLogoClick}>Simona</h1>
+        <h1
+          className="uppercase simona   text-[60px]   md:text-[120px] cursor-pointer"
+          onClick={handleLogoClick}
+        >
+          Simona
+        </h1>
 
         <CircleIcon />
       </div>
