@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { OfferContext, useOfferContext } from "../../context/OfferContext";
 import { UserContext } from "../../context/userContext";
-
+import EditOffer from "./editOfferButton";
 export default function OffersSection() {
   const [currentView, setCurrentView] = useState("AvailableOffers");
   const { offers } = useOfferContext();
@@ -44,31 +44,31 @@ export default function OffersSection() {
   };
 
   const handleEdit = (offerId) => {
-    updateOffer(offerId);
+    console.log(offerId);
   };
-  console.log("available", availableOffersArray);
-  console.log("Applied Offers:", appliedOffers);
-  console.log("isApplied:", isApplied);
+  // console.log("available", availableOffersArray);
+  // console.log("Applied Offers:", appliedOffers);
+  // console.log("isApplied:", isApplied);
 
   return (
     <>
       <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto ">
-        <div className="w-full text-white flex bg-black sticky top-0 z-50 ">
+        <div className="w-full text-white flex bg-black rounded-tl-2xl rounded-tr-2xl sticky top-0 z-50 ">
           <h2
             onClick={() => setCurrentView("MyOffers")}
-            className="text-xl text-center border cursor-pointer border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-lg "
+            className="text-xl text-center border cursor-pointer border-black font-semibold p-1 flex-grow rounded-2xl "
           >
             My Favourits Offers{" "}
           </h2>
           <h2
             onClick={() => setCurrentView("AvailableOffers")}
-            className="text-xl text-center border border-black font-semibold cursor-pointer  p-1 flex-grow rounded-tr-lg "
+            className="text-xl text-center border border-black font-semibold cursor-pointer  p-1 flex-grow rounded-2xl "
           >
             Available Offers
           </h2>
           <h2
             onClick={() => setCurrentView("AppliedOffers")}
-            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg cursor-pointer rounded-2xl "
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-2xl cursor-pointer  "
           >
             Applied Offers{" "}
           </h2>
@@ -106,26 +106,29 @@ export default function OffersSection() {
         )}
         {currentView === "AppliedOffers" && (
           <div className="w-full h-auto overflow-auto p-4 slide-in-top ">
-          <h2 className="font-bold text-lg mb-4 ">Applied Offers</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {appliedOffers?.map((offer) => (
-              <div key={offer._id} className="bg-white p-4 shadow-md rounded-2xl">
-                <h3 className="text-md font-semibold">{offer.title}</h3>
-                <p>
-                  Created by :{" "}
-                  <span className="font-bold">
-                    {offer.createdBy?.address?.firstname}{" "}
-                    {offer.createdBy?.address?.lastname}
-                  </span>
-                </p>
-                <p>Location : {offer.location}</p>
-                <p>{offer.description}</p>
-                <button className="bg-red-700 text-white font-bold  px-2  rounded ">
-                  applied
-                </button>
-              </div>
-            ))}
-             </div>
+            <h2 className="font-bold text-lg mb-4 ">Applied Offers</h2>
+            <div className="grid grid-cols-1 gap-4">
+              {appliedOffers?.map((offer) => (
+                <div
+                  key={offer._id}
+                  className="bg-white p-4 shadow-md rounded-2xl"
+                >
+                  <h3 className="text-md font-semibold">{offer.title}</h3>
+                  <p>
+                    Created by :{" "}
+                    <span className="font-bold">
+                      {offer.createdBy?.address?.firstname}{" "}
+                      {offer.createdBy?.address?.lastname}
+                    </span>
+                  </p>
+                  <p>Location : {offer.location}</p>
+                  <p>{offer.description}</p>
+                  <button className="bg-red-700 text-white font-bold  px-2  rounded ">
+                    applied
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
@@ -155,12 +158,13 @@ export default function OffersSection() {
                     +
                   </button>
                   <div className=" flex gap-2 font-bold  p-2  rounded ">
-                    <button
+                    {/* <button
                       className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
                       onClick={() => handleEdit(offer._id)}
                     >
                       Edit
-                    </button>
+                    </button> */}
+                    <EditOffer offerId={offer._id} />
                     <button
                       className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
                       onClick={() => handleDelete(offer._id)}
@@ -174,11 +178,6 @@ export default function OffersSection() {
           </div>
         )}
       </div>
-
-
-
-
-    
     </>
   );
 }

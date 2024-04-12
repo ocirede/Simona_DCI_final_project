@@ -140,3 +140,18 @@ export const applyOffer = async (req, res) => {
   }
 };
 
+// Get offer by ID
+export const getOfferById = async (req, res) => {
+  const offerId = req.params.offerId;
+ 
+  try {
+    const offer = await Post.findById(offerId);
+    if (!offer) {
+      return res.status(404).json({ success: false, message: 'Offer not found' });
+    } 
+    
+    res.json({ success: true, offer });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error fetching offer by ID', error: error.message });
+  }
+};

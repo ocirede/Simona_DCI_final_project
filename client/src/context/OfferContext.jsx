@@ -9,6 +9,7 @@ export const useOfferContext = () => useContext(OfferContext);
 const OfferProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [offers, setOffers] = useState([]);
+  const [foundOffer, setFoundOffer] = useState();
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // Fetch offers
@@ -61,15 +62,17 @@ const OfferProvider = ({ children }) => {
       const response = await axios.delete(baseURL + `/offers/${offerId}`);
       if (response.data.success) {
         const deletedOffer = response.data.deletedOffer;
-        setOffers((prevOffers) =>
-          prevOffers.filter((offer) => offer._id !== deletedOffer)
+        setOffers((offers) =>
+          offers.filter((offer) => offer._id !== deletedOffer._id)
         );
-        console.log("deleted offers", deletedOffer);
+        console.log("offers after delete", offers);
       }
     } catch (error) {
       console.error("Failed to delete offer:", error);
     }
   };
+
+  console.log("offers aft dlete", offers);
   // Update offer
   const updateOffer = async (offerId, updateData) => {
     try {
@@ -88,6 +91,7 @@ const OfferProvider = ({ children }) => {
       console.error("Failed to update offer:", error);
     }
   };
+
   //apply offer
   const applyOffer = async (offerId, applicantId) => {
     try {
@@ -104,10 +108,29 @@ const OfferProvider = ({ children }) => {
       console.error("Error applying to offer", error);
     }
   };
+  // finding offer
+  const findOffer = async (offerId) => {
+    try {
+      const response = await axios.get(baseURL + `/offers/find/${offerId}`);
+      if (response.data.success) {
+        setFoundOffer(response.data.offer);
+      }
+    } catch (error) {
+      console.error("Error fetching offer by ID:", error);
+    }
+  };
 
   return (
     <OfferContext.Provider
-      value={{ offers, createOffer, updateOffer, deleteOffer, applyOffer }}
+      value={{
+        offers,
+        foundOffer,
+        createOffer,
+        updateOffer,
+        deleteOffer,
+        applyOffer,
+        findOffer,
+      }}
     >
       {children}
     </OfferContext.Provider>

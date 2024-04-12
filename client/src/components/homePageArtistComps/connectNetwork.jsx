@@ -10,6 +10,7 @@ export default function ConnectNetwork() {
   // const allUsers = [...userData, ...entrepreneursData]
   // const [friendsList, setFriendsList] = useState([])
 
+
   return (
     <>
       <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto ">
@@ -130,12 +131,15 @@ export default function ConnectNetwork() {
                       Delete
                     </button>
                   </div>
+
                 </div>
-              ))}
+              
             </div>
           </div>
+
         )}
       </div>
     </>
   );
+
 }
