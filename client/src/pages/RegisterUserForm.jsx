@@ -58,7 +58,7 @@ const RegisterUserForm = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen ">
         {/* Logo image top left */}
         <LogoImageRegistration />
 
@@ -69,8 +69,8 @@ const RegisterUserForm = () => {
             <img src={starFourSvg} alt="Star Four" />
           </div>
           {/* Star with opposite position on small screens */}
-          <div className="absolute sm:bottom-[-105px] sm:right-[-25px] sm:left-auto sm:top-auto sm:h-[200px] sm:w-[200px] bottom-[-82px] left-2 z-[-1] h-[220px] w-[220px]">
-            <img src={starTwoSvg} alt="Star Two" />
+          <div className="absolute sm:bottom-[-105px] sm:right-[-25px] sm:left-auto sm:top-auto sm:h-[200px] sm:w-[200px] bottom-[-82px] left-2  h-[220px] w-[220px]">
+            <img src={starTwoSvg} tyle={{ position: 'relative', zIndex: '9999' }} alt="Star Two" />
           </div>
           <div className="bg-white  shadow-lg p-8 border border-black rounded-2xl  ">
             <h1 className="text-2xl font-bold mb-6 text-center">

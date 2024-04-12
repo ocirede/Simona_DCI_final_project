@@ -44,7 +44,6 @@ const RatingContextProvider = ({ children }) => {
         setRatings(response.data.ratings);
       }
 
-      console.log("===>ratings for this user", ratings);
     } catch (error) {
       console.log("Error geting ratings for the user", error);
     }

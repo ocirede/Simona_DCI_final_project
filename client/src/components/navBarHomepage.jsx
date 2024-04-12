@@ -5,7 +5,6 @@ import { UserContext } from "../context/userContext.jsx";
 import CircleIcon from "./iconsComponents/circle.jsx";
 import StarFiveIcon from "./iconsComponents/starFive.jsx";
 import WelcomeUser from "./welcomeUser.jsx";
-import { useSocketContext } from "../context/socketContext.jsx";
 
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,18 +17,18 @@ export default function NavBarHomepage() {
       navigate("/E");
     }
   };
-  const handleUserClick = () => {
+  const handleUserClick = (userId) => {
     if (user.role === "artist") {
-      navigate("/profile-artist");
+      navigate(`/profile-artist/${userId}`);
     } else {
-      navigate("/ProfilePageEntrepreneur");
+      navigate(`/ProfilePageEntrepreneur/${userId}`);
     }
   };
 
   return (
     <nav className=" m-3 z-50 pt-3 pl-3 pr-3 bg-white-400 relative rounded-lg shadow-lg border border-b-4 border-black">
       <div className="flex flex-wrap items-center justify-between md:flex-row">
-        <div className="cursor-pointer" onClick={handleUserClick}>
+        <div className="cursor-pointer" onClick={()=>handleUserClick(user._id)}>
           <WelcomeUser />
         </div>
         <StarFiveIcon className="w-[200px] absolute right-[30%] top-[-25%] rotate-[25deg] z-50  " />

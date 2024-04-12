@@ -79,7 +79,7 @@ function ProfileImgBgSection({ user }) {
                     </label>
                 </div>
                 <div className="flex gap-4 ml-4 w-full">
-                   <PersonalInfo />
+                   <PersonalInfo userEmail={user?.email} />
                 </div>
             </div>
         </div>
