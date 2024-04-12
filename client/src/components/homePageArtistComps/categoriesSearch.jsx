@@ -50,8 +50,8 @@ export function CategoriesSearch() {
               
             {selectedCategory && (
               <div className="w-full p-4 mt-5 bg-white">
-                <h1 className="text-l font-bold text-center p-4">{selectedCategory}</h1>
-                <FilteredUsersPage users={users} selectedCategory={selectedCategory} />
+                <h1 className="text-l font-bold text-center p-4">{selectedCategory} </h1>
+                <FilteredUsersPage users={users} selectedCategory={selectedCategory}  />
               </div>
             )}
 
