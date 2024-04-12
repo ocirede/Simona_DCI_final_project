@@ -19,7 +19,7 @@ export default function ConnectNetwork() {
               <h2 className="w-1/2 rounded-tr-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">Pending Requests</h2>
             </div>
             <div className="flex">
-              <div className="w-full h-auto overflow-auto border border-black p-2">
+              <div className="w-full h-auto overflow-auto border rounded-bl-2xl  border-black p-2">
                 {user?.connections?.map(friend => (
                   <div key={friend._id} className="flex gap-2 items-center">
                     <img src={friend.profileImage} className="w-5 h-5 rounded-full bg-green-400 object-cover" />
@@ -28,7 +28,7 @@ export default function ConnectNetwork() {
                   </div>
                 ))}
               </div>
-              <div className="w-full h-auto overflow-auto p-2 border border-black ">
+              <div className="w-full h-auto overflow-auto p-2 border rounded-br-2xl border-black ">
                 <div className="grid grid-cols-1 gap-5 ">
                   {user?.pendingRequests?.map(user => (
                     <div key={user._id} className="flex gap-2 items-center">
@@ -40,10 +40,10 @@ export default function ConnectNetwork() {
                   ))}
 
                 </div>
-              ))}
+              
             </div>
           </div>
-
+          </div>
         </>
       );
 }
