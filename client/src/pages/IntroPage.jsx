@@ -14,6 +14,7 @@ export default function IntroPage() {
     getBestRatedComments();
   }, []);
 
+
   return (
    <div>
 
@@ -194,3 +195,4 @@ export default function IntroPage() {
     </div>
   );
 }
+

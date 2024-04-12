@@ -36,26 +36,26 @@ export default function MeetOurTeam() {
         <TeamMember
           name="Issa Georges"
           profileImg="/issa.jpg"
-          linkedinUrl="https://www.linkedin.com/in/john-doe"
+          linkedinUrl="https://www.linkedin.com/in/issa-georges-64070199/"
           about="Issa radiates warmth and hospitality, always ensuring everyone feels welcome, and he will always surprise you with a delicious dish of food!"
         />
         <TeamMemberTwo
           name="Federico Diaferia"
           profileImg="/federico.jpg"
-          linkedinUrl="https://www.linkedin.com/in/jane-smith"
-          about="Fede is the life of the party, full of energy and wit. He is not only a skilled coder and but a very good storyteller!"
+          linkedinUrl="https://www.linkedin.com/in/federico-diaferia-902876225/"
+          about="Fede is the soul of the party, full of energy and wit. He is not only a skilled coder but a very good storyteller!"
         />
         <TeamMember
           name="Kostas Bouzianis"
           profileImg="/kostas.jpg"
-          linkedinUrl="https://www.linkedin.com/in/jane-smith"
+          linkedinUrl="https://www.linkedin.com/in/kostas-bouzianis/"
           about="Kostas and coding is going together, vs-code feels like his home. His love for technology in combination with the outdoors inspires him to find balance and harmony."
         />
         <TeamMemberTwo
           name="Tyhe Ferenc"
           profileImg="/tyhe.jpeg"
-          linkedinUrl="https://www.linkedin.com/in/jane-smith"
-          about="Tyhe's our alien coming out of this world, constantly surprising us with her alien-like creativity, whether its her coding solutions, her writing skills or even her poems."
+          linkedinUrl="https://www.linkedin.com/in/tyhe-ferenc-1382842a0/"
+          about="Tyhe is our alien coming out of this world, constantly surprising us with her alien-like creativity, whether its her coding solutions, her writing skills or even her poems."
         />
       </div>
   );

@@ -6,6 +6,7 @@ import RecommendedEntrepreneurs from "../components/homePageArtistComps/recommen
 
 import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
+import Sidebar from "../components/chatBox/SideBar";
 
 export default function HomePageArtist() {
   const { user } = useContext(UserContext);
@@ -14,6 +15,7 @@ export default function HomePageArtist() {
   const { firstname, lastname } = user?.address || {};
 
   return (
+
 
     // <>
     // <div className="max-w-md mx-auto flex flex-col gap-5 bg-gray-50 p-10 ">
@@ -54,6 +56,8 @@ export default function HomePageArtist() {
           <OffersSection />
         </div>
       </div>
+      <Sidebar />
+
     </>
   );
 }

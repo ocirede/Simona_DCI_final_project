@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CategoriesSearch } from "../components/homePageArtistComps/categoriesSearch";
 import ConnectNetwork from "../components/homePageArtistComps/connectNetwork";
 import RecommendedArtists from "../components/homePageEntrepreneurComps/recommendedArtists";
 import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
+import Sidebar from "../components/chatBox/SideBar";
 
 export default function HomePageEntrepreneur() {
   const { user } = useContext(UserContext);
@@ -14,6 +15,7 @@ export default function HomePageEntrepreneur() {
   const lastName = user?.address?.lastname;
 
   return (
+
 
 
   <>

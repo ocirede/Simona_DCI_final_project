@@ -1,7 +1,8 @@
-import  { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Copy } from "lucide-react";
 import { useLocation } from "react-router-dom";
+const clientBaseURL = import.meta.env.VITE_BASE_CLIENT_URL;
 
 function ShareLinkCard({ onClose }) {
   const [copySuccess, setCopySuccess] = useState(false);
@@ -9,16 +10,15 @@ function ShareLinkCard({ onClose }) {
   const location = useLocation();
   const pathname = location.pathname;
   const mailtoLink =
-    "mailto:?subject=Some%20text%20here%20as%20a%20subject.&body=http://localhost:5173" +
+    ` mailto:?subject=Some%20text%20here%20as%20a%20subject.&body=${clientBaseURL}` +
     pathname;
   const facebookLink =
-    "https://www.facebook.com/sharer/sharer.php?u=http://localhost:5173" +
-    pathname;
+    ` https://www.facebook.com/sharer/sharer.php?u=${clientBaseURL}` + pathname;
   const linkedinLink =
-    "https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:5173" +
+    ` https://www.linkedin.com/sharing/share-offsite/?url=${clientBaseURL}` +
     pathname;
-  const twitterLink = ` https://twitter.com/intent/tweet?url=http://localhost:5173${pathname}&text=Check%20out%20my%20profile`;
-  
+  const twitterLink = ` https://twitter.com/intent/tweet?url=${clientBaseURL}/${pathname}&text=Check%20out%20my%20profile`;
+
   const handleCopy = () => {
     inputRef.current.select();
     document.execCommand("copy");
@@ -135,8 +135,8 @@ function ShareLinkCard({ onClose }) {
 
           <input
             type="text"
-            defaultValue={`http://localhost:5173${pathname}`}
-            className="border w-full h-7 pl-2 max-w-[calc(100%-3rem)] h-7 pl-2 overflow-hidden overflow-ellipsis"
+            defaultValue={`${clientBaseURL}${pathname}`}
+            className="border w-full h-7 pl-2 max-w-[calc(100%-3rem)] overflow-hidden overflow-ellipsis"
             ref={inputRef}
           />
 

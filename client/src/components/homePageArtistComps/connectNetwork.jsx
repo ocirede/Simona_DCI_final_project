@@ -5,6 +5,9 @@ import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
 
 export default function ConnectNetwork() {
+
+
+
   const { user } = useContext(UserContext);
 
   // const allUsers = [...userData, ...entrepreneursData]

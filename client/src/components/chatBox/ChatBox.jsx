@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   useFetchMessages,
   useSendMessage,
@@ -12,7 +13,6 @@ import { ArrowDownToLine } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { Check } from "lucide-react";
 import { X } from "lucide-react";
-import { NavLink } from "react-router-dom";
 import axios from "../../config/axios.js";
 import AlertMessageWarning from "../alerts/AlertMessageWarning.jsx";
 
@@ -27,7 +27,7 @@ export default function ChatBox({ connection }) {
   const { messages, setMessages, uploadImage } = useFetchMessages(connection);
   const messagesEndRef = useRef(null);
   const baseURL = import.meta.env.VITE_BASE_URL;
-
+  const navigate = useNavigate();
   // fetching message real-time from socket.io
   useEffect(() => {
     try {
@@ -139,20 +139,29 @@ export default function ChatBox({ connection }) {
     }
   };
 
+  const handleNavigation = (connection) => {
+    if (connection.role === "artist") {
+      navigate(`/profile-artist/${connection._id}`);
+    } else {
+      navigate(`/ProfilePageEntrepreneur/${connection._id}`);
+    }
+  };
+
   // NavLink to find out how to navigate through other profile pages;
   return (
     <div className="flex flex-col mr-3 mt-4 h-2/3 bg-white rounded-lg border border-b-4 border-l-4 border-black">
       <nav className="w-full h-16 p-3 flex items-center z-50 font-custom font-bold shadow-xl">
-        <NavLink className="underline">{fullName}</NavLink>
+        <p
+          onClick={() => handleNavigation(connection)}
+          className="underline cursor-pointer"
+        >
+          {fullName}
+        </p>
       </nav>
-      {showAlert && (
-        <AlertMessageWarning text="Please type a message" />
-      )}
+      {showAlert && <AlertMessageWarning text="Please type a message" />}
       {messages && messages.length > 0 ? (
-        
         <div className="overflow-y-auto p-5">
           {messages.map((message, index) => {
-        
             const messageClass =
               message.senderId === user?._id
                 ? "sent-message"

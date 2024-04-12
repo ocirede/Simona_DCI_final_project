@@ -35,6 +35,7 @@ const SocketProvider = ({ children }) => {
                 "notifications",
                 JSON.stringify(updatedNotifications)
               ); 
+
               return updatedNotifications;
             }
             return prevNotifications;
