@@ -10,6 +10,7 @@ export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
+  const userId = user?._id;
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");

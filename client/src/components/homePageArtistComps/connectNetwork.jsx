@@ -1,21 +1,15 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import AcceptRequest from "../network-comps/AcceptRequest";
 import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
 
-
 export default function ConnectNetwork() {
-     
       const { user} = useContext(UserContext)
-
       // if(user)console.log(user)
 
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
-
-
-
 
       return (
         <>
@@ -34,7 +28,6 @@ export default function ConnectNetwork() {
                   </div>
                 ))}
               </div>
-    
               <div className="w-full h-auto overflow-auto p-2 border border-black ">
                 <div className="grid grid-cols-1 gap-5 ">
                   {user?.pendingRequests?.map(user => (
@@ -45,11 +38,13 @@ export default function ConnectNetwork() {
                       <RejectRquest senderId={user._id} />
                     </div>
                   ))}
+
                 </div>
-              </div>
+              ))}
             </div>
           </div>
-          
+
         </>
       );
 }
+
