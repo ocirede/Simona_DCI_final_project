@@ -10,6 +10,7 @@ export default function FilteredUsersPage({  selectedCategory, searchQuery  }) {
     const filteredUsers = users?.filter(user => {
       const name = `${user.address?.firstname || ""} ${user.address?.lastname || ""}`.trim()
       const role = user.role || "";
+
         const matchesCategory = selectedCategory ? user.categories.includes(selectedCategory) : true;
         const matchesSearch = !searchQuery || name.toLowerCase().includes(searchQuery.toLowerCase()) || role.toLowerCase().includes(searchQuery.toLowerCase());
 

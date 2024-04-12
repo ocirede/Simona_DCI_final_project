@@ -15,17 +15,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
-
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
 
   /* background-color: #525252;  */
 }
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 .chat-bubble {
   position: relative;
@@ -35,7 +32,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 
 /* send messages chat*/
 
@@ -113,7 +109,7 @@ body {
 
 /* hide ChevronDown Icon */
 
-.hidden{
+.hidden {
   display: none;
 }
 
@@ -125,7 +121,6 @@ body {
     transform: translateY(-10px);
   }
 }
-
 
 /* network animations*/
 
@@ -150,7 +145,16 @@ body {
     opacity: 1;
   }
 }
-
+@keyframes slideInTop {
+  from {
+    transform: translateY(-100%); /* Start above the view */
+    opacity: 0; /* Start fully transparent */
+  }
+  to {
+    transform: translateY(0); /* End at the current position */
+    opacity: 1; /* Fully visible */
+  }
+}
 /*//////////////////////////////issa*/
 .slide-in-left {
   animation: slideInLeft 1s ease-out forwards;
@@ -158,6 +162,9 @@ body {
 
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
+}
+.slide-in-top {
+  animation: slideInTop 1s ease-out forwards;
 }
 .placeholder-xs::placeholder {
   font-size: 0.75rem;
@@ -172,9 +179,8 @@ body {
   transform: translate(-50%, -50%) rotate(-90deg);
 }
 
-
 /* Glowing effect on hover */
- .glow-border {
+.glow-border {
   transition: box-shadow 0.5s;
 }
 
@@ -188,10 +194,9 @@ body {
 }
 
 .text-glow:hover {
-
-  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8), 0 0 15px rgba(223, 60, 95, 0.8);
-} 
-
+  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8),
+    0 0 15px rgba(223, 60, 95, 0.8);
+}
 
 /* Special font */
 .simona {

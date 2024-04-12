@@ -21,7 +21,9 @@ const RegisterUserQuestions = () => {
   }, []);
 
   return (
-    <div className="flex h-screen relative z-10">
+
+
+    <div className="flex h-screen relative z-[5]">
       {/* Logo image - it is a random image to be replaced with our logo */}
       <LogoImageRegistration />
       {/* Form container */}

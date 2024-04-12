@@ -28,7 +28,7 @@ export function CategoriesSearch() {
      
   return (
           <>
-            <div className="w-full bg-retroBlue pt-4 rounded-2xl  border border-black md:w-1/2">
+            <div className="w-full bg-retroBlue pt-4 rounded-2xl shadow-lg border-b-4 border border-black md:w-1/2">
               <h1 className="uppercase text-center text-xl text-white">Searching hub</h1>
               <SearchComponent clearFilter={clearFilter} onSearch={handleSearch} />
 
@@ -50,8 +50,8 @@ export function CategoriesSearch() {
               
             {selectedCategory && (
               <div className="w-full p-4 mt-5 bg-white">
-                <h1 className="text-l font-bold text-center p-4">{selectedCategory}</h1>
-                <FilteredUsersPage users={users} selectedCategory={selectedCategory} />
+                <h1 className="text-l font-bold text-center p-4">{selectedCategory} </h1>
+                <FilteredUsersPage users={users} selectedCategory={selectedCategory}  />
               </div>
             )}
 

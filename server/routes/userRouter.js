@@ -20,7 +20,10 @@ import {
   updateProfileImage,
   updateProfileBackground,
   addFavOffer,
- getUserById,
+
+
+  getUserById,
+
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -40,10 +43,9 @@ userRoutes.put("/update/:userId", updateUser);
 userRoutes.get("/loggeduser", auth, loggedUser);
 
 userRoutes.get("/all-the-users", getAllUsers);
-userRoutes.get("/single-user/:userId", getUserById)
-userRoutes.put(
-  "/update-profile-pic/:userId",)
-  
+userRoutes.get("/single-user/:userId", getUserById);
+userRoutes.put("/update-profile-pic/:userId");
+
 //The following route is an example to test the image upload, it can be deleted
 userRoutes.post(
   "/image",
@@ -56,6 +58,6 @@ userRoutes.put(
   updateProfileBackground
 );
 
-userRoutes.post("/add-fav-offer/:offerId", addFavOffer)
+userRoutes.post("/add-fav-offer/:offerId", addFavOffer);
 
 export default userRoutes;

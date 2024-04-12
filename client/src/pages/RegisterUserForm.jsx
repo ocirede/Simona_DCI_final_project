@@ -63,7 +63,7 @@ const RegisterUserForm = () => {
         <LogoImageRegistration />
 
         {/* form container */}
-        <div className="w-full max-w-md mx-auto px-4 relative">
+        <div className="w-full max-w-md mx-auto px-4 relative z-[1]">
           {/* Star with opposite position on small screens */}
           <div className="absolute sm:top-[-105px] sm:left-[-15px] sm:bottom-auto sm:right-auto sm:h-[180px] sm:w-[180px] top-[-86px] right-2 z-[-1] h-[180px] w-[180px]">
             <img src={starFourSvg} alt="Star Four" />
@@ -72,7 +72,7 @@ const RegisterUserForm = () => {
           <div className="absolute sm:bottom-[-105px] sm:right-[-25px] sm:left-auto sm:top-auto sm:h-[200px] sm:w-[200px] bottom-[-82px] left-2  h-[220px] w-[220px]">
             <img src={starTwoSvg} tyle={{ position: 'relative', zIndex: '9999' }} alt="Star Two" />
           </div>
-          <div className="bg-white  shadow-lg p-8 border border-black rounded-2xl  ">
+          <div className="bg-white  shadow-lg p-8 border border-black rounded-2xl">
             <h1 className="text-2xl font-bold mb-6 text-center">
               Create your account
             </h1>
