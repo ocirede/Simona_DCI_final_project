@@ -44,7 +44,7 @@ export default function CardElement({ address, role, categories, profileImage,pr
 
         <div className="font-bold text-xl uppercase mb-2 mt-16">{firstname} {lastname}</div>
         <p className="text-gray-700 text-base mb-2">{role}</p>
-        <SendCancelRequest receiverId={userId} />
+        <SendCancelRequest receiverId={_id} />
 
  
 

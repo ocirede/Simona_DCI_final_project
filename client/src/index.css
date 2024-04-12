@@ -150,7 +150,16 @@ body {
     opacity: 1;
   }
 }
-
+@keyframes slideInTop {
+  from {
+    transform: translateY(-100%); /* Start above the view */
+    opacity: 0; /* Start fully transparent */
+  }
+  to {
+    transform: translateY(0); /* End at the current position */
+    opacity: 1; /* Fully visible */
+  }
+}
 /*//////////////////////////////issa*/
 .slide-in-left {
   animation: slideInLeft 1s ease-out forwards;
@@ -158,6 +167,9 @@ body {
 
 .slide-in-right {
   animation: slideInRight 1s ease-out forwards;
+}
+.slide-in-top {
+  animation: slideInTop 1s ease-out forwards;
 }
 .placeholder-xs::placeholder {
   font-size: 0.75rem;

@@ -7,8 +7,8 @@ export default function OffersSection() {
   const { offers } = useOfferContext();
   const { user, addFavOffer } = useContext(UserContext);
   const { applyOffer } = useContext(OfferContext);
-  const [appliedOffers,setAppliedOffers]=useState()
-  const [isApplied,setIsApplied]=useState(false)
+  const [appliedOffers, setAppliedOffers] = useState();
+  const [isApplied, setIsApplied] = useState(false);
   const { deleteOffer, updateOffer } = useContext(OfferContext);
 
   const userFavOffers = offers?.filter((offer) =>
@@ -21,25 +21,24 @@ export default function OffersSection() {
   const handleApply = (offerId) => {
     applyOffer(offerId, user._id);
   };
-  const availableOffersArray = offers?.filter((offer) =>
-    !user?.favOffers?.some((favOffer) => favOffer._id === offer._id) &&
-    !appliedOffers?.some((appliedOffer) => appliedOffer._id === offer._id)
+  const availableOffersArray = offers?.filter(
+    (offer) =>
+      !user?.favOffers?.some((favOffer) => favOffer._id === offer._id) &&
+      !appliedOffers?.some((appliedOffer) => appliedOffer._id === offer._id)
   );
- 
+
   useEffect(() => {
-    
     const appliedOffersArray = offers?.filter((offer) =>
-      offer.applicants.some(applicantId => applicantId === user?._id)
+      offer.applicants.some((applicantId) => applicantId === user?._id)
     );
     setAppliedOffers(appliedOffersArray);
-  
+
     // const isAppliedArray = userFavOffers?.map((offer) =>
     //   offer.applicants.includes(user?._id)
     // );
     // setIsApplied(isAppliedArray);
-  
-  }, [user, offers]); 
-  
+  }, [user, offers]);
+
   const handleDelete = (offerId) => {
     deleteOffer(offerId);
   };
@@ -57,14 +56,21 @@ export default function OffersSection() {
         <div className="w-full text-white flex bg-black sticky top-0 z-50 ">
           <h2
             onClick={() => setCurrentView("MyOffers")}
-            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-lg "
+            className="text-xl text-center border cursor-pointer border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-lg "
           >
-              My Favourits Offers          </h2>
+            My Favourits Offers{" "}
+          </h2>
           <h2
             onClick={() => setCurrentView("AvailableOffers")}
-            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tr-lg "
+            className="text-xl text-center border border-black font-semibold cursor-pointer  p-1 flex-grow rounded-tr-lg "
           >
             Available Offers
+          </h2>
+          <h2
+            onClick={() => setCurrentView("AppliedOffers")}
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg cursor-pointer rounded-2xl "
+          >
+            Applied Offers{" "}
           </h2>
         </div>
         {currentView === "MyOffers" && (
@@ -88,15 +94,38 @@ export default function OffersSection() {
                 >
                   -
                 </button>
-               <button
-                  onClick={() => handleApply(offer._id)} 
+                <button
+                  onClick={() => handleApply(offer._id)}
                   className="bg-green-700 hover:bg-green-800 text-white font-bold  px-2  ml-3 rounded "
                 >
                   apply
                 </button>
-               
               </div>
             ))}
+          </div>
+        )}
+        {currentView === "AppliedOffers" && (
+          <div className="w-full h-auto overflow-auto p-4 slide-in-top ">
+          <h2 className="font-bold text-lg mb-4 ">Applied Offers</h2>
+          <div className="grid grid-cols-1 gap-4">
+            {appliedOffers?.map((offer) => (
+              <div key={offer._id} className="bg-white p-4 shadow-md rounded-2xl">
+                <h3 className="text-md font-semibold">{offer.title}</h3>
+                <p>
+                  Created by :{" "}
+                  <span className="font-bold">
+                    {offer.createdBy?.address?.firstname}{" "}
+                    {offer.createdBy?.address?.lastname}
+                  </span>
+                </p>
+                <p>Location : {offer.location}</p>
+                <p>{offer.description}</p>
+                <button className="bg-red-700 text-white font-bold  px-2  rounded ">
+                  applied
+                </button>
+              </div>
+            ))}
+             </div>
           </div>
         )}
 
@@ -126,59 +155,30 @@ export default function OffersSection() {
                     +
                   </button>
                   <div className=" flex gap-2 font-bold  p-2  rounded ">
-                      <button 
+                    <button
                       className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                      onClick={() => handleEdit(offer._id)}>Edit</button>
-                      <button
-                     className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                      onClick={() => handleDelete(offer._id)}>Delete</button>
-                   </div>
+                      onClick={() => handleEdit(offer._id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                      onClick={() => handleDelete(offer._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         )}
-      
+      </div>
 
-      
-      </div>
-      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto ">
-      <div className="w-full rounded-2xl text-white flex bg-black sticky top-0 z-50 ">
-          <h2
-            onClick={() => setCurrentView("MyOffers")}
-            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tl-lg rounded-2xl "
-          >
-             Applied Offers          </h2>
-          {/* <h2
-            onClick={() => setCurrentView("AvailableOffers")}
-            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-tr-lg "
-          >
-            Available Offers
-          </h2> */}
-        </div>
-        {appliedOffers?.map((offer) => (
-                <div
-                  key={offer._id}
-                  className="bg-white p-4 shadow-md rounded-2xl"
-                >
-                  <h3 className="text-md font-semibold">{offer.title}</h3>
-                  <p>
-                    Created by :{" "}
-                    <span className="font-bold">
-                      {offer.createdBy?.address?.firstname}{" "}
-                      {offer.createdBy?.address?.lastname}
-                    </span>
-                  </p>
-                  <p>Location : {offer.location}</p>
-                  <p>{offer.description}</p>
-                  <button
-                    className="bg-red-700 text-white font-bold  px-2  rounded "
-                  >
-                    applied
-                  </button>
-                </div>
-              ))}
-      </div>
+
+
+
+    
     </>
   );
 }
