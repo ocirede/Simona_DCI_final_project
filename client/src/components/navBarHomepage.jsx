@@ -29,6 +29,7 @@ export default function NavBarHomepage() {
     <nav className=" m-3 z-50 pt-3 pl-3 pr-3 bg-white-400 relative rounded-lg shadow-lg border border-b-4 border-black">
       <div className="flex flex-wrap items-center justify-between md:flex-row">
 
+
         <div className="cursor-pointer" onClick={()=>handleUserClick(user._id)}>
 
           <WelcomeUser />

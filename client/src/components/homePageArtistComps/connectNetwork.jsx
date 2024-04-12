@@ -5,10 +5,14 @@ import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
 
 export default function ConnectNetwork() {
+
+
+
   const { user } = useContext(UserContext);
 
   // const allUsers = [...userData, ...entrepreneursData]
   // const [friendsList, setFriendsList] = useState([])
+
 
   return (
     <>
@@ -130,12 +134,15 @@ export default function ConnectNetwork() {
                       Delete
                     </button>
                   </div>
+
                 </div>
-              ))}
+              
             </div>
           </div>
+
         )}
       </div>
     </>
   );
+
 }

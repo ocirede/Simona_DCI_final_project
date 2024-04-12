@@ -45,7 +45,8 @@ export const sendMessage = async (req, res) => {
 
     // Emit message to receiver
     io.to(receiverSocketId).emit("newMessage", newMessage);
-
+    io.to(receiverSocketId).emit("lastMessage", newMessage)
+    console.log(newMessage)
     newMessage.notifications.forEach((notification) => {
       io.to(receiverSocketId).emit("notification", notification);
     });
@@ -82,14 +83,6 @@ export const getMessages = async (req, res) => {
   }
 };
 
-// get the last message
-export const getLastMessage = async (req, res)=>{
-try {
-  
-} catch (error) {
-  
-}
-}
 
 // update notifications
 

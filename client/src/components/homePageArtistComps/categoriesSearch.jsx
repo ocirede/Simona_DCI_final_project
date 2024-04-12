@@ -28,7 +28,7 @@ export function CategoriesSearch() {
      
   return (
           <>
-            <div className="w-full bg-retroBlue pt-4 rounded-2xl  border border-black md:w-1/2">
+            <div className="w-full bg-retroBlue pt-4 rounded-2xl shadow-lg border-b-4 border border-black md:w-1/2">
               <h1 className="uppercase text-center text-xl text-white">Searching hub</h1>
               <SearchComponent clearFilter={clearFilter} onSearch={handleSearch} />
 
