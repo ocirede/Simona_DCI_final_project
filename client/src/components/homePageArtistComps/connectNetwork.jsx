@@ -44,7 +44,7 @@ export default function ConnectNetwork() {
               
             </div>
           </div>
-
+          </div>
         </>
       );
 }
