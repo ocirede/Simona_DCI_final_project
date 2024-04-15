@@ -438,12 +438,9 @@ const UserProvider = ({ children }) => {
         updateProfileImage,
         updateProfileBackground,
         saveAboutText,
-
         addFavOffer,
-
         getUserById,
         loggedUser
-
       }}
     >
       {children}

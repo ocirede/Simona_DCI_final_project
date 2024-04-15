@@ -8,8 +8,8 @@ export default function WelcomeUser() {
     const lastName = user?.address?.lastname
   return (
     <div className="flex items-center gap-3">
-      <img src={profileImage} alt="User Profile" className="w-10 h-10 rounded-full object-cover" />
+      <img src={profileImage} alt="User Profile" className="w-10 h-10 rounded-full object-cover border border-blacks" />
       <div className="text-l font-bold">{firstName} {lastName}</div>
-      </div>
+    </div>
   )
 }

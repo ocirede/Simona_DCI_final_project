@@ -16,8 +16,6 @@ function DropMenu() {
         <NavLink to="/sign-in">
           <Button name="Sign-in" />
         </NavLink>
-
-
       </div>
     </div>
   );

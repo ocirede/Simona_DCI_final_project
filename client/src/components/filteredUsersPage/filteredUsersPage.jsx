@@ -1,10 +1,10 @@
 import CardElement from "../cards/CardElement";
 import { UserContext } from "../../context/userContext";
 import { useContext } from "react";
+import MotionSlider from "../motionSlider";
+import styled from "styled-components";
 
-
-export default function FilteredUsersPage({  selectedCategory, searchQuery  }) {
-
+export default function FilteredUsersPage({ selectedCategory, searchQuery }) {
   const { users } = useContext(UserContext)
 
     const filteredUsers = users?.filter(user => {
@@ -16,10 +16,20 @@ export default function FilteredUsersPage({  selectedCategory, searchQuery  }) {
 
         return matchesCategory && matchesSearch;
     });
+
+    const Container = styled.div`
+    max-width: 700px; 
+    margin: 0 auto; 
+    @media (max-width: 640px) {
+        max-width: 90%; 
+    }
+    `;
+
     return (
-  <>
-         
-    <div className="flex flex-wrap justify-center gap-4">
+  <> 
+    <Container>  
+    <div className="p-4">
+      <MotionSlider>
       {filteredUsers.length > 0 ? (
         filteredUsers.map((user ,index)=> (
           <CardElement key={index} {...user} />
@@ -27,9 +37,9 @@ export default function FilteredUsersPage({  selectedCategory, searchQuery  }) {
       ) : (
         <div>No users found for this category.</div>
       )}
+      </MotionSlider>
     </div>
- 
-  </>
-    
+    </Container> 
+  </>   
   )
 }
