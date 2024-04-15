@@ -9,12 +9,8 @@ export default function TopReviews() {
   }, []);
   return (
 
-    <div className="bg-cobaltBlue pb-4 rounded-2xl">
-      <h2 className="uppercase text-[40px] mb-5 mt-10 pt-4 text-center">
-        Top Reviews
-      </h2>
+    <div className="m-2 bg-cobaltBlue pb-4 rounded-[30px] border-black rounded-[30px] border-b-8 md:text-[20px] lg:text-[28px] pt-6">
       {bestRatedComments?.map((review, index) => (
-          
         <div key={index} className="m-5 flex flex-col items-center text-center">
           <div className="flex items-center">
             {[...Array(review.ratingNumber)].map((_, index) => (

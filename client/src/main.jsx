@@ -5,9 +5,7 @@ import App from "./App.jsx";
 import "./index.css";
 import "./i18n";
 
-
 import "@fontsource/bungee";
-
 
 import RatingContextProvider from "./context/ratingContext.jsx";
 import UserProvider from "./context/userContext.jsx";
@@ -18,7 +16,7 @@ import SocketProvider from "./context/socketContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-  <UserProvider>
+      <UserProvider>
         <RatingContextProvider>
            <OfferProvider>
              <SocketProvider>
@@ -26,8 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               </SocketProvider>
             </OfferProvider>
          </RatingContextProvider>
-    </UserProvider>
-
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

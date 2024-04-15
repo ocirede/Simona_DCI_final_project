@@ -5,7 +5,7 @@ function DropMenuIntro() {
   return (
     <div className="origin-top-right absolute right-0 mt-[100px] w-full h-40 bg-white border-b-4 border-black xs:hidden">
       <div
-        className="flex flex-col justify-center flex-grow h-full p-3  gap-4"
+        className="flex justify-center items-end pb-8 flex-grow h-full p-3  gap-4"
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="options-menu"
@@ -14,10 +14,8 @@ function DropMenuIntro() {
           <Button name="Register" />
         </NavLink>
         <NavLink to="/sign-in">
-          <Button name="Sign-in" />
+          <Button name="Log-in" />
         </NavLink>
-
-
       </div>
     </div>
   );

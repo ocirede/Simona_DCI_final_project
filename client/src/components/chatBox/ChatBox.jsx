@@ -189,7 +189,7 @@ export default function ChatBox({ connection }) {
                     {openMessages[message._id] && (
                       <div className="  z-10 origin-top-right absolute right-0 mt-5 w-[120px] h-[52px] p-1 rounded-[10px] shadow-lg bg-white border-1 border border-black">
                         <p
-                          className=" cursor-pointer text-black font-custom"
+                          className=" cursor-pointer text-black"
                           onClick={() =>
                             handleEditText(message._id, openMessages)
                           }
@@ -199,7 +199,7 @@ export default function ChatBox({ connection }) {
 
                         <p
                           onClick={() => handleDeleteMessage(message._id)}
-                          className="cursor-pointer text-black font-custom"
+                          className="cursor-pointer text-black"
                         >
                           Delete
                         </p>

@@ -8,7 +8,7 @@ const FormSubmitButton = ({ name, onClick, disabled }) => {
         disabled ? "transform-none" : "transform-gpu active:scale-95"
       }`}
     >
-      <p className="font-custom text-2xl">{name}</p>
+      <p className="text-2xl">{name}</p>
     </button>
   );
 };
