@@ -1,10 +1,16 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useFormVisibility } from "./customHook/FormVisibility";
 import { UserContext } from '../../context/userContext';
 
-export default function TagsSection() {
+export default function TagsSection({user}) {
     const { formVisibility, toggleFormVisibility } = useFormVisibility();
-    const { user, updateUser } = useContext(UserContext);
+    const { user: loggedInUser, updateUser } = useContext(UserContext);
+    const [tagContent, setTagContent] = useState(user?.tag || "");
+
+    useEffect(() => {
+        setTagContent(user?.tag || "");
+    }, [user]);
+
 
     const [selectedIntrovertedIndex, setSelectedIntrovertedIndex] = useState(null);
     const [selectedImaginativeIndex, setSelectedImaginativeIndex] = useState(null);
@@ -80,11 +86,12 @@ export default function TagsSection() {
                 <div className="h-[150px] bg-white border border-black shadow-md rounded-[20px] flex justify-between">
                     <h2
                         className="text-[28px] uppercase font-semibold cursor-pointer pl-4 pt-2"
-                        onClick={() => toggleFormVisibility('tags')}
                     >
                         Personality / Interests 
                     </h2>
+                    {loggedInUser && loggedInUser._id === user._id && (
                     <i className="fa-solid fa-pen-to-square text-[28px] pr-4 pt-3 cursor-pointer" onClick={() => toggleFormVisibility('tags')}></i>
+                    )}
                 </div>
             )}
         </div>

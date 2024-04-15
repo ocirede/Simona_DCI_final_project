@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { UserContext } from "../../context/userContext.jsx";
 import CardElement from "../cards/CardElement.jsx";
 import styled from "styled-components";
-import MotionSlider from "../../components/motionSlider"
+import MotionSlider from "../../components/motionSlider";
+import { motion } from "framer-motion"; 
 
 const Container = styled.div`
         max-width: 700px; 
@@ -18,23 +19,25 @@ export default function RecommendedEntrepreneurs() {
 
 return (
     <>
-       <div className="flex w-full border border-b-8 border-black rounded-2xl shadow-lg overflow-hidden  md:w-1/2 md:max-h-[4535px]">
+      <div className="flex w-full border border-b-8 border-black rounded-2xl shadow-lg overflow-hidden  md:w-1/2 md:max-h-[4535px]">
       <div className="relative flex flex-col justify-center bg-cobaltBlue h-full min-h-[435px] w-20">
 
         <h2 className="text-2xl font-bold uppercase text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 vertical-text">
           Top five Entrepreneurs
         </h2>
       </div>
-      <div className="flex-1 overflow-auto pt-8 bg-white">
+      <div className="flex-1 overflow-auto pt-4 bg-white">
         <Container>
           <MotionSlider>
             {sortedEntrepreneurUsers.map((user, i) => (
-              <CardElement key={i} {...user} />
+              <motion.div key={i} whileHover={{ scale: 1.1 }}>
+                <CardElement key={i} {...user} /> 
+              </motion.div>
             ))}
           </MotionSlider>
         </Container>
       </div>
-    </div>
+      </div>
     </>
   );
 }

@@ -120,6 +120,8 @@ const OfferProvider = ({ children }) => {
     }
   };
 
+  
+
   return (
     <OfferContext.Provider
       value={{

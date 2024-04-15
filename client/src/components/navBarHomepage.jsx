@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { UserContext } from "../context/userContext.jsx";
@@ -8,6 +8,8 @@ export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
+  const [showMenu, setShowMenu] = useState(false);
+  
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");
@@ -15,6 +17,7 @@ export default function NavBarHomepage() {
       navigate("/E");
     }
   };
+
   const handleUserClick = (userId) => {
     if (user.role === "artist") {
       navigate(`/profile-artist/${userId}`);
@@ -22,6 +25,22 @@ export default function NavBarHomepage() {
       navigate(`/ProfilePageEntrepreneur/${userId}`);
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowMenu(true);
+      } else {
+        setShowMenu(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <nav className="bg-white m-3 z-50 pt-6 pl-6 pr-6 bg-white-400 relative rounded-[30px] shadow-lg border border-black border-b-[20px] h-[200px] md:h-[300px]">

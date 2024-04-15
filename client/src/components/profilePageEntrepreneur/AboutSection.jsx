@@ -34,7 +34,6 @@ export default function AboutSection({user}) {
         <div>
           <h2
             className="text-[28px] uppercase font-semibold cursor-pointer pl-4 pt-2"
-            onClick={openEditorModal}
           >
             About
           </h2>
