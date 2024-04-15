@@ -3,7 +3,7 @@ import StarRating from "./ReviewStars";
 import { RatingContext } from "../../context/ratingContext";
 import fullStarSvg from "../../assets/rating_svg/star.png";
 
-export default function CommentSection({ user }) {
+export default function CommentSection({ user, loggeduser }) {
   const { addNewRating, getRatingsForUer, ratings } = useContext(RatingContext);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -35,23 +35,25 @@ export default function CommentSection({ user }) {
           <StarRating setRating={setRating} />
         </div>
 
-        <div>
-          <form className="flex mb-2" onSubmit={handleWriteComment}>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              className="w-full h-[50px] bg-white rounded-[50px] outline-none p-2  align-middle border border-black"
-              placeholder="Write your comment..."
-              style={{ resize: "none" }}
-            ></textarea>
-            <button
-              type="submit"
-              className=" text-black py-2 px-4 rounded-[10px]transition duration-300"
-            >
-              WRITE
-            </button>
-          </form>
-        </div>
+        {user?._id !== loggeduser?._id && (
+          <div>
+            <form className="flex mb-2" onSubmit={handleWriteComment}>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className="w-full h-[50px] bg-white rounded-[50px] outline-none p-2  align-middle border border-black"
+                placeholder="Write your comment..."
+                style={{ resize: "none" }}
+              ></textarea>
+              <button
+                type="submit"
+                className=" text-black py-2 px-4 rounded-[10px]transition duration-300"
+              >
+                WRITE
+              </button>
+            </form>
+          </div>
+        )}
         <div style={{ maxHeight: "20rem", overflowY: "auto" }}>
           {ratings?.map((rating) => (
             <div key={rating._id} className="items-center mb-4">

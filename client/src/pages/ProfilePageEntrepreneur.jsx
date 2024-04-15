@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import Sidebar from "../components/chatBox/SideBar";
 
 const ProfilePageEntrepreneur = () => {
-  const { getUserById } = useContext(UserContext);
+  const { getUserById, user } = useContext(UserContext);
   const { userId } = useParams();
   const [profileUser, setProfileUser] = useState(null);
   useEffect(() => {
@@ -41,7 +41,7 @@ const ProfilePageEntrepreneur = () => {
                 <TagsSection user={profileUser} />
               </div>
             </div>
-            <CommentSection user={profileUser} />
+            <CommentSection user={profileUser} loggeduser={user} />
           </div>
         </section>
         <Sidebar />

@@ -45,7 +45,7 @@ function ProfileArtist() {
               {/* Portfolio Section */}
             </div>
             <PortfolioSection user={profileUser} loggeduser={user} />
-            <CommentSection user={profileUser} />
+            <CommentSection user={profileUser} loggeduser={user} />
           </div>
 
           <Sidebar />
