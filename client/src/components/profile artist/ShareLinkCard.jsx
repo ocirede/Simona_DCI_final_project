@@ -30,7 +30,7 @@ function ShareLinkCard({ onClose }) {
   }
 
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[430px] h-[225px]  rounded-xl p-3 bg-slate-100 border-black  z-50 transition-transform duration-800">
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[430px] h-[225px]  rounded-xl p-3 bg-white border border-black border-b-4 border-r-4  z-50 transition-transform duration-800">
       <div className=" flex justify-between">
         <h3 className=" text-xl font-bold">Profile sharing </h3>
         <X className=" cursor-pointer" onClick={onClose} />
@@ -126,7 +126,7 @@ function ShareLinkCard({ onClose }) {
           <span>Link</span>
           {copySuccess && (
             <div className="absolute  right-8 transform -translate-y-1/2">
-              <p className="text-green-500">Copied</p>
+              <p className="text-retroRed">Copied</p>
             </div>
           )}
         </label>
