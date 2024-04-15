@@ -36,7 +36,7 @@ export default function TitleNameSection({user}) {
       {formVisibility.name ? (
         <div className="flex">
           <div className="h-[90px] bg-transparent w-1/2"></div>
-          <form className="h-[90px] bg-gray-500 rounded-[15px] w-1/2 text-[12px] pt-2 pr-4 pl-4">
+          <form className="h-[90px] bg-white rounded-[15px] w-1/2 text-[12px] pt-2 pr-4 pl-4 shadow-lg">
             <input
               type="text"
               className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-full"
@@ -49,15 +49,15 @@ export default function TitleNameSection({user}) {
               }}
             />
             <div className="flex mt-2">
-              <button className="mr-2 bg-gray-400 text-white rounded-md py-1 px-4" onClick={handleNameUpdate}>Save</button>
-              <button className="bg-gray-400 text-white rounded-md py-1 px-4" onClick={() => toggleFormVisibility('name')}>Delete</button>
+              <button className="mr-2 bg-retroRed text-white rounded-md py-1 px-4" onClick={handleNameUpdate}>Save</button>
+              <button className="bg-retroBlue text-white rounded-md py-1 px-4" onClick={() => toggleFormVisibility('name')}>Delete</button>
             </div>
           </form>
         </div>
       ) : (
         <div className="flex">
           <div className="h-[50px] bg-transparent w-1/2"></div>
-          <div className="h-[50px] bg-gray-500 rounded-[15px] w-1/2 text-[12px] pt-2">
+          <div className="h-[50px] bg-white shadow-lg rounded-[15px] w-1/2 text-[12px] pt-2">
             <h1
               className="text-[20px] font-bold cursor-pointer text-center"
               onClick={() => toggleFormVisibility('name')}

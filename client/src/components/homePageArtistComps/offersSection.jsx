@@ -52,23 +52,23 @@ export default function OffersSection() {
 
   return (
     <>
-      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto ">
+      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white">
         <div className="w-full text-white flex bg-black rounded-tl-2xl rounded-tr-2xl sticky top-0 z-50 ">
           <h2
             onClick={() => setCurrentView("MyOffers")}
-            className="text-xl text-center border cursor-pointer border-black font-semibold p-1 flex-grow rounded-2xl "
+            className="text-xl text-center border cursor-pointer border-black font-semibold p-1 flex-grow rounded-2xl text-white"
           >
             My Favourits Offers{" "}
           </h2>
           <h2
             onClick={() => setCurrentView("AvailableOffers")}
-            className="text-xl text-center border border-black font-semibold cursor-pointer  p-1 flex-grow rounded-2xl "
+            className="text-xl text-center border border-black font-semibold cursor-pointer  p-1 flex-grow rounded-2xl text-white"
           >
             Available Offers
           </h2>
           <h2
             onClick={() => setCurrentView("AppliedOffers")}
-            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-2xl cursor-pointer  "
+            className="text-xl text-center border border-black font-semibold p-1 flex-grow rounded-2xl cursor-pointer  text-white"
           >
             Applied Offers{" "}
           </h2>
@@ -153,11 +153,11 @@ export default function OffersSection() {
                   <p>{offer.description}</p>
                   <button
                     onClick={() => handleFavOffers(offer._id)}
-                    className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                    className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2 mt-2 rounded "
                   >
                     +
                   </button>
-                  <div className=" flex gap-2 font-bold  p-2  rounded ">
+                  <div className="flex gap-2 font-bold rounded pt-4">
                     {/* <button
                       className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
                       onClick={() => handleEdit(offer._id)}

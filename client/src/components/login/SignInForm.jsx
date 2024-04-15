@@ -1,5 +1,4 @@
-
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import LoadingButton from "./LoadingButton";
 import { UserContext } from "../../context/userContext";
@@ -17,7 +16,7 @@ function SignInForm() {
     email,
     setPassword,
     password,
-    loading,
+    // loading,
     validationErrors,
     forgotPassword,
     setForgotPasswsord,
@@ -30,22 +29,22 @@ function SignInForm() {
     /* form container */
   }
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-1/2">
+    <div className="flex flex-col items-center justify-center w-[570px]">
       <br />
-      <div className="w-2/3 max-w-[440px] h-[390px] bg-white p-3 rounded-lg shadow-lg border border-gray">
+      <div className="lg:w-2/3 h-[420px] bg-white p-3 rounded-[15px] shadow-lg border border-gray border border-black">
         <form
           onSubmit={authenticationHandler}
-          className="flex flex-col justify-center gap-2 mt-4"
+          className="flex flex-col w-[350px] p-3 justify-center gap-2 mt-4"
         >
-          <div className=" flex justify-center">
-            <h1 className="text-5xl font-custom">Sign-in</h1>
+          <div className="flex justify-center">
+            <h1 className="text-2xl font-bold text-center mb-2">Log-in</h1>
           </div>
           <label>
-            <span className="  font-custom">Email</span>
+            <span className="text-sm">Email</span>
           </label>
-          <div className=" relative">
+          <div className="relative">
             <input
-              className="p-2  font-custom  border relative w-full h-9 "
+              className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 focus:outline-none"
               type="email"
               name="email"
               value={email}
@@ -56,17 +55,17 @@ function SignInForm() {
           </div>
 
           <label className="flex justify-between">
-            <span className=" font-custom">Password</span>
+            <span className="text-sm">Password</span>
             <span
               onClick={() => setForgotPasswsord(!forgotPassword)}
-              className="  font-custom underline text-blue-500 cursor-pointer"
+              className="underline text-blue-500 cursor-pointer"
             >
               Forgot password
             </span>
           </label>
           <div className="relative">
             <input
-              className="p-2  border relative w-full h-9 "
+              className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 focus:outline-none"
               type={showPassword ? "text" : "password"}
               name="password"
               value={password}
@@ -76,7 +75,7 @@ function SignInForm() {
             />
             <button
               type="button"
-              className="absolute inset-y-0 right-0 flex items-center px-3 pt-2 text-gray-500 focus:outline-none"
+              className="absolute inset-y-0 right-0 top-[-12%] flex items-center px-3 pt-2 text-gray-500 focus:outline-none"
               onClick={() => {
                 setShowPassword(!showPassword);
               }}
@@ -91,14 +90,14 @@ function SignInForm() {
 
           {/* submit section + loading */}
 
-          <div className="flex flex-col items-center justify-center p-4">
+          <div className="flex flex-col items-center justify-center pt-2">
             {response ? (
               <button
                 type="submit"
-                className=" w-2/3 h-8  font-custom rounded-xl bg-retroRed text-white font-bold"
+                className="mt-2 x text-white border bg-retroRed py-1 px-4 rounded-full w-full transition-transform duration-100  transform-gpu active:scale-95 text-white pt-1 pb-1 text-xl glow-border"
                 disabled={false}
               >
-                Sign In
+                Log In
               </button>
             ) : (
               <LoadingButton name="Signing in..." />
@@ -106,24 +105,25 @@ function SignInForm() {
           </div>
 
           <div className="flex flex-col items-center gap-2 xs:flex md:items-center justify-between h-12">
-            <label className=" flex items-center gap-2">
+            <label className="flex items-center gap-2">
               <input
                 checked={rememberMe}
                 onChange={handleRememberMeChange}
                 type="checkbox"
+                className="checked:bg-white"
               />
-              <span className="  font-custom">remember me</span>
+              <span>remember me</span>
             </label>
-            <span className="  font-custom">
-              Not a member ?&nbsp;
-              <Link to="/register-questions">
-                <span className="  font-custom">Sign-up</span>
+            <span className="text-gray-500">
+              Not a member?&nbsp;
+              <Link to="/register-questions" >
+                <span className="font-medium hover:underline">Register</span>
               </Link>
             </span>
           </div>
         </form>
       </div>
-      {/* Error hadling/mapping */}
+      {/* Error handling/mapping */}
       <div className="fixed top-0 left-1/2 transform -translate-x-1/2">
         {validationErrors ? (
           <ul className="text-red-500 list-none list-inside text-left">
@@ -146,11 +146,11 @@ function SignInForm() {
               onClick={() => setForgotPasswsord(!forgotPassword)}
               className="absolute top-2 right-2 cursor-pointer"
             />
-            <div className="flex flex-col items-center justify-center w-[430px] h-[430px] rounded-xl p-6 bg-slate-100 border-black transition-transform duration-800">
-              <h2 className="text-2xl font-bold mb-4 text-center font-custom">
+            <div className="flex flex-col items-center justify-center w-[430px] h-[430px] rounded-xl p-6 bg-slate-100 border-black transition-transform duration-800 border border-black border-1">
+              <h2 className="text-2xl font-bold mb-4 text-center">
                 Forgot Your Password?
               </h2>
-              <p className="text-sm text-center mb-6 font-custom">
+              <p className="text-sm text-center mb-6">
                 Enter your email address below, and we'll send you a link to
                 reset your password.
               </p>
@@ -158,7 +158,7 @@ function SignInForm() {
                 <div className="mb-4">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium font-custom text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-700 mb-1"
                   >
                     Email Address
                   </label>
@@ -168,14 +168,14 @@ function SignInForm() {
                     name="email"
                     value={email}
                     readOnly
-                    className="p-2 w-full border rounded-md font-custom"
+                    className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 focus:outline-none"
                     placeholder="Enter your email address"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-retroRed font-custom text-white font-semibold py-2 rounded-md transition duration-300 hover:bg-blue-600"
+                  className="w-full bg-retroRed text-white font-semibold py-2 rounded-md glow-border"
                 >
                   Reset Password
                 </button>

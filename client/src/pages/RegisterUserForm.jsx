@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LogoImageRegistration from "../components/register/LogoImageRegistration";
 import RegisterFormButton from "../components/register/RegisterFormButton";
 import RegisterFormButtonLoading from "../components/register/RegisterFormButtonLoading";
@@ -58,9 +58,11 @@ const RegisterUserForm = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen ">
+      <div className="flex items-center justify-center h-screen">
         {/* Logo image top left */}
-        <LogoImageRegistration />
+        <Link to="/">
+          <LogoImageRegistration />
+        </Link>
 
         {/* form container */}
         <div className="w-full max-w-md mx-auto px-4 relative z-[1]">
@@ -70,7 +72,7 @@ const RegisterUserForm = () => {
           </div>
           {/* Star with opposite position on small screens */}
           <div className="absolute sm:bottom-[-105px] sm:right-[-25px] sm:left-auto sm:top-auto sm:h-[200px] sm:w-[200px] bottom-[-82px] left-2  h-[220px] w-[220px]">
-            <img src={starTwoSvg} tyle={{ position: 'relative', zIndex: '9999' }} alt="Star Two" />
+            <img src={starTwoSvg} style={{ position: 'relative', zIndex: '-100' }} alt="Star Two" />
           </div>
           <div className="bg-white  shadow-lg p-8 border border-black rounded-2xl">
             <h1 className="text-2xl font-bold mb-6 text-center">
@@ -89,7 +91,7 @@ const RegisterUserForm = () => {
                   name="email"
                   id="email"
                   value={email}
-                  className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3"
+                  className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-3 focus:outline-none"
                   placeholder="example@email.com"
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -110,7 +112,7 @@ const RegisterUserForm = () => {
                   id="password"
                   value={password}
                   placeholder="********"
-                  className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3"
+                  className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:outline-none block w-full p-3"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}

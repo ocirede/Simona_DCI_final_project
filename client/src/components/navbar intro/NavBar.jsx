@@ -39,7 +39,7 @@ function NavBar() {
             <Button name="Register" />
           </NavLink>
           <NavLink to="/sign-in">
-            <Button name="Sign-in" />
+            <Button name="Log-in" />
           </NavLink>
           <LanguageChoice />
         </div>

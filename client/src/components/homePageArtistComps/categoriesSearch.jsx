@@ -10,8 +10,6 @@ export function CategoriesSearch() {
   const [searchQuery, setSearchQuery] = useState("")
   const { users } = useContext(UserContext)
 
- 
-
       const handleCategoryClick = (category)=>{
         setSelectedCategory(category)
        
@@ -24,23 +22,20 @@ export function CategoriesSearch() {
         setSearchQuery(query);
 
     }
-  
      
   return (
           <>
-            <div className="w-full bg-retroBlue pt-4 rounded-2xl shadow-lg border-b-4 border border-black md:w-1/2">
-              <h1 className="uppercase text-center text-xl text-white">Searching hub</h1>
+            <div className="w-full bg-white rounded-2xl shadow-lg border-b-8 border border-black md:w-1/2">
+              <h1 className="uppercase text-center text-xl text-white  bg-retroBlue pt-6 rounded-tr-2xl rounded-tl-2xl font-bold">Searching hub</h1>
               <SearchComponent clearFilter={clearFilter} onSearch={handleSearch} />
 
-
               {searchQuery && (
-              <div className="w-full p-4 mt-5 bg-white ">
-                <h1 className="text-l font-bold text-center p-4">Search Results</h1>
+              <div className="w-full p-4 bg-white">
                 <FilteredUsersPage users={users} searchQuery={searchQuery} />
               </div>
             )}
       
-            <div className="grid grid-cols-2 gap-6 p-4 bg-white  rounded-bl-2xl rounded-br-2xl shadow-md">
+            <div className="flex flex-wrap gap-4 p-4 bg-white rounded-bl-2xl rounded-br-2xl">
               {categories.map((category, index) => (
                 <button key={index} className="bg-retroRed text-white py-2 px-4 rounded-full shadow" onClick={() => handleCategoryClick(category)}>
                   {category}
@@ -49,15 +44,12 @@ export function CategoriesSearch() {
             </div>
               
             {selectedCategory && (
-              <div className="w-full p-4 mt-5 bg-white">
+              <div className="w-full p-4 bg-white rounded-bl-2xl rounded-br-2xl">
                 <h1 className="text-l font-bold text-center p-4">{selectedCategory} </h1>
                 <FilteredUsersPage users={users} selectedCategory={selectedCategory}  />
               </div>
             )}
-
-
-            </div>
-            
+            </div> 
           </>
   )
-  }
+}

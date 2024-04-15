@@ -14,8 +14,6 @@ margin: 0 auto;
 
 export default function CardCarousel({ role }) {
   const { users } = useContext(UserContext);
-
-
   const sortedUsers = users
     .filter((user) => user.role === role)
 
