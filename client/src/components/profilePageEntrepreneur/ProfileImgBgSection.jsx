@@ -61,7 +61,7 @@ function ProfileImgBgSection({ user }) {
           accept="image/*"
           onChange={handleBackgroundImageUpload}
         />
-        {user.profileBackground && (
+        {user && (
           <label
             htmlFor="backgroundImageInput"
             className="py-2 px-4 cursor-pointer absolute right-0 text-[22px]"
