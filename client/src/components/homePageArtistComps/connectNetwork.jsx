@@ -5,14 +5,8 @@ import RejectRquest from "../network-comps/RejectRequest";
 import DeleteConnection from "../network-comps/DeleteConnection";
 
 export default function ConnectNetwork() {
-
-
-
   const { user } = useContext(UserContext);
-
-  // const allUsers = [...userData, ...entrepreneursData]
-  // const [friendsList, setFriendsList] = useState([])
-
+  const [currentView, setCurrentView] = useState("MyOffers");
 
   return (
     <>
@@ -39,110 +33,20 @@ export default function ConnectNetwork() {
         </div>
         {currentView === "MyOffers" && (
           <div className="w-full h-auto overflow-auto  p-4 slide-in-left">
-            <h2 className="font-bold text-lg mb-4">My Favourits Offers</h2>
-            {userFavOffers?.map((offer) => (
-              <div key={offer._id} className="mb-4 p-2  shadow-md rounded-lg">
-                <h3 className="text-md font-semibold">{offer.title}</h3>
-                <p>
-                  Created by :{" "}
-                  <span className="font-bold">
-                    {offer.createdBy?.address?.firstname}{" "}
-                    {offer.createdBy?.address?.lastname}
-                  </span>
-                </p>
-                <p>Location : {offer.location}</p>
-                <p>{offer.description}</p>
-                <button
-                  onClick={() => handleFavOffers(offer._id)}
-                  className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                >
-                  -
-                </button>
-                <button
-                  onClick={() => handleApply(offer._id)}
-                  className="bg-green-700 hover:bg-green-800 text-white font-bold  px-2  ml-3 rounded "
-                >
-                  apply
-                </button>
-              </div>
-            ))}
+            {/* Content for MyOffers */}
           </div>
         )}
         {currentView === "AppliedOffers" && (
           <div className="w-full h-auto overflow-auto p-4 slide-in-top ">
-            <h2 className="font-bold text-lg mb-4 ">Applied Offers</h2>
-            <div className="grid grid-cols-1 gap-4">
-              {appliedOffers?.map((offer) => (
-                <div
-                  key={offer._id}
-                  className="bg-white p-4 shadow-md rounded-2xl"
-                >
-                  <h3 className="text-md font-semibold">{offer.title}</h3>
-                  <p>
-                    Created by :{" "}
-                    <span className="font-bold">
-                      {offer.createdBy?.address?.firstname}{" "}
-                      {offer.createdBy?.address?.lastname}
-                    </span>
-                  </p>
-                  <p>Location : {offer.location}</p>
-                  <p>{offer.description}</p>
-                  <button className="bg-red-700 text-white font-bold  px-2  rounded ">
-                    applied
-                  </button>
-                </div>
-              ))}
-            </div>
+            {/* Content for AppliedOffers */}
           </div>
         )}
         {currentView === "AvailableOffers" && (
           <div className="w-full h-auto overflow-auto p-4 slide-in-right ">
-            <h2 className="font-bold text-lg mb-4">Available Offers</h2>
-            <div className="grid grid-cols-1 gap-4">
-              {availableOffersArray?.map((offer) => (
-                <div
-                  key={offer._id}
-                  className="bg-white p-4 shadow-md rounded-lg"
-                >
-                  <h3 className="text-md font-semibold">{offer.title}</h3>
-                  <p>
-                    Created by :{" "}
-                    <span className="font-bold">
-                      {offer.createdBy?.address?.firstname}{" "}
-                      {offer.createdBy?.address?.lastname}
-                    </span>
-                  </p>
-                  <p>Location : {offer.location}</p>
-                  <p>{offer.description}</p>
-                  <button
-                    onClick={() => handleFavOffers(offer._id)}
-                    className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                  >
-                    +
-                  </button>
-                  <div className=" flex gap-2 font-bold  p-2  rounded ">
-                    <button
-                      className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                      onClick={() => handleEdit(offer._id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                      onClick={() => handleDelete(offer._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-
-                </div>
-              
-            </div>
+            {/* Content for AvailableOffers */}
           </div>
-
         )}
       </div>
     </>
   );
-
 }
