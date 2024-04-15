@@ -25,7 +25,7 @@ export default function CommentSection({user}) {
 
   return (
     <div className="mb-4">
-      <div className="bg-white rounded-[20px] pr-4 pl-4 pt-4 border border-black">
+      <div className="bg-white rounded-[20px] pr-4 pl-4 pt-4  border-b-8 border border-black">
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between align-middle mr-20">
           <div>
             <h3 className="text-[28px] uppercase font-semibold">Reviews</h3>

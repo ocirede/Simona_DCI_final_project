@@ -33,10 +33,7 @@ export default function OffersSection() {
     );
     setAppliedOffers(appliedOffersArray);
 
-    // const isAppliedArray = userFavOffers?.map((offer) =>
-    //   offer.applicants.includes(user?._id)
-    // );
-    // setIsApplied(isAppliedArray);
+  
   }, [user, offers]);
 
   const handleDelete = (offerId) => {
@@ -44,11 +41,9 @@ export default function OffersSection() {
   };
 
   const handleEdit = (offerId) => {
-    console.log(offerId);
+    showModal(<EditOffer offerId={offerId} />);
   };
-  // console.log("available", availableOffersArray);
-  // console.log("Applied Offers:", appliedOffers);
-  // console.log("isApplied:", isApplied);
+
 
   return (
     <>
@@ -157,13 +152,11 @@ export default function OffersSection() {
                   >
                     +
                   </button>
+
+
+                  {user && user._id === offer.createdBy._id && (
                   <div className="flex gap-2 font-bold rounded pt-4">
-                    {/* <button
-                      className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                      onClick={() => handleEdit(offer._id)}
-                    >
-                      Edit
-                    </button> */}
+                   
                     <EditOffer offerId={offer._id} />
                     <button
                       className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
@@ -172,6 +165,7 @@ export default function OffersSection() {
                       Delete
                     </button>
                   </div>
+                )} 
                 </div>
               ))}
             </div>

@@ -47,16 +47,15 @@ export default function IntroPage() {
         <MovingText text="What do we do What do we do What do we do What do we do What do we do What do we do " />
         <div className="m-2 lg:order-2 border border-1 border-black rounded-[30px] bg-white p-10 border-b-8 md:text-[20px] p-20 lg:text-[28px]">
           <p className="pb-4">
-            Do you remember the last time you had to search through dozen of
-            websites just to find that one{" "}
+          {t("textOne")}
+            
             <span className="uppercase text-[25px] lg:text-[32px] font-bold">
               right
             </span>{" "}
             person?
           </p>
           <p>
-            With Simona you don't have to feel lost anymore, start searching for
-            your next gig, exhibition or a business partner{" "}
+          {t("textTwo")}{" "}
             <span className="uppercase text-[25px] lg:text-[32px] font-bold">
               now
             </span>{" "}

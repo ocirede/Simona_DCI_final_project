@@ -10,6 +10,9 @@ const OfferProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [offers, setOffers] = useState([]);
   const [foundOffer, setFoundOffer] = useState();
+const [isEditVisible, setIsEditVisible] = useState(false);
+const [currentEditId, setCurrentEditId] = useState(null);
+
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // Fetch offers
@@ -86,6 +89,7 @@ const OfferProvider = ({ children }) => {
           offer._id === offerId ? updatedOffer : offer
         );
         setOffers(updatedOffersArray);
+        console.log("updated offer",response.data.updatedPost);
       }
     } catch (error) {
       console.error("Failed to update offer:", error);
