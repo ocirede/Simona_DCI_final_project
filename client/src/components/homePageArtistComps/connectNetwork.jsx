@@ -8,6 +8,7 @@ export default function ConnectNetwork() {
   const { user } = useContext(UserContext);
 
 
+
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
 
@@ -47,4 +48,5 @@ export default function ConnectNetwork() {
           </div>
         </>
       );
+
 }

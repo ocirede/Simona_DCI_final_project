@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import StarRating from "./ReviewStars";
 import { RatingContext } from "../../context/ratingContext";
 import fullStarSvg from "../../assets/rating_svg/star.png";
-export default function CommentSection({user}) {
+
+export default function CommentSection({ user }) {
   const { addNewRating, getRatingsForUer, ratings } = useContext(RatingContext);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -25,10 +26,12 @@ export default function CommentSection({user}) {
 
   return (
     <div className="mb-4">
-      <div className="bg-white rounded-[20px] pr-4 pl-4 pt-4 border border-black">
+
+      <div className=" bg-white rounded-[20px] pr-4 pl-4 pt-4 border border-black text-black">
+
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between align-middle mr-20">
           <div>
-            <h3 className="text-[28px] uppercase font-semibold">Reviews</h3>
+            <h3 className="text-[28px] uppercase font-semibold ">Reviews</h3>
           </div>
 
           <StarRating setRating={setRating} />
@@ -39,7 +42,9 @@ export default function CommentSection({user}) {
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
+
               className="w-full h-[50px] bg-white rounded-[50px] outline-none p-2  align-middle border border-black"
+
               placeholder="Write your comment..."
               style={{ resize: "none" }}
             ></textarea>

@@ -18,8 +18,7 @@ const ProfilePageEntrepreneur = () => {
       try {
         const userFound = await getUserById(userId);
         setProfileUser(userFound);
-        console.log("profileuser",userFound, userId, profileUser)
-
+        console.log("profileuser", userFound, userId, profileUser);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -41,6 +40,7 @@ const ProfilePageEntrepreneur = () => {
                 <OffersSection user={profileUser} />
                 <TagsSection user={profileUser} />
               </div>
+              <div></div>
             </div>
             <CommentSection user={profileUser} />
           </div>
