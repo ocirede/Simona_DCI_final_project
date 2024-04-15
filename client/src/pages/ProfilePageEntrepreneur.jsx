@@ -18,8 +18,7 @@ const ProfilePageEntrepreneur = () => {
       try {
         const userFound = await getUserById(userId);
         setProfileUser(userFound);
-        console.log("profileuser",userFound, userId, profileUser)
-
+        console.log("profileuser", userFound, userId, profileUser);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -28,13 +27,11 @@ const ProfilePageEntrepreneur = () => {
     fetchUser();
   }, [getUserById, userId]);
 
-
-
   if (profileUser) {
     return (
       <div>
         <ProfileImgBgSection user={profileUser} />
-        <section className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
+        <section className="mx-auto p-6 relative md:ml-[50px] md:mr-[50px]">
           <div>
             <TitleNameSection user={profileUser} />
             <div className="lg:flex gap-4">
@@ -43,6 +40,7 @@ const ProfilePageEntrepreneur = () => {
                 <OffersSection user={profileUser} />
                 <TagsSection user={profileUser} />
               </div>
+              <div></div>
             </div>
             <CommentSection user={profileUser} />
           </div>
