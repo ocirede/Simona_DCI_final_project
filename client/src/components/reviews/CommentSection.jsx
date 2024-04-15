@@ -31,10 +31,8 @@ export default function CommentSection({ user, loggeduser }) {
           <div>
             <h3 className="text-[28px] uppercase font-semibold ">Reviews</h3>
           </div>
-
-          <StarRating setRating={setRating} />
+          {user._id !== loggeduser._id && <StarRating setRating={setRating} />}
         </div>
-
         {user?._id !== loggeduser?._id && (
           <div>
             <form className="flex mb-2" onSubmit={handleWriteComment}>
