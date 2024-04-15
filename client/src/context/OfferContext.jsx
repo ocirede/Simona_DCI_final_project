@@ -72,12 +72,12 @@ const OfferProvider = ({ children }) => {
     }
   };
 
-  console.log("offers aft dlete", offers);
+  //console.log("offers aft dlete", offers);
   // Update offer
   const updateOffer = async (offerId, updateData) => {
     try {
       const response = await axios.put(
-        baseURL + `/offers/${offerId}`,
+        baseURL + `/offers/update/${offerId}`,
         updateData
       );
       if (response.data.success) {

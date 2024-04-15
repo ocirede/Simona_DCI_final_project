@@ -9,9 +9,10 @@ import AboutSection from "../components/profilePageEntrepreneur/AboutSection";
 import { useParams } from "react-router-dom";
 import TitleNameSection from "../components/profilePageEntrepreneur/TitleNameSection";
 import Sidebar from "../components/chatBox/SideBar";
+import PortfolioSection from "../components/profile artist/PortfolioSection";
 
 function ProfileArtist() {
-  const { getUserById } = useContext(UserContext);
+  const { getUserById, user } = useContext(UserContext);
   const { userId } = useParams();
   const [profileUser, setProfileUser] = useState(null);
 
@@ -41,7 +42,9 @@ function ProfileArtist() {
               <div className="lg:w-1/2">
                 <TagsSection user={profileUser} />
               </div>
+              {/* Portfolio Section */}
             </div>
+            <PortfolioSection user={profileUser} loggeduser={user} />
             <CommentSection user={profileUser} />
           </div>
 

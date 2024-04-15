@@ -12,6 +12,7 @@ export default function EditOffer({ offerId }) {
   const [salary, setSalary] = useState("");
   const [skillsRequired, setSkillsRequired] = useState("");
   const [status, setStatus] = useState("");
+  const [image, setImage] = useState(null);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -42,9 +43,9 @@ export default function EditOffer({ offerId }) {
     formData.append("salary", salary);
     formData.append("skillsRequired", skillsRequired);
     formData.append("status", status);
-    formData.append("postImage", e.target["offer-image"].files[0]);
+    formData.append("postImage", image);
 
-    updateOffer(formData);
+    updateOffer(offerId, formData);
   };
 
   return (
@@ -137,7 +138,8 @@ export default function EditOffer({ offerId }) {
                 </select>
                 <input
                   type="file"
-                  name="offer-image"
+                  name="postImage"
+                  onChange={(e) => setImage(e.target.files[0])}
                   className="w-full p-2 mb-4 border-2 border-green-500 rounded file:border-none file:bg-green-200 file:text-green-700"
                 />
                 <button

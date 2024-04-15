@@ -469,10 +469,7 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     console.error("Error updating the user", error.message);
   }
-
 };
-
-
 
 //logged user
 export const loggedUser = async (req, res) => {
@@ -487,7 +484,6 @@ export const loggedUser = async (req, res) => {
 
     res.send({ success: true, user });
     // console.log("logged user", user)
-
   } catch (error) {
     console.log("Error logged user:", error.message);
     res.status(500).send({ success: false, error: error.message });
@@ -506,9 +502,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-
 // Add fav offer
-
 
 export const addFavOffer = async (req, res) => {
   const { userId } = req.body;
@@ -531,20 +525,18 @@ export const addFavOffer = async (req, res) => {
     const isFavourite = user.favOffers.includes(offerId);
     if (isFavourite) {
       // If the offer is already in favorites, we remove it
-      user.favOffers = user.favOffers.filter(
-        (id) => id.toString() !== offerId
-      );
+      user.favOffers = user.favOffers.filter((id) => id.toString() !== offerId);
     } else {
       // If the restaurant is not in favorites, we add it
       user.favOffers.push(offerId);
     }
-    
+
     await user.save();
     await user.populate("favOffers");
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
-    await user.populate("connections")
-    
+    await user.populate("connections");
+
     res.send({
       success: true,
       user,
@@ -558,20 +550,109 @@ export const addFavOffer = async (req, res) => {
 
 // Get user by ID
 export const getUserById = async (req, res) => {
-  const {userId} = req.params;
- 
+  const { userId } = req.params;
+
   try {
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
-    } 
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
     res.json({ success: true, user });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Error fetching user by ID', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: "Error fetching user by ID",
+      error: error.message,
+    });
   }
 };
 
+//Upload portfolio Image
+export const uploadPortfolioImage = async (req, res) => {
+  const { userId } = req.params;
 
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    //console.log("file", req.file);
+
+    user.portfolioImages.push({ path: req.file.path });
+
+    await user.save();
+
+    await user.populate("favOffers");
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+
+    //console.log("Portfolio image uploaded successfully:", user.portfolioImages);
+    res.send({
+      success: true,
+      user: user,
+    });
+  } catch (error) {
+    console.error("Error uploading portfolio image", error.message);
+  }
+};
+
+//Delete portfolio Image
+export const deletePortfolioImage = async (req, res) => {
+  const { userId } = req.params;
+  const { imageId } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const imageToDelete = user.portfolioImages.find(
+      (image) => image._id.toString() === imageId
+    );
+
+    if (!imageToDelete) {
+      return res.status(404).json({ error: "Image not found" });
+    }
+
+    if (imageToDelete) {
+      const filename = imageToDelete.path.split("/").pop();
+      const publicId = filename.split(".")[0];
+      if (publicId) {
+        cloudinaryV2.uploader
+          .destroy(`Simona_Final_Project/portfolio_images/${publicId}`)
+          .then((result) =>
+            console.log("Portfolio image deleted result:", result)
+          );
+      }
+    }
+
+    user.portfolioImages = user.portfolioImages.filter(
+      (image) => image._id.toString() !== imageId
+    );
+
+    await user.save();
+
+    await user.populate("favOffers");
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+
+    //console.log("Image deleted successfully:", user.portfolioImages);
+    res.send({
+      success: true,
+      user: user,
+    });
+  } catch (error) {
+    console.error("Error deleting portfolio image", error.message);
+  }
+};

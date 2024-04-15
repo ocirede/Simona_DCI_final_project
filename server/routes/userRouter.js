@@ -2,6 +2,7 @@ import express from "express";
 import {
   profileBackroundUpload,
   profileImageUpload,
+  portfolioImageUpload,
 } from "../middleware/multerCloudinary.js";
 
 import {
@@ -20,10 +21,9 @@ import {
   updateProfileImage,
   updateProfileBackground,
   addFavOffer,
-
-
   getUserById,
-
+  uploadPortfolioImage,
+  deletePortfolioImage,
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -44,14 +44,12 @@ userRoutes.get("/loggeduser", auth, loggedUser);
 
 userRoutes.get("/all-the-users", getAllUsers);
 userRoutes.get("/single-user/:userId", getUserById);
-userRoutes.put("/update-profile-pic/:userId");
-
-//The following route is an example to test the image upload, it can be deleted
-userRoutes.post(
-  "/image",
+userRoutes.put(
+  "/update-profile-pic/:userId",
   profileImageUpload.single("profileImage"),
   updateProfileImage
 );
+
 userRoutes.put(
   "/update-profile-back/:userId",
   profileBackroundUpload.single("profileBackground"),
@@ -59,5 +57,13 @@ userRoutes.put(
 );
 
 userRoutes.post("/add-fav-offer/:offerId", addFavOffer);
+
+userRoutes.post(
+  "/upload-port-img/:userId",
+  portfolioImageUpload.single("portfolioImage"),
+  uploadPortfolioImage
+);
+
+userRoutes.delete("/delete-port-img/:userId", deletePortfolioImage);
 
 export default userRoutes;

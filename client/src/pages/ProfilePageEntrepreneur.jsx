@@ -40,7 +40,6 @@ const ProfilePageEntrepreneur = () => {
                 <OffersSection user={profileUser} />
                 <TagsSection user={profileUser} />
               </div>
-              <div></div>
             </div>
             <CommentSection user={profileUser} />
           </div>

@@ -26,9 +26,7 @@ export default function CommentSection({ user }) {
 
   return (
     <div className="mb-4">
-
       <div className=" bg-white rounded-[20px] pr-4 pl-4 pt-4 border border-black text-black">
-
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between align-middle mr-20">
           <div>
             <h3 className="text-[28px] uppercase font-semibold ">Reviews</h3>
@@ -42,9 +40,7 @@ export default function CommentSection({ user }) {
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-
               className="w-full h-[50px] bg-white rounded-[50px] outline-none p-2  align-middle border border-black"
-
               placeholder="Write your comment..."
               style={{ resize: "none" }}
             ></textarea>
@@ -63,11 +59,15 @@ export default function CommentSection({ user }) {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     {/* Display rater's photo */}
-                    <img
-                      src={rating.rater.profileImage}
-                      alt="Rater's Photo"
-                      className="w-10 h-10 rounded-full mr-4 object-cover"
-                    />
+                    {rating.rater.profileImage ? (
+                      <img
+                        src={rating.rater.profileImage}
+                        alt="Rater's Photo"
+                        className="w-10 h-10 rounded-full mr-4 object-cover"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full mr-4 bg-gray-300"></div>
+                    )}
                     {/* Display rater's name */}
                     <p className="font-semibold text-lg">
                       {rating.rater.address.firstname}
