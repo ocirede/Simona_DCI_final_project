@@ -558,7 +558,7 @@ export const addFavOffer = async (req, res) => {
 
 // Get user by ID
 export const getUserById = async (req, res) => {
-  const userId = req.params.userId;
+  const {userId} = req.params;
  
   try {
     const user = await User.findById(userId);
@@ -568,10 +568,10 @@ export const getUserById = async (req, res) => {
     await user.populate("sentRequests");
     await user.populate("pendingRequests");
     await user.populate("connections");
-    console.log("USER TAKEN:", user)
     res.json({ success: true, user });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Error fetching user by ID', error: error.message });
   }
 };
+
 

@@ -58,7 +58,7 @@ function NameTitle() {
           </span>
         )}
       </div>
-      <div className="absolute top-[320px]  flex items-end">
+      <div className="absolute top-[320px] flex items-end">
         <button className="w-[100px] h-[40px] rounded-xl bg-slate-500">
           <span className="text-white">Add me</span>
         </button>

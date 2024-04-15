@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Clock, Menu, X } from "lucide-react";
+import { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import { UserContext } from "../context/userContext.jsx";
-import CircleIcon from "./iconsComponents/circle.jsx";
-import StarFiveIcon from "./iconsComponents/starFive.jsx";
 import WelcomeUser from "./welcomeUser.jsx";
 
 export default function NavBarHomepage() {
@@ -26,14 +24,11 @@ export default function NavBarHomepage() {
   };
 
   return (
-    <nav className=" m-3 z-50 pt-3 pl-3 pr-3 bg-white-400 relative rounded-lg shadow-lg border border-b-4 border-black">
+    <nav className="bg-white m-3 z-50 pt-6 pl-6 pr-6 bg-white-400 relative rounded-[30px] shadow-lg border border-black border-b-[20px] h-[200px] md:h-[300px]">
       <div className="flex flex-wrap items-center justify-between md:flex-row">
-
         <div className="cursor-pointer" onClick={()=>handleUserClick(user._id)}>
-
           <WelcomeUser />
         </div>
-        <StarFiveIcon className="w-[200px] absolute right-[30%] top-[-25%] rotate-[25deg] z-50  " />
         <div className="flex items-center gap-2">
           <a className="mt-0 md:mt-0 md:ml-4 md:hidden cursor-pointer">EN-DE</a>
           <div className="md:hidden">
@@ -70,15 +65,13 @@ export default function NavBarHomepage() {
           </a>
         </div>
       </div>
-      <div className="ml-5 mr-5 mt-5 flex items-end   justify-between ">
+      <div className="ml-5 mr-5 mt-10 flex items-end  justify-between ">
         <h1
-          className="uppercase simona   text-[60px]   md:text-[120px] cursor-pointer"
+          className="uppercase simona text-[80px] md:text-[120px] cursor-pointer absolute top-[54%]"
           onClick={handleLogoClick}
         >
           Simona
         </h1>
-
-        <CircleIcon />
       </div>
     </nav>
   );

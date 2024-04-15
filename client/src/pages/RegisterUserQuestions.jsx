@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import LogoImageRegistration from "../components/register/LogoImageRegistration";
 import { UserContext } from "../context/userContext";
 import starFourSvg from "../assets/y2k_icons/star_four.svg";
 import starTwoSvg from "../assets/y2k_icons/star_two.svg";
 import artist from "../assets/y2k_icons/artist.svg";
 import entrepreneur from "../assets/y2k_icons/entrepreneur.svg";
+import FakeLogo from "../components/navbar intro/FakeLogo";
 
 const RegisterUserQuestions = () => {
   const { userRole, setUserRole } = useContext(UserContext);
@@ -21,10 +21,9 @@ const RegisterUserQuestions = () => {
   }, []);
 
   return (
-
     <div className="flex h-screen relative z-[5]">
       {/* Logo image - it is a random image to be replaced with our logo */}
-      <LogoImageRegistration />
+      <FakeLogo/>
       {/* Form container */}
       <div className="w-full my-auto max-w-screen-sm mx-auto md:w-1/2 md:max-w-480px relative">
         <div className="px-8 pt-6 pb-8 relative">

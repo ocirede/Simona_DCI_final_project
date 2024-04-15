@@ -5,6 +5,7 @@ import RegisterUserCategoryForm from "./pages/RegisterUserCategoryForm";
 import "@fortawesome/fontawesome-free/css/all.css";
 import QA from "./pages/Q&A";
 import IntroPage from "./pages/IntroPage";
+
 import ProfilePageLayout from "./layouts/ProfilePageLayout";
 import { Route, Routes } from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
@@ -19,6 +20,8 @@ import ConfirmedUserPage from "./pages/ConfirmedUserPage.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
 
 import Chat from "./pages/Chat.jsx";
+import HomePageLayout from "./layouts/HomePageLayout.jsx";
+
 
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
@@ -37,6 +40,9 @@ function App() {
             path="/ProfilePageEntrepreneur/:userId"
             element={<ProfilePageEntrepreneur />}
           />
+        </Route>
+
+        <Route element={<HomePageLayout />}>
           <Route path="/homeArtist" element={<HomePageArtist />} />
           <Route path="/E" element={<HomePageEntrepreneur />} />
           <Route path="/chatbox" element={<Chat/>} />

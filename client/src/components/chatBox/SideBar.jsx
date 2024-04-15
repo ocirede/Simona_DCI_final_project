@@ -6,7 +6,6 @@ function Sidebar() {
   const { setNotifications, notifications } = useSocketContext();
   const [isOpen, setIsOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
-
   // opening notification message
   useEffect(() => {
     if (notifications && notifications.length > 0) {
@@ -20,8 +19,7 @@ function Sidebar() {
     }
   }, [notifications, isOpen]);
 
-    // counting notifications 
-
+  // counting notifications
 
   useEffect(() => {
     if (notifications && notifications.length > 0) {

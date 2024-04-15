@@ -1,7 +1,7 @@
 import { Menu, X } from "lucide-react";
 import LanguageChoice from "../navbar intro/LanguageChoice";
 import DropMenuIntro from "../navbar intro/DropMenuIntro";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Button from "../navbar intro/Button";
 import { useEffect, useRef, useState } from "react";
 
@@ -45,11 +45,11 @@ const SimonaIntroSection = () => {
             <NavLink to="/register-questions">
                 <Button name="Register" />
             </NavLink>
-            <NavLink to="/sign-in">
-                <Button name="Sign-in" />
+            <NavLink to="/sign-in"> 
+                <Button name="Log-in" />
             </NavLink>
             </div>
-            <h1 className="uppercase text-[80px] md:text-[150px] lg:text-[200px] text-[#1E1E1E] absolute top-[69%] md:top-[66%] left-[7%] md:left-[4%] lg:top-[54%] simona">Simona</h1>
+            <Link to="/" className="uppercase text-[80px] md:text-[150px] lg:text-[170px] xl:text-[200px] text-[#1E1E1E] absolute top-[69%] md:top-[66%] left-[7%] md:left-[4%] lg:top-[61%] xl:top-[54%] simona">Simona</Link>
         </div>
     );
 }

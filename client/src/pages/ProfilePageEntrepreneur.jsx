@@ -7,17 +7,19 @@ import TagsSection from "../components/profilePageEntrepreneur/TagsSection";
 import CommentSection from "../components/reviews/CommentSection";
 import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
 import { useParams } from "react-router-dom";
+import Sidebar from "../components/chatBox/SideBar";
 
 const ProfilePageEntrepreneur = () => {
   const { getUserById } = useContext(UserContext);
   const { userId } = useParams();
   const [profileUser, setProfileUser] = useState(null);
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const userFound = await getUserById(userId);
         setProfileUser(userFound);
+        console.log("profileuser",userFound, userId, profileUser)
+
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -30,7 +32,7 @@ const ProfilePageEntrepreneur = () => {
     return (
       <div>
         <ProfileImgBgSection user={profileUser} />
-        <section className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
+        <section className="mx-auto p-6 relative md:ml-[50px] md:mr-[50px]">
           <div>
             <TitleNameSection user={profileUser} />
             <div className="lg:flex gap-4">
@@ -43,6 +45,7 @@ const ProfilePageEntrepreneur = () => {
             <CommentSection user={profileUser} />
           </div>
         </section>
+        <Sidebar />
       </div>
     );
   } else {
@@ -51,7 +54,3 @@ const ProfilePageEntrepreneur = () => {
 };
 
 export default ProfilePageEntrepreneur;
-
-
-
-

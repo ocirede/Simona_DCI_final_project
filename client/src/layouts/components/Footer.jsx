@@ -4,7 +4,7 @@ import FooterContactForm from "../../components/footer/FooterContactForm";
 
 export default function Footer() {
   return (
-    <footer className="bg-cobaltBlue relative m-2 rounded-[30px] border-1 border-black border md:h-[450px] lg:ml-20 lg:mr-20 border-b-8">
+    <footer className="bg-cobaltBlue relative m-2 rounded-[30px] border-1 border-black border md:h-[450px] border-b-8">
       <div className="flex flex-col md:flex-row md:justify-between">
         <div className="md:mr-8 md:mb-0 flex flex-col gap-2 p-10">
           <h3 className="text-3xl mb-4 font-bold uppercase text-white">
