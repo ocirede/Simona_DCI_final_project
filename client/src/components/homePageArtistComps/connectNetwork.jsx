@@ -8,6 +8,8 @@ export default function ConnectNetwork() {
   const { user } = useContext(UserContext);
 
 
+      // const allUsers = [...userData, ...entrepreneursData]
+      // const [friendsList, setFriendsList] = useState([])
 
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
@@ -15,6 +17,7 @@ export default function ConnectNetwork() {
       return (
         <>
           <div className="rounded-2xl  shadow-lg border border-b-8 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto bg-white">
+
             <div className="w-full flex sticky top-0 z-50">
               <h2  className="w-1/2 rounded-tl-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">Connections</h2>
               <h2 className="w-1/2 rounded-tr-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">Pending Requests</h2>
@@ -49,4 +52,3 @@ export default function ConnectNetwork() {
         </>
       );
 
-}

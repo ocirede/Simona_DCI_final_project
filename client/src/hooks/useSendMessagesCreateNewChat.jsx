@@ -71,8 +71,6 @@ export function useFetchMessages(connection) {
     }
   };
 
-
-
   useEffect(() => {
     if (connection) {
       const contactId = connection._id;
@@ -86,6 +84,5 @@ export function useFetchMessages(connection) {
     getMessages,
     notifications,
     setNotifications,
-    
   };
 }
