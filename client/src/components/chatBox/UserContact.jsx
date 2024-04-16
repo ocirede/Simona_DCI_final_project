@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useFetchMessages, useSendMessage } from "../../hooks/useSendMessagesCreateNewChat";
+import {
+  useFetchMessages,
+  useSendMessage,
+} from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
 import axios from "../../config/axios.js";
 import { UserContext } from "../../context/userContext.jsx";
@@ -7,19 +10,13 @@ import { UserContext } from "../../context/userContext.jsx";
 export default function UserContact({ connection, onClick }) {
   const { user } = useContext(UserContext);
   const [notificationCount, setNotificationCount] = useState(0);
-  const { messages, getMessages, notifications, setNotifications} =
+  const { messages, getMessages, notifications, setNotifications } =
     useFetchMessages(connection);
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(connection._id);
   const { address } = connection;
   const fullName = `${address.firstname} ${address.lastname}`;
   const baseURL = import.meta.env.VITE_BASE_URL;
-
-
-
- 
-  
-  
 
   // updating notification status
   const handleUpdateNotificationStatus = async (receiverId) => {
@@ -75,7 +72,6 @@ export default function UserContact({ connection, onClick }) {
       ? lastMessage?.substring(0, 15) + "..."
       : lastMessage;
 
- 
   return (
     <div className="user-contact flex items-center gap-1 ml-4 mt-7  ">
       <div className={`avatar ${isOnline ? "online" : ""}`}>
@@ -109,8 +105,7 @@ export default function UserContact({ connection, onClick }) {
 
           <div className=" flex gap-1">
             <p className=" font-custom">last message:</p>
-            <p className="  font-bold font-custom">{cutLastMessage}
-            </p>
+            <p className="  font-bold font-custom">{cutLastMessage}</p>
           </div>
         </div>
       </div>
