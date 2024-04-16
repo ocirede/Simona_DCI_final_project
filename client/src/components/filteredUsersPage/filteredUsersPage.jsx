@@ -3,6 +3,7 @@ import { UserContext } from "../../context/userContext";
 import { useContext } from "react";
 import MotionSlider from "../motionSlider";
 import styled from "styled-components";
+import { motion } from "framer-motion"; 
 
 export default function FilteredUsersPage({ selectedCategory, searchQuery }) {
   const { users } = useContext(UserContext)
@@ -32,7 +33,9 @@ export default function FilteredUsersPage({ selectedCategory, searchQuery }) {
       <MotionSlider>
       {filteredUsers.length > 0 ? (
         filteredUsers.map((user ,index)=> (
-          <CardElement key={index} {...user} />
+          <motion.div key={index} whileHover={{ scale: 1.1 }}>
+            <CardElement key={index} {...user} />
+          </motion.div>
         ))
       ) : (
         <div>No users found for this category.</div>

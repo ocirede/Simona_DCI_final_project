@@ -6,7 +6,7 @@ import {
 } from "../../hooks/useSendMessagesCreateNewChat.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 import moment from "moment";
-import { Send } from "lucide-react";
+import { ChevronLeft, Send } from "lucide-react";
 import { useSocketContext } from "../../context/socketContext.jsx";
 import { Paperclip } from "lucide-react";
 import { ArrowDownToLine } from "lucide-react";
@@ -16,7 +16,7 @@ import { X } from "lucide-react";
 import axios from "../../config/axios.js";
 import AlertMessageWarning from "../alerts/AlertMessageWarning.jsx";
 
-export default function ChatBox({ connection }) {
+export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
   const fullName = `${connection.address.firstname} ${connection.address.lastname}`;
   const { socket } = useSocketContext();
   const { user } = useContext(UserContext);
@@ -129,7 +129,6 @@ export default function ChatBox({ connection }) {
       const response = await axios.delete(
         baseURL + `/messages/delete/${messageId}`
       );
-      console.log(response.data);
       const deletedMessageId = response.data.message._id;
       setMessages((prevMessages) =>
         prevMessages.filter((message) => message?._id !== deletedMessageId)
@@ -147,10 +146,15 @@ export default function ChatBox({ connection }) {
     }
   };
 
-  // NavLink to find out how to navigate through other profile pages;
   return (
-    <div className="flex flex-col mr-3 mt-4 h-2/3 bg-white rounded-lg border border-b-4 border-l-4 border-black">
-      <nav className="w-full h-16 p-3 flex items-center z-50 font-custom font-bold shadow-xl">
+    <div className="flex flex-col h-screen w-full bg-white rounded-lg border border-b-4 border-l-4 border-black ">
+      <nav className="w-full h-16 p-3 flex items-center z-50  font-bold shadow-xl">
+        {showChatBox && (
+          <ChevronLeft
+            className="mr-2 cursor-pointer"
+            onClick={() => setShowChatBox(false)}
+          />
+        )}
         <p
           onClick={() => handleNavigation(connection)}
           className="underline cursor-pointer"
@@ -172,19 +176,17 @@ export default function ChatBox({ connection }) {
                 key={message._id}
                 className={`chat ${messageClass} ${
                   messageClass === "sent-message" ? "chat-end" : "chat-start"
-                }`}
+                } `}
               >
-                <div className="chat-bubble">
+                <div className={`chat-bubble ${messageClass}`}>
                   <div className="flex justify-between gap-3">
-                    <p className="message-text font-custom">
-                      {message.message}
-                    </p>
-
+                    <p className="message-text text-white">{message.message}</p>
                     <ChevronDown
                       className={`chat ${messageClass} ${
                         messageClass === "received-message" ? "hidden" : ""
                       } cursor-pointer`}
                       onClick={() => handleDropMenu(message._id, openEditText)}
+                      color="white"
                     />
                     {openMessages[message._id] && (
                       <div className="  z-10 origin-top-right absolute right-0 mt-5 w-[120px] h-[52px] p-1 rounded-[10px] shadow-lg bg-white border-1 border border-black">
@@ -206,12 +208,21 @@ export default function ChatBox({ connection }) {
                       </div>
                     )}
                   </div>
-                  <span className="message-timestamp">
+                  <span className="message-timestamp text-white">
                     {moment(message.createdAt).calendar()}
                   </span>
                   {message.file && (
                     <div className="chat-file relative">
-                      <img src={message.file} alt="File" />
+                      <img
+                        src={message.file}
+                        alt="File"
+                        style={{
+                          maxWidth: "100%", 
+                          maxHeight: "200px",
+                          objectFit: "cover",
+                          borderRadius: "10px",
+                        }}
+                      />
                       <div id="download-link">
                         <ArrowDownToLine
                           className={`chat ${messageClass} ${
@@ -220,6 +231,7 @@ export default function ChatBox({ connection }) {
                               : "bg-retroRed"
                           } w-7 h-7 cursor-pointer absolute top-0 right-0 p-1`}
                           onClick={() => handleArrowClick(message)}
+                          color="white"
                         />
                       </div>
                     </div>
@@ -229,14 +241,15 @@ export default function ChatBox({ connection }) {
                 {openEditText[message._id] && (
                   <form
                     onSubmit={(e) => handleUpdateMessage(e, message._id)}
-                    className=" w-1/5 absolute top-1/4 right-1/3 bg-white border border-black border-b-4 border-r-4 h-48"
+                    className="absolute w-1/2  top-1/3 right-1/4 bg-white border border-black border-b-4 border-r-4 h-48 z-50"
                   >
                     <div className=" flex flex-col justify-between gap-28 ">
-                      <div className=" flex justify-between bg-retroRed p-1 font-custom text-white">
-                        <nav> Edit message</nav>
+                      <div className=" flex justify-between bg-borderBlue p-1">
+                        <p className=" text-white"> Edit message</p>
                         <X
                           className=" cursor-pointer"
                           onClick={() => handleEditText(message._id)}
+                          color="white"
                         />
                       </div>
                       <div className="p-1 flex  gap-1 ">
@@ -247,7 +260,7 @@ export default function ChatBox({ connection }) {
                           className=" p-1 w-full  border border-black text-black"
                         />
                         <button className=" bg-retroBlue p-1" type="submit">
-                          <Check />
+                          <Check color="white" />
                         </button>
                       </div>
                     </div>
@@ -258,19 +271,20 @@ export default function ChatBox({ connection }) {
           })}
         </div>
       ) : (
-        <div className=" h-screen flex justify-center items-center font-custom font-bold">
+        <div className=" h-screen flex justify-center items-center font-bold">
           <p>No messages available</p>
         </div>
       )}
-      <footer className="flex items-center p-1 gap-3 justify-center mt-auto mb-4 shadow-current h-[50px] w-full">
-        <div className="w-1/2 flex items-center gap-3">
+      <footer className="flex items-center p-1 gap-3 justify-center mt-auto mb-4 h-[70px]">
+        <div className="flex items-center gap-3" style={{ width: "50%" }}>
           <input
             type="text"
             name="message"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="border border-black rounded-[10px] w-full px-4 py-2"
+            className="flex-grow border border-black rounded-[10px] px-4 py-2"
             placeholder="Type your message..."
+            // maxlength={1000}
           />
           <label>
             <input
@@ -284,7 +298,7 @@ export default function ChatBox({ connection }) {
         </div>
         <button
           onClick={() => sendMessage(connection._id)}
-          className="bg-lightBlue  text-white px-4 py-2 rounded"
+          className="bg-lightBlue text-white px-4 py-2 rounded"
         >
           <Send />
         </button>

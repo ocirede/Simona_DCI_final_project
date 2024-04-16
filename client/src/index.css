@@ -44,14 +44,14 @@ html {
   background-color: #224193;
   color: #fff;
   margin-left: auto;
-  max-width: calc(25% - 16px);
+  max-width: 70%;
 }
 
 .received-message .chat-bubble {
   background-color: #df3c5f;
   color: #fff;
   margin-right: auto;
-  max-width: calc(25% - 16px);
+  max-width: 70%;
 }
 
 .message-timestamp {
@@ -194,3 +194,5 @@ html {
 .simona {
   font-family: "Bungee", system-ui;
 }
+
+
