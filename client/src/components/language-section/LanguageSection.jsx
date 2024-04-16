@@ -123,7 +123,7 @@ const LanguageSection = ({ user, loggeduser }) => {
           {toggleAddForm && (
             <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm z-50">
               <div className="relative max-w-lg max-h-full overflow-hidden bg-white p-4 rounded-lg">
-                <form onSubmit={handleAddLanguage}>
+                <form onSubmit={handleAddLanguage} className="w-[300px]">
                   <div className="mb-4">
                     <label
                       htmlFor="language"
@@ -164,7 +164,7 @@ const LanguageSection = ({ user, loggeduser }) => {
                   </div>
                   <button
                     type="submit"
-                    className="border-none bg-retroRed text-white rounded-xl py-1 px-4 w-[200px] cursor-pointer  "
+                    className=" w-full border-none bg-retroRed text-white rounded-xl py-1 px-4  cursor-pointer  "
                     style={{
                       boxShadow: "0 0 10px #DF3C5F",
                     }}
@@ -180,8 +180,9 @@ const LanguageSection = ({ user, loggeduser }) => {
                     )}
                   </button>
                 </form>
+
                 <button
-                  className="absolute top-2 right-2 text-black"
+                  className="absolute top-2 right-2 text-black text-sm "
                   onClick={() => {
                     setToggleAddForm(false);
                   }}
