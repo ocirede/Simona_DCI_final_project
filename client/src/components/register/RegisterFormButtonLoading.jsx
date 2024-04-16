@@ -23,7 +23,7 @@ const RegisterFormButtonLoading = ({ name }) => {
           fill="currentColor"
         ></path>
       </svg>
-      <span className="font-custom  text-xl pt-1 pb-1">{name}</span>
+      <span className="font-custom  text-xl pt-1 pb-1 text-white">{name}</span>
     </button>
   );
 };

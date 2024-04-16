@@ -72,7 +72,11 @@ const RegisterUserForm = () => {
           </div>
           {/* Star with opposite position on small screens */}
           <div className="absolute sm:bottom-[-105px] sm:right-[-25px] sm:left-auto sm:top-auto sm:h-[200px] sm:w-[200px] bottom-[-82px] left-2  h-[220px] w-[220px]">
-            <img src={starTwoSvg} style={{ position: 'relative', zIndex: '-100' }} alt="Star Two" />
+            <img
+              src={starTwoSvg}
+              style={{ position: "relative", zIndex: "-100" }}
+              alt="Star Two"
+            />
           </div>
           <div className="bg-white  shadow-lg p-8 border border-black rounded-2xl">
             <h1 className="text-2xl font-bold mb-6 text-center">

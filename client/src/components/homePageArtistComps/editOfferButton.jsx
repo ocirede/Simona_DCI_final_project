@@ -48,9 +48,12 @@ export default function EditOffer({ offerId }) {
     formData.append("status", status);
     formData.append("postImage", image);
 
-    updateOffer(offerId,formData);
 
-console.log(Array.from(formData.entries()))  };
+    updateOffer(offerId, formData);
+  };
+
+
+
 
   return (
   
@@ -143,7 +146,9 @@ console.log(Array.from(formData.entries()))  };
                 </select>
                 <input
                   type="file"
-                  name="offer-image"
+
+                  name="postImage"
+
                   onChange={(e) => setImage(e.target.files[0])}
                   className="w-full p-2 mb-4 border-2 border-green-500 rounded file:border-none file:bg-green-200 file:text-green-700"
                 />

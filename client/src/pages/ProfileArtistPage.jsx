@@ -8,10 +8,14 @@ import AboutSection from "../components/profilePageEntrepreneur/AboutSection";
 import { useParams } from "react-router-dom";
 import TitleNameSection from "../components/profilePageEntrepreneur/TitleNameSection";
 import Sidebar from "../components/chatBox/SideBar";
+import PortfolioSection from "../components/profile artist/PortfolioSection";
+import LanguageSection from "../components/language-section/LanguageSection";
 import NavBarHomepage from "../components/navBarHomepage";
+import CreateOffer from "../components/profile artist/CreateOfferButton";
+
 
 function ProfileArtist() {
-  const { getUserById } = useContext(UserContext);
+  const { getUserById, user } = useContext(UserContext);
   const { userId } = useParams();
   const [profileUser, setProfileUser] = useState(null);
 
@@ -32,8 +36,8 @@ function ProfileArtist() {
     return (
       <>
 
-      <NavBarHomepage/>
-
+      {/* <NavBarHomepage/> */}
+    
         <ProfileImgBgSection user={profileUser} />
         <main className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
           <div>
@@ -44,7 +48,12 @@ function ProfileArtist() {
                 <TagsSection user={profileUser} />
               </div>
             </div>
-            <CommentSection user={profileUser} />
+            {/* Language Section */}
+            <LanguageSection user={profileUser} loggeduser={user} />
+            {/* Portfolio Section */}
+            <PortfolioSection user={profileUser} loggeduser={user} />
+            {/* Comment Section */}
+            <CommentSection user={profileUser} loggeduser={user} />
           </div>
 
           <CreateOffer />
