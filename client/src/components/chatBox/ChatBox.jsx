@@ -276,7 +276,7 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
         </div>
       )}
       <footer className="flex items-center p-1 gap-3 justify-center mt-auto mb-4 h-[70px]">
-        <div className="flex items-center gap-3" style={{ width: "50%" }}>
+        <div className="flex items-center gap-3" style={{ width: "70%", flexShrink: 0 }}>
           <input
             type="text"
             name="message"

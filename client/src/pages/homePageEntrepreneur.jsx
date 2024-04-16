@@ -1,3 +1,4 @@
+import Sidebar from "../components/chatBox/SideBar";
 import { CategoriesSearch } from "../components/homePageArtistComps/categoriesSearch";
 import ConnectNetwork from "../components/homePageArtistComps/connectNetwork";
 import RecommendedArtists from "../components/homePageEntrepreneurComps/recommendedArtists";
@@ -14,6 +15,8 @@ export default function HomePageEntrepreneur() {
         <ConnectNetwork />
       </div>
     </div>
+    <Sidebar />
+
   </>
  );
 }
