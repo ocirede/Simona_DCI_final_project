@@ -67,17 +67,17 @@ export default function PortfolioSection({ user, loggeduser }) {
 
         <div
           style={{ maxHeight: "20rem", overflowY: "auto" }}
-          className="flex flex-wrap gap-4 mb-4"
+          className="flex flex-wrap justify-around  gap-4 mb-4"
         >
           {/* Map through the portfolioImages array and render each image */}
           {user?.portfolioImages?.map((image) => (
-            <div key={image._id} className="relative">
+            <div key={image._id} className="relative flex-none">
               {/* Image */}
               <img
                 src={image.path}
                 alt={`Portfolio Image ${image._id}`}
                 onClick={() => handleImageClick(image)}
-                className="w-[300px] h-[250px] object-cover rounded-lg border border-gray-300 cursor-pointer"
+                className="w-[240px] h-[180px] object-cover rounded-lg border border-gray-300 cursor-pointer"
               />
               {/* Delete button */}
               {isEditing && (
@@ -92,7 +92,7 @@ export default function PortfolioSection({ user, loggeduser }) {
           ))}
           {/* Input for uploading images */}
           {isEditing && (
-            <div className="relative w-[300px] h-[250px] border border-gray-300 rounded-lg overflow-hidden">
+            <div className="relative w-[240px] h-[180px] border border-gray-300 rounded-lg overflow-hidden">
               {/* Plus icon */}
               <label
                 htmlFor="fileInput"
