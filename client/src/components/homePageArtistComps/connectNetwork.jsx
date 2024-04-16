@@ -20,7 +20,7 @@ export default function ConnectNetwork() {
                 {user?.connections?.map(friend => (
                   <div key={friend._id} className="flex gap-2 items-center">
                     <img src={friend.profileImage} className="w-5 h-5 rounded-full bg-green-400 object-cover" />
-                    <div className="text-center text-xs ">{friend.address?.firstname} {friend.address?.lastname}</div>
+                    <div className="text-center text-l ">{friend.address?.firstname} {friend.address?.lastname}</div>
                     <DeleteConnection connectionId={friend._id}/>
                   </div>
                 ))}
