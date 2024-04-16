@@ -11,7 +11,6 @@ export default function NavBarHomepage() {
 
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
-  const [showMenu, setShowMenu] = useState(false);
   
   const handleLogoClick = () => {
     if (user.role === "artist") {

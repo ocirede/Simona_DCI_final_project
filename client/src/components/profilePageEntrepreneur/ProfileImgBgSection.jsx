@@ -92,8 +92,8 @@ function ProfileImgBgSection({ user }) {
                 </div>
             </div>
         </div>
-      </div>
-    </div>
+     
+    
   );
 }
 
