@@ -8,6 +8,7 @@ import CommentSection from "../components/reviews/CommentSection";
 import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/chatBox/SideBar";
+import LanguageSection from "../components/language-section/LanguageSection";
 
 const ProfilePageEntrepreneur = () => {
   const { getUserById, user } = useContext(UserContext);
@@ -41,6 +42,8 @@ const ProfilePageEntrepreneur = () => {
                 <TagsSection user={profileUser} />
               </div>
             </div>
+            {/* Language Section */}
+            <LanguageSection user={profileUser} loggeduser={user} />
             <CommentSection user={profileUser} loggeduser={user} />
           </div>
         </section>
