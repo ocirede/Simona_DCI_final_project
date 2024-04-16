@@ -8,11 +8,8 @@ export default function CreateOffer() {
 
     return (
         <>
-      
-
-
         <div>
-            <button onClick={toggleVisibility} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={toggleVisibility} className="bg-retroBlue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-[30px]">
                 Create Offer
             </button>
 
