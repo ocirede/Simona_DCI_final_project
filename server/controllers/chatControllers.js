@@ -11,7 +11,7 @@ export const findConnectedUsersInfo = async (req, res) => {
 
     const user = await User.findById(userId).populate({
       path: "connections",
-      select: "address email role",
+      select: "address email role profileImage",
     });
 
     const connections = user.connections;

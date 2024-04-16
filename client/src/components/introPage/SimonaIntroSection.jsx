@@ -6,6 +6,8 @@ import Button from "../navbar intro/Button";
 import { useRef, useState } from "react";
 
 const SimonaIntroSection = () => {
+
+
     const divRef = useRef(null);
     const [display, setDisplay] = useState(false);
   
@@ -34,7 +36,16 @@ const SimonaIntroSection = () => {
             </div>
             <Link to="/" className="uppercase text-[80px] md:text-[150px] lg:text-[170px] xl:text-[200px] text-[#1E1E1E] absolute top-[69%] md:top-[66%] left-[7%] md:left-[4%] lg:top-[61%] xl:top-[54%] simona">Simona</Link>
         </div>
-    );
-}
+      </div>
+
+      <Link
+        to="/"
+        className="uppercase text-[80px] md:text-[150px] lg:text-[170px] xl:text-[200px] text-[#1E1E1E] absolute top-[69%] md:top-[66%] left-[7%] md:left-[4%] lg:top-[61%] xl:top-[54%] simona"
+      >
+        Simona
+      </Link>
+    </div>
+  );
+};
 
 export default SimonaIntroSection;

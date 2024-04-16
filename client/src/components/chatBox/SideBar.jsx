@@ -54,9 +54,9 @@ function Sidebar() {
         >
           <NavLink onClick={() => handleDeleteNotification()} to="/chatbox">
             <div className="relative flex items-center justify-center animated-message ">
-              <div className=" relative flex gap-1 text-lg font-custom">
-                <p>You have new message(s)</p>
-                <MessageSquareText className="notification-icon" />
+              <div className="relative flex gap-1 text-lg ">
+                <p className="text-white">You have new message(s)</p>
+                <MessageSquareText className="notification-icon" color="white"/>
                 <span className="notification-count">{notificationCount}</span>
               </div>
             </div>
@@ -65,6 +65,7 @@ function Sidebar() {
       )}
     </>
   );
+  
 }
 
 export default Sidebar;

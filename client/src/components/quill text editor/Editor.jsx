@@ -28,7 +28,7 @@ export const Editor = ({ initialContent, onSave }) => {
         formats={formats}
       />
       <div className="flex justify-center items-center mt-3">
-        <Button name="Post" onClick={handlePost}></Button>
+        <button className=" bg-retroRed w-28 p-1 rounded-[10px] text-white"  onClick={handlePost}>Post </button>
       </div>
     </div>
   );

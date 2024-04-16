@@ -42,10 +42,12 @@ userRoutes.get("/loggeduser", auth, loggedUser);
 
 userRoutes.get("/all-the-users", getAllUsers);
 userRoutes.get("/single-user/:userId", getUserById);
-userRoutes.put("/update-profile-pic/:userId", profileImageUpload.single("profileImage"),
-  updateProfileImage);
 
-//The following route is an example to test the image upload, it can be deleted
+userRoutes.put("/update-profile-pic/:userId",  profileImageUpload.single("profileImage"),
+updateProfileImage);
+
+
+
 userRoutes.put(
   "/update-profile-back/:userId",
   profileBackroundUpload.single("profileBackground"),

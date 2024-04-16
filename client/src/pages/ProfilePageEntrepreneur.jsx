@@ -8,6 +8,7 @@ import CommentSection from "../components/reviews/CommentSection";
 import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/chatBox/SideBar";
+import NavBarHomepage from "../components/navBarHomepage";
 
 const ProfilePageEntrepreneur = () => {
   const { getUserById } = useContext(UserContext);
@@ -30,6 +31,7 @@ const ProfilePageEntrepreneur = () => {
   if (profileUser) {
     return (
       <div>
+        <NavBarHomepage />
         <ProfileImgBgSection user={profileUser} />
         <section className="mx-auto p-6 relative md:ml-[50px] md:mr-[50px]">
           <div>

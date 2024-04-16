@@ -15,7 +15,7 @@ export default function IntroPage() {
   }, []);
 
   return (
-   <>
+    <>
       <div>
         <SimonaIntroSection />
         <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[670px] md:h-fit border-b-8 lg:mr-20 lg:ml-20">
@@ -45,6 +45,7 @@ export default function IntroPage() {
       </div>
       <div className="mb-4">
         <MovingText text="What do we do What do we do What do we do What do we do What do we do What do we do " />
+
         <div className="m-2 lg:order-2 border border-1 border-black rounded-[30px] bg-white p-10 border-b-8 md:text-[20px] p-20 lg:text-[28px] lg:mr-20 lg:ml-20">
           <p className="pb-4">
           {t("textOne")}
@@ -92,6 +93,7 @@ export default function IntroPage() {
           </div>
         </div>
       </div>
+
       <div className="m-2 bg-white border border-1 border-black rounded-[30px] border-b-8 p-20 md:text-[20px] p-20 lg:text-[28px] lg:mr-20 lg:ml-20">
         <div className="flex gap-2 pb-4 lg:gap-4 lg:pb-8">
           <img src="/heart_three.svg" alt="heart" className="w-[50px]"></img>
@@ -137,4 +139,3 @@ export default function IntroPage() {
     </>
   );
 }
-
