@@ -33,7 +33,7 @@ const ProfilePageEntrepreneur = () => {
   if (profileUser) {
     return (
       <div>
-        <NavBarHomepage />
+        {/* <NavBarHomepage /> */}
         <ProfileImgBgSection user={profileUser} />
         <section className="mx-auto p-6 relative md:ml-[50px] md:mr-[50px]">
           <div>
