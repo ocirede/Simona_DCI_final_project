@@ -19,7 +19,8 @@ export default function RecommendedEntrepreneurs() {
 
 return (
     <>
-      <div className="flex w-full border border-b-8 border-black rounded-2xl shadow-lg overflow-hidden  md:w-1/2 md:max-h-[4535px]">
+
+       <div className="flex w-full border border-b-8 border-black rounded-2xl shadow-lg overflow-hidden  md:w-1/2 md:max-h-[435px]">
       <div className="relative flex flex-col justify-center bg-cobaltBlue h-full min-h-[435px] w-20">
 
         <h2 className="text-2xl font-bold uppercase text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 vertical-text">
