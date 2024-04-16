@@ -24,6 +24,8 @@ import {
   getUserById,
   uploadPortfolioImage,
   deletePortfolioImage,
+  deleteLanguage,
+  addLanguage,
 } from "../controllers/userController.js";
 import auth from "../middleware/user-auth.js";
 
@@ -65,5 +67,8 @@ userRoutes.post(
 );
 
 userRoutes.delete("/delete-port-img/:userId", deletePortfolioImage);
+
+userRoutes.post("/add-language/:userId", addLanguage);
+userRoutes.delete("/delete-language/:userId", deleteLanguage);
 
 export default userRoutes;

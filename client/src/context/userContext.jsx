@@ -423,6 +423,46 @@ const UserProvider = ({ children }) => {
       console.error("Error deleting the image", error);
     }
   };
+
+  //Add new language
+  //Language levels should be stricted to:
+  //Beginner
+  //Elementary
+  //Intermediate
+  //Advanced
+  //Fluent
+  const addNewLanguage = async (userId, language, level) => {
+    const body = { language, level };
+    try {
+      const response = await axios.post(
+        baseURL + `/users/add-language/${userId}`,
+        body
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        // console.log("Upload image user", response.data.user);
+      }
+    } catch (error) {
+      console.error("Error adding the new language", error);
+    }
+  };
+
+  //delete language
+  const deleteLanguage = async (userId, languageId) => {
+    try {
+      const response = await axios.delete(
+        baseURL + `/users/delete-language/${userId}`,
+        { data: { languageId } }
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        //console.log("delete image user", response.data.user);
+      }
+    } catch (error) {
+      console.error("Error deleting the language", error);
+    }
+  };
+
   /**
    * For the brave souls who get this far: You are the chosen ones,
    * the valiant knights of programming, without rest,
@@ -473,6 +513,8 @@ const UserProvider = ({ children }) => {
         loggedUser,
         uploadPortfolioImage,
         deletePortfolioImage,
+        addNewLanguage,
+        deleteLanguage,
       }}
     >
       {children}

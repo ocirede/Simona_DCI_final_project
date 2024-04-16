@@ -656,3 +656,73 @@ export const deletePortfolioImage = async (req, res) => {
     console.error("Error deleting portfolio image", error.message);
   }
 };
+
+//Add language
+export const addLanguage = async (req, res) => {
+  const { userId } = req.params;
+  const { language, level } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    user.languages.push({ language: language, level: level });
+
+    await user.save();
+
+    await user.populate("favOffers");
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+
+    res.status(200).json({ success: true, user: user });
+    console.log("New language created successfully:", user.languages);
+  } catch (error) {
+    console.error("Error adding new language");
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+//Delete Language
+export const deleteLanguage = async (req, res) => {
+  const { userId } = req.params;
+  const { languageId } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const languageToDelete = user.languages.find(
+      (lang) => lang._id.toString() === languageId
+    );
+
+    if (!languageToDelete) {
+      return res.status(404).json({ error: "Language not found" });
+    }
+
+    if (languageToDelete) {
+      user.languages = user.languages.filter(
+        (lang) => lang._id.toString() !== languageToDelete._id.toString()
+      );
+    }
+
+    await user.save();
+
+    await user.populate("favOffers");
+    await user.populate("sentRequests");
+    await user.populate("pendingRequests");
+    await user.populate("connections");
+
+    //console.log("language deleted successfully:", user.languages);
+    res.send({
+      success: true,
+      user: user,
+    });
+  } catch (error) {
+    console.error("Error deleting the language", error.message);
+  }
+};
