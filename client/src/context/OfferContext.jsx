@@ -10,6 +10,9 @@ const OfferProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [offers, setOffers] = useState([]);
   const [foundOffer, setFoundOffer] = useState();
+const [isEditVisible, setIsEditVisible] = useState(false);
+const [currentEditId, setCurrentEditId] = useState(null);
+
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   // Fetch offers
@@ -72,12 +75,12 @@ const OfferProvider = ({ children }) => {
     }
   };
 
-  console.log("offers aft dlete", offers);
+  //console.log("offers aft dlete", offers);
   // Update offer
   const updateOffer = async (offerId, updateData) => {
     try {
       const response = await axios.put(
-        baseURL + `/offers/${offerId}`,
+        baseURL + `/offers/update/${offerId}`,
         updateData
       );
       if (response.data.success) {
@@ -86,6 +89,7 @@ const OfferProvider = ({ children }) => {
           offer._id === offerId ? updatedOffer : offer
         );
         setOffers(updatedOffersArray);
+        console.log("updated offer",response.data.updatedPost);
       }
     } catch (error) {
       console.error("Failed to update offer:", error);
@@ -119,6 +123,8 @@ const OfferProvider = ({ children }) => {
       console.error("Error fetching offer by ID:", error);
     }
   };
+
+  
 
   return (
     <OfferContext.Provider

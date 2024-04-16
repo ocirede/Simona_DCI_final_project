@@ -26,7 +26,7 @@ export default function Chat() {
   );
 
   return (
-    <div className="flex items-center h-screen mb-10 mt-10 relative z-10">
+    <div className="flex items-center h-screen ml-4 mr-4 mb-10 mt-10 relative z-10">
       {/* Sidebar (Contacts) */}
       <div
         className={`w-full h-screen mt-10 mr-3 lg:w-1/2 ml-3 lg:mr-0  lg:mt-4 rounded-lg bg-lightBlue overflow-y-auto z-50 border border-b-4 border-r-4 border-black ${

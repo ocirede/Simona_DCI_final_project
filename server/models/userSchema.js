@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
       country: String,
       phone: String,
     },
-    averageRating: { type: Number ,default: 0,},
+    averageRating: { type: Number, default: 0 },
     pendingRequests: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -56,8 +56,8 @@ const userSchema = new mongoose.Schema(
     personality: [{ type: String }],
     tags: [
       {
-        trait: { type: String }, 
-        value: { type: Number }, 
+        trait: { type: String },
+        value: { type: Number },
       },
     ],
     education: [
@@ -69,18 +69,19 @@ const userSchema = new mongoose.Schema(
 
     about: { type: String },
 
-    favOffers:[
+    favOffers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
       },
     ],
 
-
-    portfolioImages: [{ type: String }],
-
+    portfolioImages: [
+      {
+        path: { type: String },
+      },
+    ],
   },
-  
 
   {
     timestamps: true,

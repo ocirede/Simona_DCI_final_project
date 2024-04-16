@@ -1,8 +1,11 @@
 import { useEffect, useState, useContext } from "react";
 import { useOfferContext } from "../../context/OfferContext.jsx";
+import { UserContext } from "../../context/userContext.jsx";
 
 export default function EditOffer({ offerId }) {
   const { findOffer, foundOffer, updateOffer } = useOfferContext();
+  const { user } = useContext(UserContext)
+
   const [isVisible, setIsVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -12,10 +15,11 @@ export default function EditOffer({ offerId }) {
   const [salary, setSalary] = useState("");
   const [skillsRequired, setSkillsRequired] = useState("");
   const [status, setStatus] = useState("");
+  const [image, setImage] = useState(null);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
-    if (!isVisible) findOffer(offerId); // Fetch the offer when making the form visible
+    if (!isVisible) findOffer(offerId); 
   };
 
   useEffect(() => {
@@ -42,31 +46,36 @@ export default function EditOffer({ offerId }) {
     formData.append("salary", salary);
     formData.append("skillsRequired", skillsRequired);
     formData.append("status", status);
-    formData.append("postImage", e.target["offer-image"].files[0]);
+    formData.append("postImage", image);
 
-    updateOffer(formData);
+
+    updateOffer(offerId, formData);
   };
 
+
+
+
   return (
-    <>
-      <div>
+  
+     <>
+           
         <button
           onClick={toggleVisibility}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           edit
         </button>
-
-        {isVisible && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-8 shadow-lg rounded-lg border border-gray-200 w-full h-full md:w-1/4 md:h-auto">
-              <button
-                onClick={toggleVisibility}
-                className="absolute top-0 right-0 mt-4 mr-4 text-red-500 text-4xl hover:text-red-700"
-              >
-                &times;
-              </button>
-              <form
+     {isVisible && (
+       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+         <div className="fixed inset-0 bg-black opacity-50" onClick={toggleVisibility}></div>
+         <div className="relative bg-white p-8 border border-gray-200 shadow-lg rounded-lg max-w-full md:max-w-2xl mx-auto my-auto z-10 overflow-auto">
+           <button
+             onClick={toggleVisibility}
+             className="absolute top-0 right-0 mt-4 mr-4 text-red-500 text-4xl hover:text-red-700"
+           >
+             &times;
+           </button>
+          <form
                 onSubmit={handleSave}
                 className="w-full h-full mt-10 md:h-auto"
               >
@@ -76,7 +85,7 @@ export default function EditOffer({ offerId }) {
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Offer title"
                   required
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
                 />
                 <input
                   type="text"
@@ -84,20 +93,20 @@ export default function EditOffer({ offerId }) {
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Description"
                   required
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 />
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="Location"
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 />
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                   required
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 >
                   <option value="">Select Type</option>
                   <option value="offer">Offer</option>
@@ -109,27 +118,27 @@ export default function EditOffer({ offerId }) {
                   onChange={(e) => setCategory(e.target.value)}
                   placeholder="Category"
                   required
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 />
                 <input
                   type="number"
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
                   placeholder="Salary"
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 />
                 <input
                   type="text"
                   value={skillsRequired}
                   onChange={(e) => setSkillsRequired(e.target.value)}
                   placeholder="Skills Required (comma-separated)"
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 />
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
                   required
-                  className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                  className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                 >
                   <option value="">Select Status</option>
                   <option value="open">Open</option>
@@ -137,11 +146,15 @@ export default function EditOffer({ offerId }) {
                 </select>
                 <input
                   type="file"
-                  name="offer-image"
+
+                  name="postImage"
+
+                  onChange={(e) => setImage(e.target.files[0])}
                   className="w-full p-2 mb-4 border-2 border-green-500 rounded file:border-none file:bg-green-200 file:text-green-700"
                 />
                 <button
                   type="submit"
+                  onClick={()=>{handleSave}}
                   className="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded transition-colors duration-200"
                 >
                   save
@@ -154,10 +167,9 @@ export default function EditOffer({ offerId }) {
                   cancel
                 </button>
               </form>
-            </div>
-          </div>
-        )}
-      </div>
-    </>
+         </div>
+       </div>
+     )}
+   </>
   );
 }

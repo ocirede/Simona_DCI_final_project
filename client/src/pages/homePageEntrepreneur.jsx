@@ -7,11 +7,11 @@ export default function HomePageEntrepreneur() {
   return (
   <>
     <div className="max-w-full mx-auto p-1 flex flex-col md:max-w-full bg-transparent">
-      <div className="w-full p-3 flex flex-col gap-5 bg-white pb-10 md:flex-row md:justify-between">
+      <div className="w-full p-3 flex flex-col gap-5 pb-10 md:flex-row md:justify-between">
         <CategoriesSearch/>
         <RecommendedArtists />
       </div>
-      <div className="w-full p-3 flex flex-col gap-5 bg-white pb-10 md:flex-row md:justify-between">
+      <div className="w-full p-3 flex flex-col gap-5 pb-10 md:flex-row md:justify-between">
         <ConnectNetwork />
       </div>
     </div>

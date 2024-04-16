@@ -3,11 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "../config/axios.js";
 
-
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-
   const [userRole, setUserRole] = useState();
   const [validationErrors, setValidationErrors] = useState(null);
   const [response, setResponse] = useState(true);
@@ -21,7 +19,7 @@ const UserProvider = ({ children }) => {
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
 
-  const [aboutText, setAboutText] = useState('');
+  const [aboutText, setAboutText] = useState("");
 
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
@@ -55,16 +53,18 @@ const UserProvider = ({ children }) => {
       if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
+
            window.location.replace("/homeArtist");
+
         } else {
             window.location.replace("/E");
+
         }
         e.target.reset();
         setEmail("");
         setPassword("");
         setUser(response.data.user);
         setValidationErrors(null);
-
       }
     } catch (error) {
       setResponse(true);
@@ -105,7 +105,6 @@ const UserProvider = ({ children }) => {
       console.log(error);
     }
   };
-
 
   //Register backround handling
   const userRoleChoice = (role) => {
@@ -364,30 +363,104 @@ const UserProvider = ({ children }) => {
     }
   };
 
-
-  const  addFavOffer = async (offerId,userId) => {
+  const addFavOffer = async (offerId, userId) => {
     try {
-     const response =  await axios.post(baseURL + `/users/add-fav-offer/${offerId}`, { userId });
-      if(response.data.success){
-        setUser(response.data.user)
+      const response = await axios.post(
+        baseURL + `/users/add-fav-offer/${offerId}`,
+        { userId }
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
       }
-  } catch (error) {
-      console.error('Error adding to fav offers', error);
-  }
-  }
+    } catch (error) {
+      console.error("Error adding to fav offers", error);
+    }
+  };
 
   // Find user by ID
   const getUserById = async (userId) => {
     try {
-      const response = await axios.get(baseURL + `/users/single-user/${userId}`);
+      const response = await axios.get(
+        baseURL + `/users/single-user/${userId}`
+      );
       const userFound = response.data.user;
       return userFound;
     } catch (error) {
-      console.error('Error fetching user by ID:', error);
+      console.error("Error fetching user by ID:", error);
       return null;
     }
   };
-  
+
+  //upload Portfolio Image
+  const uploadPortfolioImage = async (userId, fileData) => {
+    try {
+      const response = await axios.post(
+        baseURL + `/users/upload-port-img/${userId}`,
+        fileData
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        // console.log("Upload image user", response.data.user);
+      }
+    } catch (error) {
+      console.error("Error upploading the image", error);
+    }
+  };
+
+  //delete Portfolio Image
+  const deletePortfolioImage = async (userId, imageId) => {
+    try {
+      const response = await axios.delete(
+        baseURL + `/users/delete-port-img/${userId}`,
+        { data: { imageId } }
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        //console.log("delete image user", response.data.user);
+      }
+    } catch (error) {
+      console.error("Error deleting the image", error);
+    }
+  };
+
+  //Add new language
+  //Language levels should be stricted to:
+  //Beginner
+  //Elementary
+  //Intermediate
+  //Advanced
+  //Fluent
+  const addNewLanguage = async (userId, language, level) => {
+    const body = { language, level };
+    try {
+      const response = await axios.post(
+        baseURL + `/users/add-language/${userId}`,
+        body
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        // console.log("Upload image user", response.data.user);
+      }
+    } catch (error) {
+      console.error("Error adding the new language", error);
+    }
+  };
+
+  //delete language
+  const deleteLanguage = async (userId, languageId) => {
+    try {
+      const response = await axios.delete(
+        baseURL + `/users/delete-language/${userId}`,
+        { data: { languageId } }
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+        //console.log("delete image user", response.data.user);
+      }
+    } catch (error) {
+      console.error("Error deleting the language", error);
+    }
+  };
 
   /**
    * For the brave souls who get this far: You are the chosen ones,
@@ -436,7 +509,12 @@ const UserProvider = ({ children }) => {
         saveAboutText,
         addFavOffer,
         getUserById,
-        loggedUser
+        loggedUser,
+        uploadPortfolioImage,
+        deletePortfolioImage,
+        addNewLanguage,
+        deleteLanguage,
+
       }}
     >
       {children}

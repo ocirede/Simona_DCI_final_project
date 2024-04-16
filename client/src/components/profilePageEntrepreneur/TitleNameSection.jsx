@@ -32,14 +32,14 @@ export default function TitleNameSection({user}) {
   };
 
   return (
-    <div className="text-center mb-4 mt-4 lg:text-left lg:mt-10 mt-10">
+    <div className="text-center mb-4 lg:text-left lg:mt-10 mt-10 ">
       {formVisibility.name ? (
         <div className="flex">
-          <div className="h-[90px] bg-transparent w-1/2"></div>
-          <form className="h-[90px] bg-white rounded-[15px] w-1/2 text-[12px] pt-2 pr-4 pl-4 shadow-lg">
+          <div className="h-[90px] bg-transparent w-1/2 "></div>
+          <form className="h-[90px] bg-white rounded-[15px] w-1/2 text-[12px] pt-2 pr-4 pl-4 shadow-lg border-b-8 border border-black  ">
             <input
               type="text"
-              className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-full"
+              className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-full "
               placeholder="User's Name or Title"
               value={firstName + " " + lastName}
               onChange={(e) => {
@@ -57,7 +57,7 @@ export default function TitleNameSection({user}) {
       ) : (
         <div className="flex">
           <div className="h-[50px] bg-transparent w-1/2"></div>
-          <div className="h-[50px] bg-white shadow-lg rounded-[15px] w-1/2 text-[12px] pt-2">
+          <div className="h-[50px] bg-white shadow-lg rounded-[15px] w-1/2 text-[12px] pt-2 border-b-8 border border-black">
             <h1
               className="text-[20px] font-bold cursor-pointer text-center"
               onClick={() => toggleFormVisibility('name')}

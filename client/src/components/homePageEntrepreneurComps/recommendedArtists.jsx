@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { UserContext } from "../../context/userContext.jsx";
 import CardElement from "../cards/CardElement.jsx";
 import styled from "styled-components";
-import MotionSlider from "../../components/motionSlider"
+import MotionSlider from "../../components/motionSlider";
+import { motion } from "framer-motion"; 
 
 export default function RecommendedArtists() {
   const { users } = useContext(UserContext)
@@ -22,11 +23,13 @@ export default function RecommendedArtists() {
           Top five artists
         </h2>
       </div>
-      <div className="flex-1 overflow-auto pt-8 bg-white">
+      <div className="flex-1 overflow-auto pt-4 bg-white">
         <Container>
           <MotionSlider>
             {sortedArtistsUsers.map((user, i) => (
-              <CardElement key={i} {...user} />
+              <motion.div key={i} whileHover={{ scale: 1.1 }}>
+                <CardElement key={i} {...user} />
+              </motion.div>
             ))}
           </MotionSlider>
         </Container>

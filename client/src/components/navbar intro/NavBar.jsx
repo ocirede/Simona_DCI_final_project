@@ -44,7 +44,7 @@ function NavBar() {
           </NavLink>
           <LanguageChoice />
         </div>
-        <div className="flex  gap-6 items-center md:hidden">
+        <div className="flex  justify-end gap-6 items-center md:hidden">
           <LanguageChoice />
           {display ? (
             <X
