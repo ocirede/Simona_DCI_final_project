@@ -11,6 +11,7 @@ import Sidebar from "../components/chatBox/SideBar";
 import PortfolioSection from "../components/profile artist/PortfolioSection";
 import LanguageSection from "../components/language-section/LanguageSection";
 import NavBarHomepage from "../components/navBarHomepage";
+import CreateOffer from "../components/profile artist/CreateOfferButton";
 
 
 function ProfileArtist() {
@@ -35,8 +36,8 @@ function ProfileArtist() {
     return (
       <>
 
-      <NavBarHomepage/>
-
+      {/* <NavBarHomepage/> */}
+    
         <ProfileImgBgSection user={profileUser} />
         <main className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
           <div>
