@@ -27,7 +27,9 @@ export default function CommentSection({ user }) {
   return (
     <div className="mb-4">
 
+
       <div className=" bg-white rounded-[20px] pr-4 pl-4 pt-4 border border-black text-black">
+
 
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between align-middle mr-20">
           <div>

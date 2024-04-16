@@ -45,15 +45,15 @@ export default function NavBarHomepage() {
           <a className="mt-4 md:mt-0 md:ml-4 md: blockhidden cursor-pointer">
             EN-DE
           </a>
-          <NavLink to="/offers" className="mt-4 md:mt-0 md:ml-4">
+          {/* <NavLink to="/offers" className="mt-4 md:mt-0 md:ml-4">
             Offers
-          </NavLink>
-          <NavLink to="/artists" className="mt-4 md:mt-0 md:ml-4">
+          </NavLink> */}
+          {/* <NavLink to="/artists" className="mt-4 md:mt-0 md:ml-4">
             Artists/Entrepreneur
-          </NavLink>
-          <NavLink to="/Network" className="mt-4 md:mt-0 md:ml-4  ">
+          </NavLink> */}
+          {/* <NavLink to="/Network" className="mt-4 md:mt-0 md:ml-4  ">
             Network
-          </NavLink>
+          </NavLink> */}
           <div className=" flex gap-2">
             <NavLink to="/chatbox" className="mt-4 md:mt-0 md:ml-4">
               Chatbox

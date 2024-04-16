@@ -34,7 +34,7 @@ export default function TagsSection() {
     return (
         <div className="mb-4">
             {formVisibility.tags ? (
-                <form className="h-[150px] bg-white border border-black shadow-md rounded-[20px] pr-4 pl-4 pt-4">
+                <form className="h-[150px] bg-white shadow-md rounded-[20px] pr-4 pl-4 pt-4 border-b-8 border border-black">
                     <div className="mt-2 flex flex-wrap gap-2">
                         <p>Introverted</p>
                         {[...Array(6)].map((_, index) => (
@@ -77,7 +77,7 @@ export default function TagsSection() {
                     </div>
                 </form>
             ) : (
-                <div className="h-[150px] bg-white border border-black shadow-md rounded-[20px] flex justify-between">
+                <div className="h-[150px] bg-white border border-black shadow-md rounded-[20px] flex justify-between border-b-8 border border-black">
                     <h2
                         className="text-[28px] uppercase font-semibold cursor-pointer pl-4 pt-2"
                         onClick={() => toggleFormVisibility('tags')}
