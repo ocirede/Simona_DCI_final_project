@@ -42,7 +42,7 @@ function ProfileImgBgSection({ user }) {
 
     return (
         <div className="relative">
-            <div className={`bg-${user.profileBackground ? 'cover' : 'white'} lg:mr-[10px] lg:ml-[10px] h-[200px] rounded-bl-[30px] rounded-br-[30px] relative border border-2 border-b-black border-l-black border-r-black`} style={user.profileBackground ? { backgroundImage: `url(${user.profileBackground})` } : null}>
+            <div className={`bg-${user.profileBackground ? 'cover' : 'white'} lg:mr-[10px] lg:ml-[10px] h-[200px] rounded-bl-[30px] rounded-br-[30px] relative  border-b-black border-l-black border-r-black`} style={user.profileBackground ? { backgroundImage: `url(${user.profileBackground})` } : null}>
                 <input
                     ref={inputFileRef}
                     type="file"
@@ -58,7 +58,7 @@ function ProfileImgBgSection({ user }) {
                 )}
             </div>
             <div className="flex items-center absolute top-[65%] left-[4%] lg:left-60 lg:ml-10">
-                <div className="bg-white w-[180px] h-[125px] rounded-full mx-auto mb-4 relative overflow-hidden border border-2 border-black">
+                <div className="bg-white w-[180px] h-[125px] rounded-full mx-auto mb-4 relative overflow-hidden  border-2 border-black">
                     <input
                         ref={inputFileRef}
                         type="file"

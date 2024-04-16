@@ -1,11 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { UserContext } from "../context/userContext.jsx";
 import WelcomeUser from "./welcomeUser.jsx";
+import LanguageChoice from "./navbar intro/LanguageChoice.jsx";
 
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
   const handleLogoClick = () => {
@@ -23,28 +26,48 @@ export default function NavBarHomepage() {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowMenu(true);
+      } else {
+        setShowMenu(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-white m-3 z-50 pt-6 pl-6 pr-6 bg-white-400 relative rounded-[30px] shadow-lg border border-black border-b-[20px] h-[200px] md:h-[300px]">
-      <div className="flex flex-wrap items-center justify-between md:flex-row">
-        <div className="cursor-pointer" onClick={()=>handleUserClick(user._id)}>
+    <nav className="bg-white mt-3 mr-3 ml-3 z-50 pt-6 pl-6 pr-6 bg-white-400 relative rounded-[30px] shadow-lg border border-black border-b-[20px] h-[200px] md:h-[300px]">
+      <div className="flex  items-center justify-between md:flex-row">
+        <div
+          className="cursor-pointer"
+          onClick={() => handleUserClick(user._id)}
+        >
           <WelcomeUser />
         </div>
-        <div className="flex items-center gap-2">
-          <a className="mt-0 md:mt-0 md:ml-4 md:hidden cursor-pointer">EN-DE</a>
-          <div className="md:hidden">
+        <div className="flex  items-center gap-2">
+          <a className="mt-0 md:mt-0 md:ml-4 md:hidden cursor-pointer">
+            {" "}
+            <LanguageChoice />
+          </a>
+          <div className="md:hidden flex items-center">
             <button onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
         </div>
         <div
           className={`${
             isOpen ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-full md:top-0 left-0 bg-gray-100 md:bg-transparent  z-40 p-4 md:p-0 rounded-lg md:rounded-none shadow-lg md:shadow-none border border-gray md:border-none`}
+          } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-[36%] md:top-0 left-0 bg-white md:bg-transparent  z-40 p-4 md:p-0 rounded-lg md:rounded-none shadow-lg md:shadow-none border border-black md:border-none`}
+          onClick={() => setIsOpen(!isOpen)}
         >
-          <a className="mt-4 md:mt-0 md:ml-4 md: blockhidden cursor-pointer">
-            EN-DE
-          </a>
           <NavLink to="/offers" className="mt-4 md:mt-0 md:ml-4">
             Offers
           </NavLink>

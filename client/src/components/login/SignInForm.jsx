@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import LoadingButton from "./LoadingButton";
 import { UserContext } from "../../context/userContext";
 import AlertArrayOfErrors from "../alerts/AlertArrayOfErrors";
 import { X } from "lucide-react";
 import AlertMessageSuccess from "../alerts/AlertMessageSuccess";
+import starFourSvg from "../../assets/y2k_icons/star_four.svg";
+import starTwoSvg from "../../assets/y2k_icons/star_two.svg";
+
 function SignInForm() {
   const {
     showPassword,
@@ -22,16 +24,16 @@ function SignInForm() {
     setForgotPasswsord,
     requestForgotPasswordEmail,
     response,
-    success
+    success,
   } = useContext(UserContext);
-  
+
   {
     /* form container */
   }
   return (
-    <div className="flex flex-col items-center justify-center w-[570px]">
+    <div className=" relative flex flex-col items-center justify-center w-[570px]">
       <br />
-      <div className="lg:w-2/3 h-[420px] bg-white p-3 rounded-[15px] shadow-lg border border-gray border border-black">
+      <div className="lg:w-2/3 h-[420px] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
         <form
           onSubmit={authenticationHandler}
           className="flex flex-col w-[350px] p-3 justify-center gap-2 mt-4"
@@ -94,13 +96,13 @@ function SignInForm() {
             {response ? (
               <button
                 type="submit"
-                className="mt-2 x text-white border bg-retroRed py-1 px-4 rounded-full w-full transition-transform duration-100  transform-gpu active:scale-95 text-white pt-1 pb-1 text-xl glow-border"
+                className="mt-2 x border bg-retroRed py-1 px-4 rounded-full w-full transition-transform duration-100  transform-gpu active:scale-95 text-white pt-1 pb-1 text-xl glow-border"
                 disabled={false}
               >
                 Log In
               </button>
             ) : (
-              <LoadingButton name="Signing in..." />
+              <RegisterFormButtonLoading name="Signing in..." />
             )}
           </div>
 
@@ -116,7 +118,7 @@ function SignInForm() {
             </label>
             <span className="text-gray-500">
               Not a member?&nbsp;
-              <Link to="/register-questions" >
+              <Link to="/register-questions">
                 <span className="font-medium hover:underline">Register</span>
               </Link>
             </span>
@@ -138,15 +140,14 @@ function SignInForm() {
       {forgotPassword ? (
         <div>
           <div className="fixed inset-0 bg-black opacity-50 z-40">
-          {success && <AlertMessageSuccess text="Email sent successfully" />}
-
+            {success && <AlertMessageSuccess text="Email sent successfully" />}
           </div>
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
             <X
               onClick={() => setForgotPasswsord(!forgotPassword)}
               className="absolute top-2 right-2 cursor-pointer"
             />
-            <div className="flex flex-col items-center justify-center w-[430px] h-[430px] rounded-xl p-6 bg-slate-100 border-black transition-transform duration-800 border border-black border-1">
+            <div className="flex flex-col items-center justify-center w-[430px] h-[430px] rounded-xl p-6 bg-slate-100 border-black transition-transform duration-800 border  border-1">
               <h2 className="text-2xl font-bold mb-4 text-center">
                 Forgot Your Password?
               </h2>
@@ -184,6 +185,18 @@ function SignInForm() {
           </div>
         </div>
       ) : null}
+      {/* Absolute positioned elements */}
+      <div className="absolute top-[197px]  right-[8px] bottom-auto  w-[180px] left-auto z-[-1] h-[180px] transform rotate-[35deg]">
+        <img src={starFourSvg} alt="Star Four" />
+      </div>
+      {/* Star with opposite position on small screens */}
+      <div className="absolute bottom-[155px] left-[5px] top-auto w-[200px] right-auto  h-[220px]">
+        <img
+          src={starTwoSvg}
+          style={{ position: "relative", zIndex: "-100" }}
+          alt="Star Two"
+        />
+      </div>
     </div>
   );
 }

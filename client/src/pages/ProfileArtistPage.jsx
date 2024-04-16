@@ -9,6 +9,7 @@ import AboutSection from "../components/profilePageEntrepreneur/AboutSection";
 import { useParams } from "react-router-dom";
 import TitleNameSection from "../components/profilePageEntrepreneur/TitleNameSection";
 import Sidebar from "../components/chatBox/SideBar";
+import NavBarHomepage from "../components/navBarHomepage";
 
 function ProfileArtist() {
   const { getUserById } = useContext(UserContext);
@@ -31,7 +32,7 @@ function ProfileArtist() {
   if (profileUser) {
     return (
       <>
-        <CreateOffer />
+      <NavBarHomepage/>
         <ProfileImgBgSection user={profileUser} />
         <main className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
           <div>
@@ -44,6 +45,7 @@ function ProfileArtist() {
             </div>
             <CommentSection user={profileUser} />
           </div>
+          <CreateOffer />
 
           <Sidebar />
         </main>
