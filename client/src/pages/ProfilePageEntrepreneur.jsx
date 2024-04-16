@@ -8,10 +8,12 @@ import CommentSection from "../components/reviews/CommentSection";
 import ProfileImgBgSection from "../components/profilePageEntrepreneur/ProfileImgBgSection";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/chatBox/SideBar";
+import LanguageSection from "../components/language-section/LanguageSection";
+
 import NavBarHomepage from "../components/navBarHomepage";
 
 const ProfilePageEntrepreneur = () => {
-  const { getUserById } = useContext(UserContext);
+  const { getUserById, user } = useContext(UserContext);
   const { userId } = useParams();
   const [profileUser, setProfileUser] = useState(null);
   useEffect(() => {
@@ -42,9 +44,10 @@ const ProfilePageEntrepreneur = () => {
                 <OffersSection user={profileUser} />
                 <TagsSection user={profileUser} />
               </div>
-              <div></div>
             </div>
-            <CommentSection user={profileUser} />
+            {/* Language Section */}
+            <LanguageSection user={profileUser} loggeduser={user} />
+            <CommentSection user={profileUser} loggeduser={user} />
           </div>
         </section>
         <Sidebar />

@@ -1,3 +1,4 @@
+
 import { useContext, useEffect, useRef } from 'react';
 import { UserContext } from '../../context/userContext';
 import PersonalInfo from '../profile artist/PersonalInfo';
@@ -16,31 +17,37 @@ function ProfileImgBgSection({ user }) {
         const file = e.target.files[0];
         if (!file) return;
 
-        const formData = new FormData();
-        formData.append("profileImage", file);
 
-        try {
-            await updateProfileImage(user._id, formData);
-            console.log("Profile image updated!");
-        } catch (error) {
-            console.error("Error updating the profile pic", error);
-        }
-    };
+    const formData = new FormData();
+    formData.append("profileImage", file);
 
-    const handleBackgroundImageUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    try {
+      await updateProfileImage(user._id, formData);
+      console.log("Profile image updated!");
+    } catch (error) {
+      console.error("Error updating the profile pic", error);
+    }
+  };
 
-        const formData = new FormData();
-        formData.append("profileBackground", file);
+  const handleBackgroundImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-        try {
-            await updateProfileBackground(user._id, formData);
-            console.log("Profile background updated!");
-        } catch (error) {
-            console.error("Error updating the profile background", error);
-        }
-    };
+    const formData = new FormData();
+    formData.append("profileBackground", file);
+
+    try {
+      await updateProfileBackground(user._id, formData);
+      console.log("Profile background updated!");
+    } catch (error) {
+      console.error("Error updating the profile background", error);
+    }
+  };
+
+  const handleClick = () => {
+    inputFileRef.current.click();
+  };
+
 
     return (
         <div className="relative">
@@ -85,13 +92,10 @@ function ProfileImgBgSection({ user }) {
                 </div>
             </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default ProfileImgBgSection;
-
-
-
-
-
 
