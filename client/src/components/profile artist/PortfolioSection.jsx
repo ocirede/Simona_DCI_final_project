@@ -77,7 +77,7 @@ export default function PortfolioSection({ user, loggeduser }) {
                 src={image.path}
                 alt={`Portfolio Image ${image._id}`}
                 onClick={() => handleImageClick(image)}
-                className="w-48 h-48 object-cover rounded-lg border border-gray-300 cursor-pointer"
+                className="w-[300px] h-[250px] object-cover rounded-lg border border-gray-300 cursor-pointer"
               />
               {/* Delete button */}
               {isEditing && (
@@ -92,7 +92,7 @@ export default function PortfolioSection({ user, loggeduser }) {
           ))}
           {/* Input for uploading images */}
           {isEditing && (
-            <div className="relative w-48 h-48 border border-gray-300 rounded-lg overflow-hidden">
+            <div className="relative w-[300px] h-[250px] border border-gray-300 rounded-lg overflow-hidden">
               {/* Plus icon */}
               <label
                 htmlFor="fileInput"
