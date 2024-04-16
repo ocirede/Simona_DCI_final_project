@@ -9,12 +9,15 @@ export default function ConnectNetwork() {
 
 
 
+
+
       // const allUsers = [...userData, ...entrepreneursData]
       // const [friendsList, setFriendsList] = useState([])
 
       return (
         <>
           <div className="rounded-2xl  shadow-lg border border-b-8 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto bg-white">
+
             <div className="w-full flex sticky top-0 z-50">
               <h2  className="w-1/2 rounded-tl-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">Connections</h2>
               <h2 className="w-1/2 rounded-tr-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">Pending Requests</h2>
@@ -24,7 +27,7 @@ export default function ConnectNetwork() {
                 {user?.connections?.map(friend => (
                   <div key={friend._id} className="flex gap-2 items-center">
                     <img src={friend.profileImage} className="w-5 h-5 rounded-full bg-green-400 object-cover" />
-                    <div className="text-center text-xs ">{friend.address?.firstname} {friend.address?.lastname}</div>
+                    <div className="text-center text-l ">{friend.address?.firstname} {friend.address?.lastname}</div>
                     <DeleteConnection connectionId={friend._id}/>
                   </div>
                 ))}
@@ -48,5 +51,4 @@ export default function ConnectNetwork() {
           </div>
         </>
       );
-
-}
+    }

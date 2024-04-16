@@ -30,11 +30,10 @@ export default function AboutSection({user}) {
 
   return (
     <div className="mb-4 lg:w-1/2 order-1">
-      <div className="pb-10 bg-white border-black border shadow-md rounded-[20px] flex justify-between">
+      <div className="pb-10 bg-white border-black  border-b-8 border  shadow-md rounded-[20px] flex justify-between">
         <div>
           <h2
             className="text-[28px] uppercase font-semibold cursor-pointer pl-4 pt-2"
-            onClick={openEditorModal}
           >
             About
           </h2>

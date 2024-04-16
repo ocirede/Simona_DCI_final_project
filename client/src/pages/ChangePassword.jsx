@@ -98,7 +98,7 @@ function ChangePassword() {
             </div>
             <button
               type="submit"
-              className="w-full bg-retroRed text-white font-custom font-semibold py-2 rounded-md transition duration-300 hover:bg-blue-600"
+              className="w-full bg-retroRed text-white font-custom font-semibold py-2 rounded-full transition duration-300 glow-border"
             >
               Update Password
             </button>

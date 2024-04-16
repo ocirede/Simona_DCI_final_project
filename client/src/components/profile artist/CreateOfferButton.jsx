@@ -8,11 +8,8 @@ export default function CreateOffer() {
 
     return (
         <>
-      
-
-
         <div>
-            <button onClick={toggleVisibility} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={toggleVisibility} className="bg-retroBlue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-[30px]">
                 Create Offer
             </button>
 
@@ -28,25 +25,25 @@ export default function CreateOffer() {
                             name="title"
                             placeholder="Offer title"
                             required
-                            className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                            className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                         />
                         <input
                             type="text"
                             name="description"
                             placeholder="Description"
                             required
-                            className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                            className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                         />
                         <input
                             type="text"
                             name="location"
                             placeholder="Location"
-                            className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                            className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                         />
                         <select
                         name="type"
                         required
-                        className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                        className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                     >
                         <option value="">Select Type</option>
                         <option value="offer">Offer</option>
@@ -57,24 +54,24 @@ export default function CreateOffer() {
                             name="category"
                             placeholder="Category"
                             required
-                            className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                            className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                         />
                         <input
                             type="number"
                             name="salary"
                             placeholder="Salary"
-                            className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                            className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                         />
                          <input
                         type="text"
                         name="skillsRequired"
                         placeholder="Skills Required (comma-separated)"
-                        className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                        className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                     />
                       <select
                         name="status"
                         required
-                        className="w-full p-2 mb-4 border-2 border-green-500 rounded"
+                        className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
                     >
                         <option value="">Select Status</option>
                         <option value="open">Open</option>
@@ -83,7 +80,7 @@ export default function CreateOffer() {
                         <input
                             type="file"
                             name="offer-image"
-                            className="w-full p-2 mb-4 border-2 border-green-500 rounded file:border-none file:bg-green-200 file:text-green-700"
+                            className="w-full p-2 mb-4 border-2  border-gray-500 rounded file:border-none file:bg-green-200 file:text-green-700"
                         />
                         <button  type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded transition-colors duration-200">Create Offer</button>
                     </form>

@@ -53,13 +53,12 @@ const UserProvider = ({ children }) => {
       if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
-          setTimeout(() => {
-            window.location.replace("/homeArtist");
-          }, 1000);
+
+           window.location.replace("/homeArtist");
+
         } else {
-          setTimeout(() => {
             window.location.replace("/E");
-          }, 1000);
+
         }
         e.target.reset();
         setEmail("");
@@ -515,6 +514,7 @@ const UserProvider = ({ children }) => {
         deletePortfolioImage,
         addNewLanguage,
         deleteLanguage,
+
       }}
     >
       {children}
