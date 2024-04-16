@@ -27,7 +27,7 @@ const SimonaIntroSection = () => {
         ) : (
           <Menu
             onClick={() => setDisplay(!display)}
-            className="w-8 h-8 md:hidden cursor-pointer"
+            className="w-10 h-10 md:hidden cursor-pointer"
           />
         )}
         {display && <DropMenuIntro />}
