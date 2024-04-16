@@ -86,12 +86,11 @@ export default function Chat() {
       >
         {showChatBox && selectedContact ? (
           <>
-           
-              <ChatBox
-                connection={selectedContact}
-                showChatBox={showChatBox}
-                setShowChatBox={setShowChatBox}
-              />
+            <ChatBox
+              connection={selectedContact}
+              showChatBox={showChatBox}
+              setShowChatBox={setShowChatBox}
+            />
           </>
         ) : (
           <div

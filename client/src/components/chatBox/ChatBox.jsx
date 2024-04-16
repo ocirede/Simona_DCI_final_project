@@ -217,7 +217,7 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
                         src={message.file}
                         alt="File"
                         style={{
-                          maxWidth: "100%", 
+                          maxWidth: "100%",
                           maxHeight: "200px",
                           objectFit: "cover",
                           borderRadius: "10px",
@@ -239,32 +239,35 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
                   <div ref={messagesEndRef}></div>
                 </div>
                 {openEditText[message._id] && (
-                  <form
-                    onSubmit={(e) => handleUpdateMessage(e, message._id)}
-                    className="absolute w-1/2  top-1/3 right-1/4 bg-white border border-black border-b-4 border-r-4 h-48 z-50"
-                  >
-                    <div className=" flex flex-col justify-between gap-28 ">
-                      <div className=" flex justify-between bg-borderBlue p-1">
-                        <p className=" text-white"> Edit message</p>
-                        <X
-                          className=" cursor-pointer"
-                          onClick={() => handleEditText(message._id)}
-                          color="white"
-                        />
+                  <div className="fixed inset-0 bg-black bg-opacity-35 z-50">
+                    <form
+                      onSubmit={(e) => handleUpdateMessage(e, message._id)}
+                      className="absolute top-1/2 right-1/4 bg-white border border-black border-b-4 border-r-4 h-48 w-[60%] md:w-[40%] md:right-1/3  lg:w-[30%]"
+                      style={{ backdropFilter: "blur(4px)" }}
+                    >
+                      <div className=" flex flex-col justify-between gap-28 ">
+                        <div className=" flex justify-between bg-borderBlue p-1">
+                          <p className=" text-white"> Edit message</p>
+                          <X
+                            className=" cursor-pointer"
+                            onClick={() => handleEditText(message._id)}
+                            color="white"
+                          />
+                        </div>
+                        <div className="p-1 flex  gap-1 ">
+                          <input
+                            type="text"
+                            name="updatedmessage"
+                            defaultValue={message.message}
+                            className=" p-1 w-full  border border-black text-black"
+                          />
+                          <button className=" bg-retroBlue p-1" type="submit">
+                            <Check color="white" />
+                          </button>
+                        </div>
                       </div>
-                      <div className="p-1 flex  gap-1 ">
-                        <input
-                          type="text"
-                          name="updatedmessage"
-                          defaultValue={message.message}
-                          className=" p-1 w-full  border border-black text-black"
-                        />
-                        <button className=" bg-retroBlue p-1" type="submit">
-                          <Check color="white" />
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 )}
               </div>
             );
@@ -276,7 +279,10 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
         </div>
       )}
       <footer className="flex items-center p-1 gap-3 justify-center mt-auto mb-4 h-[70px]">
-        <div className="flex items-center gap-3" style={{ width: "70%", flexShrink: 0 }}>
+        <div
+          className="flex items-center gap-3"
+          style={{ width: "70%", flexShrink: 0 }}
+        >
           <input
             type="text"
             name="message"
