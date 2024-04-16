@@ -147,7 +147,7 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full bg-white rounded-lg border border-b-4 border-l-4 border-black ">
+    <div className="flex flex-col h-[700px] w-full bg-white rounded-lg border border-b-4 border-l-4 border-black ">
       <nav className="w-full h-16 p-3 flex items-center z-50  font-bold shadow-xl">
         {showChatBox && (
           <ChevronLeft

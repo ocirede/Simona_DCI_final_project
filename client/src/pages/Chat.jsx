@@ -26,13 +26,13 @@ export default function Chat() {
   );
 
   return (
-    <div className="flex items-center h-screen ml-4 mr-4 mb-10 mt-10 relative z-10">
+    <div className="flex items-center  ml-4 mr-4 mb-10 mt-10 relative z-10">
       {/* Sidebar (Contacts) */}
       <div
-        className={`w-full h-screen mt-10 mr-3 lg:w-1/2 ml-3 lg:mr-0  lg:mt-4 rounded-lg bg-lightBlue overflow-y-auto z-50 border border-b-4 border-r-4 border-black ${
+        className={`w-full h-[700px] mt-10 mr-3 lg:w-1/2 ml-3 lg:mr-0  lg:mt-4 rounded-lg bg-lightBlue overflow-y-auto z-50 border border-b-4 border-r-4 border-black ${
           showChatBox ? "hidden lg:block" : ""
         }`}
-        style={{ maxWidth: "80vw", margin: "0 auto" }}
+        style={{ maxWidth: "85vw", margin: "0 auto" }}
       >
         <div className="shadow-xl flex text-4xl mt-4">
           <h2 className="font-bold text-left p-1">Chats</h2>
@@ -78,7 +78,7 @@ export default function Chat() {
 
       {/* Main Content (Chat Box) */}
       <div
-        className={`lg:flex h-screen items-center w-full ${
+        className={`lg:flex  items-center w-full ${
           showChatBox ? "" : "hidden lg:flex"
         } `}
         style={{ maxWidth: "80vw", margin: "0 auto" }}
@@ -94,7 +94,7 @@ export default function Chat() {
           </>
         ) : (
           <div
-            className={`lg:w-1/2 h-full lg:bg-retroBlue flex flex-col items-center justify-center flex-grow mr-3 rounded-lg border border-b-4 border-black border-l-4 ${
+            className={`lg:w-1/2 h-[700px] lg:bg-retroBlue flex flex-col items-center justify-center flex-grow mr-3 rounded-lg border border-b-4 border-black border-l-4 ${
               !showChatBox ? "" : "transform translate-x-0"
             }`}
           >
