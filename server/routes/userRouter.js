@@ -20,8 +20,6 @@ import {
   updateProfileImage,
   updateProfileBackground,
   addFavOffer,
-
-
   getUserById,
 
 } from "../controllers/userController.js";
@@ -44,8 +42,10 @@ userRoutes.get("/loggeduser", auth, loggedUser);
 
 userRoutes.get("/all-the-users", getAllUsers);
 userRoutes.get("/single-user/:userId", getUserById);
+
 userRoutes.put("/update-profile-pic/:userId",  profileImageUpload.single("profileImage"),
 updateProfileImage);
+
 
 
 userRoutes.put(

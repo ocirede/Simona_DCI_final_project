@@ -437,6 +437,7 @@ const UserProvider = ({ children }) => {
         addFavOffer,
         getUserById,
         loggedUser
+
       }}
     >
       {children}

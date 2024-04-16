@@ -46,6 +46,7 @@ export const updatePost = async (req, res) => {
         }
         req.body.postImage = req.file.filename;
       }
+      console.log(req.body)
       const updatedPost = await Post.findByIdAndUpdate(
         id,
         { $set: req.body },
@@ -57,7 +58,7 @@ export const updatePost = async (req, res) => {
         success: true,
         updatedPost,
       });
-      console.log("Product updated successfully:", updatedPost);
+       //console.log("Product updated successfully:", updatedPost);
     } catch (error) {
       console.error("Error updating the post", error);
       res.status(500).json({ success: false, error });

@@ -12,6 +12,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
+  padding: 20px;
 `;
 
 const StyledTrack = styled(motion.div)`

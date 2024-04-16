@@ -30,8 +30,8 @@ function NameTitle() {
   };
 
   return (
-    <section className="flex flex-col justify-center items-center relative">
-      <div className="absolute flex justify-center w-full h-[50px] rounded-xl">
+    <section className="flex flex-col justify-center items-center relative  ">
+      <div className="absolute flex justify-center w-full h-[50px] rounded-xl ">
         {editing ? ( 
           <>
             <input

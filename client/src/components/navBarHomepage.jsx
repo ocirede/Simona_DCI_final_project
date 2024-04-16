@@ -11,6 +11,8 @@ export default function NavBarHomepage() {
 
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
+  const [showMenu, setShowMenu] = useState(false);
+  
   const handleLogoClick = () => {
     if (user.role === "artist") {
       navigate("/homeArtist");
@@ -18,6 +20,7 @@ export default function NavBarHomepage() {
       navigate("/E");
     }
   };
+
   const handleUserClick = (userId) => {
     if (user.role === "artist") {
       navigate(`/profile-artist/${userId}`);
@@ -68,15 +71,19 @@ export default function NavBarHomepage() {
           } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-[36%] md:top-0 left-0 bg-white md:bg-transparent  z-40 p-4 md:p-0 rounded-lg md:rounded-none shadow-lg md:shadow-none border border-black md:border-none`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <NavLink to="/offers" className="mt-4 md:mt-0 md:ml-4">
+
+          <a className="mt-4 md:mt-0 md:ml-4 md: blockhidden cursor-pointer">
+            EN-DE
+          </a>
+          {/* <NavLink to="/offers" className="mt-4 md:mt-0 md:ml-4">
             Offers
-          </NavLink>
-          <NavLink to="/artists" className="mt-4 md:mt-0 md:ml-4">
+          </NavLink> */}
+          {/* <NavLink to="/artists" className="mt-4 md:mt-0 md:ml-4">
             Artists/Entrepreneur
-          </NavLink>
-          <NavLink to="/Network" className="mt-4 md:mt-0 md:ml-4  ">
+          </NavLink> */}
+          {/* <NavLink to="/Network" className="mt-4 md:mt-0 md:ml-4  ">
             Network
-          </NavLink>
+          </NavLink> */}
           <div className=" flex gap-2">
             <NavLink to="/chatbox" className="mt-4 md:mt-0 md:ml-4">
               Chatbox
