@@ -69,7 +69,7 @@ function ProfileImgBgSection({ user }) {
             </div>
 
             <div className="flex items-center absolute top-[65%] left-[4%] lg:left-60 lg:ml-10">
-                <div className="bg-white w-[180px] h-[125px] rounded-full mx-auto mb-4 relative overflow-hidden  border-2 border-black">
+                <div className="bg-white w-[180px] h-[125px] rounded-full mx-auto mb-4 relative overflow-hidden border-2 border-black">
                     <input
                         ref={inputFileRef}
                         type="file"
