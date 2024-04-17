@@ -186,11 +186,11 @@ function SignInForm() {
         </div>
       ) : null}
       {/* Absolute positioned elements */}
-      <div className="absolute top-[197px]  right-[8px] bottom-auto  w-[180px] left-auto z-[-1] h-[180px] transform rotate-[35deg]">
+      <div className="absolute top-[205px]  right-[25px] bottom-auto  w-[180px] left-auto z-[-1] h-[180px] ">
         <img src={starFourSvg} alt="Star Four" />
       </div>
       {/* Star with opposite position on small screens */}
-      <div className="absolute bottom-[155px] left-[5px] top-auto w-[200px] right-auto  h-[220px]">
+      <div className="absolute bottom-[195px] left-[5px] top-auto w-[200px] right-auto  h-[220px]">
         <img
           src={starTwoSvg}
           style={{ position: "relative", zIndex: "-100" }}

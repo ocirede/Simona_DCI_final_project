@@ -29,7 +29,7 @@ export default function Chat() {
     <div className="flex items-center  ml-4 mr-4 mb-10 mt-10 relative z-10">
       {/* Sidebar (Contacts) */}
       <div
-        className={`w-full h-[700px] mt-10 mr-3 lg:w-1/2 ml-3 lg:mr-0  lg:mt-4 rounded-lg bg-lightBlue overflow-y-auto z-50 border border-b-4 border-r-4 border-black ${
+        className={`w-full h-[700px] mt-10 mr-3 ml-3 lg:w-1/3  lg:mr-0  lg:mt-4 rounded-lg bg-lightBlue overflow-y-auto z-50 border border-b-8 border-r-8 border-black ${
           showChatBox ? "hidden lg:block" : ""
         }`}
         style={{ maxWidth: "85vw", margin: "0 auto" }}
@@ -38,7 +38,7 @@ export default function Chat() {
           <h2 className="font-bold text-left p-1">Chats</h2>
         </div>
 
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-start ml-20 mt-6">
           <input
             className="w-2/3 border border-black rounded-[10px] p-1 pl-2"
             type="text"
@@ -82,7 +82,6 @@ export default function Chat() {
           showChatBox ? "" : "hidden lg:flex"
         } `}
         style={{ maxWidth: "80vw", margin: "0 auto" }}
-
       >
         {showChatBox && selectedContact ? (
           <>
@@ -94,7 +93,7 @@ export default function Chat() {
           </>
         ) : (
           <div
-            className={`lg:w-1/2 h-[700px] lg:bg-retroBlue flex flex-col items-center justify-center flex-grow mr-3 rounded-lg border border-b-4 border-black border-l-4 ${
+            className={`lg:w-1/2 h-[700px] lg:bg-retroBlue flex flex-col items-center justify-center flex-grow mr-3 rounded-lg border border-b-8 border-black border-r-8 ${
               !showChatBox ? "" : "transform translate-x-0"
             }`}
           >

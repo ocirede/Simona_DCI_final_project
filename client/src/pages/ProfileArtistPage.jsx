@@ -10,7 +10,6 @@ import TitleNameSection from "../components/profilePageEntrepreneur/TitleNameSec
 import Sidebar from "../components/chatBox/SideBar";
 import PortfolioSection from "../components/profile artist/PortfolioSection";
 import LanguageSection from "../components/language-section/LanguageSection";
-import NavBarHomepage from "../components/navBarHomepage";
 import CreateOffer from "../components/profile artist/CreateOfferButton";
 
 
@@ -31,6 +30,7 @@ function ProfileArtist() {
 
     fetchUser();
   }, [getUserById, userId]);
+
 
   if (profileUser) {
     return (

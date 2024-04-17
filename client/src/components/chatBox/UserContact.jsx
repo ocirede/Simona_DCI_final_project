@@ -68,13 +68,13 @@ export default function UserContact({ connection, onClick }) {
 
   // grabbing the last message
   const lastMessage = messages[messages.length - 1]?.message;
-  // const cutLastMessage =
-  //   lastMessage?.length > 20
-  //     ? lastMessage?.substring(0, 15) + "..."
-  //     : lastMessage;
+  const cutLastMessage =
+    lastMessage?.length > 20
+      ? lastMessage?.substring(0, 15) + "..."
+      : lastMessage;
 
       return (
-        <div className="user-contact flex justify-center items-center gap-4  mt-7">
+        <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
           <div className={`avatar ${isOnline ? "online" : ""}`}>
             <div className="w-12 h-12 rounded-full">
               <img src={avatarImage} alt="User Avatar"/>
@@ -107,7 +107,7 @@ export default function UserContact({ connection, onClick }) {
       
               <div className="flex gap-1">
                 <p>last message:</p>
-                <p className="font-bold">{lastMessage}</p>
+                <p className="font-bold">{cutLastMessage}</p>
               </div>
             </div>
           </div>
