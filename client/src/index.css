@@ -1,15 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-body {
-  width: 100%;
-  min-height: 100vh;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Can be changed */
-  background-color: #525252; /* Can be deleted or changed */
+  color: black;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+html {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  background-image: url("/background_paper.jpg");
+}
+
+.chat-bubble {
+  position: relative;
+  padding: 5px 9px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* send messages chat*/
+
+.sent-message {
+  text-align: left;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.received-message {
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* send messages chat*/
+.sent-message .chat-bubble {
+  background-color: #224193;
+  color: #fff;
+  margin-left: auto;
+  max-width: 70%;
+}
+
+.received-message .chat-bubble {
+  background-color: #df3c5f;
+  color: #fff;
+  margin-right: auto;
+  max-width: 70%;
+}
+
+.message-timestamp {
+  margin-left: auto;
+}
+
+/*download image*/
+
+#download-link:hover::after {
+  content: "Download";
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #df3c5f;
+  color: white;
+  padding: 2px;
+  border-radius: 3px;
+}
+
+/* avatar online */
+
+.avatar {
+  position: relative;
+}
+
+/*notification sidebar*/
+
+.notification-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+
+/* Bouncing animation  notification */
+.animated-message {
+  animation: bounce 0.3s ease infinite alternate;
+}
+
+/* hide ChevronDown Icon */
+
+.hidden {
+  display: none;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+/* network animations*/
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInTop {
+  from {
+    transform: translateY(-100%); /* Start above the view */
+    opacity: 0; /* Start fully transparent */
+  }
+  to {
+    transform: translateY(0); /* End at the current position */
+    opacity: 1; /* Fully visible */
+  }
+}
+/*//////////////////////////////issa*/
+.slide-in-left {
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 1s ease-out forwards;
+}
+.slide-in-top {
+  animation: slideInTop 1s ease-out forwards;
+}
+.placeholder-xs::placeholder {
+  font-size: 0.75rem;
+}
+.vertical-text {
+  transform: rotate(-90deg);
+  transform-origin: center;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/* Glowing effect on hover */
+.glow-border {
+  transition: box-shadow 0.5s;
+}
+
+.glow-border:hover {
+  box-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #df3c5f, 0 0 10px #df3c5f,
+    0 0 20px #df3c5f;
+}
+
+.text-glow {
+  transition: text-shadow 0.5s;
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 5px rgba(223, 60, 95, 0.8), 0 0 10px rgba(223, 60, 95, 0.8),
+    0 0 15px rgba(223, 60, 95, 0.8);
+}
+
+/* Special font */
+.simona {
+  font-family: "Bungee", system-ui;
+}
+
+
