@@ -66,7 +66,6 @@ export default function OffersSection() {
           <EditOffer
             offerId={offerToEditId}
             setToggleEditForm={setToggleEditForm}
-            toggleEditForm={toggleEditForm}
           />
         )}
         <div className="w-full text-white flex bg-black rounded-tl-2xl rounded-tr-2xl sticky top-0 z-50 ">
