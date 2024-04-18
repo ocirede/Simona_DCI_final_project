@@ -6,7 +6,7 @@ import { UserContext } from "../context/userContext";
 import { motion } from "framer-motion"; 
 
 const Container = styled.div`
-  max-width: 700px; 
+  max-width: 900px; 
   margin: 0 auto; 
   @media (max-width: 640px) {
     max-width: 90%; 

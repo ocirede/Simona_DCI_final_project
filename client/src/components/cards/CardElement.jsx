@@ -37,7 +37,7 @@ export default function CardElement({ address, role, categories, profileImage,pr
         <p className="text-gray-700 text-base mb-2">{role}</p>
         <SendCancelRequest receiverId={_id} />
       </div>
-      <div className="pl-6 pr-6 pb-4 flex flex-wrap gap-2 justify-center text-center">
+      <div className="pl-5 pr-5 pb-4 flex flex-wrap gap-2 justify-center text-center">
         {categories.map((category, index) => (
          <PlayfulTag
          key={index}

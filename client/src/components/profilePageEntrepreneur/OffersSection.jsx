@@ -8,14 +8,7 @@ export default function OffersSection({user}) {
     const { user: loggedInUser } = useContext(UserContext);
     const { offers } = useOfferContext();
 
-    // Needs to be fixed
-    const createdBy = "65f89ca9283067909386bcf9";
-
-    const userOffers = offers?.filter(offer => {
-        console.log("Offer createdBy:", createdBy);
-        console.log("User ID vs. Offer createdBy:", user?._id === offer?.createdBy);
-        return createdBy === user?._id;
-    });
+    const userOffer = offers?.find(offer => offer?.createdBy._id === user._id);
 
     return (
         <div className="mb-4"> 
@@ -29,25 +22,23 @@ export default function OffersSection({user}) {
                 )}
             </div>
             <div className="overflow-auto max-h-[170px] pl-5 pt-2" > 
-                {userOffers.length > 0 ? (
-                    userOffers.map((offer) => (
-                        <div key={offer._id} className="offer-card mt-2">
-                            <h3 className="text-md font-semibold">{offer.title}</h3>
+            {userOffer ? (
+                        <div key={userOffer._id} className="offer-card mt-2">
+                            <h3 className="text-md font-semibold">{userOffer.title}</h3>
                             <p>
                                 Created by :{" "}
                                 <span className="font-bold">
-                                    {offer.createdBy?.address?.firstname}{" "}
-                                    {offer.createdBy?.address?.lastname}
+                                    {userOffer.createdBy?.address?.firstname}{" "}
+                                    {userOffer.createdBy?.address?.lastname}
                                 </span>
                             </p>
-                            <p>Location : {offer.location}</p>
-                            <p>{offer.description}</p>
-                            <EditOffer offerId={offer._id}/>
+                            <p>Location : {userOffer.location}</p>
+                            <p>{userOffer.description}</p>
+                            <EditOffer offerId={userOffer._id}/>
                         </div>
-                    ))
-                ) : (
-                    <p>No offers available</p>
-                )}
+                    ) : (
+                        <p>No offer available</p>
+            )}
             </div>
         </div>
     </div>
