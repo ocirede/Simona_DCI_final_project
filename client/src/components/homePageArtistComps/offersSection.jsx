@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { OfferContext, useOfferContext } from "../../context/OfferContext";
 import { UserContext } from "../../context/userContext";
 import EditOffer from "./editOfferButton";
-import EditForm from "./editForm";
 
 export default function OffersSection() {
   const [currentView, setCurrentView] = useState("AvailableOffers");
