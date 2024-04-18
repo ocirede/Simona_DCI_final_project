@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useOfferContext } from "../../context/OfferContext.jsx";
 import { UserContext } from "../../context/userContext.jsx";
 
-export default function EditOffer({ offerId, setToggleEditForm }) {
+export default function EditForm({ offerId }) {
   const { findOffer, foundOffer, updateOffer } = useOfferContext();
   const { user } = useContext(UserContext);
 
@@ -16,13 +16,7 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
   const [status, setStatus] = useState("");
   const [image, setImage] = useState(null);
 
-  const toggleVisibility = () => {
-    setToggleEditForm(false);
-  };
-
-  useEffect(() => {
-    findOffer(offerId);
-  }, [offerId]);
+  console.log(foundOffer);
 
   useEffect(() => {
     if (foundOffer) {
@@ -51,24 +45,13 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
     formData.append("postImage", image);
 
     updateOffer(offerId, formData);
-    setToggleEditForm(false);
   };
 
   return (
     <>
-      <div className="fixed inset-0 z-[51] flex items-center justify-center p-4">
-        <div
-          className="fixed inset-0 bg-black opacity-50"
-          onClick={toggleVisibility}
-        ></div>
-        <div className="relative bg-white p-8 border border-gray-200 shadow-lg rounded-lg max-w-full md:max-w-2xl mx-auto my-auto z-10 overflow-auto">
-          <button
-            onClick={toggleVisibility}
-            className="absolute top-0 right-0 mt-4 mr-4 text-red-500 text-4xl hover:text-red-700"
-          >
-            &times;
-          </button>
-          <form onSubmit={handleSave} className="w-full h-full mt-10 md:h-auto">
+      <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm z-50">
+        <div className="relative max-w-lg max-h-full overflow-hidden bg-white p-4 rounded-lg">
+          <form onSubmit={handleSave} className="w-[300px]">
             <input
               type="text"
               value={title}
@@ -83,20 +66,20 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             />
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             />
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             >
               <option value="">Select Type</option>
               <option value="offer">Offer</option>
@@ -108,27 +91,27 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
               onChange={(e) => setCategory(e.target.value)}
               placeholder="Category"
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             />
             <input
               type="number"
               value={salary}
               onChange={(e) => setSalary(e.target.value)}
               placeholder="Salary"
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             />
             <input
               type="text"
               value={skillsRequired}
               onChange={(e) => setSkillsRequired(e.target.value)}
               placeholder="Skills Required (comma-separated)"
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             />
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
             >
               <option value="">Select Status</option>
               <option value="open">Open</option>
@@ -151,7 +134,6 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
             </button>
             <button
               type="button"
-              onClick={toggleVisibility}
               className="w-full bg-red-500 hover:bg-red-700 text-white p-2 rounded transition-colors duration-200"
             >
               cancel

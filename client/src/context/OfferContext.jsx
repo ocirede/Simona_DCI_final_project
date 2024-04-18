@@ -7,11 +7,11 @@ export const OfferContext = createContext();
 export const useOfferContext = () => useContext(OfferContext);
 
 const OfferProvider = ({ children }) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [offers, setOffers] = useState([]);
   const [foundOffer, setFoundOffer] = useState();
-const [isEditVisible, setIsEditVisible] = useState(false);
-const [currentEditId, setCurrentEditId] = useState(null);
+  const [isEditVisible, setIsEditVisible] = useState(false);
+  const [currentEditId, setCurrentEditId] = useState(null);
 
   const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -89,7 +89,7 @@ const [currentEditId, setCurrentEditId] = useState(null);
           offer._id === offerId ? updatedOffer : offer
         );
         setOffers(updatedOffersArray);
-        console.log("updated offer",response.data.updatedPost);
+        console.log("updated offer", response.data.updatedPost);
       }
     } catch (error) {
       console.error("Failed to update offer:", error);
@@ -104,14 +104,23 @@ const [currentEditId, setCurrentEditId] = useState(null);
         applicantId,
       });
       if (response.data.success) {
-        setOffers((offers) => offers.filter((offer) => offer._id !== offerId));
+        const updatedOffers = offers.map((offer) => {
+          if (offer._id === offerId) {
+            return response.data.offer;
+          }
+          return offer;
+        });
 
-        console.log("Application successful", offers);
+        setOffers(updatedOffers);
+        setUser(response.data.applicant);
+
+        console.log("Application successful", updatedOffers);
       }
     } catch (error) {
       console.error("Error applying to offer", error);
     }
   };
+
   // finding offer
   const findOffer = async (offerId) => {
     try {
@@ -123,8 +132,6 @@ const [currentEditId, setCurrentEditId] = useState(null);
       console.error("Error fetching offer by ID:", error);
     }
   };
-
-  
 
   return (
     <OfferContext.Provider
