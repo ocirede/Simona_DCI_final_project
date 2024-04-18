@@ -27,13 +27,13 @@ function PersonalInfo({ userEmail }) {
       <div className="">
         <button
           onClick={handleContactMeClick}
-          className="bg-white  border-black border-2 rounded-full p-2"
+          className="bg-white  border-black border-2 rounded-full p-1 sm:p-2"
         >
           <span className="text-black uppercase">Contact me</span>
         </button>
       </div>
 
-      <div className="bg-white  border-black border-2  rounded-full p-2">
+      <div className="bg-white  border-black border-2  rounded-full p-1 sm:p-2">
         <button onClick={() => toggleFormVisibility("shareLink")} className="">
           <span className="text-black uppercase">Share Link</span>
         </button>

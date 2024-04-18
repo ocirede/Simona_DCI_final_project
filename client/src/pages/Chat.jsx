@@ -3,7 +3,6 @@ import UseGetConnections from "../hooks/useGetConnections.jsx";
 import UserContact from "../components/chatBox/UserContact.jsx";
 import ChatBox from "../components/chatBox/ChatBox.jsx";
 import { UserContext } from "../context/userContext.jsx";
-import { ChevronLeft } from "lucide-react";
 
 export default function Chat() {
   const { user } = useContext(UserContext);
@@ -14,6 +13,7 @@ export default function Chat() {
   const initialMessage = `Select a chat to start messaging!`;
   const [searchQuery, setSearchQuery] = useState("");
   const [showChatBox, setShowChatBox] = useState(false);
+
   const handleSelectedContact = (connection) => {
     setSelectedContact(connection);
     setShowChatBox(true);
@@ -24,6 +24,8 @@ export default function Chat() {
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
+
+
 
   return (
     <div className="flex items-center  ml-4 mr-4 mb-10 mt-10 relative z-10">
@@ -71,6 +73,7 @@ export default function Chat() {
               key={index}
               connection={connection}
               onClick={() => handleSelectedContact(connection)}
+
             />
           ))
         )}

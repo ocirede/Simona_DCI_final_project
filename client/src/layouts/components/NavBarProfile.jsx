@@ -40,7 +40,7 @@ function NavBarProfile() {
 
   return (
     <nav className={`h-20 flex bg-white items-center shadow-md mr-[10px] ml-[10px] border border-black mt-2 rounded-tr-[30px] rounded-tl-[30px] ${
-      showMenu ? "sticky top-0 transition-all duration-300 z-[100] rounded-tr-[0px] rounded-tl-[0px] w-full ml-auto mr-auto" : ""
+      showMenu ? "sticky top-0 transition-all duration-300 z-[100] rounded-tr-[0] rounded-tl-[0] w-full ml-auto mr-auto" : ""
     }`}>
       <ul className="p-3 w-full flex items-center justify-between">
         <div onClick={handleLogoClick} className="cursor-pointer">

@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  useFetchMessages,
-  useSendMessage,
-} from "../../hooks/useSendMessagesCreateNewChat";
+  useFetchMessages} from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
 import axios from "../../config/axios.js";
 import { UserContext } from "../../context/userContext.jsx";
@@ -10,7 +8,7 @@ import { UserContext } from "../../context/userContext.jsx";
 export default function UserContact({ connection, onClick }) {
   const { user } = useContext(UserContext);
   const [notificationCount, setNotificationCount] = useState(0);
-  const { messages, getMessages, notifications, setNotifications } =
+  const { messages, setMessages, getMessages, notifications, setNotifications } =
     useFetchMessages(connection);
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(connection._id);
@@ -18,7 +16,6 @@ export default function UserContact({ connection, onClick }) {
   const fullName = `${address.firstname} ${address.lastname}`;
   const baseURL = import.meta.env.VITE_BASE_URL;
   const [avatarImage, setAvatarImage] = useState(profileImage);
-
   // updating notification status
   const handleUpdateNotificationStatus = async (receiverId) => {
     try {
@@ -40,12 +37,13 @@ export default function UserContact({ connection, onClick }) {
     }
   };
 
+
   // fetching messages
   useEffect(() => {
     if (messages) {
       getMessages(connection._id);
     }
-  }, []);
+  }, [connection._id]);
 
   // counting notifications
 
@@ -66,7 +64,7 @@ export default function UserContact({ connection, onClick }) {
     }
   }, [notifications]);
 
-  // grabbing the last message
+  //grabbing the last message
   const lastMessage = messages[messages.length - 1]?.message;
   const cutLastMessage =
     lastMessage?.length > 20
@@ -77,7 +75,7 @@ export default function UserContact({ connection, onClick }) {
         <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
           <div className={`avatar ${isOnline ? "online" : ""}`}>
             <div className="w-12 h-12 rounded-full">
-              <img src={avatarImage} alt="User Avatar"/>
+              <img src={avatarImage || "../assets/avatar.svg"} alt="User Avatar"/>
             </div>
           </div>
           <div

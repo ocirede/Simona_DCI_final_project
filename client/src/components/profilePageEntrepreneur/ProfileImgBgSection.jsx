@@ -53,7 +53,7 @@ function ProfileImgBgSection({ user }) {
         <div className="relative">
 
             <div
-                className={`bg-${user.profileBackground ? 'cover' : 'white'} mr-[10px] ml-[10px] h-[200px] rounded-bl-[30px] rounded-br-[30px] relative border border-2 border-black`}
+                className={`bg-${user.profileBackground ? 'cover' : 'white'} mr-[10px] ml-[10px] h-[200px] rounded-bl-[30px] rounded-br-[30px] relative  border-2 border-black`}
                 style={user.profileBackground ? { backgroundImage: `url(${user.profileBackground})` } : null}
             >
                 {loggedInUser && loggedInUser._id === user._id && (
