@@ -6,9 +6,8 @@ export default defineConfig({
   resolve: {
     extensions: [".js", ".jsx", ".json"],
   },
-  build: {
-    rollupOptions: {
-      external: ["react-use-dimensions"],
-    },
+  css: {
+    // Exclude CSS files from being bundled
+    exclude: ["react-quill/dist/quill.snow.css"],
   },
 });
