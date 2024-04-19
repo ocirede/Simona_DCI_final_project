@@ -13,10 +13,11 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const baseURL = import.meta.env.VITE_BASE_URL;
   useEffect(() => {
     try {
       if (user) {
-        const socket = io("http://localhost:3002", {
+        const socket = io(baseURL, {
           query: {
             userId: user._id,
           },
@@ -34,7 +35,7 @@ const SocketProvider = ({ children }) => {
               sessionStorage.setItem(
                 "notifications",
                 JSON.stringify(updatedNotifications)
-              ); 
+              );
 
               return updatedNotifications;
             }
@@ -43,7 +44,6 @@ const SocketProvider = ({ children }) => {
         });
 
         socket.on("reconnectionFailed");
-
 
         return () => socket.close();
       } else {
@@ -57,11 +57,9 @@ const SocketProvider = ({ children }) => {
     }
   }, [user]);
 
-
-
   return (
     <SocketContext.Provider
-      value={{ socket, onlineUsers, notifications, setNotifications}}
+      value={{ socket, onlineUsers, notifications, setNotifications }}
     >
       {children}
     </SocketContext.Provider>
