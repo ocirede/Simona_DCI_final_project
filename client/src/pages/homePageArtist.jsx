@@ -5,7 +5,6 @@ import RecommendedEntrepreneurs from "../components/homePageArtistComps/recommen
 import Sidebar from "../components/chatBox/SideBar";
 
 export default function HomePageArtist() {
-
   return (
     <>
       <div className="max-w-full mx-auto p-1 flex flex-col md:max-w-full bg-transparent">
