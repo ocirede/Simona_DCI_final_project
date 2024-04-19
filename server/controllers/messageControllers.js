@@ -50,7 +50,7 @@ export const sendMessage = async (req, res) => {
     });
 
     io.to(receiverSocketId).emit("lastMessage", newMessage);
-
+    io.to(senderSocketId).emit("lastMessage", newMessage);
 
     // Emit message to sender
     io.to(senderSocketId).emit("newMessage", newMessage);
@@ -77,16 +77,13 @@ export const getMessages = async (req, res) => {
       return res.status(200).json([]);
     }
     const messages = conversation.messages;
-   
 
     res.status(200).json(messages);
-
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 };
-
 
 // update notifications
 
@@ -141,10 +138,8 @@ export const deleteMessage = async (req, res) => {
       { $pull: { messages: messageId } }
     );
 
-
-// emit event to notify the delation
+    // emit event to notify the delation
     io.emit("messageDeleted", messageId);
-
 
     res.status(200).json({ message });
   } catch (error) {
@@ -167,7 +162,7 @@ export const updateMessage = async (req, res) => {
     );
     if (!newMessage) {
       return res.status(404).json({ error: "Message not found" });
-    };
+    }
 
     // emit event to notify the update
     io.emit("messageUpdate", newMessage);

@@ -21,8 +21,8 @@ export default function UserContact({ connection, onClick }) {
   const baseURL = import.meta.env.VITE_BASE_URL;
   const [avatarImage, setAvatarImage] = useState(profileImage);
   const [lastMessage, setLastMessage] = useState([]);
-  const [initialize, setinitialize] = useState(false);
-  const [cutLastMessage, setCutLastMessage] = useState("");
+  // const [initialize, setinitialize] = useState(false);
+  // const [cutLastMessage, setCutLastMessage] = useState("");
 
   const { socket } = useSocketContext();
   // updating notification status
@@ -46,19 +46,28 @@ export default function UserContact({ connection, onClick }) {
     }
   };
 
+
+  // real time last message
   useEffect(() => {
     try {
       socket?.on("lastMessage", (lastMessage) => {
-        if (lastMessage.senderId === connection._id) {
-          console.log(connection._id);
+        if (lastMessage.senderId === connection._id || lastMessage.receiverId === connection._id) {
           setLastMessage((prevMessages) => [...prevMessages, lastMessage]);
         }
       });
-      return () => socket?.off("newMessage");
+      return () => socket?.off("lastMessage");
     } catch (error) {
       console.log(error);
     }
-  }, [socket, lastMessage]);
+  }, [socket, connection]);
+
+
+  const recentMessage = messages[messages.length - 1]?.message ;
+  const cutLastMessage =
+  recentMessage?.length > 20
+      ? recentMessage?.substring(0, 15) + "..."
+      : recentMessage;
+
 
   // fetching messages
   useEffect(() => {
@@ -86,27 +95,6 @@ export default function UserContact({ connection, onClick }) {
     }
   }, [notifications]);
 
-  useEffect(() => {
-    console.log(messages);
-    if (initialize) return;
-    if (messages.length) {
-      setinitialize(true);
-      const recentMessage = messages[messages.length - 1]?.message;
-      const cutLastMessage =
-        recentMessage?.length > 20
-          ? recentMessage?.substring(0, 15) + "..."
-          : recentMessage;
-    }
-
-    setCutLastMessage(cutLastMessage);
-  }, [messages.length]);
-  console.log(cutLastMessage);
-  //grabbing the last message
-  // const recentMessage = messages[messages.length - 1]?.message;
-  // const cutLastMessage =
-  //   lastMessage?.length > 20
-  //     ? lastMessage?.substring(0, 15) + "..."
-  //     : lastMessage;
 
   return (
     <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
