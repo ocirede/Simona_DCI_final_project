@@ -14,19 +14,17 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async (senderEmail, subject, message) => {
   try {
     await transporter.sendMail({
-      from: senderEmail, 
-      to: process.env.GMAIL_USER, 
+      from: senderEmail,
+      to: process.env.GMAIL_USER,
       subject: subject,
       text: message,
-      replyTo: senderEmail
+      replyTo: senderEmail,
     });
-    return { success: true, message: 'Email sent successfully' };
+    return { success: true, message: "Email sent successfully" };
   } catch (error) {
-    console.error('Error sending email:', error);
-    return { success: false, error: 'Failed to send email' };
+    console.error("Error sending email:", error);
+    return { success: false, error: "Failed to send email" };
   }
 };
 
 export default sendEmail;
-
- 
