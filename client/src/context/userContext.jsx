@@ -18,6 +18,7 @@ const UserProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
+  const [message, setMessage] = useState("");
 
   const [aboutText, setAboutText] = useState("");
 
@@ -459,6 +460,62 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // Add Interests
+  const addInterest = async (userId, interest) => {
+    const body =  { interest }
+    try {
+      const response = await axios.post( baseURL + `/profile/interests/${userId}`, body);
+      if (response.data.success) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error("Error adding interest:", error);
+      setMessage("Failed to add interest. Please try again.");
+    }
+  };
+  // Delete Interests
+  const deleteInterest = async (userId, interestId ) => {
+    try {
+      const response = await axios.delete(
+        baseURL + `/profile/delete-interests/${userId}`,
+        { data: { interestId } }
+      );
+      if (response.data.success) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      console.error("Error deleting the interest", error);
+    }
+  }
+
+// Add Personality
+const addPersonality = async (userId, personality) => {
+  const body =  { personality }
+  try {
+    const response = await axios.post( baseURL + `/profile/personality/${userId}`, body);
+    if (response.data.success) {
+      setUser(response.data.user);
+    }
+  } catch (error) {
+    console.error("Error adding personality:", error);
+    setMessage("Failed to add personality. Please try again.");
+  }
+};
+// Delete Personality
+const deletePersonality = async (userId, personalityId ) => {
+  try {
+    const response = await axios.delete(
+      baseURL + `/profile/delete-personality/${userId}`,
+      { data: { personalityId } }
+    );
+    if (response.data.success) {
+      setUser(response.data.user);
+    }
+  } catch (error) {
+    console.error("Error deleting the personality", error);
+  }
+}
+
   /**
    * For the brave souls who get this far: You are the chosen ones,
    * the valiant knights of programming, without rest,
@@ -511,6 +568,11 @@ const UserProvider = ({ children }) => {
         deletePortfolioImage,
         addNewLanguage,
         deleteLanguage,
+        addInterest,
+        deleteInterest,
+        addPersonality,
+        deletePersonality,
+
       }}
     >
       {children}

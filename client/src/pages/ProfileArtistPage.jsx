@@ -13,7 +13,6 @@ import LanguageSection from "../components/language-section/LanguageSection";
 import NavBarHomepage from "../components/navBarHomepage";
 import CreateOffer from "../components/profile artist/CreateOfferButton";
 
-
 function ProfileArtist() {
   const { getUserById, user } = useContext(UserContext);
   const { userId } = useParams();
@@ -35,9 +34,7 @@ function ProfileArtist() {
   if (profileUser) {
     return (
       <>
-
       {/* <NavBarHomepage/> */}
-    
         <ProfileImgBgSection user={profileUser} />
         <main className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
           <div>
@@ -55,10 +52,7 @@ function ProfileArtist() {
             {/* Comment Section */}
             <CommentSection user={profileUser} loggeduser={user} />
           </div>
-
           <CreateOffer />
-
-
           <Sidebar />
         </main>
       </>

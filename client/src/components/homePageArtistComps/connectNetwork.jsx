@@ -16,7 +16,7 @@ export default function ConnectNetwork() {
 
       return (
         <>
-          <div className="rounded-2xl  shadow-lg border border-b-8 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto bg-white">
+          <div className="rounded-2xl  shadow-lg border border-b-8 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto bg-white four">
 
             <div className="w-full flex sticky top-0 z-50">
               <h2  className="w-1/2 rounded-tl-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">Connections</h2>

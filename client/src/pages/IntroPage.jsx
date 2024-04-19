@@ -18,7 +18,7 @@ export default function IntroPage() {
     <>
       <div>
         <SimonaIntroSection />
-        <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[670px] md:h-fit border-b-8 lg:mr-20 lg:ml-20">
+        <div className="m-2 mt-4 border border-1 border-black rounded-[30px] bg-white h-[710px] md:h-fit border-b-8 lg:mr-20 lg:ml-20">
           <div className="bg-cobaltBlue rounded-tl-[30px] rounded-tr-[30px] flex p-6 justify-between items-center pr-8 pl-8 md:pr-24 md:pl-24">
             <img
               src="/smiley.svg"

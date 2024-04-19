@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import QASection from "../components/q&aPage/Q&ASection";
 import PrivacyPolicy from "../components/q&aPage/PrivacyPolicy";
 import TermsAndConditions from "../components/q&aPage/TermsAndConditions";
 import SimonaIntroSection from "../components/introPage/SimonaIntroSection";
+import NavBarHomepage from "../components/navBarHomepage";
+import { UserContext } from "../context/userContext";
 
 export default function QA() {
     const [currentSection, setCurrentSection] = useState(1);
+    const { user: loggedInUser } = useContext(UserContext);
 
     const renderSection = () => {
         switch (currentSection) {
@@ -22,7 +25,7 @@ export default function QA() {
 
     return ( 
         <div className="">
-            <SimonaIntroSection />
+            {loggedInUser ? <NavBarHomepage /> : <SimonaIntroSection />}
             <div className="min-h-screen flex flex-col sm:flex-row ml-4 mr-4">
                 <div className="bg-retroBlue text-gray-100 w-full sm:w-1/4 p-4 rounded-[30px] border border-1 border-black border-b-8">
                     <button onClick={() => setCurrentSection(1)} className="block py-2 px-4 my-2 rounded-full bg-white text-black hover:bg-retroRed transition duration-300 focus:outline-none focus:bg-retroRed w-full text-left">Q&A</button>

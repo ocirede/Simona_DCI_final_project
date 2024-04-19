@@ -61,6 +61,7 @@ export default function OffersSection() {
 
   return (
     <>
+
       <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white">
         {toggleEditForm && (
           <EditOffer
@@ -68,6 +69,7 @@ export default function OffersSection() {
             setToggleEditForm={setToggleEditForm}
           />
         )}
+
         <div className="w-full text-white flex bg-black rounded-tl-2xl rounded-tr-2xl sticky top-0 z-50 ">
           <h2
             onClick={() => setCurrentView("MyOffers")}
@@ -231,6 +233,7 @@ export default function OffersSection() {
                   </button>
 
                   {user && user._id === offer.createdBy._id && (
+
                     <div className="flex gap-2 font-bold rounded pt-4">
                       {/* <EditOffer offerId={offer._id} /> */}
                       <button
@@ -248,12 +251,15 @@ export default function OffersSection() {
                       </button>
                     </div>
                   )}
+
                 </div>
               ))}
             </div>
           </div>
         )}
       </div>
+
+      
     </>
   );
 }
