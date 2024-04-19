@@ -1,7 +1,5 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import useDimensios from "react-use-dimensions";
-
 import { Context } from "./Context";
 
 const ItemWrapper = styled.div`
@@ -14,7 +12,24 @@ const ItemWrapper = styled.div`
 
 const Item = ({ children, gap, padding }) => {
   const { dispatch } = useContext(Context);
-  const [itemRef, { x }] = useDimensios();
+  const itemRef = useRef(null);
+  const [x, setX] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (itemRef.current) {
+        const rect = itemRef.current.getBoundingClientRect();
+        setX(rect.x);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     x && dispatch({ type: "ADD_ITEM", item: x - padding });
@@ -28,3 +43,4 @@ const Item = ({ children, gap, padding }) => {
 };
 
 export default Item;
+
