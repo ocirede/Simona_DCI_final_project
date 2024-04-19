@@ -75,7 +75,7 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Offer title"
               required
-              className="w-full p-2 mb-4 border-2 border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2 border-gray-500 rounded bg-white"
             />
             <input
               type="text"
@@ -83,20 +83,20 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             />
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             />
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             >
               <option value="">Select Type</option>
               <option value="offer">Offer</option>
@@ -108,27 +108,27 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
               onChange={(e) => setCategory(e.target.value)}
               placeholder="Category"
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             />
             <input
               type="number"
               value={salary}
               onChange={(e) => setSalary(e.target.value)}
               placeholder="Salary"
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             />
             <input
               type="text"
               value={skillsRequired}
               onChange={(e) => setSkillsRequired(e.target.value)}
               placeholder="Skills Required (comma-separated)"
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             />
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
               required
-              className="w-full p-2 mb-4 border-2  border-gray-500 rounded"
+              className="w-full p-2 mb-4 border-2  border-gray-500 rounded bg-white"
             >
               <option value="">Select Status</option>
               <option value="open">Open</option>
