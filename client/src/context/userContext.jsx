@@ -54,12 +54,9 @@ const UserProvider = ({ children }) => {
       if (response.data.success) {
         setResponse(true);
         if (userRole === "artist") {
-
-           window.location.replace("/homeArtist");
-
+          window.location.replace("/homeArtist");
         } else {
-            window.location.replace("/E");
-
+          window.location.replace("/E");
         }
         e.target.reset();
         setEmail("");
@@ -575,6 +572,7 @@ const deletePersonality = async (userId, personalityId ) => {
         deleteInterest,
         addPersonality,
         deletePersonality,
+
       }}
     >
       {children}

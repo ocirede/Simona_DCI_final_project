@@ -2,15 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import { OfferContext, useOfferContext } from "../../context/OfferContext";
 import { UserContext } from "../../context/userContext";
 import EditOffer from "./editOfferButton";
+
 export default function OffersSection() {
   const [currentView, setCurrentView] = useState("AvailableOffers");
-  const { offers,setOffers } = useOfferContext();
+  const { offers, setOffers } = useOfferContext();
   const { user, addFavOffer } = useContext(UserContext);
   const { applyOffer } = useContext(OfferContext);
   const [appliedOffers, setAppliedOffers] = useState();
   const { deleteOffer, updateOffer } = useContext(OfferContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState(null);
+  const [offerToEditId, setOfferToEditId] = useState();
+  const [toggleEditForm, setToggleEditForm] = useState(false);
 
   const userFavOffers = offers?.filter((offer) =>
     user?.favOffers?.some((favOffer) => favOffer._id === offer?._id)
@@ -22,10 +25,7 @@ export default function OffersSection() {
   const handleApply = (offerId) => {
     applyOffer(offerId, user._id);
   };
- 
-  
 
-  
   const availableOffersArray = offers?.filter(
     (offer) =>
       !user?.favOffers?.some((favOffer) => favOffer._id === offer._id) &&
@@ -34,17 +34,15 @@ export default function OffersSection() {
 
   useEffect(() => {
     const appliedOffersArray = offers?.filter((offer) =>
-      offer.applicants.some((applicantId) => applicantId === user?._id)
+      offer.applicants.some((applicant) => applicant?._id === user?._id)
     );
-    setAppliedOffers(appliedOffersArray);
 
-  
+    setAppliedOffers(appliedOffersArray);
   }, [user, offers]);
 
   const handleDelete = (offerId) => {
     deleteOffer(offerId);
   };
-
 
   const openModal = (offer) => {
     setSelectedOffer(offer);
@@ -55,9 +53,23 @@ export default function OffersSection() {
     setModalVisible(false);
     setSelectedOffer(null);
   };
+
+  const handleToggleEditForm = (offerId) => {
+    setOfferToEditId(offerId);
+    setToggleEditForm(true);
+  };
+
   return (
     <>
-      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white five">
+
+      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white">
+        {toggleEditForm && (
+          <EditOffer
+            offerId={offerToEditId}
+            setToggleEditForm={setToggleEditForm}
+          />
+        )}
+
         <div className="w-full text-white flex bg-black rounded-tl-2xl rounded-tr-2xl sticky top-0 z-50 ">
           <h2
             onClick={() => setCurrentView("MyOffers")}
@@ -137,32 +149,57 @@ export default function OffersSection() {
           </div>
         )}
 
-
-      {modalVisible && selectedOffer && (
-        <div className="fixed inset-0 p-4 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
-          <div className="bg-white  p-4 rounded-lg shadow-lg relative max-w-lg mx-auto">
-            <button onClick={closeModal} className="absolute top-2 right-2 text-lg font-bold">&times;</button>
-            <h3 className="text-lg font-bold mb-2">{selectedOffer.title}</h3>
-            <img src={selectedOffer.postImage} alt="Offer" className="w-full h-auto object-cover md:h-48" />
-            <p className="mt-2"><strong>Description:</strong> {selectedOffer.description}</p>
-            <p><strong>Location:</strong> {selectedOffer.location}</p>
-            <p><strong>Salary:</strong> {selectedOffer.salary ? `$${selectedOffer.salary}` : "Not specified"}</p>
-            <p><strong>Category:</strong> {selectedOffer.category}</p>
-            <p><strong>Type:</strong> {selectedOffer.type}</p>
-            <p><strong>Status:</strong> {selectedOffer.status}</p>
-            <p><strong>Skills Required:</strong> {selectedOffer.skillsRequired.join(', ')}</p>
-            <div className="mt-4 flex justify-between">
-              <button onClick={() => handleApply(selectedOffer._id)}
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded">
-                Apply
+        {modalVisible && selectedOffer && (
+          <div className="fixed inset-0 p-4 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
+            <div className="bg-white  p-4 rounded-lg shadow-lg relative max-w-lg mx-auto">
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-2 text-lg font-bold"
+              >
+                &times;
               </button>
-              
+              <h3 className="text-lg font-bold mb-2">{selectedOffer.title}</h3>
+              <img
+                src={selectedOffer.postImage}
+                alt="Offer"
+                className="w-full h-auto object-cover md:h-48"
+              />
+              <p className="mt-2">
+                <strong>Description:</strong> {selectedOffer.description}
+              </p>
+              <p>
+                <strong>Location:</strong> {selectedOffer.location}
+              </p>
+              <p>
+                <strong>Salary:</strong>{" "}
+                {selectedOffer.salary
+                  ? `$${selectedOffer.salary}`
+                  : "Not specified"}
+              </p>
+              <p>
+                <strong>Category:</strong> {selectedOffer.category}
+              </p>
+              <p>
+                <strong>Type:</strong> {selectedOffer.type}
+              </p>
+              <p>
+                <strong>Status:</strong> {selectedOffer.status}
+              </p>
+              <p>
+                <strong>Skills Required:</strong>{" "}
+                {selectedOffer.skillsRequired.join(", ")}
+              </p>
+              <div className="mt-4 flex justify-between">
+                <button
+                  onClick={() => handleApply(selectedOffer._id)}
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
+                >
+                  Apply
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
-      
+        )}
 
         {currentView === "AvailableOffers" && (
           <div className="w-full h-auto overflow-auto p-4 slide-in-right ">
@@ -173,7 +210,12 @@ export default function OffersSection() {
                   key={offer._id}
                   className="bg-white p-4 shadow-md rounded-lg"
                 >
-                  <h3 onClick={() => openModal(offer)} className="text-md cursor-pointer font-semibold">{offer.title}</h3>
+                  <h3
+                    onClick={() => openModal(offer)}
+                    className="text-md cursor-pointer font-semibold"
+                  >
+                    {offer.title}
+                  </h3>
                   <p>
                     Created by :{" "}
                     <span className="font-bold">
@@ -190,19 +232,26 @@ export default function OffersSection() {
                     +
                   </button>
 
-
                   {user && user._id === offer.createdBy._id && (
-                  <div className="flex gap-2 font-bold rounded pt-4">
-                   
-                    <EditOffer offerId={offer._id} />
-                    <button
-                      className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
-                      onClick={() => handleDelete(offer._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                )} 
+
+                    <div className="flex gap-2 font-bold rounded pt-4">
+                      {/* <EditOffer offerId={offer._id} /> */}
+                      <button
+                        onClick={() => {
+                          handleToggleEditForm(offer._id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                        onClick={() => handleDelete(offer._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+
                 </div>
               ))}
             </div>
