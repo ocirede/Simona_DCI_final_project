@@ -23,7 +23,7 @@ function PersonalInfo({ userEmail }) {
   };
 
   return (
-    <section className="flex gap-8 ml-16 items-center">
+    <section className="flex gap-8 ml-2 items-center">
       <div className="">
         <button
           onClick={handleContactMeClick}

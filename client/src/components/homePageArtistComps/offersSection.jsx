@@ -57,7 +57,7 @@ export default function OffersSection() {
   };
   return (
     <>
-      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white">
+      <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white five">
         <div className="w-full text-white flex bg-black rounded-tl-2xl rounded-tr-2xl sticky top-0 z-50 ">
           <h2
             onClick={() => setCurrentView("MyOffers")}
@@ -194,7 +194,7 @@ export default function OffersSection() {
                   {user && user._id === offer.createdBy._id && (
                   <div className="flex gap-2 font-bold rounded pt-4">
                    
-                    <EditOffer  offerId={offer._id} />
+                    <EditOffer offerId={offer._id} />
                     <button
                       className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
                       onClick={() => handleDelete(offer._id)}
@@ -209,6 +209,8 @@ export default function OffersSection() {
           </div>
         )}
       </div>
+
+      
     </>
   );
 }
