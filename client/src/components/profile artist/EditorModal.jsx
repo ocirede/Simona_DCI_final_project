@@ -1,4 +1,4 @@
-import { Editor } from "../quill text editor/Editor";
+//import { Editor } from "../quill text editor/Editor";
 import { X } from "lucide-react";
 
 function EditorModal({ onClose, onSave, initialContent }) {
@@ -13,8 +13,11 @@ function EditorModal({ onClose, onSave, initialContent }) {
           content={initialContent}
           onChange={handleEditorChange}
           onSave={onSave}
-        /> 
-        <X className="cursor-pointer absolute top-1 right-1" onClick={onClose} />
+        />
+        <X
+          className="cursor-pointer absolute top-1 right-1"
+          onClick={onClose}
+        />
       </div>
     </div>
   );
