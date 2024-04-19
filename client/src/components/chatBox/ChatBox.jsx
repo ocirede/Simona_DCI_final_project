@@ -40,8 +40,8 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
     }
   }, [socket, newMessage, messages, setMessages, setNewMessage]);
 
-   // Listen for message deletion and update event socket.io
-   useEffect(() => {
+  // Listen for message deletion and update event socket.io
+  useEffect(() => {
     const handleDeleteMessage = (deletedMessageId) => {
       setMessages((prevMessages) =>
         prevMessages.filter((message) => message?._id !== deletedMessageId)
@@ -50,24 +50,20 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
 
     const handleUpdateMessage = (updatedMessage) => {
       setMessages((prevMessages) =>
-      prevMessages.map((message) =>
-        message._id === updatedMessage._id ? updatedMessage : message
-      )
-    );
+        prevMessages.map((message) =>
+          message._id === updatedMessage._id ? updatedMessage : message
+        )
+      );
     };
 
     socket.on("messageDeleted", handleDeleteMessage);
     socket.on("messageUpdate", handleUpdateMessage);
 
-
     return () => {
       socket.off("messageDeleted", handleDeleteMessage);
       socket.off("messageUpdate", handleUpdateMessage);
-
     };
   }, [socket, setMessages]);
-
-  
 
   // useRef to scroll into the view
   useEffect(() => {
