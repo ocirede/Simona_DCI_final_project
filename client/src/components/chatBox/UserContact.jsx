@@ -7,22 +7,15 @@ import { UserContext } from "../../context/userContext.jsx";
 export default function UserContact({ connection, onClick }) {
   const { user } = useContext(UserContext);
   const [notificationCount, setNotificationCount] = useState(0);
-  const {
-    messages,
-    setMessages,
-    getMessages,
-    notifications,
-    setNotifications,
-  } = useFetchMessages(connection);
+  const { messages, getMessages, notifications, setNotifications } =
+    useFetchMessages(connection);
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(connection._id);
   const { address, profileImage } = connection;
   const fullName = `${address.firstname} ${address.lastname}`;
   const baseURL = import.meta.env.VITE_BASE_URL;
   const [avatarImage, setAvatarImage] = useState(profileImage);
-  const [lastMessage, setLastMessage] = useState([]);
-  // const [initialize, setinitialize] = useState(false);
-  // const [cutLastMessage, setCutLastMessage] = useState("");
+  const [lastMessage, setLastMessage] = useState({});
 
   const { socket } = useSocketContext();
   // updating notification status
@@ -46,28 +39,36 @@ export default function UserContact({ connection, onClick }) {
     }
   };
 
-
   // real time last message
   useEffect(() => {
     try {
-      socket?.on("lastMessage", (lastMessage) => {
-        if (lastMessage.senderId === connection._id || lastMessage.receiverId === connection._id) {
-          setLastMessage((prevMessages) => [...prevMessages, lastMessage]);
+      socket?.on("lastMessage", (newMessage) => {
+        if (
+          newMessage.senderId === connection._id ||
+          newMessage.receiverId === connection._id
+        ) {
+          setLastMessage(newMessage);
         }
       });
+
       return () => socket?.off("lastMessage");
     } catch (error) {
       console.log(error);
     }
   }, [socket, connection]);
 
-
-  const recentMessage = messages[messages.length - 1]?.message ;
-  const cutLastMessage =
-  recentMessage?.length > 20
+  // fetching http last message
+  const recentMessage = messages[messages.length - 1]?.message;
+  const cutRecentMessage =
+    recentMessage?.length > 20
       ? recentMessage?.substring(0, 15) + "..."
       : recentMessage;
 
+  const lastSocketMessage = lastMessage?.message;
+  const cutLastMessage =
+    lastSocketMessage?.length > 20
+      ? lastSocketMessage.substring(0, 15) + "..."
+      : lastSocketMessage;
 
   // fetching messages
   useEffect(() => {
@@ -93,9 +94,9 @@ export default function UserContact({ connection, onClick }) {
     } else {
       setNotificationCount(0);
     }
-  }, [notifications]);
+  }, [notifications, notificationCount]); 
 
-
+console.log(notifications)
   return (
     <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
       <div className={`avatar ${isOnline ? "online" : ""}`}>
@@ -131,9 +132,7 @@ export default function UserContact({ connection, onClick }) {
           <div className="flex gap-1">
             <p>last message:</p>
 
-            <p className="font-bold">
-              {lastMessage.pop()?.message || cutLastMessage}
-            </p>
+            <p className="font-bold">{cutLastMessage || cutRecentMessage}</p>
           </div>
         </div>
       </div>

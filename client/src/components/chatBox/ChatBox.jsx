@@ -24,7 +24,13 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
   const [openEditText, setOpenEditText] = useState(false);
   const { sendMessage, newMessage, setNewMessage, setUploadImage, showAlert } =
     useSendMessage(connection);
-  const { messages, setMessages, uploadImage } = useFetchMessages(connection);
+  const {
+    messages,
+    setMessages,
+    uploadImage,
+    setNotifications,
+    notifications,
+  } = useFetchMessages(connection);
   const messagesEndRef = useRef(null);
   const baseURL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
@@ -39,8 +45,6 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
       console.log(error);
     }
   }, [socket, newMessage, messages, setMessages, setNewMessage]);
-
-
 
   // Listen for message deletion and update event socket.io
   useEffect(() => {
@@ -165,11 +169,33 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
     }
   };
 
+  // to navigate too the user s profile
   const handleNavigation = (connection) => {
     if (connection.role === "artist") {
       navigate(`/profile-artist/${connection._id}`);
     } else {
       navigate(`/ProfilePageEntrepreneur/${connection._id}`);
+    }
+  };
+
+  // updating notification status
+  const handleUpdateNotificationStatus = async (receiverId) => {
+    try {
+      const response = await axios.put(
+        `${baseURL}/messages/notifications/${receiverId}`
+      );
+
+      if (response.data) {
+        setNotifications((prevNotifications) =>
+          prevNotifications?.filter(
+            (notification) => notification.receiverId !== receiverId
+          )
+        );
+      } else {
+        console.error("Empty response received from server.");
+      }
+    } catch (error) {
+      console.error("Error updating notification status:", error);
     }
   };
 
@@ -317,6 +343,9 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
             onChange={(e) => setNewMessage(e.target.value)}
             className="flex-grow border border-black rounded-[10px] px-4 py-2"
             placeholder="Type your message..."
+            // onFocus={() => {
+            //   handleUpdateNotificationStatus(user._id);
+            // }}
             // maxlength={1000}
           />
           <label>

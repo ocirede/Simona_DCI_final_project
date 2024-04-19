@@ -12,7 +12,6 @@ const SocketProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     try {
       if (user) {
@@ -27,20 +26,6 @@ const SocketProvider = ({ children }) => {
           setOnlineUsers(users);
         });
 
-        socket.on("notification", (data) => {
-          setNotifications((prevNotifications) => {
-            if (data) {
-              const updatedNotifications = [...prevNotifications, data];
-              sessionStorage.setItem(
-                "notifications",
-                JSON.stringify(updatedNotifications)
-              ); 
-
-              return updatedNotifications;
-            }
-            return prevNotifications;
-          });
-        });
 
         socket.on("reconnectionFailed");
 
@@ -61,7 +46,7 @@ const SocketProvider = ({ children }) => {
 
   return (
     <SocketContext.Provider
-      value={{ socket, onlineUsers, notifications, setNotifications}}
+      value={{ socket, onlineUsers}}
     >
       {children}
     </SocketContext.Provider>

@@ -1,52 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MessageSquareText } from "lucide-react";
 import { useSocketContext } from "../../context/socketContext";
 import { NavLink } from "react-router-dom";
+import { useFetchMessages } from "../../hooks/useSendMessagesCreateNewChat";
+import { UserContext } from "../../context/userContext";
 function Sidebar() {
-  const { setNotifications, notifications } = useSocketContext();
+  const { user } = useContext(UserContext);
+  const { socket } = useSocketContext();
   const [isOpen, setIsOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
-  // opening notification message
-  useEffect(() => {
-    if (notifications && notifications.length > 0) {
-      if (!isOpen) {
-        setIsOpen(true);
-      }
-    } else {
-      if (isOpen) {
-        setIsOpen(false);
-      }
-    }
-  }, [notifications, isOpen]);
+  const {notifications, setNotifications } = useFetchMessages(user);
 
-  // counting notifications
 
+  // real time notification 
   useEffect(() => {
-    if (notifications && notifications.length > 0) {
-      const uniqueSenderIds = [
-        ...new Set(notifications.map((notif) => notif.senderId)),
-      ];
-      const totalCount = uniqueSenderIds.reduce((acc, senderId) => {
-        const count = notifications.filter(
-          (notif) => notif.senderId === senderId
-        ).length;
-        return acc + count;
-      }, 0);
-      setNotificationCount(totalCount);
-    } else {
-      setNotificationCount(0);
+    try {
+      socket?.on("notification", (data) => {
+        setNotifications((prevNotifications) => {
+          if (data) {
+            const updatedNotifications = [...prevNotifications, data];
+            sessionStorage.setItem(
+              "notifications",
+              JSON.stringify(updatedNotifications)
+            );
+            setNotificationCount((prevCount) => prevCount + 1);
+            return updatedNotifications;
+          }
+          return prevNotifications;
+        });
+      });
+
+      return () => socket?.off("notification");
+    } catch (error) {
+      console.log(error);
     }
+  }, [socket]);
+
+  // Load notifications from sessionStorage on component mount
+  useEffect(() => {
+    const storedNotifications = JSON.parse(
+      sessionStorage.getItem("notifications") || "[]"
+    );
+    setNotifications(storedNotifications);
+    setNotificationCount(storedNotifications.length);
+  }, []);
+
+  // Update isOpen state based on notifications
+  useEffect(() => {
+    setIsOpen(notifications && notifications.length > 0);
   }, [notifications]);
 
-  // empting notification array and sessionStorage
+  // Handle deleting notifications
   const handleDeleteNotification = () => {
     setNotifications([]);
     sessionStorage.removeItem("notifications");
+    setNotificationCount(0);
   };
 
   return (
     <>
-      {isOpen && (
+      {isOpen && notificationCount > 0 && (
         <div
           className={`fixed top-1/2 right-0 z-50 bg-retroRed text-white rounded-lg p-4 transition-transform duration-700 ease-in-out  ${
             isOpen ? "transform translate-x-0" : "transform translate-x-full"
@@ -56,7 +69,10 @@ function Sidebar() {
             <div className="relative flex items-center justify-center animated-message ">
               <div className="relative flex gap-1 text-lg ">
                 <p className="text-white">You have new message(s)</p>
-                <MessageSquareText className="notification-icon" color="white"/>
+                <MessageSquareText
+                  className="notification-icon"
+                  color="white"
+                />
                 <span className="notification-count">{notificationCount}</span>
               </div>
             </div>
@@ -65,7 +81,6 @@ function Sidebar() {
       )}
     </>
   );
-  
 }
 
 export default Sidebar;
