@@ -1,8 +1,8 @@
 function HeartSVG(props) {
   return (
     <svg
-      width="249.61237mm"
-      height="198.79752mm"
+    width="150" 
+    height="100" 
       viewBox="0 0 249.61237 198.79752"
       version="1.1"
       id="svg12652"

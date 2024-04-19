@@ -35,7 +35,7 @@ const ProfilePageEntrepreneur = () => {
       <div>
         {/* <NavBarHomepage /> */}
         <ProfileImgBgSection user={profileUser} />
-        <section className="mx-auto p-6 relative md:ml-[50px] md:mr-[50px]">
+        <section className="mx-auto p-6 relative lg:ml-[230px] lg:mr-[230px] md:ml-[50px] md:mr-[50px]">
           <div>
             <TitleNameSection user={profileUser} />
             <div className="lg:flex gap-4">

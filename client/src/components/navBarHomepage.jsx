@@ -4,10 +4,16 @@ import { Menu, X } from "lucide-react";
 import { UserContext } from "../context/userContext.jsx";
 import WelcomeUser from "./welcomeUser.jsx";
 import LanguageChoice from "./navbar intro/LanguageChoice.jsx";
+import DragComponent from "./framerMotionAnimations/DragNDrop.jsx";
+import StarSVG from "./draggableElementsSVG/StarFive.jsx";
+import HeartTwo from "./draggableElementsSVG/HeartTwo.jsx";
+import Circle from "./draggableElementsSVG/Circle.jsx";
+import JoyrideSidebar from "./joyride/Joyride.jsx";
 
 export default function NavBarHomepage() {
   const [isOpen, setIsOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false); 
 
   const navigate = useNavigate();
   const { user, setUser, logout } = useContext(UserContext);
@@ -44,8 +50,28 @@ export default function NavBarHomepage() {
     };
   }, []);
 
+  const toggleTutorial = () => {
+    setShowTutorial(!showTutorial);
+  };
+
   return (
-    <nav className="bg-white mt-3 mr-3 ml-3 z-50 pt-6 pl-6 pr-6 bg-white-400 relative rounded-[30px] shadow-lg border border-black border-b-[20px] h-[200px] md:h-[300px]">
+    <>
+    <nav className="bg-white mt-3 mr-3 ml-3 mb-2 z-50 pt-6 pl-6 pr-6 bg-white-400 relative rounded-[30px] shadow-lg border border-black border-b-[20px] h-[200px] md:h-[300px] one">
+      <div className="absolute  right-[25%] top-[10%] md:top-[15%] md:right-[30%] lg:right-[40%]">
+      <DragComponent>
+        <StarSVG  className="w-[120px] h-[90px] md:h-[100px] md:w-[230px]"/>
+      </DragComponent>
+      </div>
+      <div className="absolute top-[40%]  md:left-[10%] md:top-[20%]">
+      <DragComponent>
+        <HeartTwo className="w-[250px] md:w-[420px] lg:w-[500px]"/>
+      </DragComponent>
+      </div>
+      <div className="absolute left-[70%] top-[40%] md:top-[30%] lg:top-[10%]">
+      <DragComponent>
+        <Circle className="w-[100px] md:w-[200px] md:h-[170px] lg:h-[220px]" />
+      </DragComponent>
+      </div>
       <div className="flex  items-center justify-between md:flex-row">
         <div
           className="cursor-pointer"
@@ -83,12 +109,12 @@ export default function NavBarHomepage() {
           {/* <NavLink to="/Network" className="mt-4 md:mt-0 md:ml-4  ">
             Network
           </NavLink> */}
-          <div className=" flex gap-2">
+          <div className=" flex gap-2 six">
             <NavLink to="/chatbox" className="mt-4 md:mt-0 md:ml-4">
               Chatbox
             </NavLink>
           </div>
-
+          <p className="mt-4 md:mt-0 md:ml-4 cursor-pointer" onClick={toggleTutorial}>Tutorial</p>
           <a className="mt-4 md:mt-0 md:ml-4 cursor-pointer" onClick={logout}>
             Logout
           </a>
@@ -103,5 +129,7 @@ export default function NavBarHomepage() {
         </h1>
       </div>
     </nav>
+    {showTutorial && <JoyrideSidebar />}
+     </>
   );
 }
