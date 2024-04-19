@@ -36,7 +36,9 @@ const Track = ({ children }) => {
 
   const dragConstraints = {
     left: isEnd ? 0 : -(trackDimensions.width - containerDimensions.width),
-    right: isBeginning ? maxRightDrag : (containerDimensions.width - trackDimensions.width)
+    right: isBeginning
+      ? maxRightDrag
+      : containerDimensions.width - trackDimensions.width,
   };
 
   return (
@@ -49,7 +51,10 @@ const Track = ({ children }) => {
           dragMomentum={false}
           dragConstraints={dragConstraints}
           onDrag={(event, info) => {
-            if ((info.point.x < 0 && isEnd) || (info.point.x > 0 && isBeginning)) {
+            if (
+              (info.point.x < 0 && isEnd) ||
+              (info.point.x > 0 && isBeginning)
+            ) {
               controls.stop();
             }
           }}
@@ -62,11 +67,3 @@ const Track = ({ children }) => {
 };
 
 export default Track;
-
-
-
-
-
-
-
-

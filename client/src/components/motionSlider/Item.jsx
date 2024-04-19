@@ -8,7 +8,7 @@ const ItemWrapper = styled.div`
   flex: 0 0 auto;
 
   &:not(:last-child) {
-    padding-right: ${props => props.gap}px;
+    padding-right: ${(props) => props.gap}px;
   }
 `;
 
