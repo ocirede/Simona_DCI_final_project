@@ -16,8 +16,8 @@ export default function UserContact({ connection, onClick }) {
   const baseURL = import.meta.env.VITE_BASE_URL;
   const [avatarImage, setAvatarImage] = useState(profileImage);
   const [lastMessage, setLastMessage] = useState({});
-
   const { socket } = useSocketContext();
+
   // updating notification status
   const handleUpdateNotificationStatus = async (receiverId) => {
     try {
@@ -64,6 +64,7 @@ export default function UserContact({ connection, onClick }) {
       ? recentMessage?.substring(0, 15) + "..."
       : recentMessage;
 
+      // substring last message
   const lastSocketMessage = lastMessage?.message;
   const cutLastMessage =
     lastSocketMessage?.length > 20
@@ -94,9 +95,8 @@ export default function UserContact({ connection, onClick }) {
     } else {
       setNotificationCount(0);
     }
-  }, [notifications, notificationCount]); 
+  }, [notifications, notificationCount]);
 
-console.log(notifications)
   return (
     <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
       <div className={`avatar ${isOnline ? "online" : ""}`}>
