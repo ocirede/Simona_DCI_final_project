@@ -1,4 +1,4 @@
-//import { Editor } from "../quill text editor/Editor";
+import { Editor } from "../quill text editor/Editor";
 import { X } from "lucide-react";
 
 function EditorModal({ onClose, onSave, initialContent }) {

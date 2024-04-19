@@ -1,15 +1,30 @@
-import React from "react";
-import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "./EditorToolBar";
-import "react-quill/dist/quill.snow.css";
-import Button from "../navbar intro/Button";
+import { useRef, useEffect, useState } from "react";
+import Quill from "quill";
 
 export const Editor = ({ initialContent, onSave }) => {
-  const [value, setValue] = React.useState(initialContent || "");
+  const editorRef = useRef(null);
+  const [value, setValue] = useState(initialContent || "");
 
-  const handleChange = (content) => {
-    setValue(content);
-  };
+  useEffect(() => {
+    if (!editorRef.current) {
+      editorRef.current = new Quill("#editor-container", {
+        theme: "snow",
+        modules: {
+          toolbar: [
+            [{ 'header': [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['link', 'image'],
+            ['clean']
+          ]
+        }
+      });
+
+      editorRef.current.on("text-change", () => {
+        setValue(editorRef.current.root.innerHTML);
+      });
+    }
+  }, []);
 
   const handlePost = () => {
     onSave(value);
@@ -18,23 +33,14 @@ export const Editor = ({ initialContent, onSave }) => {
 
   return (
     <div className="text-editor">
-      <EditorToolbar />
-      <ReactQuill
-        theme="snow"
-        value={value}
-        onChange={handleChange}
-        placeholder={"Write something awesome..."}
-        modules={modules}
-        formats={formats}
-      />
+      <div id="editor-container" />
       <div className="flex justify-center items-center mt-3">
-        <button
-          className=" bg-retroRed w-28 p-1 rounded-[10px] text-white"
-          onClick={handlePost}
-        >
-          Post{" "}
-        </button>
+        <button className="bg-retroRed w-28 p-1 rounded-[10px] text-white" onClick={handlePost}>Post</button>
       </div>
     </div>
   );
 };
+
+
+
+
