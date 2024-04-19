@@ -12,7 +12,6 @@ export default function AboutSection({ user }) {
   useEffect(() => {
     setAboutContent(user?.about || "");
   }, [user]);
-
   const openEditorModal = () => toggleFormVisibility("about");
 
   const updateAboutContent = async (newContent) => {
