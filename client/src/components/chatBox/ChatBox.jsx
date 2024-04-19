@@ -179,25 +179,25 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
   };
 
   // updating notification status
-  const handleUpdateNotificationStatus = async (receiverId) => {
-    try {
-      const response = await axios.put(
-        `${baseURL}/messages/notifications/${receiverId}`
-      );
+  // const handleUpdateNotificationStatus = async (receiverId) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `${baseURL}/messages/notifications/${receiverId}`
+  //     );
 
-      if (response.data) {
-        setNotifications((prevNotifications) =>
-          prevNotifications?.filter(
-            (notification) => notification.receiverId !== receiverId
-          )
-        );
-      } else {
-        console.error("Empty response received from server.");
-      }
-    } catch (error) {
-      console.error("Error updating notification status:", error);
-    }
-  };
+  //     if (response.data) {
+  //       setNotifications((prevNotifications) =>
+  //         prevNotifications?.filter(
+  //           (notification) => notification.receiverId !== receiverId
+  //         )
+  //       );
+  //     } else {
+  //       console.error("Empty response received from server.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating notification status:", error);
+  //   }
+  // };
 
   return (
     <div className="flex flex-col h-[700px] w-full bg-white rounded-lg border border-b-8 border-r-8 border-black ">
