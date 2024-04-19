@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  useFetchMessages} from "../../hooks/useSendMessagesCreateNewChat";
+import { useFetchMessages } from "../../hooks/useSendMessagesCreateNewChat";
 import { useSocketContext } from "../../context/socketContext";
 import axios from "../../config/axios.js";
 import { UserContext } from "../../context/userContext.jsx";
@@ -8,14 +7,24 @@ import { UserContext } from "../../context/userContext.jsx";
 export default function UserContact({ connection, onClick }) {
   const { user } = useContext(UserContext);
   const [notificationCount, setNotificationCount] = useState(0);
-  const { messages, setMessages, getMessages, notifications, setNotifications } =
-    useFetchMessages(connection);
+  const {
+    messages,
+    setMessages,
+    getMessages,
+    notifications,
+    setNotifications,
+  } = useFetchMessages(connection);
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(connection._id);
   const { address, profileImage } = connection;
   const fullName = `${address.firstname} ${address.lastname}`;
   const baseURL = import.meta.env.VITE_BASE_URL;
   const [avatarImage, setAvatarImage] = useState(profileImage);
+  const [lastMessage, setLastMessage] = useState([]);
+  const [initialize, setinitialize] = useState(false);
+  const [cutLastMessage, setCutLastMessage] = useState("");
+
+  const { socket } = useSocketContext();
   // updating notification status
   const handleUpdateNotificationStatus = async (receiverId) => {
     try {
@@ -37,6 +46,19 @@ export default function UserContact({ connection, onClick }) {
     }
   };
 
+  useEffect(() => {
+    try {
+      socket?.on("lastMessage", (lastMessage) => {
+        if (lastMessage.senderId === connection._id) {
+          console.log(connection._id);
+          setLastMessage((prevMessages) => [...prevMessages, lastMessage]);
+        }
+      });
+      return () => socket?.off("newMessage");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [socket, lastMessage]);
 
   // fetching messages
   useEffect(() => {
@@ -64,52 +86,69 @@ export default function UserContact({ connection, onClick }) {
     }
   }, [notifications]);
 
-  //grabbing the last message
-  const lastMessage = messages[messages.length - 1]?.message;
-  const cutLastMessage =
-    lastMessage?.length > 20
-      ? lastMessage?.substring(0, 15) + "..."
-      : lastMessage;
+  useEffect(() => {
+    console.log(messages);
+    if (initialize) return;
+    if (messages.length) {
+      setinitialize(true);
+      const recentMessage = messages[messages.length - 1]?.message;
+      const cutLastMessage =
+        recentMessage?.length > 20
+          ? recentMessage?.substring(0, 15) + "..."
+          : recentMessage;
+    }
 
-      return (
-        <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
-          <div className={`avatar ${isOnline ? "online" : ""}`}>
-            <div className="w-12 h-12 rounded-full">
-              <img src={avatarImage || "../assets/avatar.svg"} alt="User Avatar"/>
+    setCutLastMessage(cutLastMessage);
+  }, [messages.length]);
+  console.log(cutLastMessage);
+  //grabbing the last message
+  // const recentMessage = messages[messages.length - 1]?.message;
+  // const cutLastMessage =
+  //   lastMessage?.length > 20
+  //     ? lastMessage?.substring(0, 15) + "..."
+  //     : lastMessage;
+
+  return (
+    <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
+      <div className={`avatar ${isOnline ? "online" : ""}`}>
+        <div className="w-12 h-12 rounded-full">
+          <img src={avatarImage || "../assets/avatar.svg"} alt="User Avatar" />
+        </div>
+      </div>
+      <div
+        onClick={onClick}
+        role="button"
+        className="flex flex-col w-full bg-white border border-black rounded-[10px] lg:w-3/4"
+        style={{ maxWidth: "60vw" }}
+      >
+        <div
+          onClick={() => {
+            if (notifications && notifications.length > 0) {
+              handleUpdateNotificationStatus(user._id);
+            }
+          }}
+          className="ml-2"
+        >
+          {notificationCount > 0 ? (
+            <div className="flex justify-between items-center mr-1">
+              <h3 className="text-black">{fullName}</h3>
+              <span className="bg-retroRed w-5 h-5 flex items-center justify-center rounded-full text-white">
+                {notificationCount}
+              </span>
             </div>
-          </div>
-          <div
-            onClick={onClick}
-            role="button"
-            className="flex flex-col w-full bg-white border border-black rounded-[10px] lg:w-3/4"
-            style={{ maxWidth: "60vw" }}
-            >
-            <div
-              onClick={() => {
-                if (notifications && notifications.length > 0) {
-                  handleUpdateNotificationStatus(user._id);
-                }
-              }}
-              className="ml-2"
-            >
-              {notificationCount > 0 ? (
-                <div className="flex justify-between items-center mr-1">
-                  <h3 className="text-black">{fullName}</h3>
-                  <span className="bg-retroRed w-5 h-5 flex items-center justify-center rounded-full text-white">
-                    {notificationCount}
-                  </span>
-                </div>
-              ) : (
-                <h3 className="text-black">{fullName}</h3>
-              )}
-      
-              <div className="flex gap-1">
-                <p>last message:</p>
-                <p className="font-bold">{cutLastMessage}</p>
-              </div>
-            </div>
+          ) : (
+            <h3 className="text-black">{fullName}</h3>
+          )}
+
+          <div className="flex gap-1">
+            <p>last message:</p>
+
+            <p className="font-bold">
+              {lastMessage.pop()?.message || cutLastMessage}
+            </p>
           </div>
         </div>
-      );
-      
+      </div>
+    </div>
+  );
 }

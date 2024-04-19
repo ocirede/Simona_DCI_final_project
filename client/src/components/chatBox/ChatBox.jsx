@@ -40,6 +40,8 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
     }
   }, [socket, newMessage, messages, setMessages, setNewMessage]);
 
+
+
   // Listen for message deletion and update event socket.io
   useEffect(() => {
     const handleDeleteMessage = (deletedMessageId) => {
