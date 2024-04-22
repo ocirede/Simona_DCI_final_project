@@ -40,7 +40,7 @@ function NavBar() {
             <Button name="Register" />
           </NavLink>
           <NavLink to="/sign-in">
-            <Button name="Log-in" />
+            <Button name="LogIn" />
           </NavLink>
           <LanguageChoice />
         </div>

@@ -31,12 +31,12 @@ function SignInForm() {
     /* form container */
   }
   return (
-    <div className=" relative flex flex-col items-center justify-center w-[570px]">
+    <div className=" w-full relative flex flex-col items-center justify-center"> 
       <br />
-      <div className="lg:w-2/3 h-[420px] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
+      <div className="w-full  max-w-md mx-auto px-4 relative z-[1] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
         <form
           onSubmit={authenticationHandler}
-          className="flex flex-col w-[350px] p-3 justify-center gap-2 mt-4"
+          className="w-full  flex flex-col  p-3 justify-center gap-2 mt-4"
         >
           <div className="flex justify-center">
             <h1 className="text-2xl font-bold text-center mb-2">LogIn</h1>
@@ -186,7 +186,7 @@ function SignInForm() {
         </div>
       ) : null}
       {/* Absolute positioned elements */}
-      <div className="absolute top-[16%] right-[5%]  z-[-1] w-[35%]">
+      <div className="hidden absolute z-[-1]  w-[180px] h-[180px]  xs:block  xs:top-[80px] xs:right-[3px] sm:right-[60px] md:right-[165px] lg:right-[330px]  xl:top-[180px] xl:right-[630px]">
         <img
           src={starFourSvg}
           alt="Star Four"
@@ -199,7 +199,7 @@ function SignInForm() {
         />
       </div>
       {/* Star with opposite position on small screens */}
-      <div className="absolute bottom-[15%] left-[-3%] z-[-1] w-[45%] ">
+      <div className="hidden absolute z-[-1] w-[180px] h-[180px] xs:block  xs:bottom-[50px] xs:left-[-13px] sm:bottom[80px] sm:left-[70px] md:bottom-[55px] md:left-[155px] lg:left-[330px] xl:bottom-[175px] xl:left-[610px]  ">
         <img
           src={starTwoSvg}
           style={{
