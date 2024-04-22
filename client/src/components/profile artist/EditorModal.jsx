@@ -13,8 +13,11 @@ function EditorModal({ onClose, onSave, initialContent }) {
           content={initialContent}
           onChange={handleEditorChange}
           onSave={onSave}
-        /> 
-        <X className="cursor-pointer absolute top-1 right-1" onClick={onClose} />
+        />
+        <X
+          className="cursor-pointer absolute top-1 right-1"
+          onClick={onClose}
+        />
       </div>
     </div>
   );

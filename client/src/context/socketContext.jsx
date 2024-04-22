@@ -9,13 +9,15 @@ export const useSocketContext = () => {
 };
 
 const SocketProvider = ({ children }) => {
+  const baseURL = import.meta.env.VITE_BASE_URL;
+
   const { user } = useContext(UserContext);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   useEffect(() => {
     try {
       if (user) {
-        const socket = io("http://localhost:3002", {
+        const socket = io(baseURL, {
           query: {
             userId: user._id,
           },
@@ -29,7 +31,6 @@ const SocketProvider = ({ children }) => {
 
         socket.on("reconnectionFailed");
 
-
         return () => socket.close();
       } else {
         if (socket) {
@@ -41,8 +42,6 @@ const SocketProvider = ({ children }) => {
       console.log(error);
     }
   }, [user]);
-
-
 
   return (
     <SocketContext.Provider

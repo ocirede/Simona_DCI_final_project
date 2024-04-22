@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import "react-quill/dist/quill.snow.css";
 import { useFormVisibility } from "./customHook/FormVisibility";
 import { UserContext } from "../../context/userContext";
 import EditorModal from "../profile artist/EditorModal";
@@ -13,7 +12,6 @@ export default function AboutSection({ user }) {
   useEffect(() => {
     setAboutContent(user?.about || "");
   }, [user]);
-
   const openEditorModal = () => toggleFormVisibility("about");
 
   const updateAboutContent = async (newContent) => {

@@ -23,21 +23,19 @@ function PersonalInfo({ userEmail }) {
   };
 
   return (
-    <section className="flex gap-4 ml-11 items-center">
-      <div className="">
+    <section className="lg:flex lg:gap-6 lg:items-center ">
         <button
+        role="button"
           onClick={handleContactMeClick}
-          className="bg-white  border-black border-2 rounded-full p-1 sm:p-2"
+          className="bg-white z-50 text-black uppercase border-black border-2 rounded-full p-1.5 mr-3"
         >
-          <span className="text-black uppercase">Contact me</span>
+         Contact me
         </button>
-      </div>
-
-      <div className="bg-white  border-black border-2  rounded-full p-1 sm:p-2">
-        <button onClick={() => toggleFormVisibility("shareLink")} className="">
+      <button className="bg-white  border-black border-2  z-50  rounded-full p-1.5 ">
+        <div onClick={() => toggleFormVisibility("shareLink")} className="">
           <span className="text-black uppercase">Share Link</span>
-        </button>
-      </div>
+        </div>
+      </button>
 
       {formVisibility.shareLink && (
         <ShareLinkCard onClose={() => toggleFormVisibility("shareLink")} />

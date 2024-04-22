@@ -37,10 +37,10 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
   // fetching message real-time from socket.io
   useEffect(() => {
     try {
-      socket.on("newMessage", (newMessage) => {
+      socket?.on("newMessage", (newMessage) => {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       });
-      return () => socket.off("newMessage");
+      return () => socket?.off("newMessage");
     } catch (error) {
       console.log(error);
     }
@@ -62,12 +62,12 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
       );
     };
 
-    socket.on("messageDeleted", handleDeleteMessage);
-    socket.on("messageUpdate", handleUpdateMessage);
+    socket?.on("messageDeleted", handleDeleteMessage);
+    socket?.on("messageUpdate", handleUpdateMessage);
 
     return () => {
-      socket.off("messageDeleted", handleDeleteMessage);
-      socket.off("messageUpdate", handleUpdateMessage);
+      socket?.off("messageDeleted", handleDeleteMessage);
+      socket?.off("messageUpdate", handleUpdateMessage);
     };
   }, [socket, setMessages]);
 
@@ -311,9 +311,9 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
           <p>No messages available</p>
         </div>
       )}
-      <footer className="flex items-center p-1 gap-3 justify-center mt-auto mb-4 h-[70px]">
+      <footer className="flex items-center p-1 gap-3 xxs:justify-start xs:justify-center  ml-1 mt-auto mb-4 h-[70px]">
         <div
-          className="flex items-center gap-3"
+          className=" flex items-center gap-3"
           style={{ width: "70%", flexShrink: 0 }}
         >
           <input
@@ -321,7 +321,7 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
             name="message"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="flex-grow border border-black rounded-[10px] px-4 py-2"
+            className="realtive flex-grow border border-black rounded-[10px] px-4 py-2"
             placeholder="Type your message..."
           />
           <label>
@@ -331,15 +331,16 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
               value={uploadImage}
               onChange={(e) => setUploadImage(e.target.files[0])}
             />
-            <Paperclip className="cursor-pointer" />
+            <Paperclip className=" cursor-pointer" />
           </label>
-        </div>
         <button
           onClick={() => sendMessage(connection._id)}
           className="bg-lightBlue text-white px-4 py-2 rounded"
         >
           <Send />
         </button>
+        </div>
+
       </footer>
     </div>
   );

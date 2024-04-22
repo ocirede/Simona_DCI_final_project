@@ -98,8 +98,8 @@ export default function UserContact({ connection, onClick }) {
   }, [notifications, notificationCount]);
 
   return (
-    <div className="user-contact flex justify-start m-4 items-center gap-4 mt-7">
-      <div className={`avatar ${isOnline ? "online" : ""}`}>
+    <div className="user-contact xxs:flex xxs:justify-center  flex justify-start m-4 items-center gap-4 mt-7">
+      <div className={`avatar ${isOnline ? "online" : ""} hidden xs:block `}>
         <div className="w-12 h-12 rounded-full">
           <img src={avatarImage || "../assets/avatar.svg"} alt="User Avatar" />
         </div>
@@ -107,8 +107,8 @@ export default function UserContact({ connection, onClick }) {
       <div
         onClick={onClick}
         role="button"
-        className="flex flex-col w-full bg-white border border-black rounded-[10px] lg:w-3/4"
-        style={{ maxWidth: "60vw" }}
+        className=" flex flex-col w-full  bg-white border border-black rounded-[10px] lg:w-3/4"
+        style={{ maxWidth: "75vw" }}
       >
         <div
           onClick={() => {
@@ -116,7 +116,7 @@ export default function UserContact({ connection, onClick }) {
               handleUpdateNotificationStatus(user._id);
             }
           }}
-          className="ml-2"
+          className="ml-2 "
         >
           {notificationCount > 0 ? (
             <div className="flex justify-between items-center mr-1">

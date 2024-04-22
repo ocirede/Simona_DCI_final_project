@@ -11,6 +11,7 @@ export default {
         borderBlue: "#597CA7",
       },
       screens: {
+        xxs: "390px",   // extra extra small screen
         xs: "480px", // Custom extra small screen size
         sm: "640px", // Small screen size
         md: "768px", // Medium screen size
