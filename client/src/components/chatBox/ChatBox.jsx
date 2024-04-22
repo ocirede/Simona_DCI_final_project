@@ -321,8 +321,9 @@ export default function ChatBox({ connection, showChatBox, setShowChatBox }) {
             name="message"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="realtive flex-grow border border-black rounded-[10px] px-4 py-2"
+            className="realtive flex-grow text-black border border-black rounded-[10px] px-4 py-2"
             placeholder="Type your message..."
+            color="white"
           />
           <label>
             <input
