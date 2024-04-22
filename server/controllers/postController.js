@@ -18,7 +18,9 @@ export const createPost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("createdBy");
+    const posts = await Post.find()
+      .populate("createdBy")
+      .populate("applicants");
     res.status(200).json({ success: true, offers: posts });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch offers", details: error });

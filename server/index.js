@@ -37,8 +37,6 @@ app.use("/chats", chatRouter);
 app.use("/messages", messageRouter);
 
 
-
-
 server.listen(port, () => {
   console.log(`The server is running in port ${port}`);
 });
