@@ -140,7 +140,7 @@ export default function OffersSection() {
                   </p>
                   <p>Location : {offer.location}</p>
                   <p>{offer.description}</p>
-                  <button className="bg-red-700 text-white font-bold  px-2  rounded ">
+                  <button className="bg-retroRed text-white font-bold  px-2 pt-1 pb-1 rounded-[30px] mt-4">
                     applied
                   </button>
                 </div>

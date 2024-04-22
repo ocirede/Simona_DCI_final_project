@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import CreateOffer from "../profile artist/CreateOfferButton";
 import { useOfferContext } from "../../context/OfferContext";
@@ -7,8 +7,14 @@ import EditOffer from "../homePageArtistComps/editOfferButton";
 export default function OffersSection({user}) {
     const { user: loggedInUser } = useContext(UserContext);
     const { offers } = useOfferContext();
+    const [toggleEditForm, setToggleEditForm] = useState(false);
 
     const userOffer = offers?.find(offer => offer?.createdBy._id === user._id);
+
+    const handleToggleEditForm = (offer_Id) => {
+        setOfferToEditId(offer_Id);
+        setToggleEditForm(true);
+      };
 
     return (
         <div className="mb-4"> 
@@ -34,7 +40,19 @@ export default function OffersSection({user}) {
                             </p>
                             <p>Location : {userOffer.location}</p>
                             <p>{userOffer.description}</p>
-                            <EditOffer offerId={userOffer._id}/>
+                            {toggleEditForm && (
+                            <EditOffer 
+                            offerId={userOffer._id}
+                            offer_Id={offerToEditId}
+                            setToggleEditForm={setToggleEditForm}/>
+                            )}
+                             <button
+                        onClick={() => {
+                          handleToggleEditForm(offer._id);
+                        }}
+                      >
+                        Edit
+                      </button>
                         </div>
                     ) : (
                         <p>No offer available</p>
