@@ -13,5 +13,6 @@
 9. chatbox: name- link and arrow to fix the clickability
 10. double check the seach input field in the searchHub
 11. gototop buton fix the z-index
+12. sharelink resize for small screen
     
 
