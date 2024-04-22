@@ -23,7 +23,7 @@ const RegisterUserQuestions = () => {
   return (
     <div className="flex h-screen relative z-[5]">
       {/* Logo image - it is a random image to be replaced with our logo */}
-      <FakeLogo/>
+      <FakeLogo />
       {/* Form container */}
       <div className="w-full my-auto max-w-screen-sm mx-auto md:w-1/2 md:max-w-480px relative">
         <div className="px-8 pt-6 pb-8 relative">
