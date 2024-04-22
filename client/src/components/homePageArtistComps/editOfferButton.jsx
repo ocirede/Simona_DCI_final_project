@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useOfferContext } from "../../context/OfferContext.jsx";
 import { UserContext } from "../../context/userContext.jsx";
+import { TrendingUp } from "lucide-react";
 
 export default function EditOffer({ offerId, setToggleEditForm }) {
   const { findOffer, foundOffer, updateOffer } = useOfferContext();
@@ -145,7 +146,7 @@ export default function EditOffer({ offerId, setToggleEditForm }) {
               onClick={() => {
                 handleSave;
               }}
-              className="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded transition-colors duration-200"
+              className="w-full bg-retroRed hover:bg-red-700 text-white p-2 rounded transition-colors duration-200"
             >
               save
             </button>

@@ -2,7 +2,7 @@ const CrescentShapeSVG = (props) => {
   return (
     <svg
       width="240"
-      height="200"
+      height="100"
       viewBox="0 0 237.59953 253.12334"
       version="1.1"
       id="svg18734"

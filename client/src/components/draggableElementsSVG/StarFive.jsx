@@ -2,8 +2,8 @@ function StarSVG(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="100mm"
-      height="170"
+      width="50"
+      height="150"
       viewBox="0 0 261.66079 1"
       {...props}
     >

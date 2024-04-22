@@ -35,7 +35,7 @@ export function CategoriesSearch() {
               </div>
             )}
       
-            <div className="flex flex-wrap gap-4 p-4 bg-white rounded-bl-2xl rounded-br-2xl">
+            <div className="flex flex-wrap gap-2 lg:gap-4 p-4 bg-white rounded-bl-2xl rounded-br-2xl">
               {categories.map((category, index) => (
                 <button key={index} className="bg-retroRed text-white py-2 px-4 rounded-full shadow" onClick={() => handleCategoryClick(category)}>
                   {category}

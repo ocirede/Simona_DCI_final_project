@@ -2,9 +2,9 @@ const HeartTwo = (props) => {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 247.51403 233.13804"
-        width=""
-        height=""
+        viewBox="0 0 98.51403 100.13804"
+        width="100"
+        height="150"
         {...props}
       >
         <path
