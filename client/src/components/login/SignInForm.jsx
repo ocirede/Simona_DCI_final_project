@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import AlertMessageSuccess from "../alerts/AlertMessageSuccess";
 import starFourSvg from "../../assets/y2k_icons/star_four.svg";
 import starTwoSvg from "../../assets/y2k_icons/star_two.svg";
-
+import RegisterFormButtonLoading from "../register/RegisterFormButtonLoading";
 function SignInForm() {
   const {
     showPassword,
@@ -186,14 +186,28 @@ function SignInForm() {
         </div>
       ) : null}
       {/* Absolute positioned elements */}
-      <div className="absolute top-[197px]  right-[8px] bottom-auto  w-[180px] left-auto z-[-1] h-[180px] transform rotate-[35deg]">
-        <img src={starFourSvg} alt="Star Four" />
+      <div className="absolute top-[16%] right-[5%]  z-[-1] w-[35%]">
+        <img
+          src={starFourSvg}
+          alt="Star Four"
+          style={{
+            position: "relative",
+            zIndex: "-100",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
+        />
       </div>
       {/* Star with opposite position on small screens */}
-      <div className="absolute bottom-[155px] left-[5px] top-auto w-[200px] right-auto  h-[220px]">
+      <div className="absolute bottom-[15%] left-[-3%] z-[-1] w-[45%] ">
         <img
           src={starTwoSvg}
-          style={{ position: "relative", zIndex: "-100" }}
+          style={{
+            position: "relative",
+            zIndex: "-100",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
           alt="Star Two"
         />
       </div>

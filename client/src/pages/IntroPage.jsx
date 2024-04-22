@@ -46,7 +46,7 @@ export default function IntroPage() {
       <div className="mb-4">
         <MovingText text="What do we do What do we do What do we do What do we do What do we do What do we do " />
 
-        <div className="m-2 lg:order-2 border border-1 border-black rounded-[30px] bg-white p-10 border-b-8 md:text-[20px] p-20 lg:text-[28px] lg:mr-20 lg:ml-20">
+        <div className="m-2 lg:order-2 border border-1 border-black rounded-[30px] bg-whiteborder-b-8 md:text-[20px] p-20 lg:text-[28px] lg:mr-20 lg:ml-20">
           <p className="pb-4">
           {t("textOne")}
             
@@ -93,6 +93,7 @@ export default function IntroPage() {
           </div>
         </div>
       </div>
+
 
       <div className="m-2 bg-white border border-1 border-black rounded-[30px] border-b-8 p-10 md:p-20 md:text-[20px] lg:text-[28px] lg:mr-20 lg:ml-20">
         <div className="flex gap-2 pb-4 lg:gap-4 lg:pb-8">

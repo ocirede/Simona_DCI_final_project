@@ -1,8 +1,18 @@
-# React + Vite
+# things to be done
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# styling
 
-Currently, two official plugins are available:
+1. svg elements resize
+2. Simona log resize (homepage)
+3. register questions  double check the mobile version
+4. nav bar homepage fix drop menu ( hight, make it like the one in the intro)
+5. restyle the connections and pending requests div and make the name clickable
+6. profile page check contact and share link button
+7. interests functionality (kostas know what to do)
+8. create offer button to place it somewhere else
+9. chatbox: name- link and arrow to fix the clickability
+10. double check the seach input field in the searchHub
+11. gototop buton fix the z-index
+12. sharelink resize for small screen
+    
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

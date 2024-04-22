@@ -13,6 +13,7 @@ import {
   changePassVerification,
 } from "../verification/emailVerification.js";
 import cloudinaryV2 from "../config/cloudinary.js";
+import { getSocketIds, io } from "../socket/socket.js";
 
 //Register user
 export const handleRegister = async (req, res) => {
@@ -158,6 +159,15 @@ export const sendConnectionRequest = async (req, res) => {
     await sender.populate("sentRequests");
     await sender.populate("connections");
     await sender.populate("pendingRequests");
+
+      //SOCKET.IO FUNCTIONALITY
+
+      const { senderSocketId, receiverSocketId } = getSocketIds(
+        senderId,
+        receiverId
+      );
+  
+      io.to(receiverSocketId).emit("pendingRequest", sender);
 
     res.send({
       success: true,

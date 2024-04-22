@@ -10,7 +10,7 @@ function DropMenuIntro() {
         aria-orientation="vertical"
         aria-labelledby="options-menu"
       >
-        <NavLink to="/register">
+        <NavLink to="/register-questions">
           <Button name="Register" />
         </NavLink>
         <NavLink to="/sign-in">

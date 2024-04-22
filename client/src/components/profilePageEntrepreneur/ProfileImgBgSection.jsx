@@ -53,7 +53,7 @@ function ProfileImgBgSection({ user }) {
         <div className="relative">
 
             <div
-                className={`bg-${user.profileBackground ? 'cover' : 'white'} mr-[10px] ml-[10px] h-[200px] rounded-bl-[30px] rounded-br-[30px] relative border border-2 border-black`}
+                className={`bg-${user.profileBackground ? 'cover' : 'white'} mr-[10px] ml-[10px] h-[200px] rounded-bl-[30px] rounded-br-[30px] relative  border-2 border-black`}
                 style={user.profileBackground ? { backgroundImage: `url(${user.profileBackground})` } : null}
             >
                 {loggedInUser && loggedInUser._id === user._id && (
@@ -68,7 +68,7 @@ function ProfileImgBgSection({ user }) {
                 )}
             </div>
 
-            <div className="flex items-center absolute top-[65%] left-[8%] lg:left-[15%] lg:left-60 lg:ml-10">
+            <div className="flex items-center absolute top-[65%] left-[8%] lg:left-[15%] lg:ml-10">
                 <div className="bg-white w-[180px] h-[125px] rounded-full mx-auto mb-4 relative overflow-hidden border-2 border-black">
                     <input
                         ref={inputFileRef}
@@ -87,7 +87,7 @@ function ProfileImgBgSection({ user }) {
                         <img src={user.profileImage} alt="Profile" className="w-full h-full object-cover" />
                     )}
                 </div>
-                <div className="flex gap-4 ml-4 w-full">
+                <div className="flex gap-4 ml-1.5 w-full">
                     <PersonalInfo userEmail={user?.email} />
                 </div>
             </div>
