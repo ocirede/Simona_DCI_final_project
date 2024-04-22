@@ -14,7 +14,7 @@ export default function ConnectNetwork() {
           <div className="rounded-2xl flex flex-col sm:flex-row shadow-lg border border-b-8 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto bg-white ">
 
             <div className="w-full">
-              <h2  className=" w-full rounded-tr-2xl rounded-tl-2xl   bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 ">Connections</h2>
+              <h2  className=" w-full  xxs:rounded-tr-2xl lg:rounded-none rounded-tl-2xl  pl-5 bg-black cursor-pointer text-white text-xl border border-black font-semibold p-1 ">Connections</h2>
               <div className="w-full h-auto overflow-auto  p-2">
                 {user?.connections?.map(friend => (
                   <div key={friend._id} className="flex gap-2 items-center">
@@ -26,8 +26,8 @@ export default function ConnectNetwork() {
             </div>
             </div>
             <div className="w-full ">
-              <h2 className=" w-full bg-black cursor-pointer md:rounded-tr-2xl sm:rounded-tr-2xl text-white text-xl text-center border border-black font-semibold p-1 ">Pending Requests</h2>
-              <div className="w-full h-auto overflow-auto p-2  ">
+              <h2 className=" w-full bg-black cursor-pointer md:rounded-tr-2xl pl-5 sm:rounded-tr-2xl text-white text-xl  border border-black font-semibold p-1 ">Pending Requests</h2>
+              <div className="w-full h-auto overflow-auto p-2   ">
                 <div className="grid grid-cols-1 gap-5 ">
                   {user?.pendingRequests?.map(user => (
                     <div key={user._id} className="flex gap-2 items-center">
