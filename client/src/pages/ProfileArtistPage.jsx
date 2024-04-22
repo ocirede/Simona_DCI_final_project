@@ -12,6 +12,7 @@ import PortfolioSection from "../components/profile artist/PortfolioSection";
 import LanguageSection from "../components/language-section/LanguageSection";
 import NavBarHomepage from "../components/navBarHomepage";
 import CreateOffer from "../components/profile artist/CreateOfferButton";
+import OffersSection from "../components/profilePageEntrepreneur/OffersSection";
 
 function ProfileArtist() {
   const { getUserById, user } = useContext(UserContext);
@@ -52,7 +53,7 @@ function ProfileArtist() {
             {/* Comment Section */}
             <CommentSection user={profileUser} loggeduser={user} />
           </div>
-          <CreateOffer />
+          <OffersSection user={profileUser} />
           <Sidebar />
         </main>
       </>
