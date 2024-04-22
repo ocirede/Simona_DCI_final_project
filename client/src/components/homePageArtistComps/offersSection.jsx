@@ -107,13 +107,13 @@ export default function OffersSection() {
                 <p>{offer.description}</p>
                 <button
                   onClick={() => handleFavOffers(offer._id)}
-                  className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2  rounded "
+                  className="bg-retroRed hover:bg-red-800 text-white font-bold  px-3 pt-1 pb-1 rounded-[30px] mt-4"
                 >
                   -
                 </button>
                 <button
                   onClick={() => handleApply(offer._id)}
-                  className="bg-green-700 hover:bg-green-800 text-white font-bold  px-2  ml-3 rounded "
+                  className="bg-retroBlue hover:bg-blue-800 text-white font-bold px-3 ml-3 rounded-[30px] pt-1 pb-1 "
                 >
                   apply
                 </button>
@@ -150,15 +150,15 @@ export default function OffersSection() {
         )}
 
         {modalVisible && selectedOffer && (
-          <div className="fixed inset-0 p-4 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
-            <div className="bg-white  p-4 rounded-lg shadow-lg relative max-w-lg mx-auto">
+          <div className="fixed inset-0 p-4 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center pt-10">
+            <div className="bg-white w-[500px]  p-4 rounded-lg shadow-lg relative max-w-lg mx-auto">
               <button
                 onClick={closeModal}
-                className="absolute top-2 right-2 text-lg font-bold"
+                className="absolute top-0 right-4 text-[38px] text-retroRed font-bold"
               >
                 &times;
               </button>
-              <h3 className="text-lg font-bold mb-2">{selectedOffer.title}</h3>
+              <h3 className="text-lg font-bold mb-2 uppercase">{selectedOffer.title}</h3>
               <img
                 src={selectedOffer.postImage}
                 alt="Offer"
@@ -192,7 +192,7 @@ export default function OffersSection() {
               <div className="mt-4 flex justify-between">
                 <button
                   onClick={() => handleApply(selectedOffer._id)}
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
+                  className="bg-retroBlue hover:bg-green-700 text-white font-bold py-1 px-4 rounded-[30px]"
                 >
                   Apply
                 </button>
@@ -227,7 +227,7 @@ export default function OffersSection() {
                   <p>{offer.description}</p>
                   <button
                     onClick={() => handleFavOffers(offer._id)}
-                    className="bg-red-700 hover:bg-red-800 text-white font-bold  px-2 mt-2 rounded "
+                    className="bg-retroRed hover:bg-red-800 text-white font-bold px-2 mt-2  rounded-full pb-[0.5px]"
                   >
                     +
                   </button>
