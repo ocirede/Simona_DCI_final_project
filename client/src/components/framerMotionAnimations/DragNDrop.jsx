@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const DragComponent = ({ children, constraints }) => {
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleDragStart = () => {
+  const handleDragStart = (event, info) => {
     setIsDragging(true);
   };
 
@@ -15,6 +15,7 @@ const DragComponent = ({ children, constraints }) => {
   return (
     <motion.div
       drag
+      dragTransition={{ bounceDamping: 0 }}
       dragConstraints={constraints}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
@@ -30,4 +31,5 @@ const DragComponent = ({ children, constraints }) => {
 };
 
 export default DragComponent;
+
 

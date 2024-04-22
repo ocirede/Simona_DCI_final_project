@@ -58,7 +58,7 @@ const LanguageSection = ({ user, loggeduser }) => {
   };
 
   return (
-    <div className="mb-4 ">
+    <div className="mb-4">
       <div className="bg-white rounded-[20px] p-4 border border-black text-black">
         <div className="flex justify-between items-center">
           <h3 className="text-[28px] uppercase font-semibold">Languages</h3>

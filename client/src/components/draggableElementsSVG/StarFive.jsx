@@ -3,8 +3,8 @@ function StarSVG(props) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100mm"
-      height="130mm"
-      viewBox="0 0 281.66079 281.66079"
+      height="170"
+      viewBox="0 0 261.66079 1"
       {...props}
     >
       <g transform="translate(103.02608,83.209972)">

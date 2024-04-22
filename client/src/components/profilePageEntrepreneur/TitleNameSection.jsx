@@ -3,8 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { useFormVisibility } from "./customHook/FormVisibility";
 
-
-export default function TitleNameSection({user}) {
+export default function TitleNameSection({ user }) {
   const { updateUser } = useContext(UserContext);
   const { formVisibility, toggleFormVisibility } = useFormVisibility();
   const [newFirstName, setNewFirstName] = useState("");
@@ -12,6 +11,8 @@ export default function TitleNameSection({user}) {
 
   const firstName = user?.address?.firstname;
   const lastName = user?.address?.lastname;
+
+  const rating = user?.averageRating;
 
   const handleNameUpdate = () => {
     if (newFirstName.trim() === "" && newLastName.trim() === "") {
@@ -28,46 +29,54 @@ export default function TitleNameSection({user}) {
     updateUser(user._id, updatedData);
     setNewFirstName("");
     setNewLastName("");
-    toggleFormVisibility('name');
+    toggleFormVisibility("name");
   };
 
   return (
     <div className="text-center mb-4 lg:text-left lg:mt-10 mt-10 ">
       {formVisibility.name ? (
-        <div className="flex">
-          <div className="h-[90px] bg-transparent w-1/2 "></div>
-          <form className="h-[90px] bg-white rounded-[15px] w-1/2 text-[12px] pt-2 pr-4 pl-4 shadow-lg border-b-8 border border-black  ">
+        <div>
+          <form className="h-[90px] bg-white rounded-[15px] w-1/2 text-[12px] pt-4 pr-4 pl-4 shadow-lg border-b-8 border border-black ">
             <input
               type="text"
               className="mt-2 bg-transparent border-b border-gray-300 focus:outline-none w-full "
-              placeholder="User's Name or Title"
-              value={firstName + " " + lastName}
+              placeholder="Write a new name"
+              value={newFirstName !== "" || newLastName !== "" ? newFirstName + " " + newLastName : ""}
               onChange={(e) => {
-                const [newFirst, newLast] = e.target.value.split(" ");
-                setNewFirstName(newFirst);
-                setNewLastName(newLast);
+                const value = e.target.value;
+                const lastSpaceIndex = value.lastIndexOf(" ");
+                setNewFirstName(value.slice(0, lastSpaceIndex).trim());
+                setNewLastName(value.slice(lastSpaceIndex + 1).trim());
               }}
             />
             <div className="flex mt-2">
               <button className="mr-2 bg-retroRed text-white rounded-md py-1 px-4" onClick={handleNameUpdate}>Save</button>
-              <button className="bg-retroBlue text-white rounded-md py-1 px-4" onClick={() => toggleFormVisibility('name')}>Delete</button>
+              <button className="bg-retroBlue text-white rounded-md py-1 px-4" onClick={() => toggleFormVisibility("name")}>Delete</button>
             </div>
           </form>
         </div>
       ) : (
-        <div className="flex">
-          <div className="h-[50px] bg-transparent w-1/2"></div>
-          <div className="h-[50px] bg-white shadow-lg rounded-[15px] w-1/2 text-[12px] pt-2 border-b-8 border border-black">
+        <div>
+          <div className="h-[70px] w-full bg-white shadow-lg rounded-[15px] w-1/2 text-[12px] border-b-8 border border-black flex justify-between pr-10 pl-5">
             <h1
-              className="text-[20px] font-bold cursor-pointer text-center"
-              onClick={() => toggleFormVisibility('name')}
+              className="text-[20px] font-bold cursor-pointer pt-4"
+              onClick={() => toggleFormVisibility("name")}
             >
               {firstName} {lastName}
-            </h1>
+            </h1> 
+            
+            <div className="text-[18px] font-semibold flex items-center gap-2">
+              <img src="/rating_star.png" alt="rating-star" className="w-[30px]"></img>
+              <p>Rating:</p>
+              <p className="pt-[2px]">{rating}</p>
+            </div>
           </div>
         </div>
       )}
+     
     </div>
   );
 }
+
+
 
