@@ -94,7 +94,7 @@ export default function IntroPage() {
         </div>
       </div>
 
-      <div className="m-2 bg-white border border-1 border-black rounded-[30px] border-b-8 p-20 md:text-[20px] p-20 lg:text-[28px] lg:mr-20 lg:ml-20">
+      <div className="m-2 bg-white border border-1 border-black rounded-[30px] border-b-8 p-10 md:p-20 md:text-[20px] lg:text-[28px] lg:mr-20 lg:ml-20">
         <div className="flex gap-2 pb-4 lg:gap-4 lg:pb-8">
           <img src="/heart_three.svg" alt="heart" className="w-[50px]"></img>
           <p>

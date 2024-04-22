@@ -62,14 +62,14 @@ export default function NavBarHomepage() {
         <StarSVG  className="w-[120px] h-[90px] md:h-[100px] md:w-[230px]"/>
       </DragComponent>
       </div>
-      <div className="absolute top-[40%]  md:left-[10%] md:top-[20%]">
+      <div className="absolute top-[30%] md:left-[10%] md:top-[20%]">
       <DragComponent>
-        <HeartTwo className="w-[250px] md:w-[420px] lg:w-[500px]"/>
+        <HeartTwo className="w-[100px] md:w-[120px] lg:w-[300px]"/>
       </DragComponent>
       </div>
       <div className="absolute left-[70%] top-[40%] md:top-[30%] lg:top-[10%]">
       <DragComponent>
-        <Circle className="w-[100px] md:w-[200px] md:h-[170px] lg:h-[220px]" />
+        <Circle className="w-[100px] h-[80px] md:w-[200px] md:h-[170px] lg:h-[220px]" />
       </DragComponent>
       </div>
       <div className="flex  items-center justify-between md:flex-row">
@@ -122,7 +122,7 @@ export default function NavBarHomepage() {
       </div>
       <div className="ml-5 mr-5 mt-10 flex items-end  justify-between ">
         <h1
-          className="uppercase simona text-[80px] md:text-[120px] cursor-pointer absolute top-[54%]"
+          className="uppercase simona text-[71px] md:text-[120px] cursor-pointer absolute top-[57%]"
           onClick={handleLogoClick}
         >
           Simona
