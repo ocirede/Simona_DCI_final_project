@@ -79,13 +79,13 @@ export default function NavBarHomepage() {
         >
           <WelcomeUser />
         </div>
-        <div className="flex  items-center gap-2">
+        <div className="flex items-center gap-2">
           <a className="mt-0 md:mt-0 md:ml-4 md:hidden cursor-pointer">
             {" "}
             <LanguageChoice />
           </a>
           <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)}>
+            <button onClick={() => setIsOpen(!isOpen)} className="z-[100]">
               {isOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
@@ -93,7 +93,7 @@ export default function NavBarHomepage() {
         <div
           className={`${
             isOpen ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-[36%] md:top-0 left-0 bg-white md:bg-transparent  z-40 p-4 md:p-0 rounded-lg md:rounded-none shadow-lg md:shadow-none border border-black md:border-none`}
+          } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-[0%] md:top-0 left-0 bg-white md:bg-transparent  z-40 pl-10 pt-2 pb-7 md:p-0 rounded-[30px] shadow-lg md:shadow-none border border-black md:border-none`}
           onClick={() => setIsOpen(!isOpen)}
         >
 
