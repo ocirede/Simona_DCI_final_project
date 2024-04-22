@@ -39,7 +39,7 @@ function SignInForm() {
           className="flex flex-col w-[350px] p-3 justify-center gap-2 mt-4"
         >
           <div className="flex justify-center">
-            <h1 className="text-2xl font-bold text-center mb-2">Log-in</h1>
+            <h1 className="text-2xl font-bold text-center mb-2">LogIn</h1>
           </div>
           <label>
             <span className="text-sm">Email</span>

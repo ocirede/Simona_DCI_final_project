@@ -98,8 +98,8 @@ export default function UserContact({ connection, onClick }) {
   }, [notifications, notificationCount]);
 
   return (
-    <div className="user-contact xxs:flex xxs:justify-center  flex justify-start m-4 items-center gap-4 mt-7">
-      <div className={`avatar ${isOnline ? "online" : ""} hidden xs:block `}>
+    <div className="user-contact xxs:flex xxs:justify-center  flex justify-start m-4 xxs:ml-2 xxs:gap-1 items-center gap-4 mt-7">
+      <div className={`avatar ${isOnline ? "online" : ""} `}>
         <div className="w-12 h-12 rounded-full">
           <img src={avatarImage || "../assets/avatar.svg"} alt="User Avatar" />
         </div>
@@ -108,7 +108,7 @@ export default function UserContact({ connection, onClick }) {
         onClick={onClick}
         role="button"
         className=" flex flex-col w-full  bg-white border border-black rounded-[10px] lg:w-3/4"
-        style={{ maxWidth: "75vw" }}
+        style={{ maxWidth: "80%" }}
       >
         <div
           onClick={() => {
@@ -130,9 +130,9 @@ export default function UserContact({ connection, onClick }) {
           )}
 
           <div className="flex gap-1">
-            <p>last message:</p>
+            <p className="overflow-hidden whitespace-no-wrap truncate">last message:</p>
 
-            <p className="font-bold">{cutLastMessage || cutRecentMessage}</p>
+            <p className="font-bold overflow-hidden whitespace-no-wrap truncate">{cutLastMessage || cutRecentMessage}</p>
           </div>
         </div>
       </div>
