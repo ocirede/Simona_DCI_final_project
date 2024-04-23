@@ -159,16 +159,15 @@ export const sendConnectionRequest = async (req, res) => {
     await sender.populate("sentRequests");
     await sender.populate("connections");
     await sender.populate("pendingRequests");
+    console.log( sender)
 
       //SOCKET.IO FUNCTIONALITY
 
       const { senderSocketId, receiverSocketId } = getSocketIds(
-        sender,
-        receiver
+        senderId,
+        receiverId
       );
-  
       io.to(receiverSocketId).emit("pendingRequest", sender);
-        console.log(receiverSocketId, sender)
     res.send({
       success: true,
       sender,

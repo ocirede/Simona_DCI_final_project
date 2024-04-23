@@ -11,13 +11,13 @@ export default function ConnectNetwork() {
 
   useEffect(() => {
     socket?.on("pendingRequest", (sender) => {
+
       console.log("sender connect network ", sender);
       setUser((prevUser) => ({
         ...prevUser,
         pendingRequests: [...prevUser.pendingRequests, sender],
       }));
     });
-    console.log(user)
 
     return () => {
       socket?.off("pendingRequest");
