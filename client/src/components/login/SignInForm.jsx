@@ -31,15 +31,15 @@ function SignInForm() {
     /* form container */
   }
   return (
-    <div className=" w-full relative flex flex-col items-center justify-center"> 
-      <br />
-      <div className="w-full  max-w-md mx-auto px-4 relative z-[1] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
+    <div className=" w-full  max-w-md mx-auto px-4 relative flex flex-col items-center justify-center"> 
+     
+      <div className="w-full  max-w-md mx-auto  relative z-[1] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
         <form
           onSubmit={authenticationHandler}
-          className="w-full  flex flex-col  p-3 justify-center gap-2 mt-4"
+          className="w-full  flex flex-col  p-3 justify-center gap-2 "
         >
           <div className="flex justify-center">
-            <h1 className="text-2xl font-bold text-center mb-2">LogIn</h1>
+            <h1 className="text-2xl font-bold text-center mb-6">LogIn</h1>
           </div>
           <label>
             <span className="text-sm">Email</span>
@@ -57,7 +57,7 @@ function SignInForm() {
           </div>
 
           <label className="flex justify-between">
-            <span className="text-sm">Password</span>
+            <span className="text-sm mt-2">Password</span>
             <span
               onClick={() => setForgotPasswsord(!forgotPassword)}
               className="underline text-blue-500 cursor-pointer"
@@ -96,7 +96,7 @@ function SignInForm() {
             {response ? (
               <button
                 type="submit"
-                className="mt-2 x border bg-retroRed py-1 px-4 rounded-full w-full transition-transform duration-100  transform-gpu active:scale-95 text-white pt-1 pb-1 text-xl glow-border"
+                className="mt-2 x border bg-retroRed py-1 px-4 rounded-full w-full transition-transform duration-100  transform-gpu active:scale-95 text-white pt-2 pb-2 text-xl glow-border"
                 disabled={false}
               >
                 Log In
@@ -186,7 +186,7 @@ function SignInForm() {
         </div>
       ) : null}
       {/* Absolute positioned elements */}
-      <div className="hidden absolute z-[-1]  w-[180px] h-[180px]  xs:block  xs:top-[80px] xs:right-[3px] sm:right-[60px] md:right-[165px] lg:right-[330px]  xl:top-[180px] xl:right-[630px]">
+      <div className="absolute z-[-1]  w-[180px] h-[180px]  top-[180px] right-[-9px] sm:right-[-10px] md:right-[-55px] lg:right-[0px]  xl:top-[180px]">
         <img
           src={starFourSvg}
           alt="Star Four"
@@ -199,7 +199,7 @@ function SignInForm() {
         />
       </div>
       {/* Star with opposite position on small screens */}
-      <div className="hidden absolute z-[-1] w-[180px] h-[180px] xs:block  xs:bottom-[50px] xs:left-[-13px] sm:bottom[80px] sm:left-[70px] md:bottom-[55px] md:left-[155px] lg:left-[330px] xl:bottom-[175px] xl:left-[610px]  ">
+      <div className=" absolute z-[-1] w-[180px] h-[180px] bottom-[185px] left-[-35px] sm:left-[-60px]  md:left-[-65px] lg:left-[-60px] xl:bottom-[175px] ">
         <img
           src={starTwoSvg}
           style={{
