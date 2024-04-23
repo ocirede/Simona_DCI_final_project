@@ -20,6 +20,12 @@ Simona.
 We will miss our times, butthe ree we planted will always remain,
 Here, in the space of bits and bytes.
 
+- **About:**
+
+Simona is an intuituve medium which offer an interactive collaboration between two partners.
+
+The application is desiged to simplify the matching of offer and demand.
+
 - **Live Website:**
 
 Click [here](https://simona-1973-client.vercel.app/) to visit the website.
