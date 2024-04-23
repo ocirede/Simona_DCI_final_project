@@ -61,7 +61,6 @@ export default function OffersSection() {
 
   return (
     <>
-
       <div className="rounded-2xl border border-b-4 border-black md:max-h-[435px]  md:min-h-[435px]  md:w-1/2 md:overflow-y-auto bg-white">
         {toggleEditForm && (
           <EditOffer
@@ -92,7 +91,7 @@ export default function OffersSection() {
         </div>
         {currentView === "MyOffers" && (
           <div className="w-full h-auto overflow-auto  p-4 slide-in-left">
-            <h2 className="font-bold text-lg mb-4">My Favourits Offers</h2>
+            <h2 className="font-bold text-lg mb-4">My Favourites Offers</h2>
             {userFavOffers?.map((offer) => (
               <div key={offer._id} className="mb-4 p-2  shadow-md rounded-lg">
                 <h3 className="text-md font-semibold">{offer.title}</h3>
@@ -158,7 +157,9 @@ export default function OffersSection() {
               >
                 &times;
               </button>
-              <h3 className="text-lg font-bold mb-2 uppercase">{selectedOffer.title}</h3>
+              <h3 className="text-lg font-bold mb-2 uppercase">
+                {selectedOffer.title}
+              </h3>
               <img
                 src={selectedOffer.postImage}
                 alt="Offer"
@@ -233,7 +234,6 @@ export default function OffersSection() {
                   </button>
 
                   {user && user._id === offer.createdBy._id && (
-
                     <div className="flex gap-2 font-bold rounded pt-4">
                       {/* <EditOffer offerId={offer._id} /> */}
                       <button
@@ -251,15 +251,12 @@ export default function OffersSection() {
                       </button>
                     </div>
                   )}
-
                 </div>
               ))}
             </div>
           </div>
         )}
       </div>
-
-      
     </>
   );
 }
