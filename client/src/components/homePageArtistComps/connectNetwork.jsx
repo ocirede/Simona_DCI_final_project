@@ -29,47 +29,47 @@ export default function ConnectNetwork() {
   return (
     <>
       <div className="rounded-2xl  shadow-lg border border-b-8 border-black md:w-1/2 md:max-h-[435px] md:overflow-y-auto bg-white">
-        <div className="w-full flex sticky top-0 z-50">
-          <h2 className="w-1/2 rounded-tl-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">
-            Connections
-          </h2>
-          <h2 className="w-1/2 rounded-tr-lg bg-black cursor-pointer text-white text-xl text-center border border-black font-semibold p-1 flex-grow">
-            Pending Requests
-          </h2>
+       
+      <div className="flex flex-col md:flex-row md:w-full">
+  <div className="w-full md:w-1/2 h-auto overflow-auto rounded-bl-2xl md:rounded-none">
+    <h2 className="w-full rounded-tl-lg bg-black cursor-pointer text-white text-xl pl-4 font-semibold p-1">
+      Connections
+    </h2>
+    {user?.connections?.map((friend) => (
+      <div key={friend._id} className="flex gap-2 pl-4 items-center">
+        <img
+          src={friend.profileImage}
+          className="w-5 h-5 rounded-full bg-green-400 object-cover"
+        />
+        <div className="text-center text-l ">
+          {friend.address?.firstname} {friend.address?.lastname}
         </div>
-        <div className="flex">
-          <div className="w-full h-auto overflow-auto border rounded-bl-2xl  border-black p-2">
-            {user?.connections?.map((friend) => (
-              <div key={friend._id} className="flex gap-2 items-center">
-                <img
-                  src={friend.profileImage}
-                  className="w-5 h-5 rounded-full bg-green-400 object-cover"
-                />
-                <div className="text-center text-l ">
-                  {friend.address?.firstname} {friend.address?.lastname}
-                </div>
-                <DeleteConnection connectionId={friend._id} />
-              </div>
-            ))}
+        <DeleteConnection connectionId={friend._id} />
+      </div>
+    ))}
+  </div>
+  <div className="w-full md:w-1/2 h-auto overflow-auto rounded-br-2xl md:rounded-none">
+    <h2 className="w-full rounded-tr-lg bg-black cursor-pointer text-white text-xl pl-4 font-semibold p-1">
+      Pending Requests
+    </h2>
+    <div className="grid grid-cols-1 gap-5">
+      {user?.pendingRequests?.map((user) => (
+        <div key={user._id} className="flex gap-2 pl-4 items-center">
+          <img
+            src={user.profileImage}
+            className="w-5 h-5 rounded-full bg-green-400 object-cover"
+          />
+          <div className="text-start text-xs ">
+            {user.address?.firstname} {user.address?.lastname}
           </div>
-          <div className="w-full h-auto overflow-auto p-2 border rounded-br-2xl border-black ">
-            <div className="grid grid-cols-1 gap-5 ">
-              {user?.pendingRequests?.map((user) => (
-                <div key={user._id} className="flex gap-2 items-center">
-                  <img
-                    src={user.profileImage}
-                    className="w-5 h-5 rounded-full bg-green-400 object-cover"
-                  />
-                  <div className="text-start text-xs ">
-                    {user.address?.firstname} {user.address?.lastname}
-                  </div>
-                  <AcceptRequest senderId={user._id} />
-                  <RejectRquest senderId={user._id} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <AcceptRequest senderId={user._id} />
+          <RejectRquest senderId={user._id} />
         </div>
+      ))}
+    </div>
+  </div>
+</div>
+
       </div>
     </>
   );
