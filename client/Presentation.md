@@ -12,3 +12,7 @@ In my profile i can add my interests, some thinghs and highlights about me, some
 everything is of cpourse editable so i can update my profile anytime with my new upcoming work and you can stay always uptodade with my new work and the upcoming events.
 
 I can also create my own offer and showcase my work to potential entrepreneur
+
+---
+
+By cicking on the logo i can go to the home,
