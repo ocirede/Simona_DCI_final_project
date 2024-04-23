@@ -5,11 +5,11 @@
 Behind the screen a seed was thrown,
 
 As time passed, the seed of our minds pulled started to grow individually by each character,
-and with each next meeting a specifi number arose to gather. Number 10 was our shade under
+and with each next meeting a specific number arose to gather. Number 10 was our shade under
 the tree we planted together.
 
 The breakout rooms of Zoom were the ones that would always promt us to play- Time was at
-our disposal. Gathering the room number 10 was our safe heaven, our sacial place and the
+our disposal. Gathering the room number 10 was our safe haven, our sacial place and the
 scree became less lonely. We always knew w wanted to work together in ourfinal gathering.
 
 A song,
