@@ -1,14 +1,12 @@
 ### **Simona Final Project**
 
-- **Features:**
+- **About:**
 
-  - Register new user - Login user - error handling
-  - Another feature
-  - Another feature
-  - Another feature
-  - Another feature
-  - Another feature
-  - Another feature
+  - Here will be the about xD
+
+- **Live Website:**
+
+Click [here](https://simona-1973-client.vercel.app/) to visit the website.
 
 - **Colaborators:**
 
@@ -16,9 +14,3 @@
   - [Kostas Bouzianis](https://github.com/KostasBzn)
   - [Tyhe Ferenc](https://github.com/MEINNASTIE)
   - [Issa Georges](https://github.com/issageorges)
-
-Notes: Here some notes
-
---Another text--
-
-Click [here](https://google.com/) to visit the website.
