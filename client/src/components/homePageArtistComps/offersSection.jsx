@@ -91,7 +91,9 @@ export default function OffersSection() {
         </div>
         {currentView === "MyOffers" && (
           <div className="w-full h-auto overflow-auto  p-4 slide-in-left">
+
             <h2 className="font-bold text-lg mb-4">My Favourites Offers</h2>
+
             {userFavOffers?.map((offer) => (
               <div key={offer._id} className="mb-4 p-2  shadow-md rounded-lg">
                 <h3 className="text-md font-semibold">{offer.title}</h3>
