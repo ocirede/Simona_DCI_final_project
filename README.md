@@ -8,6 +8,7 @@
   - Another feature
   - Another feature
   - Another feature
+  - Another feature
 
 - **Colaborators:**
 

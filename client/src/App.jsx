@@ -22,7 +22,6 @@ import ChangePassword from "./pages/ChangePassword.jsx";
 import Chat from "./pages/Chat.jsx";
 import HomePageLayout from "./layouts/HomePageLayout.jsx";
 
-
 //import FilteredUsersPage from "./components/filteredUsersPage/filteredUsersPage.jsx";
 
 function App() {
@@ -35,7 +34,10 @@ function App() {
         </Route>
 
         <Route element={<ProfilePageLayout />}>
-          <Route path="/profile-artist/:userId" element={<ProfileArtistPage />} />
+          <Route
+            path="/profile-artist/:userId"
+            element={<ProfileArtistPage />}
+          />
           <Route
             path="/ProfilePageEntrepreneur/:userId"
             element={<ProfilePageEntrepreneur />}
@@ -45,7 +47,7 @@ function App() {
         <Route element={<HomePageLayout />}>
           <Route path="/homeArtist" element={<HomePageArtist />} />
           <Route path="/E" element={<HomePageEntrepreneur />} />
-          <Route path="/chatbox" element={<Chat/>} />
+          <Route path="/chatbox" element={<Chat />} />
           <Route path="/QA" element={<QA />} />
         </Route>
 

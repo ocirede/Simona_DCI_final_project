@@ -62,14 +62,14 @@ export default function NavBarHomepage() {
         <StarSVG  className="w-[120px] h-[90px] md:h-[100px] md:w-[230px]"/>
       </DragComponent>
       </div>
-      <div className="absolute top-[40%]  md:left-[10%] md:top-[20%]">
+      <div className="absolute top-[30%] md:left-[10%] md:top-[20%]">
       <DragComponent>
-        <HeartTwo className="w-[250px] md:w-[420px] lg:w-[500px]"/>
+        <HeartTwo className="w-[100px] md:w-[120px] lg:w-[300px]"/>
       </DragComponent>
       </div>
       <div className="absolute left-[70%] top-[40%] md:top-[30%] lg:top-[10%]">
       <DragComponent>
-        <Circle className="w-[100px] md:w-[200px] md:h-[170px] lg:h-[220px]" />
+        <Circle className="w-[100px] h-[80px] md:w-[200px] md:h-[170px] lg:h-[220px]" />
       </DragComponent>
       </div>
       <div className="flex  items-center justify-between md:flex-row">
@@ -79,13 +79,13 @@ export default function NavBarHomepage() {
         >
           <WelcomeUser />
         </div>
-        <div className="flex  items-center gap-2">
+        <div className="flex items-center gap-2">
           <a className="mt-0 md:mt-0 md:ml-4 md:hidden cursor-pointer">
             {" "}
             <LanguageChoice />
           </a>
           <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)}>
+            <button onClick={() => setIsOpen(!isOpen)} className="z-[100]">
               {isOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
@@ -93,7 +93,7 @@ export default function NavBarHomepage() {
         <div
           className={`${
             isOpen ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-[36%] md:top-0 left-0 bg-white md:bg-transparent  z-40 p-4 md:p-0 rounded-lg md:rounded-none shadow-lg md:shadow-none border border-black md:border-none`}
+          } md:flex flex-col md:flex-row w-full md:items-center md:justify-end md:w-auto absolute md:relative top-[0%] md:top-0 left-0 bg-white md:bg-transparent  z-40 pl-10 pt-2 pb-7 md:p-0 rounded-[30px] shadow-lg md:shadow-none border border-black md:border-none`}
           onClick={() => setIsOpen(!isOpen)}
         >
 
@@ -122,7 +122,7 @@ export default function NavBarHomepage() {
       </div>
       <div className="ml-5 mr-5 mt-10 flex items-end  justify-between ">
         <h1
-          className="uppercase simona text-[80px] md:text-[120px] cursor-pointer absolute top-[54%]"
+          className="uppercase simona text-[71px] md:text-[120px] cursor-pointer absolute top-[57%]"
           onClick={handleLogoClick}
         >
           Simona

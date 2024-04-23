@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import AlertMessageSuccess from "../alerts/AlertMessageSuccess";
 import starFourSvg from "../../assets/y2k_icons/star_four.svg";
 import starTwoSvg from "../../assets/y2k_icons/star_two.svg";
-
+import RegisterFormButtonLoading from "../register/RegisterFormButtonLoading";
 function SignInForm() {
   const {
     showPassword,
@@ -31,15 +31,15 @@ function SignInForm() {
     /* form container */
   }
   return (
-    <div className=" relative flex flex-col items-center justify-center w-[570px]">
+    <div className=" w-full relative flex flex-col items-center justify-center"> 
       <br />
-      <div className="lg:w-2/3 h-[420px] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
+      <div className="w-full  max-w-md mx-auto px-4 relative z-[1] bg-white p-3 rounded-[15px] shadow-lg  border-gray border border-black">
         <form
           onSubmit={authenticationHandler}
-          className="flex flex-col w-[350px] p-3 justify-center gap-2 mt-4"
+          className="w-full  flex flex-col  p-3 justify-center gap-2 mt-4"
         >
           <div className="flex justify-center">
-            <h1 className="text-2xl font-bold text-center mb-2">Log-in</h1>
+            <h1 className="text-2xl font-bold text-center mb-2">LogIn</h1>
           </div>
           <label>
             <span className="text-sm">Email</span>
@@ -186,14 +186,28 @@ function SignInForm() {
         </div>
       ) : null}
       {/* Absolute positioned elements */}
-      <div className="absolute top-[197px]  right-[8px] bottom-auto  w-[180px] left-auto z-[-1] h-[180px] transform rotate-[35deg]">
-        <img src={starFourSvg} alt="Star Four" />
+      <div className="hidden absolute z-[-1]  w-[180px] h-[180px]  xs:block  xs:top-[80px] xs:right-[3px] sm:right-[60px] md:right-[165px] lg:right-[330px]  xl:top-[180px] xl:right-[630px]">
+        <img
+          src={starFourSvg}
+          alt="Star Four"
+          style={{
+            position: "relative",
+            zIndex: "-100",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
+        />
       </div>
       {/* Star with opposite position on small screens */}
-      <div className="absolute bottom-[155px] left-[5px] top-auto w-[200px] right-auto  h-[220px]">
+      <div className="hidden absolute z-[-1] w-[180px] h-[180px] xs:block  xs:bottom-[50px] xs:left-[-13px] sm:bottom[80px] sm:left-[70px] md:bottom-[55px] md:left-[155px] lg:left-[330px] xl:bottom-[175px] xl:left-[610px]  ">
         <img
           src={starTwoSvg}
-          style={{ position: "relative", zIndex: "-100" }}
+          style={{
+            position: "relative",
+            zIndex: "-100",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
           alt="Star Two"
         />
       </div>

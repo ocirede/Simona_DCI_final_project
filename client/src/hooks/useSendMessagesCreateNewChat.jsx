@@ -30,6 +30,8 @@ export function useSendMessage(connection) {
       );
       setMessages((prev) => [...prev, response.data]);
       setNewMessage("");
+      setUploadImage(null);
+
     } catch (error) {
       console.log(error);
     }
@@ -48,9 +50,9 @@ export function useSendMessage(connection) {
 
 export function useFetchMessages(connection) {
   const { user } = useContext(UserContext);
-  // const {notifications, setNotifications}= useSocketContext()
   const [messages, setMessages] = useState([]);
   const [notifications, setNotifications] = useState([]);
+
   // Function to get messages of a specific chat
   const getMessages = async (contactId) => {
     try {
@@ -65,6 +67,7 @@ export function useFetchMessages(connection) {
           allNotifications.push(...userNotifications);
         });
         setNotifications(allNotifications);
+        
       }
     } catch (error) {
       console.log(error);
@@ -78,11 +81,13 @@ export function useFetchMessages(connection) {
     }
   }, [connection]);
 
+  
   return {
     messages,
     setMessages,
     getMessages,
     notifications,
     setNotifications,
+    
   };
 }

@@ -30,7 +30,7 @@ function ShareLinkCard({ onClose }) {
   }
 
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[430px] h-[225px]  rounded-xl p-3 bg-white border border-black border-b-4 border-r-4  z-50 transition-transform duration-800">
+    <div  className=" fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] h-[32%] rounded-xl p-3 bg-white border border-black border-b-4 border-r-4  z-50 transition-transform duration-800 xxs:w-[95%] xs:w-[80%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%]">
       <div className=" flex justify-between">
         <h3 className=" text-xl font-bold">Profile sharing </h3>
         <X className=" cursor-pointer" onClick={onClose} />

@@ -57,9 +57,9 @@ export default function TitleNameSection({ user }) {
         </div>
       ) : (
         <div>
-          <div className="h-[70px] w-full bg-white shadow-lg rounded-[15px] w-1/2 text-[12px] border-b-8 border border-black flex justify-between pr-10 pl-5">
+          <div className="h-[90px] w-full bg-white shadow-lg rounded-[15px]  text-[12px] border-b-8 border border-black flex items-center justify-between pr-10 pl-5">
             <h1
-              className="text-[20px] font-bold cursor-pointer pt-4"
+              className="text-[20px] font-bold cursor-pointer"
               onClick={() => toggleFormVisibility("name")}
             >
               {firstName} {lastName}

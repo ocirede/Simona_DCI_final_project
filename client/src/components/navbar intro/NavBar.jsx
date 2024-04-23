@@ -40,11 +40,11 @@ function NavBar() {
             <Button name="Register" />
           </NavLink>
           <NavLink to="/sign-in">
-            <Button name="Log-in" />
+            <Button name="LogIn" />
           </NavLink>
           <LanguageChoice />
         </div>
-        <div className="flex  gap-6 items-center md:hidden">
+        <div className="flex  justify-end gap-6 items-center md:hidden">
           <LanguageChoice />
           {display ? (
             <X

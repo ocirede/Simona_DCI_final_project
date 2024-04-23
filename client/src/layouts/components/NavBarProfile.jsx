@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FakeLogo from "../../components/navbar intro/FakeLogo";
 import LanguageChoice from "../../components/navbar intro//LanguageChoice";
 import { Menu, X } from "lucide-react";
@@ -9,6 +9,7 @@ import DropMenuLayout from "./DropMenuLayout";
 
 function NavBarProfile() {
   const [display, setDisplay] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const {logout, user} = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -20,8 +21,27 @@ function NavBarProfile() {
     }
   };
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setShowMenu(true);
+      } else {
+        setShowMenu(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="h-20 flex bg-white items-center shadow-md mr-[10px] ml-[10px] border border-black mt-2 rounded-tr-[30px] rounded-tl-[30px]">
+    <nav className={`h-20 flex bg-white items-center shadow-md mr-[10px] ml-[10px] border border-black mt-2 rounded-tr-[30px] rounded-tl-[30px] ${
+      showMenu ? "sticky top-0 transition-all duration-300 z-[100] rounded-tr-[0] rounded-tl-[0] w-full ml-auto mr-auto" : ""
+    }`}>
       <ul className="p-3 w-full flex items-center justify-between">
         <div onClick={handleLogoClick} className="cursor-pointer">
           <FakeLogo />
