@@ -8,6 +8,7 @@
   - Another feature
   - Another feature
   - Another feature
+  - Another feature
 
 - **Colaborators:**
 
@@ -21,5 +22,3 @@ Notes: Here some notes
 --Another text--
 
 Click [here](https://google.com/) to visit the website.
-
-
