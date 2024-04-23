@@ -2,7 +2,7 @@
 
 - **Our story:**
 
-  - Behind the screen a seed was thrown,
+Behind the screen a seed was thrown,
 
 As time passed, the seed of our minds pulled started to grow individually by each character,
 and with each next meeting a specifi number arose to gather. Number 10 was our shade under
