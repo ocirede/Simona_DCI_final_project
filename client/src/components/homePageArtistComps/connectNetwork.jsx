@@ -17,12 +17,12 @@ export default function ConnectNetwork() {
         pendingRequests: [...prevUser.pendingRequests, sender],
       }));
     });
+    console.log(user)
 
     return () => {
       socket?.off("pendingRequest");
     };
   }, [socket, setUser]);
-
   // const allUsers = [...userData, ...entrepreneursData]
   // const [friendsList, setFriendsList] = useState([])
 

@@ -18,6 +18,7 @@ function SignInForm() {
     email,
     setPassword,
     password,
+    resetPassword,
     // loading,
     validationErrors,
     forgotPassword,
@@ -140,7 +141,7 @@ function SignInForm() {
       {forgotPassword ? (
         <div>
           <div className="fixed inset-0 bg-black opacity-50 z-40">
-            {success && <AlertMessageSuccess text="Email sent successfully" />}
+            {resetPassword && <AlertMessageSuccess text="Email sent successfully" />}
           </div>
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
             <X

@@ -163,12 +163,12 @@ export const sendConnectionRequest = async (req, res) => {
       //SOCKET.IO FUNCTIONALITY
 
       const { senderSocketId, receiverSocketId } = getSocketIds(
-        senderId,
-        receiverId
+        sender,
+        receiver
       );
   
       io.to(receiverSocketId).emit("pendingRequest", sender);
-
+        console.log(receiverSocketId, sender)
     res.send({
       success: true,
       sender,

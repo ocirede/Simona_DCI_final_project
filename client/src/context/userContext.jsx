@@ -16,6 +16,7 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [forgotPassword, setForgotPasswsord] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const[resetPassword, setResetPassword]=useState(false)
   const [newUser, setNewUser] = useState();
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
@@ -95,10 +96,19 @@ const UserProvider = ({ children }) => {
       const response = await axios.post(
         baseURL + "/users/changepassword",
         body
+      
       );
       if (response.data.success) {
         console.log("we have sent you an email to reset you password");
+        console.log(resetPassword)
+
+        setResetPassword(true);
+      setTimeout(()=>{
+        setResetPassword(false)
+      }, 2000)
       }
+
+
     } catch (error) {
       console.log(error);
     }
@@ -540,6 +550,7 @@ const deletePersonality = async (userId, personalityId ) => {
         forgotPassword,
         newUser,
         user,
+        resetPassword,
         setUser,
         setUserRole,
         userRoleChoice,
