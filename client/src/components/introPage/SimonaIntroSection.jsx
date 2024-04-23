@@ -60,7 +60,7 @@ const SimonaIntroSection = () => {
       >
         Simona
       </Link>
-      <div className="absolute right-[3%] top-[40%] md:top-[50%] md:right-[-2%] md:top-[15%] lg:right-[5%] lg:top-[32%]">
+      <div className="absolute right-[3%] top-[40%] md:top-[50%] md:right-[-2%] lg:right-[5%] lg:top-[32%]">
         <DragComponent>
           <CrescentShapeSVG className="w-[100px] md:w-[300px] md:h-[200px] lg:w-[250px] lg:h-[300px]" />
         </DragComponent>
