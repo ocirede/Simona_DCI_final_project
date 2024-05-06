@@ -8,7 +8,7 @@ As time passed, the seed of our minds pulled started to grow individually by eac
 and with each next meeting a specific number arose to gather. Number 10 was our shade under
 the tree we planted together.
 
-The breakout rooms of Zoom were the ones that would always promt us to play- Time was at
+The breakout rooms of Zoom were the ones that would always prompt us to play- Time was at
 our disposal. Gathering the room number 10 was our safe haven, our social place and the
 screen became less lonely. We always knew we wanted to work together in our final gathering.
 
