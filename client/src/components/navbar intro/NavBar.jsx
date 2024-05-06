@@ -34,7 +34,9 @@ function NavBar() {
       }`}
     >
       <ul className="p-3 w-full flex items-center justify-between">
+        <div className="">
         <FakeLogo />
+        </div>
         <div className="hidden md:flex justify-end bg-white items-center flex-grow p-3 gap-5">
           <NavLink to="/register-questions">
             <Button name="Register" />
@@ -44,18 +46,19 @@ function NavBar() {
           </NavLink>
           <LanguageChoice />
         </div>
-        <div className="flex  justify-end gap-6 items-center md:hidden">
-          <LanguageChoice />
-          {display ? (
-            <X
-              className="w-8 h-8 cursor-pointer absolute right-5 top-3 z-10 md:hidden"
-              onClick={() => setDisplay(!display)}
-            />
-          ) : (
-            <Menu onClick={() => setDisplay(!display)} className="w-10 h-10" />
-          )}
-          {display && <DropMenuIntro />}
-        </div>
+        <div className="flex justify-end gap-6 items-center md:hidden relative"> 
+  <LanguageChoice />
+  {display ? (
+    <X
+      className="w-8 h-8 cursor-pointer absolute right-5 top-3 z-50 md:hidden" 
+      onClick={() => setDisplay(!display)}
+    />
+  ) : (
+    <Menu onClick={() => setDisplay(!display)} className="w-10 h-10" />
+  )}
+  {display && <DropMenuIntro />}
+</div>
+
       </ul>
     </nav>
   );
